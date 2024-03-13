@@ -1,0 +1,113 @@
+/* ========================================================= All Customer Edits */
+.image-rec-full {
+    object-fit: scale-down;
+    width: 100px;
+    height: 100px;
+}
+
+.image-in-circle-125 {
+    object-fit: cover;
+    /* display: block; */
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+}
+
+.image-in-circle-100 {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.image-in-circle-75 {
+    object-fit: cover;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.image-in-circle-50 {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.image-in-box {
+    width: 75px;
+    /* height: 75px; */
+}
+
+.card-logo {
+    height: 120px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stock_car_price_section a {
+    background: #F4F2F2;
+    padding: 14px 28px;
+    box-shadow: none !important;
+    border-bottom: 3px solid #EDEBEB;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .stock_car_price_section a-header {
+    padding: 0;
+  }
+
+  .stock_car_price_section a:last-child {
+    border: none;
+    border-radius: 0px 0px 16px 16px;
+  }
+
+  .stock_car_price_section a p {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #23272A;
+    text-decoration-line: underline;
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 500px) {
+    stock_car_price_section a p {
+      font-size: 14px;
+    }
+  }
+
+.stock_car_body {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    margin-bottom: 41px;
+}
+
+.Stock_car_image {
+    border-radius: 15px 0px 0px 0px;
+}
+
+.priceBox{
+    border-bottom: 1px #ccc;
+}
+
+.stockImageCtrl{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* transform: translate(-50%, -50%); */
+}
+
+.left-drop-down-btn{
+  background-color: #ececec;
+  color: #23272A;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 1%;
+}
