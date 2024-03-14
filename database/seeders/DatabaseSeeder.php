@@ -20,10 +20,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            TransmissionTypeSeeder::class,
-            FuelTypeSeeder::class,
-            EngineAspirationSeeder::class,
-            BodyShapeSeeder::class,
+            // TransmissionTypeSeeder::class,
+            // FuelTypeSeeder::class,
+            // EngineAspirationSeeder::class,
+            // BodyShapeSeeder::class,
+            CarBrandSeeder::class,
         ]);
     }
+
+   
 }
