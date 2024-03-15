@@ -23,31 +23,27 @@ class CarBrandModelController extends Controller
         }
 
         // -------------------- Store Brand Models Method -------------------- //
-
         public function store(StoreCarBrandModelRequest $request)
         {
-           
                 CarBrandModel::create([
                     'name' => [
                         'en' => $request->name_en,
                         'ar' => $request->name_ar,
-                      
+
                     ],
                     "car_brand_id"=>$request->car_brand_id,
                     "slug"=>Str::slug($request->name_en)
-                   
+
                 ]);
-            
+
             Alert::success('Success Message', 'Data processed successfully!');
             return  response()->json(['success', 'success']);
         }
-      
 
         // -------------------- Update Brand Models Method -------------------- //
-
         public function update(UpdateCarBrandModelRequest $request, CarBrandModel $carBrandModel)
         {
-           
+
             $carBrandModel->update([
                 'name' => [
                     'en' => $request->name_en,
@@ -59,24 +55,13 @@ class CarBrandModelController extends Controller
             return response()->json(['success' => "success"]);
         }
 
-
-
-
         // -------------------- Delete Brand Models Method -------------------- //
-
         public function destroy(CarBrandModel $carBrandModel)
         {
             $carBrandModel->delete();
             Alert::success('Successfully', 'Your brand model has been deleted');
             return redirect()->back();
         }
-
-
-        // test for another future ctrl 'ModelSpecs' //
-        public function allSpcesPage ()
-        {
-            return view('gt-manager.cars_assets.model_specs');
-        } 
 
     } // End Class
 

@@ -10,6 +10,10 @@
 
     <!-- Select2-->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/select2/select2.css">
+    <!-- dropzone-->
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/dropzone/dropzone.min.css">
+    {{-- <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script> --}}
+    {{-- <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" /> --}}
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/core/core.css">
@@ -71,7 +75,7 @@
 
         </div>
     </div>
-    
+
     <!-- ------------------------------- Inject:js ------------------------------- -->
     <!-- jqaury -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -111,15 +115,22 @@
 
     <!-- Valdation JS -->
     {{-- <script src="{{ asset('gt_manager') }}/assets/js/validate.min.js"></script> --}}
+
+    {{-- Select2 --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
+
+    {{-- Dropzone --}}
+    <script src="{{ asset('gt_manager') }}/assets/vendors/dropzone/dropzone.min.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/dropzone.js"></script>
+
     <!-- Image Real-Time JS -->
     <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
-  
-    <!-- ------------------------------- END Inject:js ------------------------------- -->
-<!-- Sweet Alert JS -->
 
-@yield('script')
+    <!-- ------------------------------- END Inject:js ------------------------------- -->
+
+    @yield('script')
 
 </body>
+
 </html>

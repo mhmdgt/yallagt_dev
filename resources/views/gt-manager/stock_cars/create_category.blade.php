@@ -86,8 +86,14 @@
                             <div class="form-group row pt-0 mt-4">
                                 <div class="col">
                                     <label>Engine Capacity</label>
-                                    <div id="the-basics">
-                                        <input class="typeahead" type="text" placeholder="Horsepower">
+                                    <div>
+                                        <select class="js-example-basic-single w-100">
+                                            <option value="TX">800 cc</option>
+                                            <option value="NY">1000 cc</option>
+                                            <option value="FL">1200 cc</option>
+                                            <option value="KN">1300 cc</option>
+                                            <option value="HW">1400 cc</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

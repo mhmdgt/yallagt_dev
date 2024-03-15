@@ -62,7 +62,7 @@
             </li>
             {{-- END 1st Section --}}
 
-            {{-- 2nd Section --}}         
+            {{-- 2nd Section --}}
             <li class="nav-item nav-category">Stock Manager</li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#StockCars" role="button" aria-expanded="false" aria-controls="StockCars">
@@ -125,6 +125,9 @@
                 </a>
                 <div class="collapse" id="CarsForSale">
                     <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('add-car-for-sale') }}" class="nav-link">+ Add</a>
+                        </li>
                         <li class="nav-item">
                             <a href="pages/ui-components/alerts.html" class="nav-link">All Live</a>
                         </li>
