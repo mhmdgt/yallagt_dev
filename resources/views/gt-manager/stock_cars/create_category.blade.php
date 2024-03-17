@@ -83,7 +83,16 @@
                             <div class="form-group row pt-0 mt-4">
                                 <div class="col">
                                     <label for="engine_capacity">Engine Capacity</label>
-                                    <input class="typeahead form-control" type="text" placeholder="Horsepower" id="engine_capacity" name="engine_capacity" value="{{ old('engine_capacity') }}">
+
+                                    <div>
+                                        <select class="js-example-basic-single w-100" name="engine_capacity" >
+                                            <option value="TX">800 cc</option>
+                                            <option value="NY">1000 cc</option>
+                                            <option value="FL">1200 cc</option>
+                                            <option value="KN">1300 cc</option>
+                                            <option value="HW">1400 cc</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row pt-0">

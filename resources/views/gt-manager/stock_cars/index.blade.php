@@ -1,7 +1,6 @@
 @extends('gt-manager.aBody.app-layout')
 @section('content')
     <div class="page-content">
-
         {{-- ========================== NAV Section ==========================  --}}
         <nav class="page-breadcrumb">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
@@ -13,20 +12,20 @@
                 <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0" data-toggle="modal"
                     data-target="#AddStockModel">
                     <i class="btn-icon-prepend" data-feather="plus"></i>
-                    Add New Stock
+                    Add Stock Model
                 </button>
             </div>
         </nav>
-        {{-- ====== Content Of Models ====== --}}
+        {{-- ====== Content ====== --}}
         <div class="row gy-3">
             {{-- Loop Starts --}}
             <div class="col-md-4 mb-4">
                 <div class="card">
                     {{-- image --}}
                     <div>
-                        <img src="{{ asset('gt_manager/media/stock_cars/audi-s3.jpg') }}" class="card-img-top" alt="Cat_img">
-                        <button class="btn btn-light stockImageCtrl" data-toggle="modal"
-                        data-target="#EditStockModel">
+                        <img src="{{ asset('gt_manager/media/stock_cars/audi-s3.jpg') }}" class="card-img-top"
+                            alt="Cat_img">
+                        <button class="btn btn-light stockImageCtrl" data-toggle="modal" data-target="#EditStockModel">
                             <i data-feather="edit"></i>
                         </button>
                     </div>
@@ -35,7 +34,7 @@
 
                         <h4 class="mb-4 ">Audi A3 2024</h4>
 
-                        <a href="{{route('create-category')}}" class="btn btn-outline-primary">add</a>
+                        <a href="{{ route('create-category') }}" class="btn btn-outline-primary">add</a>
                         <a href="#" class="btn btn-primary">Import .xlsx</a>
                         <a href="#" class="btn btn-secondary">Export .xlsx</a>
                     </div>
@@ -94,9 +93,13 @@
                             action="{{ route('car-brand.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
-                                <input type="text" class="form-control" name="name_en" autocomplete="off"
-                                    placeholder="English Name">
+                                <label>Brand</label>
+                                <div>
+                                    <select class="js-example-basic-single w-100">
+                                        <option value="TX">Kia</option>
+                                        <option value="NY">Hyundai</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
@@ -120,13 +123,8 @@
                                                 type="button">Upload</button>
                                         </span>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmaill" class="form-label"> </label>
-                                        <img id="showImage" class="image-rec-full"
-                                            src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
-                                    </div>
                                 </div>
-                                <div>
+                                {{-- <div>
                                     <label>Model Main Photo</label>
                                     <input type="file" name="logo" class="file-upload-default" id="image">
                                     <div class="input-group col-xs-12">
@@ -159,10 +157,26 @@
                                         <img id="showImage" class="image-rec-full"
                                             src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
                                     </div>
+                                </div> --}}
+
+                                {{-- Media --}}
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Media</h6>
+                                                <div>
+                                                    <label>Upload your images</label>
+                                                    <form action="#" enctype="multipart/form-data" class="dropzone"
+                                                        id="image-upload">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
 
                             <div class="modal-footer">
                                 <button type="submit" id="add_employee_btn" class="btn btn-primary">Save

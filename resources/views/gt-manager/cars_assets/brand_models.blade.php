@@ -2,7 +2,6 @@
 @section('content')
 <div class="page-content">
     {{-- ====== Page Header ====== --}}
-
     <nav class="page-breadcrumb">
         {{-- ====== Navagation ====== --}}
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
@@ -10,7 +9,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('car-brand.index') }}">All Car
                         Brands</a></li>
-                <li class="breadcrumb-item"><a>Selected Brand And Models</a></li>
+                <li class="breadcrumb-item"><a>Brand Details</a></li>
             </ol>
             {{-- ====== Modal button ====== --}}
             <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0" data-toggle="modal"
@@ -252,7 +251,7 @@
     $('#car-brand').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-       
+
         let url = "{{ route('car-brand.update',$carBrand->id) }}";
         $.ajax({
             url: url,
@@ -325,8 +324,8 @@
                     if (errors.hasOwnProperty('name_ar')) {
                         $("#ar_name-error").text(errors.name_ar[0]);
                     }
-                   
-                } 
+
+                }
             }
         });
     });
@@ -369,11 +368,9 @@ $('.car-brand-model-edit').submit(function(e) {
             }
         });
     });
-   
+
 
 });
 
 </script>
-
-
 @endsection

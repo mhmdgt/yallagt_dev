@@ -1,25 +1,21 @@
 @extends('gt-manager.aBody.app-layout')
 @section('content')
 <div class="page-content">
-   
-
-   
     {{-- ========================== NAV Section ========================== --}}
     <nav class="page-breadcrumb">
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page">All Car Brands</li>
+                <li class="breadcrumb-item" aria-current="page">Brands & Models</li>
             </ol>
             {{-- ====== Modal button ====== --}}
             <button type="button" class="btn btn-success btn-icon-text mb-2 mb-md-0" data-toggle="modal"
                 data-target="#addNewCarModal">
                 <i class="btn-icon-prepend" data-feather="plus"></i>
-                Add New Brand
+                Add Brand
             </button>
         </div>
     </nav>
-  
     {{-- ========================== All Brands ========================== --}}
     <div class="row">
         <div class="col-md-12">
@@ -44,10 +40,6 @@
                                 </a>
                             </div>
                             @endforeach
-                           
-                        </div>
-                        <div class="d-flex justify-content-end">
-                        
                         </div>
                     </div>
                 </div>
@@ -69,7 +61,7 @@
                     {{-- brand store --}}
                     <form class="forms-sample" method="POST" enctype="multipart/form-data" id="car-brand" >
                         @csrf
-                        
+
                         <div class="form-group">
                             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
                             <input type="text" class="form-control" name="name_en" autocomplete="off"
@@ -143,7 +135,7 @@
                     window.location.href = "{{ route('car-brand.index') }}";
                 // Reload the page after a successful request
                 location.reload(true); // Force reload from server
-                 
+
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr);
