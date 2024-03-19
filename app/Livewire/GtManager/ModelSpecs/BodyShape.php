@@ -14,10 +14,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 class BodyShape extends Component
 {
     use WithFileUploads, WithPagination;
-
+    public $logo;
     public $name_en;
     public $name_ar;
-    public $logo;
+    // Add a public property to hold the ID of the clicked item
+    public $selectedItemId;
+
     public function rules()
     {
         return  [
@@ -49,15 +51,24 @@ class BodyShape extends Component
         $this->dispatch('dispatch-model')->self();
     }
 
+    function edit($id)
+    {
+        $bodyShape = Body::findOrFail($id);
+        $this->logo = $bodyShape ? $bodyShape->logo : null;
+        $this->name_en = $bodyShape ? $bodyShape->getTranslations('name')['en'] : '';
+        $this->name_ar = $bodyShape ? $bodyShape->getTranslations('name')['ar'] : '';
+    }
+    // Add a method to set the data of the clicked item to public properties
+
 
     function update($id)
     {
         $validatedData = $this->validate();
-        $body = Body::findOrFail($id);
+        $bodyShape = Body::findOrFail($id);
         // Store data...
-        $body->update([
+        $bodyShape->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $body->logo,
+            'logo' => $this->logo ? $this->logo->store('photos', 'public') :  $bodyShape->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);
@@ -67,16 +78,14 @@ class BodyShape extends Component
         $this->dispatch('dispatch-model')->self();
     }
 
-    function delete()
+    function delete($id)
     {
-        dd("d");
-        // dd($id);
-        // Body::findOrFail($id)->delete();
+         Body::findOrFail($id)->delete();
     }
     public function render()
     {
 
-        $bodyShapes = Body::latest()->paginate(5, ['name', 'logo', 'id']);
+        $bodyShapes = Body::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.model-specs.body-shape', compact('bodyShapes'));
     }
     private function resetFields()
