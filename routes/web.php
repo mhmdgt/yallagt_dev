@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\CarBrand;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminLoginController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
@@ -41,6 +42,8 @@ require __DIR__ . '/gt_manager.php';
 
 
 Route::get('/', function () {
+    // $brandEagle = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = '580 Eagle'")->first();
+    // dd($brandEagle);
     return view('welcome');
 });
 

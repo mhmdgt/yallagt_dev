@@ -16,6 +16,9 @@ Route::middleware('admin')->group(function () {
     Route::get('manager', [AdminController::class, 'IndexPage'])
         ->name('index-page');
 
+    Route::get('manager/home', [AdminController::class, 'ManagerHome'])
+    ->name('manager-home');
+
     #################### Admin user ####################
     Route::get('manager/profile', [AdminProfileController::class, 'AdminProfile'])
         ->name('admin-profile');
@@ -67,8 +70,10 @@ Route::middleware('admin')->group(function () {
     });
 
     #################### Stock Cars ####################
-    Route::get('manager/all-stock-cars', [StockCarsController::class, 'index'])
-        ->name('all-stock-cars');
+    Route::get('manager/all-stock-car-brands', [StockCarsController::class, 'index'])
+        ->name('all-stock-car-brands');
+    Route::get('manager/all-stock-models', [StockCarsController::class, 'StockModels'])
+        ->name('all-stock-models');
     Route::get('manager/create-stock-cars', [StockCarsController::class, 'create'])
         ->name('create-stock-cars');
 //     Route::get('manager/update-stock-cars', [StockCarsController::class, 'update'])

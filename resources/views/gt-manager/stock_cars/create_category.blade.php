@@ -5,9 +5,9 @@
         <nav class="page-breadcrumb">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('all-stock-cars') }}">Stock Cars</a>
-                    </li>
+                    <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('all-stock-car-brands') }}">All Stock Brands</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="#">Brand Name</a></li>
                     <li class="breadcrumb-item"><a>Add New Categorie</a></li>
                 </ol>
             </div>

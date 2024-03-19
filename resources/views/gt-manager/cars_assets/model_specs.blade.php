@@ -57,7 +57,7 @@
                                     <a href="#">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
-                                                <img width="100px"
+                                                <img width="80px"
                                                     src="{{ asset('gt_manager/media/car_specs_icons/EngineAspiration.png') }}"
                                                     alt="">
                                             </div>
@@ -71,7 +71,7 @@
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="100px"
-                                                    src="{{ asset('gt_manager/media/car_specs_icons/EngineKM.png') }}"
+                                                    src="{{ asset('gt_manager/media/car_specs_icons/EngineCC.png') }}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -89,6 +89,19 @@
                                             </div>
                                         </div>
                                         <p class="text-center mt-3 text-dark ">Fuel Type</p>
+                                    </a>
+                                </div>
+                                {{-- Engine KM --}}
+                                <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
+                                    <a href="#">
+                                        <div class="border border-light rounded shadow-sm">
+                                            <div class="card-logo">
+                                                <img width="100px"
+                                                    src="{{ asset('gt_manager/media/car_specs_icons/EngineKM.png') }}"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <p class="text-center mt-3 text-dark ">Engine KM</p>
                                     </a>
                                 </div>
                             </div>

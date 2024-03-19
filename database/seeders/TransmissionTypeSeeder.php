@@ -15,9 +15,7 @@ class TransmissionTypeSeeder extends Seeder
     {
        $transmissions=[
         ['en' => "Automatic", "ar" => "أوتوماتيك"],
-        ['en' => "Manua", "ar" => "مانيوال"],
-        ['en' => "CVT", "ar" => "CVT"],
-        ['en' => "DSG", "ar" => "DSG"],
+        ['en' => "Manual", "ar" => "مانيوال"],
 
        ];
        foreach($transmissions as $transmission){
@@ -25,6 +23,6 @@ class TransmissionTypeSeeder extends Seeder
             "name"=>$transmission
         ]);
 }
-       
+
     }
 }

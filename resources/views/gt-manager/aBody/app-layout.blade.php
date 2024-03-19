@@ -8,12 +8,16 @@
     <title>Admin | Yalla GT</title>
     <!-- ------------------------------- Head Injectors ------------------------------- -->
 
-    <!-- Select2-->
+    <!-- Select2 ############################# -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/select2/select2.css">
-    <!-- dropzone-->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/dropzone/dropzone.min.css">
+
+    <!--  dropzone ############################# -->
+    {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/dropzone/dropzone.min.css"> --}}
     {{-- <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script> --}}
     {{-- <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" /> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css"> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/core/core.css">
@@ -41,10 +45,13 @@
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/light_theme/style.css">
     {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/dark_theme/style.css"> --}}
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/custom.css">
+
+    <!-- Loader bar -->
     {{-- <link rel="stylesheet" href="{{ asset('/gt_manager/assets/css/loader/loader-style.css') }}"> --}}
 
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('gt_manager') }}/assets/images/favicon.ico" />
+
     <!-- ------------------------------- END Head Inject ------------------------------- -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -77,11 +84,13 @@
     </div>
 
     <!-- ------------------------------- Inject:js ------------------------------- -->
+
     <!-- jqaury -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
     <!-- core:js -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/core/core.js"></script>
-    <!-- endinject -->
+
     <!-- plugin js for this page -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/chartjs/Chart.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/jquery.flot/jquery.flot.js"></script>
@@ -89,23 +98,21 @@
     <script src="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/progressbar.js/progressbar.min.js"></script>
-    <!-- end plugin js for this page -->
+
     <!-- inject:js -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/feather-icons/feather.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/template.js"></script>
-    <!-- endinject -->
+
     <!-- custom js for this page -->
     <script src="{{ asset('gt_manager') }}/assets/js/dashboard.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/datepicker.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/file-upload.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
-    <!-- end custom js for this page -->
 
     <!-- plugin js for Data Tables -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/data-table.js"></script>
-    <!-- end plugin js for Data Tables -->
 
     <!-- Loader bar -->
     {{-- <scipt src="{{ asset('/gt_manager/assets/js/loader-style.js') }}"></scipt> --}}
@@ -123,6 +130,8 @@
     {{-- Dropzone --}}
     <script src="{{ asset('gt_manager') }}/assets/vendors/dropzone/dropzone.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/dropzone.js"></script>
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script> --}}
 
     <!-- Image Real-Time JS -->
     <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>

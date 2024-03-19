@@ -17,7 +17,7 @@ class ModelSpecsController extends Controller
     // -------------------- Show Spec Details -------------------- //
     public function show()
     {
-        return view('gt-manager.cars_assets.spec_ctrl');
+        return view('gt-manager.cars_assets.spec_details');
 
     }
 
