@@ -42,7 +42,7 @@ class CarBrandSeeder extends Seeder
           
         // ];
         $carBrands = [
-            ['en' => "580 Eagle", "ar" => "580 ايجل"],
+           ['en' => "580 Eagle", "ar" => "580 ايجل"], 
             ['en' => "Alfa Romeo", "ar" => "الفا روميو"],
             ['en' => "Alpine", "ar" => "ألبينا"],
             ['en' => "Aston Martin", "ar" => "استون مارتن"],
@@ -125,6 +125,18 @@ class CarBrandSeeder extends Seeder
                 "slug"=>Str::slug($carBrand['en']),
                 "logo"=>"logo.png"
             ]);
+
+            $EagleModels=[
+                ["en"=>"","ar"=>""],
+                ["en"=>"","ar"=>""],
+                ["en"=>"","ar"=>""],
+            ];
+
+
+          
+
+
+        
 
         }
         

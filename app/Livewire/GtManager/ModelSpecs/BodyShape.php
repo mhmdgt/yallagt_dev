@@ -4,14 +4,17 @@ namespace App\Livewire\GtManager\ModelSpecs;
 
 
 use Livewire\Component;
-use App\Models\BodyShape as Body;
+use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
+use App\Models\BodyShape as Body;
+use Livewire\WithPagination;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BodyShape extends Component
 {
-    use WithFileUploads;
-    public $showModal = false; // Add a property to track modal state
+    use WithFileUploads, WithPagination;
+
     public $name_en;
     public $name_ar;
     public $logo;
@@ -35,32 +38,49 @@ class BodyShape extends Component
         $validatedData = $this->validate();
 
         // Store data...
-        $this->logo->store('photos', 'public'); // Example storage method
+
+        Body::create([
+            "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
+            'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
+        ]);
         // Clear form fields after successful storage
-        $this->reset(['name_en', 'name_ar', 'logo']);
-
-        // Close modal after storing data
-        $this->showModal = false;
-    }
-    function toggleModal()
-    {
-     $this->showModal = true;
+        $this->resetFields();
+        // Dispatching a browser event after storing the date
+        $this->dispatch('dispatch-model')->self();
     }
 
-    function update()
+
+    function update($id)
     {
-        
         $validatedData = $this->validate();
-
+        $body = Body::findOrFail($id);
         // Store data...
-      
+        $body->update([
+            "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
+            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $body->logo,
+        ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);
+        // Clear form fields after successful storage
+        $this->resetFields();
+        // Dispatching a browser event after storing the date
+        $this->dispatch('dispatch-model')->self();
+    }
+
+    function delete()
+    {
+        dd("d");
+        // dd($id);
+        // Body::findOrFail($id)->delete();
     }
     public function render()
     {
 
-        $bodyShapes = Body::paginate();
+        $bodyShapes = Body::latest()->paginate(5, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.model-specs.body-shape', compact('bodyShapes'));
+    }
+    private function resetFields()
+    {
+        $this->reset(['name_en', 'name_ar', 'logo']);
     }
 }

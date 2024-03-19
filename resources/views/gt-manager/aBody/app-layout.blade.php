@@ -128,6 +128,7 @@
     <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
 
     <!-- ------------------------------- END Inject:js ------------------------------- -->
+    <script >src="{{ asset('vendor/sweetalert2/sweetalert2.all.js') }}"</script>
     @livewireScripts
     @yield('script')
 
