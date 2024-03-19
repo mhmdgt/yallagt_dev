@@ -47,6 +47,7 @@
     <link rel="shortcut icon" href="{{ asset('gt_manager') }}/assets/images/favicon.ico" />
     <!-- ------------------------------- END Head Inject ------------------------------- -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+     
     @livewireStyles
 
 </head>
@@ -127,7 +128,9 @@
     <!-- Image Real-Time JS -->
     <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
 
+    
     <!-- ------------------------------- END Inject:js ------------------------------- -->
+    <script >src="{{ asset('vendor/sweetalert2/sweetalert2.all.js') }}"</script>
     @livewireScripts
     @yield('script')
 
