@@ -95,10 +95,17 @@
     border-bottom: 1px #ccc;
 }
 
-.stockImageCtrl{
+.stockCarImageEdit{
   position: absolute;
   top: 10px;
   right: 10px;
+  /* transform: translate(-50%, -50%); */
+}
+
+.stockCarImageDel{
+  position: absolute;
+  top: 10px;
+  right: 80px;
   /* transform: translate(-50%, -50%); */
 }
 

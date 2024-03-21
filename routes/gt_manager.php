@@ -1,22 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Cars_system\CarBrandController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use App\Http\Controllers\Gt_manager\Model_specs\BodyShapeController;
-use App\Http\Controllers\Gt_manager\Model_specs\ModelSpecsController;
-use App\Http\Controllers\Gt_manager\Stock_cars\CarCategoriesController;
-use App\Http\Controllers\Gt_manager\Cars_for_sale\CarsForSaleController;
-use App\Http\Controllers\Gt_manager\Cars_system\CarBrandModelController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
+
+use App\Http\Controllers\Gt_manager\Cars_system\CarBrandController;
+use App\Http\Controllers\Gt_manager\Cars_system\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Cars_system\AllSpecsController;
+
+use App\Http\Controllers\Gt_manager\Stock_cars\CarCategoriesController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+
+use App\Http\Controllers\Gt_manager\Cars_for_sale\CarsForSaleController;
+
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->group(function () {
 
     Route::get('manager', [AdminController::class, 'IndexPage'])
         ->name('index-page');
 
-    #################### Admin user ####################
+    Route::get('manager/home', [AdminController::class, 'ManagerHome'])
+        ->name('manager-home');
+
+    #################### Admin Profile ####################
     Route::get('manager/profile', [AdminProfileController::class, 'AdminProfile'])
         ->name('admin-profile');
     Route::post('manager/profile/update', [AdminProfileController::class, 'AdminUpdateData'])
@@ -51,24 +57,18 @@ Route::middleware('admin')->group(function () {
 
     });
 
-    #################### Spec CTRL #################################
-    Route::get('manager/models-specs', [ModelSpecsController::class, 'index'])
-        ->name('model-specs-index');
-    Route::get('manager/spec-details', [ModelSpecsController::class, 'show'])
-        ->name('spec-details');
-
-    #################### Body Shape #################################
-    Route::controller(BodyShapeController::class)->prefix('body-shapes')->name('body-shape.')->group(function () {
-
-        Route::post('/', 'store')->name('store');
-        Route::put('/{bodyShape}', 'update')->name('update');
-        Route::delete('destroy/{bodyShape}', 'destroy')->name('destroy');
-
-    });
+    #################### Specs Categories #################################
+    Route::get('manager/spec-categroies', [AllSpecsController::class, 'index'])
+        ->name('spec-categories');
+    Route::get('manager/specs/body-shapes', [AllSpecsController::class, 'BodyShape'])
+        ->name('body-shapes');
 
     #################### Stock Cars ####################
     Route::get('manager/all-stock-cars', [StockCarsController::class, 'index'])
         ->name('all-stock-cars');
+    Route::get('manager/all-stock-models', [StockCarsController::class, 'ModelsIndex'])
+        ->name('all-stock-models');
+
     Route::get('manager/create-stock-cars', [StockCarsController::class, 'create'])
         ->name('create-stock-cars');
 //     Route::get('manager/update-stock-cars', [StockCarsController::class, 'update'])
@@ -76,9 +76,8 @@ Route::middleware('admin')->group(function () {
 //     Route::get('manager/delete-stock-cars', [StockCarsController::class, 'delete'])
 //             ->name('create-stock-cars');
 
-    #################### Stock Categories ####################
-    Route::get('manager/create-category', [CarCategoriesController::class, 'create'])
-        ->name('create-category');
+    Route::get('manager/car-stock-category', [CarCategoriesController::class, 'create'])
+        ->name('category.create');
 //     Route::get('manager/update-stock-cars', [StockCarsController::class, 'update'])
 //             ->name('create-stock-cars');
 //     Route::get('manager/delete-stock-cars', [StockCarsController::class, 'delete'])
@@ -86,8 +85,7 @@ Route::middleware('admin')->group(function () {
 
     #################### Cars For Sale ####################
     Route::get('manager/add-car-for-sale', [CarsForSaleController::class, 'create'])
-    ->name('add-car-for-sale');
-
+        ->name('add-car-for-sale');
 
     #################### Admin Logout ####################
     Route::get('logout', [AdminController::class, 'logout'])

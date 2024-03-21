@@ -11,8 +11,7 @@ class CarBrand extends Model
 {
     use HasFactory  ,HasTranslations;
     protected $fillable = ["logo", 'name',"slug"];
-    protected $guarded = [];
-   
+
 
     public $translatable = ['name'];
 
