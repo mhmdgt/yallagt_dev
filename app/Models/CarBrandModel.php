@@ -12,7 +12,6 @@ class CarBrandModel extends Model
     protected $fillable = [ 'name',"slug","car_brand_id"];
     public $translatable = ['name'];
 
-
     function brand(){
         return $this->belongsTo(CarBrand::class);
     }

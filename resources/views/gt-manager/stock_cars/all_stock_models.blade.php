@@ -6,8 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('all-stock-car-brands') }}">All Stock Models</a></li>
-                    <li class="breadcrumb-item"><a href="#">Brand Name</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('all-stock-cars') }}">All Stock Models</a></li>
                     <li class="breadcrumb-item">All Stock</li>
                 </ol>
                 {{-- ====== Modal button ====== --}}
@@ -27,8 +26,11 @@
                     <div>
                         <img src="{{ asset('gt_manager/media/stock_cars/audi-s3.jpg') }}" class="card-img-top"
                             alt="Cat_img">
-                        <button class="btn btn-light stockImageCtrl" data-toggle="modal" data-target="#EditStockModel">
+                        <button class="btn btn-light stockCarImageEdit" data-toggle="modal" data-target="#EditStockModel">
                             <i data-feather="edit"></i>
+                        </button>
+                        <button class="btn btn-light stockCarImageDel " data-toggle="modal" data-target="#EditStockModel">
+                            <i data-feather="trash"></i>
                         </button>
                     </div>
                     {{-- add categories --}}
@@ -95,18 +97,15 @@
                             action="{{ route('car-brand.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label>Brand</label>
+                                <label>Model</label>
                                 <div>
                                     <select class="js-example-basic-single w-100">
-                                        <option value="TX">Kia</option>
-                                        <option value="NY">Hyundai</option>
+                                        <option value="TX">Cerato</option>
+                                        <option value="NY">Picanto</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-                                <input type="text" class="form-control" name="name_ar" placeholder="Arabic Name">
-                            </div>
+
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Year</label>
                                 <input type="text" class="form-control" name="name_ar" placeholder="Arabic Name">

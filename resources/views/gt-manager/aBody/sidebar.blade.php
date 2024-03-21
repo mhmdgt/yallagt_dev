@@ -17,17 +17,10 @@
 
             {{-- 1st Section --}}
             <li class="nav-item nav-category">Main</li>
-
             <li class="nav-item">
                 <a href="{{ route('index-page') }}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('manager-home') }}" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">Home</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -62,8 +55,8 @@
                                 Brands & Models</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('model-specs-index') }}" class="nav-link">
-                                Model Specs</a>
+                            <a href="{{ route('spec-categories') }}" class="nav-link">
+                                Spec Categories</a>
                         </li>
 
                     </ul>
@@ -76,17 +69,14 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#StockCars" role="button" aria-expanded="false"
                     aria-controls="StockCars">
-                    <i class="link-icon" data-feather="package"></i>
+                    <i class="link-icon" data-feather="zap"></i>
                     <span class="link-title">Stock Cars</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="StockCars">
                     <ul class="nav sub-menu">
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('create-stock-cars') }}" class="nav-link">Add Stock Car</a>
-                        </li> --}}
                         <li class="nav-item">
-                            <a href="{{ route('all-stock-car-brands') }}" class="nav-link">All Stock Brands</a>
+                            <a href="{{ route('all-stock-cars') }}" class="nav-link">Show All</a>
                         </li>
                     </ul>
                 </div>
@@ -224,21 +214,21 @@
 
             {{-- 5th Section --}}
             <li class="nav-item nav-category">Settings</li>
+
             <li class="nav-item">
-                {{-- <a href="{{ route('create-category') }}" class="nav-link"> --}}
-                <a href="#" class="nav-link">
+                <a href="{{ route('manager-home') }}" class="nav-link">
                     <i class="link-icon" data-feather="layers"></i>
                     <span class="link-title">Branding</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" target="_blank" class="nav-link">
                     <i class="link-icon" data-feather="info"></i>
                     <span class="link-title">Contact Us</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" target="_blank" class="nav-link">
                     <i class="link-icon" data-feather="link"></i>
                     <span class="link-title">Social Media</span>
                 </a>

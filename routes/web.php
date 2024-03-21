@@ -42,8 +42,7 @@ require __DIR__ . '/gt_manager.php';
 
 
 Route::get('/', function () {
-    // $brandEagle = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = '580 Eagle'")->first();
-    // dd($brandEagle);
+
     return view('welcome');
 });
 
