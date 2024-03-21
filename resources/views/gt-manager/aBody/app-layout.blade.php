@@ -130,7 +130,10 @@
 
     
     <!-- ------------------------------- END Inject:js ------------------------------- -->
-    <script >src="{{ asset('vendor/sweetalert2/sweetalert2.all.js') }}"</script>
+   
+<!-- Flash Messages by sweet alert -->
+<script  src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+
     @livewireScripts
     @yield('script')
 

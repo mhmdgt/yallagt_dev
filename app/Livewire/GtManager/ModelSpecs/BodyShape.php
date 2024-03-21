@@ -4,12 +4,14 @@ namespace App\Livewire\GtManager\ModelSpecs;
 
 
 use Livewire\Component;
-use Livewire\Attributes\On;
+// use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 use App\Models\BodyShape as Body;
-use Livewire\WithPagination;
-use RealRashid\SweetAlert\Facades\Alert;
+
+use App\Http\Requests\GtManager\ModelSpecs\StoreBodyShapeRequest;
+use App\Http\Requests\GtManager\ModelSpecs\UpdateBodyShapeRequest;
 
 class BodyShape extends Component
 {
@@ -20,25 +22,12 @@ class BodyShape extends Component
     // Add a public property to hold the ID of the clicked item
     public $selectedItemId;
 
-    public function rules()
-    {
-        return  [
-            'name_ar' => [
-                'required', 'string', 'max:200',
-                Rule::unique('body_shapes', 'name->ar')
-            ],
-            'name_en' => [
-                'required', 'string', 'max:200',
-                Rule::unique('body_shapes', 'name->en')
-            ],
-            'logo' => 'nullable|image|max:1024|mimes:png'
-        ];
-    }
+  
 
     public function store()
     {
-        $validatedData = $this->validate();
 
+        $validatedData = $this->validate((new StoreBodyShapeRequest())->rules());
         // Store data...
 
         Body::create([
@@ -63,15 +52,16 @@ class BodyShape extends Component
 
     function update($id)
     {
-        $validatedData = $this->validate();
+
+        $validatedData = $this->validate((new UpdateBodyShapeRequest($id,'body_shapes'))->rules());
         $bodyShape = Body::findOrFail($id);
         // Store data...
         $bodyShape->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
             'logo' => $this->logo ? $this->logo->store('photos', 'public') :  $bodyShape->logo,
         ]);
-        // Clear form fields after successful storage
-        $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->dispatch('success');
+       
         // Clear form fields after successful storage
         $this->resetFields();
         // Dispatching a browser event after storing the date
@@ -80,11 +70,11 @@ class BodyShape extends Component
 
     function delete($id)
     {
-         Body::findOrFail($id)->delete();
+        Body::findOrFail($id)->delete();
     }
     public function render()
     {
-
+       
         $bodyShapes = Body::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.model-specs.body-shape', compact('bodyShapes'));
     }

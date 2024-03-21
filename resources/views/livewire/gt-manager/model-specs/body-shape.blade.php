@@ -1,4 +1,6 @@
 <div>
+
+
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div class="page-content">
         {{-- ====== Page Header ====== --}}
@@ -182,8 +184,18 @@
 
 @script
 <script>
+   
     $wire.on('dispatch-model', () => {
         $('.dispatch-model').modal('hide');
     });
+  
+
+$wire.on('success', ()  => {
+    // Confirm dialog
+    console.log('l')
+    swal("Success!", "Your message here", "success");
+    });
 </script>
+
+
 @endscript

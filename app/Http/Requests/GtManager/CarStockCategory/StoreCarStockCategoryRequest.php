@@ -41,6 +41,8 @@ class StoreCarStockCategoryRequest extends FormRequest
             'fuel_type_id' => 'required|exists:fuel_types,id',
             'transmission_type_id' => 'required|exists:transmission_types,id',
             'engine_aspiration_id' => 'required|exists:engine_aspirations,id',
+             'engine_km_id'=>'required|exists:engine_kms,id',
+             'engine_cc_id'=>'required|exists:engine_ccs,id',
         ];
     }
 }

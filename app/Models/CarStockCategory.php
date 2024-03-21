@@ -28,6 +28,8 @@ class CarStockCategory extends Model
         'fuel_type_id',
         'transmission_type_id',
         'engine_aspiration_id',
+        'engine_km_id',
+        'engine_cc_id'
     ];
     
 }
