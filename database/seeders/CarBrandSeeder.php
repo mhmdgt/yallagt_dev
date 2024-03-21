@@ -15,10 +15,6 @@ class CarBrandSeeder extends Seeder
     {
 
         $carBrands = [
-<<<<<<< HEAD
-           ['en' => "580 Eagle", "ar" => "580 ايجل"], 
-=======
->>>>>>> muhammed
             ['en' => "Alfa Romeo", "ar" => "الفا روميو"],
             ['en' => "Alpine", "ar" => "ألبينا"],
             ['en' => "Aston Martin", "ar" => "استون مارتن"],
@@ -128,24 +124,13 @@ class CarBrandSeeder extends Seeder
                 "logo" => "logo.png",
             ]);
 
-            $EagleModels=[
-                ["en"=>"","ar"=>""],
-                ["en"=>"","ar"=>""],
-                ["en"=>"","ar"=>""],
-            ];
-
-
-<<<<<<< HEAD
           
 
 
-        
-=======
 
 
 
 
->>>>>>> muhammed
 
         }
 

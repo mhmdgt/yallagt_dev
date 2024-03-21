@@ -11,10 +11,6 @@ class CarBrandModel extends Model
     use HasFactory  ,HasTranslations;
     protected $fillable = [ 'name',"slug","car_brand_id"];
     public $translatable = ['name'];
-<<<<<<< HEAD
-    
-=======
->>>>>>> muhammed
 
     function brand(){
         return $this->belongsTo(CarBrand::class);
