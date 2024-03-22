@@ -73,14 +73,37 @@
                                                 Edit
                                             </button>
 
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#confirmDeleteModal{{ $bodyShape->id }}">
+                                                Delete Item
+                                            </button>
 
-
-                                            <form wire:submit.prevent='deleteConfirmation({{ $bodyShape->id }})''>
-                                                <button type="submit" class="btn btn-danger">delete</button>
-                                            </form>
-                                            <form wire:submit.prevent='delete({{ $bodyShape->id }})' id="confirmDeleteForm{{ $bodyShape->id }}" >
-                                                <button type="submit" class="btn btn-danger">delete</button>
-                                            </form>
+                                            <!-- Delete Confirmation Modal -->
+                                            <div class="modal fade" id="confirmDeleteModal{{ $bodyShape->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm
+                                                                Delete</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete this item?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                wire:click='delete($bodyShape->id)'>Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
@@ -90,85 +113,92 @@
                                                     class="text-danger">(EN)</span></label>
                                             <input type="text" class="form-control" autocomplete="off"
                                                 wire:model=' name_en'>
-                                                @include('gt-manager.error.error', ['property' => 'name_en'])
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-                            <input type="text" class="form-control" wire:model='name_ar'>
-                            @include('gt-manager.error.error', ['property' => 'name_ar'])
-                        </div>
+                                            @include('gt-manager.error.error', ['property' => 'name_en'])
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputUsername1">Name <span
+                                                    class="text-danger">(AR)</span></label>
+                                            <input type="text" class="form-control" wire:model='name_ar'>
+                                            @include('gt-manager.error.error', ['property' => 'name_ar'])
+                                        </div>
 
 
-                        <div class="form-group">
-                            <label> Logo</label>
-                            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+                                        <div class="form-group">
+                                            <label> Logo</label>
+                                            <input type="file" wire:model="logo" class="file-upload-default" id="image">
 
-                            <div class="input-group col-xs-12">
-                                <input type="text" class="form-control file-upload-info" disabled=""
-                                    placeholder="Upload Image">
-                                <span class="input-group-append">
-                                    <button class="file-upload-browse btn btn-success" type="button">Upload</button>
-                                </span>
-                            </div>
-                            @include('gt-manager.error.error', ['property' => 'logo'])
+                                            <div class="input-group col-xs-12">
+                                                <input type="text" class="form-control file-upload-info" disabled=""
+                                                    placeholder="Upload Image">
+                                                <span class="input-group-append">
+                                                    <button class="file-upload-browse btn btn-success"
+                                                        type="button">Upload</button>
+                                                </span>
+                                            </div>
+                                            @include('gt-manager.error.error', ['property' => 'logo'])
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmaill" class="form-label"> </label>
+                                            <img id="showImage" class="image-rec-full"
+                                                src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
+                                        </div>
+                                    </x-model.edit>
+                                    @endforeach
+                                    {{-- Loop Ends --}}
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmaill" class="form-label"> </label>
-                            <img id="showImage" class="image-rec-full"
-                                src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
-                        </div>
-                        </x-model.edit>
-                        @endforeach
-                        {{-- Loop Ends --}}
-                        </tbody>
-                        </table>
+                        {{ $bodyShapes->links() }}
                     </div>
-                    {{ $bodyShapes->links() }}
                 </div>
             </div>
         </div>
     </div>
-</div>
-{{-- ========================== Add body Shapes ========================== --}}
-<x-model.create title="body shape">
-    <div class="form-group">
-        <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
-        <input type="text" class="form-control" wire:model="name_en" autocomplete="off" placeholder="English Name"
-            value="{{ old('name_en') ?? '' }}">
-        @error('name_en')
-        <small class="text-danger">{{ $message }}</small>
-        @enderror
+    {{-- ========================== Add body Shapes ========================== --}}
+    <x-model.create title="body shape">
+        <div class="form-group">
+            <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
+            <input type="text" class="form-control" wire:model="name_en" autocomplete="off" placeholder="English Name"
+                value="{{ old('name_en') ?? '' }}">
+            @error('name_en')
+            <small class="text-danger">{{ $message }}</small>
+            @enderror
 
-    </div>
-    <div class="form-group">
-        <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-        <input type="text" class="form-control" wire:model="name_ar" placeholder="Arabic Name"
-            value="{{ old('name_ar') ?? '' }}">
-        @error('name_ar')
-        <small class="text-danger">{{ $message }}</small>
-        @enderror
-    </div>
-
-    <h6 class="mt-4 mb-2">Media Section</h6>
-    <div class="form-group">
-        <label>Brand Logo</label>
-        <input type="file" wire:model="logo" class="file-upload-default" id="image">
-
-        <div class="input-group col-xs-12">
-            <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
-            <span class="input-group-append">
-                <button class="file-upload-browse btn btn-success" type="button">Upload</button>
-            </span>
         </div>
-        @error('logo')
-        <small class="text-danger">{{ $message }}</small>
-        @enderror
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputEmaill" class="form-label"> </label>
-        <img id="showImage" class="image-rec-full" src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
-    </div>
-</x-model.create>
+        <div class="form-group">
+            <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
+            <input type="text" class="form-control" wire:model="name_ar" placeholder="Arabic Name"
+                value="{{ old('name_ar') ?? '' }}">
+            @error('name_ar')
+            <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+
+        <h6 class="mt-4 mb-2">Media Section</h6>
+        <div class="form-group">
+            <label>Brand Logo</label>
+            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+
+            <div class="input-group col-xs-12">
+                <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-success" type="button">Upload</button>
+                </span>
+            </div>
+            @error('logo')
+            <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmaill" class="form-label"> </label>
+            <img id="showImage" class="image-rec-full" src="{{ asset('gt_manager/assets/images/no_image.jpg') }}"
+                alt="...">
+        </div>
+    </x-model.create>
+
+
+
+
 
 </div>
 
@@ -234,7 +264,6 @@
 // In your JavaScript file
 
     Livewire.on('deleteConfirmation', (event) => {
-       
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -244,10 +273,9 @@
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            if (result.isConfirmed) {
-               
-                
+            if (result.isConfirmed) { 
                 document.getElementById('confirmDeleteForm'+event.id).submit();
+
             }
         });
     });
