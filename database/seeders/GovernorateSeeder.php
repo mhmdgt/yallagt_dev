@@ -14,6 +14,9 @@ class GovernorateSeeder extends Seeder
     public function run(): void
     {
         $governorates=[
+<<<<<<< HEAD
+            ['en' => "", "ar" => ""],
+=======
             ['en', 'Cairo', 'ar', 'القاهرة'],
             ['en', 'Giza', 'ar', 'الجيزة'],
             ['en', 'Alexandria', 'ar', 'الإسكندرية'],
@@ -41,6 +44,7 @@ class GovernorateSeeder extends Seeder
             ['en', 'Damietta', 'ar', 'دمياط'],
             ['en', 'New Valley (Al-Wadi Al-Jadid)', 'ar', 'الوادي الجديد (الوادي الجديد)'],
             ['en', 'North Sinai (Shamal Sina)', 'ar', 'شمال سيناء (شمال سيناء)']
+>>>>>>> muhammed
         ];
 
 
@@ -48,6 +52,10 @@ class GovernorateSeeder extends Seeder
             Governorate::create(  $governorate);
 
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> muhammed
     }
 }

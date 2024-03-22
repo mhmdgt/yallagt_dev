@@ -6,17 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CarBrandModel extends Model
+class EnginCc extends Model
 {
     use HasFactory  ,HasTranslations;
-    protected $fillable = [ 'name',"slug","car_brand_id"];
+    protected $fillable = [ 'name'];
     public $translatable = ['name'];
-<<<<<<< HEAD
-    
-=======
->>>>>>> muhammed
-
-    function brand(){
-        return $this->belongsTo(CarBrand::class);
-    }
 }
