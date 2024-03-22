@@ -1,6 +1,6 @@
    {{-- ========================== Add body sheps ========================== --}}
 
-   <div class="modal fade  dispatch-model" id="store-body-shape" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   <div class="modal fade  hide-modal" id="store-body-shape" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
    aria-hidden="true" wire:ignore.self>
 
    <div class="modal-dialog" role="document">
@@ -27,4 +27,28 @@
            </div>
        </div>
    </div>
+   
+@script
+<script>
+    $wire.on('hide-modal-dispatch', () => {
+            $('.hide-modal').modal('hide');
+        });
+      
+
+        window.addEventListener('alert', (event) => {
+            let data = event.detail;
+
+            console.log(data);
+
+            Swal.fire({
+                position: data.position,
+                icon: data.type,
+                title: data.title,
+                showConfirmButton: true,
+                timer: 1500
+            });
+        })
+       
+</script>
+@endscript
 </div>

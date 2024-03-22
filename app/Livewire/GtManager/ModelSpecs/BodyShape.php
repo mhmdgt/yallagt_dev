@@ -30,7 +30,7 @@ class BodyShape extends Component
         // Clear form fields after successful storage
         $this->resetFields();
         // Dispatching a browser event after storing the date
-        $this->dispatch('dispatch-model')->self();
+        $this->dispatch('hide-modal-dispatch')->self();
 
         $this->dispatch(
             'alert',
@@ -62,25 +62,30 @@ class BodyShape extends Component
         // Clear form fields after successful storage
         $this->resetFields();
         // Dispatching a browser event after storing the date
-        $this->dispatch('dispatch-model')->self();
-    }
+       
+        $this->dispatch('hide-modal-dispatch')->self();
 
-    public function deleteConfirmation($id)
-    {
-        //    dd($id); 
-        $this->delete_id = $id;
-        // $this->dispatch('delete-alert');
 
         $this->dispatch(
-            "deleteConfirmation",
-            id: $this->delete_id
+            'toast',
+            type: 'success',
+            title: 'updated successfully'
         );
     }
 
+
+
     public function delete($id)
     {
-        dd('done');
+
         Body::findOrFail($id)->delete();
+        $this->dispatch('hide-modal-dispatch')->self();
+        $this->dispatch(
+            'toast',
+            type: 'success',
+            title: 'deleted successfully'
+           
+        );
     }
 
     public function render()

@@ -73,37 +73,7 @@
                                                 Edit
                                             </button>
 
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#confirmDeleteModal{{ $bodyShape->id }}">
-                                                Delete Item
-                                            </button>
-
-                                            <!-- Delete Confirmation Modal -->
-                                            <div class="modal fade" id="confirmDeleteModal{{ $bodyShape->id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm
-                                                                Delete</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure you want to delete this item?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Cancel</button>
-                                                            <button type="button" class="btn btn-danger"
-                                                                wire:click='delete($bodyShape->id)'>Delete</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           <x-model.delete id="{{ $bodyShape->id }}"></x-model.delete>
                                         </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
@@ -111,8 +81,8 @@
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
-                                            <input type="text" class="form-control" autocomplete="off"
-                                                wire:model=' name_en'>
+                                            <input type="text" class="form-control" 
+                                                wire:model='name_en'>
                                             @include('gt-manager.error.error', ['property' => 'name_en'])
                                         </div>
                                         <div class="form-group">
@@ -202,84 +172,3 @@
 
 </div>
 
-@script
-<script>
-    $wire.on('dispatch-model', () => {
-            $('.dispatch-model').modal('hide');
-        });
-
-        window.addEventListener('alert', (event) => {
-            let data = event.detail;
-
-            console.log(data);
-
-            Swal.fire({
-                position: data.position,
-                icon: data.type,
-                title: data.title,
-                showConfirmButton: true,
-                timer: 1500
-            });
-        })
-
-    // window.addEventListener('delete-alert', (event) => {
-
-            // Swal.fire({
-            //     title: "Are you sure?",
-            //     text: "You won't be able to revert this!",
-            //     icon: "warning",
-            //     showCancelButton: true,
-            //     confirmButtonColor: "#3085d6",
-            //     cancelButtonColor: "#d33",
-            //     confirmButtonText: "Yes, delete it!"
-            // }).then((result) => {
-            //     if (result.isConfirmed) {
-            //         Livewire.emit('deleteConfirmed')
-            //     }
-            // });
-
-
-
-        // })
-
-       
-        // window.addEventListener('delete-confirmation', (event) => {
-        //      Swal.fire({
-        //         title: "Are you sure?",
-        //         text: "You won't be able to revert this!",
-        //         icon: "warning",
-        //         showCancelButton: true,
-        //         confirmButtonColor: "#3085d6",
-        //         cancelButtonColor: "#d33",
-        //         confirmButtonText: "Yes, delete it!"
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             alert('ll')
-        //             Livewire.emit('delete')
-        //         }
-        //     });
-        // });
-
-
-// In your JavaScript file
-
-    Livewire.on('deleteConfirmation', (event) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) { 
-                document.getElementById('confirmDeleteForm'+event.id).submit();
-
-            }
-        });
-    });
-
-
-</script>
-@endscript
