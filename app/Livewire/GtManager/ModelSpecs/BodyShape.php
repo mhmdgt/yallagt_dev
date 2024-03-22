@@ -65,12 +65,15 @@ class BodyShape extends Component
         $this->dispatch('dispatch-model')->self();
     }
 
-    public function deleteConfermation($id)
+    public function deleteConfirmation($id)
     {
-        // dd($id);
-        $this->delete_id =$id;
+        $this->delete_id = $id;
         // $this->dispatch('delete-alert');
-        $this->dispatch('delete-alert')->self();
+
+        $this->dispatch(
+            "deleteConfirmation",
+            id: $this->delete_id
+        );
     }
 
     public function delete($id)
