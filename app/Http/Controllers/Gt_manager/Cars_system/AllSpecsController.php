@@ -19,9 +19,9 @@ class AllSpecsController extends Controller
         return view('gt-manager.cars_assets.spec_categories.body_shapes');
     }
     // -------------------- Fule Type -------------------- //
-    public function FuleType()
+    public function FuelType()
     {
-        return view('gt-manager.cars_assets.spec_categories.fule_type');
+        return view('gt-manager.cars_assets.spec_categories.fuel_type');
     }
     // -------------------- Fule Type -------------------- //
     public function TransmassionType()
@@ -34,14 +34,14 @@ class AllSpecsController extends Controller
         return view('gt-manager.cars_assets.spec_categories.engine_aspiration');
     }
     // -------------------- Fule Type -------------------- //
-    public function EngineCC()
+    public function EngineCapacity()
     {
-        return view('gt-manager.cars_assets.spec_categories.engine_cc');
+        return view('gt-manager.cars_assets.spec_categories.engine_capacity');
     }
     // -------------------- Fule Type -------------------- //
-    public function EngineKM()
+    public function EngineKilometer()
     {
-        return view('gt-manager.cars_assets.spec_categories.engine_km');
+        return view('gt-manager.cars_assets.spec_categories.engine_kilometer');
     }
 
 

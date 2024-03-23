@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Livewire\GtManager\ModelSpecs;
+namespace App\Livewire\GtManager\CarsAssets\SpecCategories;
 
 use App\Http\Requests\GtManager\CarSpecCategory\StoreRequest;
 use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
-use App\Models\BodyShape as Body;
+use App\Models\EngineAspiration as Type;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class BodyShape extends Component
+class EngineAspiration extends Component
 {
     use WithFileUploads, WithPagination;
 
@@ -18,11 +18,20 @@ class BodyShape extends Component
     public $name_ar;
     public $delete_id;
 
+    public function render()
+    {
+        $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
+        return view('livewire.gt-manager.cars-assets.spec-categories.engine-aspiration', compact('types'));
+    }
+    public function resetFields()
+    {
+        $this->reset(['name_en', 'name_ar', 'logo']);
+    }
     public function store()
     {
-        $validatedData = $this->validate((new StoreRequest('body_shapes'))->rules());
+        $validatedData = $this->validate((new StoreRequest('engine_aspirations'))->rules());
         // Store data...
-        Body::create([
+        Type::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
             'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
         ]);
@@ -38,23 +47,21 @@ class BodyShape extends Component
             position: 'center'
         );
     }
-
     public function edit($id)
     {
-        $bodyShape = Body::findOrFail($id);
-        $this->logo = $bodyShape ? $bodyShape->logo : null;
-        $this->name_en = $bodyShape ? $bodyShape->getTranslations('name')['en'] : '';
-        $this->name_ar = $bodyShape ? $bodyShape->getTranslations('name')['ar'] : '';
+        $FuelType = Type::findOrFail($id);
+        $this->logo = $FuelType ? $FuelType->logo : null;
+        $this->name_en = $FuelType ? $FuelType->getTranslations('name')['en'] : '';
+        $this->name_ar = $FuelType ? $FuelType->getTranslations('name')['ar'] : '';
     }
-
     public function update($id)
     {
         $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
-        $bodyShape = Body::findOrFail($id);
+        $FuelType = Type::findOrFail($id);
         // Store data...
-        $bodyShape->update([
+        $FuelType->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $bodyShape->logo,
+            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $FuelType->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);
@@ -70,11 +77,10 @@ class BodyShape extends Component
             title: 'updated successfully'
         );
     }
-
     public function delete($id)
     {
 
-        Body::findOrFail($id)->delete();
+        Type::findOrFail($id)->delete();
         $this->dispatch('hide-modal-dispatch')->self();
         $this->dispatch(
             'toast',
@@ -82,16 +88,5 @@ class BodyShape extends Component
             title: 'deleted successfully'
 
         );
-    }
-
-    public function render()
-    {
-        $bodyShapes = Body::latest()->paginate(10, ['name', 'logo', 'id']);
-        return view('livewire.gt-manager.model-specs.body-shape', compact('bodyShapes'));
-    }
-
-    public function resetFields()
-    {
-        $this->reset(['name_en', 'name_ar', 'logo']);
     }
 }

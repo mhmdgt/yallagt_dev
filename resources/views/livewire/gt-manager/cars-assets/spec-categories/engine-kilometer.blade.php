@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories') }}">Specs
                             Categories</a></li>
-                    <li class="breadcrumb-item"><a>Body Shape</a></li>
+                    <li class="breadcrumb-item"><a>Engine Kilometers</a></li>
                 </ol>
             </div>
         </nav>
@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12 d-flex align-items-center">
-                            <span class="h4">Body Shapes</span>
+                            <span class="h4">Engine Kilometers</span>
                             <td>
                                 <button wire:click="resetFields" type="button"
                                     class="btn btn-inverse-primary btn-icon-text ml-4" data-toggle="modal"
@@ -51,41 +51,43 @@
                                 <tbody>
                                     <tr>
                                         {{-- Loop Starts --}}
-                                        @foreach ($bodyShapes as $bodyShape)
+                                        @foreach ($types as $type)
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <div>
                                                     <img class="image-in-circle-75"
-                                                        src="{{ !empty($bodyShape->photo)
-                                                            ? asset('storage/' . $bodyShape->logo)
-                                                            : asset('gt_manager/assets/images/no_image.jpg') }}"
+                                                        src="{{ !empty($type->photo) ? asset('storage/' . $type->logo) : asset('gt_manager/assets/images/no_image.jpg') }}"
                                                         alt="profile">
                                                 </div>
                                             </td>
-                                            <td>{{ $bodyShape->getTranslations('name')['en'] }}</td>
-                                            <td> {{ $bodyShape->getTranslations('name')['ar'] }}</td>
+                                            <td>{{ $type->getTranslations('name')['en'] }}</td>
+                                            <td> {{ $type->getTranslations('name')['ar'] }}</td>
                                             <td class="d-flex">
                                                 <button class="btn btn-inverse-warning mr-2"
-                                                    wire:click="edit({{ $bodyShape->id }})" data-toggle="modal"
-                                                    data-target="#editModel{{ $bodyShape->id }}" title="Edit">
+                                                    wire:click="edit({{ $type->id }})" data-toggle="modal"
+                                                    data-target="#editModel{{ $type->id }}" title="Edit">
                                                     Edit
                                                 </button>
-                                                <x-model.delete id="{{ $bodyShape->id }}"></x-model.delete>
+                                                <x-model.delete id="{{ $type->id }}"></x-model.delete>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <x-model.edit title="Body Shape" id="{{ $bodyShape->id }}">
+                                    <x-model.edit title="Fuel Type" id="{{ $type->id }}">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
                                             <input type="text" class="form-control" wire:model='name_en'>
-                                            @include('gt-manager.error.error', ['property' => 'name_en'])
+                                            @include('gt-manager.error.error', [
+                                                'property' => 'name_en',
+                                            ])
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(AR)</span></label>
                                             <input type="text" class="form-control" wire:model='name_ar'>
-                                            @include('gt-manager.error.error', ['property' => 'name_ar'])
+                                            @include('gt-manager.error.error', [
+                                                'property' => 'name_ar',
+                                            ])
                                         </div>
 
 
@@ -116,14 +118,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $bodyShapes->links() }}
+                        {{ $types->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {{-- ========================== Add body Shapes ========================== --}}
-    <x-model.create title="body shape">
+    <x-model.create title="transmassion type">
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
             <input type="text" class="form-control" wire:model="name_en" autocomplete="off"

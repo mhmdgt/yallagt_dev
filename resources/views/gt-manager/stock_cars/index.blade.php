@@ -10,7 +10,7 @@
                 </ol>
             </div>
         </nav>
-        {{-- ========================== Content Table ==========================  --}}
+        {{-- ========================== Brand Table ==========================  --}}
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -26,15 +26,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach( $brands as $brand )
                                     <tr>
-
-                                        <td>1</td>
-                                        <td> <a href="{{ route('all-stock-models') }}">Kia</a></td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td> <a href="{{ route('all-stock-models') }}">{{ $brand->name }}</a></td>
                                         <td>15</td>
-
                                     </tr>
-
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

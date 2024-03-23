@@ -6,14 +6,8 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item" aria-current="page">Model Specs</li>
+                    <li class="breadcrumb-item" aria-current="page">Spec Categories</li>
                 </ol>
-                {{-- ====== Modal button ====== --}}
-                {{-- <button type="button" class="btn btn-success btn-icon-text mb-2 mb-md-0" data-toggle="modal"
-                    data-target="#addNewCarModal">
-                    <i class="btn-icon-prepend" data-feather="plus"></i>
-                    Add New Brand
-                </button> --}}
             </div>
         </nav>
         {{-- ========================== Specifications ========================== --}}
@@ -41,7 +35,7 @@
                                 </div>
                                 {{-- Fuel Type --}}
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
-                                    <a href="#">
+                                    <a href="{{ route('fuel-types') }}">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="100px"
@@ -54,7 +48,7 @@
                                 </div>
                                 {{-- Transmassion Type --}}
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
-                                    <a href="#">
+                                    <a href="{{ route('transmassion-types') }}">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="80px"
@@ -67,7 +61,7 @@
                                 </div>
                                 {{-- Engine Aspiration --}}
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
-                                    <a href="#">
+                                    <a href="{{ route('engine-aspiration') }}">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="80px"
@@ -80,7 +74,7 @@
                                 </div>
                                 {{-- Engine Capacity --}}
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
-                                    <a href="#">
+                                    <a href="{{ route('engine-capacity') }}">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="100px"
@@ -93,7 +87,7 @@
                                 </div>
                                 {{-- Engine KM --}}
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
-                                    <a href="#">
+                                    <a href="{{ route('engine-kilometer') }}">
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo">
                                                 <img width="100px"

@@ -8,23 +8,24 @@
     <title>Admin | Yalla GT</title>
     <!-- ------------------------------- Head Injectors ------------------------------- -->
 
-    <!-- Select2-->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/select2/select2.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.css">
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/core/core.css">
 
-    <!-- plugin css for this page -->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- this page -->
+    <link rel="stylesheet"
+        href="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 
-    <!-- plugin css for icon pages -->
+    <!-- icon pages -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/mdi/css/materialdesignicons.min.css">
 
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/fonts/feather-font/css/iconfont.css">
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/flag-icon-css/css/flag-icon.min.css">
 
-    <!-- plugin css for Data Tables -->
+    <!-- Data Tables -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
 
     <!-- Layout styles -->
@@ -35,14 +36,13 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('gt_manager') }}/assets/images/favicon.ico" />
 
-    <!-- ------------------------------- END Head Inject ------------------------------- -->
+    <!-- ------------------------------- END Head ------------------------------- -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @livewireStyles
 
 </head>
 
 <body class="sidebar-dark">
-    {{-- @include('sweetalert::alert') --}}
 
     <div class="main-wrapper">
 
@@ -66,20 +66,15 @@
         </div>
     </div>
 
-    <!-- ########################### Scripts ########################### -->
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <!-- ------------------------------- Scripts ------------------------------- -->
 
     <!-- jqaury -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"></script> --}}
 
     <!-- core:js -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/core/core.js"></script>
 
-    <!-- plugin js for this page -->
+    <!-- Custom js -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/chartjs/Chart.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/jquery.flot/jquery.flot.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/jquery.flot/jquery.flot.resize.js"></script>
@@ -95,23 +90,23 @@
     <script src="{{ asset('gt_manager') }}/assets/js/dashboard.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/datepicker.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/file-upload.js"></script>
-    <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
 
-    <!-- plugin js for Data Tables -->
+    <!-- Data Tables -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/data-table.js"></script>
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Select2 -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
 
     <!-- Image Real-Time JS -->
     <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
 
-    <!-- Flash Messages by sweet alert -->
-    {{-- <script  src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script> --}}
-
-    <!-- ------------------------------- END Inject:js ------------------------------- -->
+    <!-- ------------------------------- END js ------------------------------- -->
 
     @livewireScripts
     @yield('script')

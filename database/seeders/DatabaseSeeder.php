@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             TransmissionTypeSeeder::class,
             EngineAspirationSeeder::class,
             EngineCcSeeder::class,
+            EngineKmSeeder::class,
         ]);
     }
 

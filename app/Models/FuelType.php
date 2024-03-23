@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FuelType extends Model
 {
-    use HasFactory  ,HasTranslations;
-    protected $fillable = ["logo", 'name'];
+    use HasFactory , HasTranslations;
+    protected $fillable = ['logo', 'name'];
     public $translatable = ['name'];
 }

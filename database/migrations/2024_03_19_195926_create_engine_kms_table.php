@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('engine_kms', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('engin_kms');
+        Schema::dropIfExists('engine_kms');
     }
 };

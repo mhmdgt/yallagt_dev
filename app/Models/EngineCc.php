@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class EngineCc extends Model
 {
-    use HasFactory  ,HasTranslations;
-    protected $fillable = [ 'name'];
+    use HasFactory , HasTranslations;
+    protected $fillable = ['logo', 'name'];
     public $translatable = ['name'];
 }

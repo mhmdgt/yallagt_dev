@@ -106,19 +106,7 @@
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
-                                {{-- <div class="col">
-                                    <label for="aspiration">Aspiration</label>
-                                    <select class="js-example-basic-single w-100" id="aspiration" name="engin_aspiration_id">
-                                        @foreach ($enginAspirations as $enginAspiration)
-                                        <option value="{{ $enginAspiration->id }}" {{ old('engin_aspiration_id') == $enginAspiration->id ? 'selected' : '' }}>{{$enginAspiration->name }}</option>
 
-                                        @endforeach
-
-                                    </select>
-                                    @error('engin_aspiration_id')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div> --}}
                                 <div class="col">
                                     <label for="maximum_speed">Maximum Speed</label>
                                     <input type="number" class="form-control" id="maximum_speed" name="maximum_speed" value="{{ old('maximum_speed') }}">
