@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('stock_cars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('car_brand_model_id')->references('id')->on('car_brand_models')->cascadeOnDelete();
+            $table->date('year');
             $table->timestamps();
         });
     }

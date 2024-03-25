@@ -126,12 +126,7 @@ class CarBrandSeeder extends Seeder
                 "logo"=>"logo.png"
             ]);
 
-            $EagleModels=[
-                ["en"=>"","ar"=>""],
-                ["en"=>"","ar"=>""],
-                ["en"=>"","ar"=>""],
-            ];
-
+          
 
           
 

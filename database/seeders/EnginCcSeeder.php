@@ -20,7 +20,7 @@ class EnginCcSeeder extends Seeder
 
 
         foreach(  $enginCcs as   $enginCc){
-            EnginCc::create(  $enginCc);
+            EnginCc::create(  ['name'=>$enginCc]);
 
         }
     }

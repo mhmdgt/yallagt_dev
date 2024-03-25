@@ -19,7 +19,7 @@ class EnginKmSeeder extends Seeder
 
 
         foreach(  $enginKms as   $enginKm){
-            EnginKm::create(  $enginKm);
+            EnginKm::create(  ['name'=>$enginKm]);
 
         }
     }
