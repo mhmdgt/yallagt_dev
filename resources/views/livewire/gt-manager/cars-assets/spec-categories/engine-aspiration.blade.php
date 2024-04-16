@@ -5,8 +5,8 @@
             {{-- ====== Navagation ====== --}}
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories') }}">Specs
+                    <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories.index') }}">Specs
                             Categories</a></li>
                     <li class="breadcrumb-item"><a>Engine Aspiration</a></li>
                 </ol>
@@ -56,7 +56,7 @@
                                             <td>
                                                 <div>
                                                     <img class="image-in-circle-75"
-                                                        src="{{ !empty($type->photo) ? asset('storage/' . $type->logo) : asset('gt_manager/assets/images/no_image.jpg') }}"
+                                                        src="{{ !empty($type->photo) ? asset('storage/' . $type->logo) : asset('gt_manager/media/no_image.jpg') }}"
                                                         alt="profile">
                                                 </div>
                                             </td>
@@ -65,14 +65,14 @@
                                             <td class="d-flex">
                                                 <button class="btn btn-inverse-warning mr-2"
                                                     wire:click="edit({{ $type->id }})" data-toggle="modal"
-                                                    data-target="#editModel{{ $type->id }}" title="Edit">
+                                                    data-target="#editModal{{ $type->id }}" title="Edit">
                                                     Edit
                                                 </button>
-                                                <x-model.delete id="{{ $type->id }}"></x-model.delete>
+                                                <x-modal.delete id="{{ $type->id }}"></x-modal.delete>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <x-model.edit title="Fuel Type" id="{{ $type->id }}">
+                                    <x-modal.edit title="Fuel Type" id="{{ $type->id }}">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
@@ -109,23 +109,23 @@
                                         <div class="mb-3">
                                             <label for="exampleInputEmaill" class="form-label"> </label>
                                             <img id="showImage" class="image-rec-full"
-                                                src="{{ asset('gt_manager/assets/images/no_image.jpg') }}"
+                                                src="{{ asset('gt_manager/media/no_image.jpg') }}"
                                                 alt="...">
                                         </div>
-                                    </x-model.edit>
+                                    </x-modal.edit>
                                     @endforeach
                                     {{-- Loop Ends --}}
                                 </tbody>
                             </table>
                         </div>
-                        {{ $types->links() }}
+                        {{ $types->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {{-- ========================== Add body Shapes ========================== --}}
-    <x-model.create title="transmassion type">
+    <x-modal.create title="engine aspiration type">
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
             <input type="text" class="form-control" wire:model="name_en" autocomplete="off"
@@ -162,8 +162,8 @@
         </div>
         <div class="mb-3">
             <label for="exampleInputEmaill" class="form-label"> </label>
-            <img id="showImage" class="image-rec-full" src="{{ asset('gt_manager/assets/images/no_image.jpg') }}"
+            <img id="showImage" class="image-rec-full" src="{{ asset('gt_manager/media/no_image.jpg') }}"
                 alt="...">
         </div>
-    </x-model.create>
+    </x-modal.create>
 </div>

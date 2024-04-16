@@ -26,7 +26,7 @@ class CarCategoriesController extends Controller
             $fuelTypes = $this->getModel(FuelType::class, ['id', 'name']);
             $enginAspiration = $this->getModel(EngineAspiration::class, ['id', 'name']);
             $transmissionType = $this->getModel(TransmissionType::class, ['id', 'name']);
-            return view('gt-manager.stock_cars.stock_car_categories.create',compact('bodyShapes','fuelTypes','enginAspiration','transmissionType'));
+            return view('gt-manager.pages.stock_cars.stock_car_categories.create',compact('bodyShapes','fuelTypes','enginAspiration','transmissionType'));
         }
 
         function store(StoreCarStockCategoryRequest $request)

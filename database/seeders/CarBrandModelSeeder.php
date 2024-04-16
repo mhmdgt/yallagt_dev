@@ -170,7 +170,6 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "116i", "ar" => "116i"],
             ["en" => "118i", "ar" => "118i"],
             ["en" => "120i", "ar" => "120i"],
-            ["en" => "218", "ar" => "218"],
             ["en" => "218i", "ar" => "218i"],
             ["en" => "235i", "ar" => "235i"],
             ["en" => "316i", "ar" => "316i"],

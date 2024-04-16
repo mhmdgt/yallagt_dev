@@ -20,12 +20,18 @@ class EngineKilometer extends Component
 
     public function render()
     {
-        $types = Type::latest()->paginate(20, ['name', 'logo', 'id']);
+        $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.cars-assets.spec-categories.engine-kilometer', compact('types'));
+    }
+    public function clearValidationErrors()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
     public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->clearValidationErrors();
     }
     public function store()
     {
@@ -33,7 +39,7 @@ class EngineKilometer extends Component
         // Store data...
         Type::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_km', 'public') : null,
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -53,15 +59,16 @@ class EngineKilometer extends Component
         $this->logo = $EngineKilometer ? $EngineKilometer->logo : null;
         $this->name_en = $EngineKilometer ? $EngineKilometer->getTranslations('name')['en'] : '';
         $this->name_ar = $EngineKilometer ? $EngineKilometer->getTranslations('name')['ar'] : '';
+        $this->clearValidationErrors();
     }
     public function update($id)
     {
-        $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
+        $validatedData = $this->validate((new UpdateRequest($id, 'engine_kms'))->rules());
         $EngineKilometer = Type::findOrFail($id);
         // Store data...
         $EngineKilometer->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $EngineKilometer->logo,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_km', 'public') : $EngineKilometer->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);

@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
             // }
 
             if (Auth::guard('admin')->check()) {
-                return redirect()->route('index-page');
+                return redirect()->route('manager-index');
             }
 
             if (Auth::guard('web')->check()) {

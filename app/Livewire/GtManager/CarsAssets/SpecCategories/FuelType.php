@@ -24,9 +24,15 @@ class FuelType extends Component
         $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.cars-assets.spec-categories.fuel-type', compact('types'));
     }
+    public function clearValidationErrors()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
     public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->clearValidationErrors();
     }
     public function store()
     {
@@ -34,7 +40,7 @@ class FuelType extends Component
         // Store data...
         Type::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/fuel_type', 'public') : null,
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -54,15 +60,16 @@ class FuelType extends Component
         $this->logo = $FuelType ? $FuelType->logo : null;
         $this->name_en = $FuelType ? $FuelType->getTranslations('name')['en'] : '';
         $this->name_ar = $FuelType ? $FuelType->getTranslations('name')['ar'] : '';
+        $this->clearValidationErrors();
     }
     public function update($id)
     {
-        $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
+        $validatedData = $this->validate((new UpdateRequest($id, 'fuel_types'))->rules());
         $FuelType = Type::findOrFail($id);
         // Store data...
         $FuelType->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $FuelType->logo,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/fuel_type', 'public') : $FuelType->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);

@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminProfileController extends Controller
 {
-    // -------------------- New Method -------------------- //
+    // --------------------  Method -------------------- //
     public function AdminProfile()
     {
         $id = Auth::guard('admin')->user()->id;
         $adminData = Admin::find($id);
 
-        return view('gt-manager.admin_profile.admin_profile', compact('adminData'));
+        return view('gt-manager.pages.profile.index', compact('adminData'));
     }
 
     // -------------------- New Method -------------------- //
@@ -49,7 +49,7 @@ class AdminProfileController extends Controller
         $id = Auth::guard('admin')->user()->id;
         $adminData = Admin::find($id);
 
-        return view('gt-manager.admin_profile.admin_change_password', compact('adminData'));
+        return view('gt-manager.pages.auth.change_password', compact('adminData'));
     }
 
     // -------------------- New Method -------------------- //
@@ -65,7 +65,7 @@ class AdminProfileController extends Controller
             'old_password' => 'required',
             'new_password' => 'required|confirmed|min:6',
         ]);
-        
+
         //Match password
         if ( !Hash::check($request->old_password, $old_password)) {
             $notification = array(
