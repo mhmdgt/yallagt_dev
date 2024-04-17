@@ -28,8 +28,12 @@ class AdminController extends Controller
 
     public function IndexPage()
     {
-
         return view('gt-manager.master-app');
+    } // End Method
+
+    public function ManagerHome()
+    {
+        return view('gt-manager.app_index.home');
     } // End Method
 
 

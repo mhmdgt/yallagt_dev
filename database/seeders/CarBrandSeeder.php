@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\CarBrand;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 
 class CarBrandSeeder extends Seeder
 {
@@ -14,35 +13,8 @@ class CarBrandSeeder extends Seeder
      */
     public function run(): void
     {
-        // $carBrands=[
-        //     ['en' => "580 Eagle", "ar" => "580 ايجل"],
-        //     ['en' => "Alfa Romeo", "ar" => "الفا روميو"],
-        //     ['en' => "Alpine", "ar" => "ألبينا"],
-        //     ['en' => "Aston Martin", "ar" => "استون مارتن"],
-        //     ['en' => "Audi", "ar" => "أودي"],
-        //     ['en' => "Avatr", "ar" => "أفيتر"],
-        //     ['en' => "BAIC", "ar" => "بايك"],
-        //     ['en' => "Bentley", "ar" => "بنتلي"],
-        //     ['en' => "Bestune", "ar" => "بيستون"],
-        //     ['en' => "BMW", "ar" => "بي ام دبليو"],
-        //     ['en' => "Brilliance", "ar" => "بريليانس"],
-        //     ['en' => "Buick", "ar" => "بويك"],
-        //     ['en' => "BYD", "ar" => "بي واي دي"],
-        //     ['en' => "Cadillac", "ar" => "كاديلاك"],
-        //     ['en' => "Chana", "ar" => "شانا"],
-        //     ['en' => "Changan", "ar" => "تشانجان"],
-        //     ['en' => "Changhe", "ar" => "تشانغي"],
-        //     ['en' => "Chery", "ar" => "شيري"],
-        //     ['en' => "Chevrolet", "ar" => "شيفروليه"],
-        //     ['en' => "Chrysler", "ar" => "كرايسلر"],
-        //     ['en' => "Citroen", "ar" => "سيتروين"],
-        //     ['en' => "", "ar" => ""],
-        //     ['en' => "", "ar" => ""],
-            
-          
-        // ];
+
         $carBrands = [
-           ['en' => "580 Eagle", "ar" => "580 ايجل"], 
             ['en' => "Alfa Romeo", "ar" => "الفا روميو"],
             ['en' => "Alpine", "ar" => "ألبينا"],
             ['en' => "Aston Martin", "ar" => "استون مارتن"],
@@ -67,7 +39,7 @@ class CarBrandSeeder extends Seeder
             ['en' => "Dacia", "ar" => "داتشيا"],
             ['en' => "Daewoo", "ar" => "دايو"],
             ['en' => "Daihatsu", "ar" => "دايهاتسو"],
-            ['en' => "Dodge", "ar" => "دودج"],
+            ['en' => "Dodge", "ar" => " دودج"],
             ['en' => "Dongfeng", "ar" => "دونج فينج"],
             ['en' => "DS", "ar" => "دي اس"],
             ['en' => "Faw", "ar" => "فاو"],
@@ -116,24 +88,51 @@ class CarBrandSeeder extends Seeder
             ['en' => "Nissan", "ar" => "نيسان"],
             ['en' => "OPEL", "ar" => "أوبل"],
             ['en' => "Perodua", "ar" => "بيرودوا"],
-            ['en' => "Peugeot", "ar"=>"بوجاتي"],
-            ['en' => "Mclaren", "ar"=>"ماكلارين"],
+            ['en' => "Peugeot", "ar" => "بيجو"],
+            ['en' => "Pontiac", "ar" => "بونتياك"],
+            ['en' => "Porsche", "ar" => "بورش"],
+            ['en' => "Proton", "ar" => "بروتون"],
+            ['en' => "Range Rover", "ar" => "رينج روفر"],
+            ['en' => "Renault", "ar" => "رينو"],
+            ['en' => "Rolls Royce", "ar" => "رولزرويس"],
+            ['en' => "Saab", "ar" => "ساب"],
+            ['en' => "Saipa", "ar" => "سايبا"],
+            ['en' => "Samsung", "ar" => "سامسونج"],
+            ['en' => "Seat", "ar" => "سيات"],
+            ['en' => "Senova", "ar" => "سينوفا"],
+            ['en' => "Skoda", "ar" => "سكودا"],
+            ['en' => "Smart", "ar" => "سمارت"],
+            ['en' => "Soueast", "ar" => "ساويست"],
+            ['en' => "Speranza", "ar" => "سبيرانزا"],
+            ['en' => "SsangYong", "ar" => "سانج يونج"],
+            ['en' => "Subaru", "ar" => "سوبارو"],
+            ['en' => "Suzuki", "ar" => "سوزوكي"],
+            ['en' => "Tesla", "ar" => "تسلا"],
+            ['en' => "Toyota", "ar" => "تويوتا"],
+            ['en' => "VGV", "ar" => "VGV"],
+            ['en' => "Volkswagen", "ar" => "فولكس فاجن"],
+            ['en' => "Volvo", "ar" => "فولفو"],
+            ['en' => "Zeekr", "ar" => "زييكر"],
+            ['en' => "Zotye", "ar" => "زوتي"],
+            ['en' => "Bugatti", "ar" => "بوجاتي"],
+            ['en' => "Mclaren", "ar" => "ماكلارين"],
         ];
-        foreach($carBrands as $carBrand){
+        foreach ($carBrands as $carBrand) {
             CarBrand::create([
-                "name"=>$carBrand,
-                "slug"=>Str::slug($carBrand['en']),
-                "logo"=>"logo.png"
+                "name" => $carBrand,
+                "slug" => Str::slug($carBrand['en']),
+                "logo" => "logo.png",
             ]);
 
-          
-
-          
+  
 
 
-        
+
+
+
+
 
         }
-        
+
     }
 }

@@ -2,34 +2,26 @@
 
 namespace App\Livewire\GtManager\ModelSpecs;
 
-
-use Livewire\Component;
-// use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\GtManager\CarSpecCategory\StoreRequest;
+use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
 use App\Models\BodyShape as Body;
-
-use App\Http\Requests\GtManager\ModelSpecs\StoreBodyShapeRequest;
-use App\Http\Requests\GtManager\ModelSpecs\UpdateBodyShapeRequest;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class BodyShape extends Component
 {
     use WithFileUploads, WithPagination;
+
     public $logo;
     public $name_en;
     public $name_ar;
-    // Add a public property to hold the ID of the clicked item
-    public $selectedItemId;
-
-  
+    public $delete_id;
 
     public function store()
     {
-
-        $validatedData = $this->validate((new StoreBodyShapeRequest())->rules());
+        $validatedData = $this->validate((new StoreRequest('body_shapes'))->rules());
         // Store data...
-
         Body::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
             'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
@@ -37,48 +29,68 @@ class BodyShape extends Component
         // Clear form fields after successful storage
         $this->resetFields();
         // Dispatching a browser event after storing the date
-        $this->dispatch('dispatch-model')->self();
+        $this->dispatch('hide-modal-dispatch')->self();
+
+        $this->dispatch(
+            'alert',
+            type: 'success',
+            title: 'Data Stored',
+            position: 'center'
+        );
     }
 
-    function edit($id)
+    public function edit($id)
     {
         $bodyShape = Body::findOrFail($id);
         $this->logo = $bodyShape ? $bodyShape->logo : null;
         $this->name_en = $bodyShape ? $bodyShape->getTranslations('name')['en'] : '';
         $this->name_ar = $bodyShape ? $bodyShape->getTranslations('name')['ar'] : '';
     }
-    // Add a method to set the data of the clicked item to public properties
 
-
-    function update($id)
+    public function update($id)
     {
-
-        $validatedData = $this->validate((new UpdateBodyShapeRequest($id,'body_shapes'))->rules());
+        $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
         $bodyShape = Body::findOrFail($id);
         // Store data...
         $bodyShape->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') :  $bodyShape->logo,
+            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $bodyShape->logo,
         ]);
         $this->dispatch('success');
        
         // Clear form fields after successful storage
         $this->resetFields();
         // Dispatching a browser event after storing the date
-        $this->dispatch('dispatch-model')->self();
+
+        $this->dispatch('hide-modal-dispatch')->self();
+
+        $this->dispatch(
+            'toast',
+            type: 'success',
+            title: 'updated successfully'
+        );
     }
 
-    function delete($id)
+    public function delete($id)
     {
+
         Body::findOrFail($id)->delete();
+        $this->dispatch('hide-modal-dispatch')->self();
+        $this->dispatch(
+            'toast',
+            type: 'success',
+            title: 'deleted successfully'
+
+        );
     }
+
     public function render()
     {
-       
         $bodyShapes = Body::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.model-specs.body-shape', compact('bodyShapes'));
     }
-    private function resetFields()
+
+    public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
     }

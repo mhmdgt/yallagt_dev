@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\EnginKm;
+
+use App\Models\EngineKm;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -19,7 +20,7 @@ class EnginKmSeeder extends Seeder
 
 
         foreach(  $enginKms as   $enginKm){
-            EnginKm::create(  ['name'=>$enginKm]);
+            EngineKm::create(  ['name'=>$enginKm]);
 
         }
     }

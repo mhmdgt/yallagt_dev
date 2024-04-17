@@ -1,7 +1,10 @@
 <div>
+<<<<<<< HEAD
 
 
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
+=======
+>>>>>>> 51690606491ef6c006899486d5e0cbc5e2031b97
     <div class="page-content">
         {{-- ====== Page Header ====== --}}
         <nav class="page-breadcrumb">
@@ -9,10 +12,9 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index-page') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a
-                            href="{{ route('model-specs-index') }}">Model
-                            Specs</a></li>
-                    <li class="breadcrumb-item"><a>Table Name</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories') }}">Specs
+                            Categories</a></li>
+                    <li class="breadcrumb-item"><a>Body Shape</a></li>
                 </ol>
             </div>
         </nav>
@@ -21,15 +23,14 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col-12 col-md-8">
-                            <span class="ml-3 h4">Table Name</span>
-                            <td class="col-6 col-md-4">
-                                <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0"
-                                    data-toggle="modal" data-target="#store-body-shape">
-                                    <i class="btn-icon-prepend" data-feather="plus"></i>
-                                    Type
+                        <div class="col-12 d-flex align-items-center">
+                            <span class="h4">Body Shapes</span>
+                            <td>
+                                <button wire:click="resetFields" type="button"
+                                    class="btn btn-inverse-primary btn-icon-text ml-4" data-toggle="modal"
+                                    data-target="#store-modal">
+                                    + Add
                                 </button>
-
                             </td>
                         </div>
                     </div>
@@ -56,75 +57,66 @@
                                 <tbody>
                                     <tr>
                                         {{-- Loop Starts --}}
-                                        @foreach ( $bodyShapes as $bodyShape)
-
-
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <div>
-                                                <img class="image-in-circle-75" src="{{ !empty($bodyShape->photo)
-                                                        ? asset('storage/'.$bodyShape->logo)
-                                                        : asset('gt_manager/assets/images/no_image.jpg') }}"
-                                                    alt="profile">
-                                            </div>
-                                        </td>
-                                        <td>{{$bodyShape->getTranslations('name')['en']}}</td>
-                                        <td> {{$bodyShape->getTranslations('name')['ar']}}</td>
-
-                                        <td>
-                                            <button class="btn btn-inverse-warning ml-4 mr-1"
-                                                wire:click="edit({{ $bodyShape->id }})" data-toggle="modal"
-                                                data-target="#editModel{{ $bodyShape->id }}" title="Edit">
-                                                edit
-                                            </button>
-
-                                            <form wire:submit.prevent="delete({{ $bodyShape->id }})">
-                                                <button class="btn btn-inverse-danger ml-4 mr-1" type="submit">
-                                                    delete
+                                        @foreach ($bodyShapes as $bodyShape)
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div>
+                                                    <img class="image-in-circle-75"
+                                                        src="{{ !empty($bodyShape->photo)
+                                                            ? asset('storage/' . $bodyShape->logo)
+                                                            : asset('gt_manager/assets/images/no_image.jpg') }}"
+                                                        alt="profile">
+                                                </div>
+                                            </td>
+                                            <td>{{ $bodyShape->getTranslations('name')['en'] }}</td>
+                                            <td> {{ $bodyShape->getTranslations('name')['ar'] }}</td>
+                                            <td class="d-flex">
+                                                <button class="btn btn-inverse-warning mr-2"
+                                                    wire:click="edit({{ $bodyShape->id }})" data-toggle="modal"
+                                                    data-target="#editModel{{ $bodyShape->id }}" title="Edit">
+                                                    Edit
                                                 </button>
-                                            </form>
-
-
-                                        </td>
+                                                <x-model.delete id="{{ $bodyShape->id }}"></x-model.delete>
+                                            </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
                                     <x-model.edit title="Body Shape" id="{{ $bodyShape->id }}">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
-                                            <input type="text" class="form-control" autocomplete="off"
-                                                wire:model='name_en'>
-                                            @include('gt-manager.error.error',['property'=>'name_en'])
+                                            <input type="text" class="form-control" wire:model='name_en'>
+                                            @include('gt-manager.error.error', ['property' => 'name_en'])
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(AR)</span></label>
                                             <input type="text" class="form-control" wire:model='name_ar'>
-                                            @include('gt-manager.error.error',['property'=>'name_ar'])
+                                            @include('gt-manager.error.error', ['property' => 'name_ar'])
                                         </div>
 
 
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                                id="image">
 
                                             <div class="input-group col-xs-12">
-                                                <input type="text" class="form-control file-upload-info" disabled=""
-                                                    placeholder="Upload Image">
+                                                <input type="text" class="form-control file-upload-info"
+                                                    disabled="" placeholder="Upload Image">
                                                 <span class="input-group-append">
                                                     <button class="file-upload-browse btn btn-success"
                                                         type="button">Upload</button>
                                                 </span>
                                             </div>
-                                            @include('gt-manager.error.error',['property'=>'logo'])
+                                            @include('gt-manager.error.error', ['property' => 'logo'])
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputEmaill" class="form-label"> </label>
                                             <img id="showImage" class="image-rec-full"
-                                                src="{{ asset('gt_manager/assets/images/no_image.jpg') }}" alt="...">
+                                                src="{{ asset('gt_manager/assets/images/no_image.jpg') }}"
+                                                alt="...">
                                         </div>
                                     </x-model.edit>
-
                                     @endforeach
                                     {{-- Loop Ends --}}
                                 </tbody>
@@ -136,25 +128,23 @@
             </div>
         </div>
     </div>
-
-    {{-- ========================== Add body sheps ========================== --}}
-
+    {{-- ========================== Add body Shapes ========================== --}}
     <x-model.create title="body shape">
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
-            <input type="text" class="form-control" wire:model="name_en" autocomplete="off" placeholder="English Name"
-                value="{{ old('name_en')??'' }}">
+            <input type="text" class="form-control" wire:model="name_en" autocomplete="off"
+                placeholder="English Name" value="{{ old('name_en') ?? '' }}">
             @error('name_en')
-            <small class="text-danger">{{ $message }}</small>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
 
         </div>
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
             <input type="text" class="form-control" wire:model="name_ar" placeholder="Arabic Name"
-                value="{{ old('name_ar')??'' }}">
+                value="{{ old('name_ar') ?? '' }}">
             @error('name_ar')
-            <small class="text-danger">{{ $message }}</small>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
@@ -164,13 +154,14 @@
             <input type="file" wire:model="logo" class="file-upload-default" id="image">
 
             <div class="input-group col-xs-12">
-                <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                <input type="text" class="form-control file-upload-info" disabled=""
+                    placeholder="Upload Image">
                 <span class="input-group-append">
                     <button class="file-upload-browse btn btn-success" type="button">Upload</button>
                 </span>
             </div>
             @error('logo')
-            <small class="text-danger">{{ $message }}</small>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
         <div class="mb-3">
@@ -179,8 +170,8 @@
                 alt="...">
         </div>
     </x-model.create>
-
 </div>
+<<<<<<< HEAD
 
 @script
 <script>
@@ -199,3 +190,5 @@ $wire.on('success', ()  => {
 
 
 @endscript
+=======
+>>>>>>> 51690606491ef6c006899486d5e0cbc5e2031b97

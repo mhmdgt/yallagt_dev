@@ -46,7 +46,7 @@
                                         <option value="{{ $bodyShape->id }}" >{{ $bodyShape->name }}</option>
                                         @endforeach
 
-                                       
+
                                     </select>
                                     @error('body_shape_id')
                                         <small class="text-danger">{{ $message }}</small>
@@ -108,14 +108,14 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="aspiration">Aspiration</label>
-                                    <select class="js-example-basic-single w-100" id="aspiration" name="engin_aspiration_id">
+                                    <select class="js-example-basic-single w-100" id="aspiration" name="engine_aspiration_id">
                                         @foreach ($enginAspirations as $enginAspiration)
-                                        <option value="{{ $enginAspiration->id }}" {{ old('engin_aspiration_id') == $enginAspiration->id ? 'selected' : '' }}>{{$enginAspiration->name }}</option>
-                                     
+                                        <option value="{{ $enginAspiration->id }}" {{ old('engine_aspiration_id') == $enginAspiration->id ? 'selected' : '' }}>{{$enginAspiration->name }}</option>
+
                                         @endforeach
-                                       
+
                                     </select>
-                                    @error('engin_aspiration_id')
+                                    @error('engine_aspiration_id')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

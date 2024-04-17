@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\EnginCc;
+use App\Models\EngineCc;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -20,7 +20,7 @@ class EnginCcSeeder extends Seeder
 
 
         foreach(  $enginCcs as   $enginCc){
-            EnginCc::create(  ['name'=>$enginCc]);
+            EngineCc::create(  ['name'=>$enginCc]);
 
         }
     }
