@@ -1,12 +1,9 @@
 <?php
 
-use App\Models\CarBrand;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminLoginController;
 
-require __DIR__ . '/auth.php';
+require __DIR__ . '/gt_manager.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -18,42 +15,15 @@ require __DIR__ . '/auth.php';
 |
  */
 
- /* ===================== GT-Guest Routes ===================== */
-
- Route::middleware('guest')->group(function(){
-
-    Route::post('/admin/check-login', [AdminLoginController::class, 'login'])
-    ->name('admin-check-login');
-
-    Route::get('/admin/login', [AdminController::class, 'LoginPage'])
-    ->name('admin-login');
-
-    Route::get('/admin/register', [AdminController::class, 'RegisterPage'])
-    ->name('admin-register');
-
+ Route::middleware('guest','PreventBackHistory')->group(function(){
+     Route::view('/manager/login', 'gt-manager.pages.auth.login')->name('admin-login');
+    Route::post('/manager/check-login', [AdminController::class, 'login'])->name('admin.check.login');
 }); // END OF Guest Routes
 
 
-/* ===================== GT-Manager Routes ===================== */
-
-require __DIR__ . '/gt_manager.php';
-
-/* ===================== Yalla-GT Routes ===================== */
-
-
 Route::get('/', function () {
-
-    return view('welcome');
+return view('yalla-gt.pages.home.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 

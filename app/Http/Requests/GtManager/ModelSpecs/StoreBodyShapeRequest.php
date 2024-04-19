@@ -34,7 +34,7 @@ class StoreBodyShapeRequest extends FormRequest
                 'max:200',
                 Rule::unique('body_shapes', 'name->en'),
             ],
-            'logo' => 'nullable|image|mimes:png',
+            'logo' => 'sometimes|image|mimes:png',
         ];
     }
 }

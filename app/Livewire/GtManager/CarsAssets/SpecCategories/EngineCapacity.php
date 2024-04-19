@@ -20,12 +20,18 @@ class EngineCapacity extends Component
 
     public function render()
     {
-        $types = Type::latest()->paginate(20, ['name', 'logo', 'id']);
+        $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.cars-assets.spec-categories.engine-capacity', compact('types'));
+    }
+    public function clearValidationErrors()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
     public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->clearValidationErrors();
     }
     public function store()
     {
@@ -33,7 +39,7 @@ class EngineCapacity extends Component
         // Store data...
         Type::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_cc', 'public') : null,
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -53,15 +59,16 @@ class EngineCapacity extends Component
         $this->logo = $EngineCapacity ? $EngineCapacity->logo : null;
         $this->name_en = $EngineCapacity ? $EngineCapacity->getTranslations('name')['en'] : '';
         $this->name_ar = $EngineCapacity ? $EngineCapacity->getTranslations('name')['ar'] : '';
+        $this->clearValidationErrors();
     }
     public function update($id)
     {
-        $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
+        $validatedData = $this->validate((new UpdateRequest($id, 'engine_ccs'))->rules());
         $EngineCapacity = Type::findOrFail($id);
         // Store data...
         $EngineCapacity->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $EngineCapacity->logo,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_cc', 'public') : $EngineCapacity->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);

@@ -23,9 +23,15 @@ class EngineAspiration extends Component
         $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
         return view('livewire.gt-manager.cars-assets.spec-categories.engine-aspiration', compact('types'));
     }
+    public function clearValidationErrors()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
     public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->clearValidationErrors();
     }
     public function store()
     {
@@ -33,7 +39,7 @@ class EngineAspiration extends Component
         // Store data...
         Type::create([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : null,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_aspiration', 'public') : null,
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -49,19 +55,20 @@ class EngineAspiration extends Component
     }
     public function edit($id)
     {
-        $FuelType = Type::findOrFail($id);
-        $this->logo = $FuelType ? $FuelType->logo : null;
-        $this->name_en = $FuelType ? $FuelType->getTranslations('name')['en'] : '';
-        $this->name_ar = $FuelType ? $FuelType->getTranslations('name')['ar'] : '';
+        $engine_aspiration = Type::findOrFail($id);
+        $this->logo = $engine_aspiration ? $engine_aspiration->logo : null;
+        $this->name_en = $engine_aspiration ? $engine_aspiration->getTranslations('name')['en'] : '';
+        $this->name_ar = $engine_aspiration ? $engine_aspiration->getTranslations('name')['ar'] : '';
+        $this->clearValidationErrors();
     }
     public function update($id)
     {
-        $validatedData = $this->validate((new UpdateRequest($id, 'body_shapes'))->rules());
-        $FuelType = Type::findOrFail($id);
+        $validatedData = $this->validate((new UpdateRequest($id, 'engine_aspirations'))->rules());
+        $engine_aspiration = Type::findOrFail($id);
         // Store data...
-        $FuelType->update([
+        $engine_aspiration->update([
             "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('photos', 'public') : $FuelType->logo,
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_aspiration', 'public') : $engine_aspiration->logo,
         ]);
         // Clear form fields after successful storage
         $this->reset(['name_en', 'name_ar', 'logo']);

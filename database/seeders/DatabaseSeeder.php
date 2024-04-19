@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             EngineAspirationSeeder::class,
             EngineCcSeeder::class,
             EngineKmSeeder::class,
+            ColorSeeder::class,
         ]);
     }
 
