@@ -22,7 +22,7 @@ require __DIR__ . '/gt_manager.php';
 
 
 Route::get('/', function () {
-return view('yalla-gt.pages.home.index');
+return view('yalla-gt.pages.app.index');
 });
 
 

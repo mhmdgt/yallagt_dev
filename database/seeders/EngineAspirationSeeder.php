@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\EngineAspiration;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class EngineAspirationSeeder extends Seeder
@@ -13,16 +12,14 @@ class EngineAspirationSeeder extends Seeder
      */
     public function run(): void
     {
-        $engines=[
+        $engines = [
             ['en' => "Natural", "ar" => "طبيعي"],
             ['en' => "Turbo-charger", "ar" => "تيربو"],
-            ['en' => "Super-charger", "ar" => "سوبر تشارج"]
+            ['en' => "Super-charger", "ar" => "سوبر تشارج"],
 
         ];
-        foreach($engines as $engine){
-            EngineAspiration::create([
-                "name"=>$engine
-            ]);
+        foreach ($engines as $engine) {
+            EngineAspiration::create(["name" => $engine]);
         }
     }
 }

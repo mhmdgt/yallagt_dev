@@ -4,10 +4,8 @@
         <nav class="page-breadcrumb">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('stock-car.index') }}">Stock Car
-                            Brands</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a
-                            href="{{ route('stock-car.show', $brandData->slug) }}">{{ $brandData->name }}</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('stock-car.index') }}">Brands</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('stock-car.show', $brandData->slug) }}">{{ $brandData->name }}</a></li>
                     <li class="breadcrumb-item"><a>Create Model</a></li>
                 </ol>
             </div>
@@ -79,7 +77,7 @@
                                 <label>PDF Brochure</label>
                                 <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
                                 <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control file-upload-info"
+                                    <input type="text" class="form-control file-upload-info" disabled=""
                                         placeholder="Upload Borchur">
                                     <span class="input-group-append">
                                         <button class="file-upload-browse btn btn-light" type="button">Upload</button>
@@ -94,6 +92,23 @@
                     </div>
                 </div>
             </div>
+            {{-- Tags --}}
+            {{-- <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="bi bi-tags"></i>
+                                Tags input
+                            </h6>
+                            <p class="mb-2">Type something to add a new tag</p>
+                            <div>
+                                <input name="tags" id="tags" value="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">Submit</button>
         </form>
@@ -116,7 +131,7 @@
         const pond = FilePond.create(inputElement);
 
         // Set the options for you files
-        FilePond.setOptions({
+        pond.setOptions({
             allowMultiple: true,
             allowReorder: true,
             server: {

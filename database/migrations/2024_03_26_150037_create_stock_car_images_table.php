@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('stock_car_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
-            $table->string('path');
             $table->string('name');
             $table->boolean('main_img');
             $table->timestamps();

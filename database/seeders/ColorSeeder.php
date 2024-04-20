@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Colors;
+use App\Models\Color;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ColorSeeder extends Seeder
 {
@@ -34,12 +33,11 @@ class ColorSeeder extends Seeder
             ['en' => "Baby Blue", "ar" => "سماوي"],
             ['en' => "Champagne", "ar" => "شمبان"],
             ['en' => "Silver", "ar" => "فضي"],
-            ['en' => "Maroon", "ar" => "نبيتي"]
+            ['en' => "Maroon", "ar" => "نبيتي"],
         ];
 
-
-    foreach( $colors as $color ){
-        Colors::create( ['name'=>$color] );
-    }
+        foreach ($colors as $color) {
+            Color::create(['name' => $color]);
+        }
     }
 }

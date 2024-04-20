@@ -45,7 +45,7 @@ class GovernorateSeeder extends Seeder
 
 
         foreach ($governorates as   $governorate) {
-            Governorate::create($governorate);
+            Governorate::create( ['name'=>$governorate] );
         }
     }
 }

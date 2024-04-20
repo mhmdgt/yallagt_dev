@@ -256,7 +256,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group ow pt-0">
+                            <div class="form-group row pt-0">
                                 <label for="exampleInputName1">Name</label>
                                 <input type="text" class="form-control" id="exampleInputName1"
                                     autocomplete="off" name="name" value="">
@@ -326,7 +326,5 @@
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">Submit form</button>
         </Form>
-
-
     </div>
 @endsection

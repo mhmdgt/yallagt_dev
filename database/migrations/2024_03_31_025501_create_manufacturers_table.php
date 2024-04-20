@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('slug_ar');
-            $table->string('slug_en');
+            $table->string('slug');
             $table->string('logo')->nullable();
             $table->timestamps();
         });

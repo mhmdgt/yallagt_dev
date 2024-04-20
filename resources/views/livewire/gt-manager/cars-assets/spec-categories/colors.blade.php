@@ -68,7 +68,10 @@
                                                     data-target="#editModal{{ $color->id }}" title="Edit">
                                                     Edit
                                                 </button>
-                                                <x-modal.delete id="{{ $color->id }}"></x-modal.delete>
+                                                <x-modal.delete id="{{ $color->id }}">
+                                                    <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
+                                                    data-target="#confirmDeleteModal{{ $color->id}}">Delete</button>
+                                                </x-modal.delete>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
@@ -92,7 +95,7 @@
 
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                            <input type="file" wire:model="logo" class="file-upload-default"  accept=".png"
                                                 id="image">
 
                                             <div class="input-group col-xs-12">
@@ -149,7 +152,7 @@
         </div>
         <div class="form-group">
             <label>Brand Logo</label>
-            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+            <input type="file" wire:model="logo" class="file-upload-default" id="image"  accept=".png">
 
             <div class="input-group col-xs-12">
                 <input type="text" class="form-control file-upload-info" disabled=""

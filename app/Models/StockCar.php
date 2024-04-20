@@ -23,5 +23,8 @@ class StockCar extends Model
     function images(){
         return $this->hasMany(StockCarImage::class);
     }
+    function stockCarCategories(){
+        return $this->hasMany(StockCarCategory::class);
+    }
 
 }

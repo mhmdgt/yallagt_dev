@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('stock_car_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('slug')->unique()->default('');
             $table->decimal('price');
+            $table->enum('status' , ['active' , 'hidden'] )->default('active');
             $table->integer('rims_size');
             $table->integer('number_of_seat');
             $table->integer('trunk_size');
             $table->integer('fuel_tank_capacity');
-            $table->integer('engine_capacity');
             $table->integer('cylinder');
             $table->integer('acceleration');
             $table->integer('maximum_speed');
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->integer('horsepower');
             $table->integer('transmission_speed');
             $table->integer('fuel_consumption');
-            $table->enum('active',[0,1])->default(1)->comment('0=>inactive,1=>active');
             $table->foreignId('body_shape_id')->nullable()->references('id')->on('body_shapes')->onDelete('set null');
             $table->foreignId('fuel_type_id')->nullable()->references('id')->on('fuel_types')->onDelete('set null');
             $table->foreignId('transmission_type_id')->nullable()->references('id')->on('transmission_types')->onDelete('set null');
@@ -35,6 +35,7 @@ return new class extends Migration
             $table->foreignId('engine_cc_id')->nullable()->references('id')->on('engine_ccs')->onDelete('set null');
             $table->foreignId('engine_km_id')->nullable()->references('id')->on('engine_kms')->onDelete('set null');
             $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

@@ -9,9 +9,12 @@ class StockCarCategory extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
+        'slug',
         'price',
+        'status',
         'rims_size',
         'number_of_seat',
         'trunk_size',
@@ -24,11 +27,12 @@ class StockCarCategory extends Model
         'horsepower',
         'transmission_speed',
         'fuel_consumption',
-        'active',
         'body_shape_id',
         'fuel_type_id',
         'transmission_type_id',
         'engine_aspiration_id',
-    ];
-    
+        'engine_km_id',
+        'engine_cc_id',
+        'stock_car_id'];
+
 }

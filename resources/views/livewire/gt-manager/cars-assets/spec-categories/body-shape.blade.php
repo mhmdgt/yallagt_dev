@@ -1,13 +1,14 @@
 <div>
     <div class="page-content">
-        {{-- ====== Navagation ====== --}}
+        {{-- ====== Page Header ====== --}}
         <nav class="page-breadcrumb">
+            {{-- ====== Navagation ====== --}}
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories.index') }}">Specs
-                            Categories</a></li>
-                    <li class="breadcrumb-item"><a>Body Shape</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a
+                            href="{{ route('spec-categories.index') }}">Specs Categories</a></li>
+                    <li class="breadcrumb-item"><a>Shapes</a></li>
                 </ol>
             </div>
         </nav>
@@ -17,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12 d-flex align-items-center">
-                            <span class="h4">Body Shapes</span>
+                            <span class="h4">Shapes</span>
                             <td>
                                 <button wire:click="resetFields" type="button"
                                     class="btn btn-inverse-primary btn-icon-text ml-4" data-toggle="modal"
@@ -50,47 +51,51 @@
                                 <tbody>
                                     <tr>
                                         {{-- Loop Starts --}}
-                                        @foreach ($bodyShapes as $bodyShape)
+                                        @foreach ($shapes as $shape)
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <div>
                                                     <img class="image-in-circle-75"
-                                                        src="{{ !empty($bodyShape->logo)
-                                                            ? asset('storage/'.$bodyShape->logo)
-                                                            : asset('gt_manager/media/no_image.jpg') }}"
-                                                        alt="...">
-                                                    </div>
-                                                </td>
-                                            <td>{{ $bodyShape->getTranslations('name')['en'] }}</td>
-                                            <td> {{ $bodyShape->getTranslations('name')['ar'] }}</td>
+                                                        src="{{ !empty($shape->logo) ? asset('storage/' . $shape->logo) : asset('gt_manager/media/no_image.jpg') }}"
+                                                        alt="profile">
+                                                </div>
+                                            </td>
+                                            <td>{{ $shape->getTranslations('name')['en'] }}</td>
+                                            <td> {{ $shape->getTranslations('name')['ar'] }}</td>
                                             <td class="d-flex">
                                                 <button class="btn btn-inverse-warning mr-2"
-                                                    wire:click="edit({{ $bodyShape->id }})" data-toggle="modal"
-                                                    data-target="#editModal{{ $bodyShape->id }}" title="Edit">
+                                                    wire:click="edit({{ $shape->id }})" data-toggle="modal"
+                                                    data-target="#editModal{{ $shape->id }}" title="Edit">
                                                     Edit
                                                 </button>
-                                                <x-modal.delete id="{{ $bodyShape->id }}"></x-modal.delete>
+                                                <x-modal.delete id="{{ $shape->id }}">
+                                                    <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
+                                                    data-target="#confirmDeleteModal{{ $shape->id}}">Delete</button>
+                                                </x-modal.delete>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <x-modal.edit title="Body Shape" id="{{ $bodyShape->id }}">
+                                    <x-modal.edit title="shape" id="{{ $shape->id }}">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
                                             <input type="text" class="form-control" wire:model='name_en'>
-                                            @include('gt-manager.error.error', ['property' => 'name_en'])
+                                            @include('gt-manager.error.error', [
+                                                'property' => 'name_en',
+                                            ])
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(AR)</span></label>
                                             <input type="text" class="form-control" wire:model='name_ar'>
-                                            @include('gt-manager.error.error', ['property' => 'name_ar'])
+                                            @include('gt-manager.error.error', [
+                                                'property' => 'name_ar',
+                                            ])
                                         </div>
-
 
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                            <input type="file" wire:model="logo" class="file-upload-default"  accept=".png"
                                                 id="image">
 
                                             <div class="input-group col-xs-12">
@@ -103,29 +108,31 @@
                                             </div>
                                             @include('gt-manager.error.error', ['property' => 'logo'])
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmaill" class="form-label"> </label>
-                                            <img id="showImage" class="image-rec-full"
-                                            src="{{ !empty($bodyShape->logo)
-                                                ? asset('storage/'.$bodyShape->logo)
-                                                : asset('gt_manager/media/no_image.jpg') }}"
-                                            alt="...">
-
-                                        </div>
+                                        @if ($logo)
+                                            @if (is_string($logo))
+                                                <!-- If logo is a string (file path) -->
+                                                <img class="image-rec-full" src="{{ asset('storage/' . $logo) }}"
+                                                    alt="Logo">
+                                            @else
+                                                <!-- If logo is an uploaded file -->
+                                                <img class="image-rec-full" src="{{ $logo->temporaryURL() }}"
+                                                    alt="Temporary Logo">
+                                            @endif
+                                        @endif
                                     </x-modal.edit>
                                     @endforeach
                                     {{-- Loop Ends --}}
                                 </tbody>
                             </table>
                         </div>
-                        {{ $bodyShapes->links('pagination::bootstrap-5') }}
+                        {{ $shapes->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- ====== Add body Shapes ====== --}}
-    <x-modal.create title="body shape">
+    {{-- ========================== Add body Shapes ========================== --}}
+    <x-modal.create title="shape">
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
             <input type="text" class="form-control" wire:model="name_en" autocomplete="off"
@@ -143,15 +150,12 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
-
-        <h6 class="mt-4 mb-2">Media Section</h6>
         <div class="form-group">
             <label>Brand Logo</label>
-            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+            <input type="file" wire:model="logo" class="file-upload-default" id="image"  accept=".png">
 
             <div class="input-group col-xs-12">
-                <input type="text" class="form-control file-upload-info" disabled=""
-                    placeholder="Upload Image">
+                <input type="text" class="form-control file-upload-info" placeholder="Upload Image">
                 <span class="input-group-append">
                     <button class="file-upload-browse btn btn-success" type="button">Upload</button>
                 </span>
@@ -160,17 +164,8 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmaill" class="form-label"> </label>
-            <img id="showImage" class="image-rec-full"
-            src="{{ !empty($bodyShape->logo)
-                ? asset('storage/'.$bodyShape->logo)
-                : asset('gt_manager/media/no_image.jpg') }}"
-            alt="...">
-
-                {{-- @if ($logo)
-                <img id="showImage" class="image-rec-full" src="{{ $logo->temporaryUrl() }}">
-                @endif --}}
-        </div>
+        @if ($logo && !is_string($logo))
+            <img class="image-rec-full" src="{{ $logo->temporaryURL() }}" alt="">
+        @endif
     </x-modal.create>
 </div>

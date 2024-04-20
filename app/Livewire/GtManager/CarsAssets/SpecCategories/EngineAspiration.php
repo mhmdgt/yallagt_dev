@@ -2,44 +2,51 @@
 
 namespace App\Livewire\GtManager\CarsAssets\SpecCategories;
 
-use App\Http\Requests\GtManager\CarSpecCategory\StoreRequest;
-use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
-use App\Models\EngineAspiration as Type;
+use App\Models\EngineAspiration as table;
+use App\Traits\SlugTrait;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Http\Requests\GtManager\CarSpecCategory\StoreRequest;
+use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
 
 class EngineAspiration extends Component
 {
-    use WithFileUploads, WithPagination;
+    use WithFileUploads, WithPagination, SlugTrait;
 
-    public $logo;
     public $name_en;
     public $name_ar;
+    public $logo;
+    public $newLogo;
     public $delete_id;
 
+    // -------------------- render -------------------- //
     public function render()
     {
-        $types = Type::latest()->paginate(10, ['name', 'logo', 'id']);
-        return view('livewire.gt-manager.cars-assets.spec-categories.engine-aspiration', compact('types'));
+        $AspirationTypes = table::latest()->paginate(10, ['name', 'logo', 'id']);
+        return view('livewire.gt-manager.cars-assets.spec-categories.engine-aspiration', compact('AspirationTypes'));
     }
+    // -------------------- clearValidationErrors -------------------- //
     public function clearValidationErrors()
     {
         $this->resetErrorBag();
         $this->resetValidation();
     }
+    // -------------------- resetFields -------------------- //
     public function resetFields()
     {
         $this->reset(['name_en', 'name_ar', 'logo']);
         $this->clearValidationErrors();
     }
+    // -------------------- resetFields -------------------- //
     public function store()
     {
         $validatedData = $this->validate((new StoreRequest('engine_aspirations'))->rules());
         // Store data...
-        Type::create([
-            "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_aspiration', 'public') : null,
+        table::create([
+            'name' => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
+            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_aspirations', 'public') : null,
+            'slug' => $this->slug(['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']]),
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -53,46 +60,52 @@ class EngineAspiration extends Component
             position: 'center'
         );
     }
+    // -------------------- edit -------------------- //
     public function edit($id)
     {
-        $engine_aspiration = Type::findOrFail($id);
-        $this->logo = $engine_aspiration ? $engine_aspiration->logo : null;
-        $this->name_en = $engine_aspiration ? $engine_aspiration->getTranslations('name')['en'] : '';
-        $this->name_ar = $engine_aspiration ? $engine_aspiration->getTranslations('name')['ar'] : '';
+        $AspirationTypes = table::findOrFail($id);
+        $this->logo = $AspirationTypes ? $AspirationTypes->logo : null;
+        $this->name_en = $AspirationTypes ? $AspirationTypes->getTranslations('name')['en'] : '';
+        $this->name_ar = $AspirationTypes ? $AspirationTypes->getTranslations('name')['ar'] : '';
         $this->clearValidationErrors();
     }
+    // -------------------- update -------------------- //
     public function update($id)
     {
         $validatedData = $this->validate((new UpdateRequest($id, 'engine_aspirations'))->rules());
-        $engine_aspiration = Type::findOrFail($id);
-        // Store data...
-        $engine_aspiration->update([
-            "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/engine_aspiration', 'public') : $engine_aspiration->logo,
+        $AspirationTypes = table::findOrFail($id);
+
+        $AspirationTypes->update([
+            "name" => ['en' => $validatedData['name_en'] ?? $AspirationTypes->name->en, 'ar' => $validatedData['name_ar'] ?? $AspirationTypes->name->ar],
+            "slug" => $this->slug(['en' => $validatedData['name_en'] ?? $AspirationTypes->name->en, 'ar' => $validatedData['name_ar'] ?? $AspirationTypes->name->ar]),
+            "logo" => $this->logo instanceof \Illuminate\Http\UploadedFile  ?
+            $this->logo->store('media/spec_category_imgs/engine_aspirations', 'public') :
+            $AspirationTypes->logo,
         ]);
+
         // Clear form fields after successful storage
-        $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->reset(['name_en', 'name_ar', 'newLogo']);
+
         // Clear form fields after successful storage
         $this->resetFields();
+
         // Dispatching a browser event after storing the date
-
         $this->dispatch('hide-modal-dispatch')->self();
-
         $this->dispatch(
             'toast',
             type: 'success',
             title: 'updated successfully'
         );
     }
+    // -------------------- delete -------------------- //
     public function delete($id)
     {
-
-        Type::findOrFail($id)->delete();
+        table::findOrFail($id)->delete();
         $this->dispatch('hide-modal-dispatch')->self();
         $this->dispatch(
             'toast',
             type: 'success',
-            title: 'deleted successfully'
+            title: 'Deleted successfully'
 
         );
     }

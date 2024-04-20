@@ -22,8 +22,8 @@ class CarBrandModel extends Model
         return $this->belongsTo(CarBrand::class, 'car_brand_id');
     }
 
-    public function StockCars()
+    public function stockCars()
     {
-        return $this->hasMany(StockCar::class, 'car_brand_model_id');
+        return $this->hasMany(StockCar::class);
     }
 }

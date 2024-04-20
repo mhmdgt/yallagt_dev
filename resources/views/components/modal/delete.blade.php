@@ -2,11 +2,7 @@
     <!-- Delete Button -->
     {{-- <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
         data-target="#confirmDeleteModal{{ $id}}">Delete</button> --}}
-
         {{ $slot }}
-        @dd($id);
-
-
     <!-- Delete Confirmation Modal -->
     <div class="modal fade hide-modal" id="confirmDeleteModal{{ $id }}" tabindex="-1" role="dialog"
         aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" wire:ignore.self>

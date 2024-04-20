@@ -121,17 +121,7 @@ class CarBrandSeeder extends Seeder
             CarBrand::create([
                 "name" => $carBrand,
                 "slug" => Str::slug($carBrand['en']),
-                "logo" => "logo.png",
             ]);
-
-          
-
-
-
-
-
-
-
         }
 
     }

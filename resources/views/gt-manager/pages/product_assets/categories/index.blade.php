@@ -33,7 +33,7 @@
                                             <div class="card-logo ">
                                                 <img width="100px"
                                                     src="{{ !empty('') ? url('gt_manager/media/product_categories/') : asset('gt_manager/media/no_image.jpg') }}"
-                                                    alt="profile">
+                                                    alt="No_IMG">
                                             </div>
                                         </div>
                                         <p class="text-center mt-3 text-dark ">Oils & Liquids</p>
