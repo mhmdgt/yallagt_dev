@@ -29,7 +29,7 @@
                                 <label for="name">Name</label>
                                 <input class="typeahead form-control" type="text" id="name" name="name"
                                     value="{{ old('name') }}">
-                                @include('gt-manager.error.error', ['property' => 'name'])
+                              
                                 <x-errors.display-validation-error property="name" />
                             </div>
                             <div class="col">

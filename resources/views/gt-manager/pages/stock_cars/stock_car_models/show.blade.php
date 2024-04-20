@@ -41,7 +41,7 @@
                                     <i data-feather="edit"></i>
                                 </button>
                             </a>
-
+{{-- 
                             <form method="POST" id="deleteForm" action="{{ route('stock-car.delete', $stockCar->id) }}"
                                 class="d-inline">
                                 @csrf
@@ -49,8 +49,14 @@
                                 <button type="submit" class="btn btn-light btn-icon stockCarImageDel">
                                     <i data-feather="trash"></i>
                                 </button>
-                            </form>
 
+                            </form> --}}
+                            <button class="btn btn-light btn-icon stockCarImageDel" data-toggle="modal"
+                            data-target="#confirmDeleteModal{{ $stockCar->id }}" title="Edit">
+                            <i data-feather="trash"></i>
+                        </button>
+                        <x-modal.confirm-delete-modal route="{{route('stock-car.delete', $stockCar->id) }}" id="{{ $stockCar->id}}" />
+                    
 
                         </div>
                         {{-- add categories --}}
