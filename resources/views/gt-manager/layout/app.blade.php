@@ -10,6 +10,8 @@
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css">
+
 
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/core/core.css">
@@ -37,7 +39,8 @@
     {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/filepond/filepond.css"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/filepond/filepond_preview.css"> --}}
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/multi_imgs/main.css">
 
@@ -116,6 +119,8 @@
     <!-- Select2 -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/tags-input.js"></script>
 
     <!-- filepond -->
     {{-- <script src="{{ asset('gt_manager') }}/assets/js/filepond/filepond_preview.js"></script> --}}

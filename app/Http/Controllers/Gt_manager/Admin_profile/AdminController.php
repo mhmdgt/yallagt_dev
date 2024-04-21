@@ -13,7 +13,7 @@ class AdminController extends Controller
     // -------------------- New Method -------------------- //
     public function index()
     {
-        return view('gt-manager.pages.home.index');
+        return view('gt-manager.pages.app.index');
     }
     public function LoginPage()
     {

@@ -45,7 +45,11 @@ class GovernorateSeeder extends Seeder
 
 
         foreach ($governorates as   $governorate) {
+<<<<<<< HEAD
             Governorate::create(['name'=>$governorate]);
+=======
+            Governorate::create( ['name'=>$governorate] );
+>>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
         }
     }
 }

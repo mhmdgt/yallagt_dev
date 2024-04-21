@@ -70,7 +70,11 @@
                                                 </button>
                                                 <x-modal.delete id="{{ $color->id }}">
                                                     <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
+<<<<<<< HEAD
                                                     data-target="#confirmDeleteModal{{$color->id}}">Delete</button>
+=======
+                                                    data-target="#confirmDeleteModal{{ $color->id}}">Delete</button>
+>>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
                                                 </x-modal.delete>
                                             </td>
                                     </tr>
@@ -95,7 +99,7 @@
 
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                            <input type="file" wire:model="logo" class="file-upload-default"  accept=".png"
                                                 id="image">
 
                                             <div class="input-group col-xs-12">
@@ -152,7 +156,7 @@
         </div>
         <div class="form-group">
             <label>Brand Logo</label>
-            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+            <input type="file" wire:model="logo" class="file-upload-default" id="image"  accept=".png">
 
             <div class="input-group col-xs-12">
                 <input type="text" class="form-control file-upload-info" disabled=""

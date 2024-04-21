@@ -12,7 +12,6 @@ class StockCarImage extends Model
     protected $fillable = [
         'stock_car_id',
         'name',
-        'path',
         'main_img'
     ];
 

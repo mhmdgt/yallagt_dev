@@ -111,6 +111,19 @@
                                         <p class="text-center mt-3 text-dark ">Engine KM</p>
                                     </a>
                                 </div>
+                                {{-- Features --}}
+                                <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4 mt-4">
+                                    <a href="{{ route('spec-categories.features') }}">
+                                        <div class="border border-light rounded shadow-sm">
+                                            <div class="card-logo">
+                                                <img width="100px"
+                                                    src="{{ asset('gt_manager/media/spec_category_icons/features.png') }}"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <p class="text-center mt-3 text-dark ">Features</p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

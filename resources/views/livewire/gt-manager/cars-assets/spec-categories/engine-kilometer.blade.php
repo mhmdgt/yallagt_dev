@@ -6,9 +6,9 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('spec-categories.index') }}">Specs
-                            Categories</a></li>
-                    <li class="breadcrumb-item"><a>Engine Kilometers</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a
+                            href="{{ route('spec-categories.index') }}">Specs Categories</a></li>
+                    <li class="breadcrumb-item"><a>Engine KM</a></li>
                 </ol>
             </div>
         </nav>
@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12 d-flex align-items-center">
-                            <span class="h4">Engine Kilometers</span>
+                            <span class="h4">Engine KM</span>
                             <td>
                                 <button wire:click="resetFields" type="button"
                                     class="btn btn-inverse-primary btn-icon-text ml-4" data-toggle="modal"
@@ -51,12 +51,12 @@
                                 <tbody>
                                     <tr>
                                         {{-- Loop Starts --}}
-                                        @foreach ($types as $type)
+                                        @foreach ($kmTypes as $type)
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <div>
                                                     <img class="image-in-circle-75"
-                                                        src="{{ !empty($type->photo) ? asset('storage/' . $type->logo) : asset('gt_manager/media/no_image.jpg') }}"
+                                                        src="{{ !empty($type->logo) ? asset('storage/' . $type->logo) : asset('gt_manager/media/no_image.jpg') }}"
                                                         alt="profile">
                                                 </div>
                                             </td>
@@ -68,11 +68,14 @@
                                                     data-target="#editModal{{ $type->id }}" title="Edit">
                                                     Edit
                                                 </button>
-                                                <x-modal.delete id="{{ $type->id }}"></x-modal.delete>
+                                                <x-modal.delete id="{{ $type->id }}">
+                                                    <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
+                                                    data-target="#confirmDeleteModal{{ $type->id}}">Delete</button>
+                                                </x-modal.delete>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <x-modal.edit title="Fuel Type" id="{{ $type->id }}">
+                                    <x-modal.edit title="type" id="{{ $type->id }}">
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
@@ -90,10 +93,9 @@
                                             ])
                                         </div>
 
-
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                            <input type="file" wire:model="logo" class="file-upload-default"  accept=".png"
                                                 id="image">
 
                                             <div class="input-group col-xs-12">
@@ -106,19 +108,24 @@
                                             </div>
                                             @include('gt-manager.error.error', ['property' => 'logo'])
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmaill" class="form-label"> </label>
-                                            <img id="showImage" class="image-rec-full"
-                                                src="{{ asset('gt_manager/media/no_image.jpg') }}"
-                                                alt="...">
-                                        </div>
+                                        @if ($logo)
+                                            @if (is_string($logo))
+                                                <!-- If logo is a string (file path) -->
+                                                <img class="image-rec-full" src="{{ asset('storage/' . $logo) }}"
+                                                    alt="Logo">
+                                            @else
+                                                <!-- If logo is an uploaded file -->
+                                                <img class="image-rec-full" src="{{ $logo->temporaryURL() }}"
+                                                    alt="Temporary Logo">
+                                            @endif
+                                        @endif
                                     </x-modal.edit>
                                     @endforeach
                                     {{-- Loop Ends --}}
                                 </tbody>
                             </table>
                         </div>
-                        {{ $types->links('pagination::bootstrap-5') }}
+                        {{ $kmTypes->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
@@ -143,11 +150,9 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
-
-        <h6 class="mt-4 mb-2">Media Section</h6>
         <div class="form-group">
             <label>Brand Logo</label>
-            <input type="file" wire:model="logo" class="file-upload-default" id="image">
+            <input type="file" wire:model="logo" class="file-upload-default" id="image"  accept=".png">
 
             <div class="input-group col-xs-12">
                 <input type="text" class="form-control file-upload-info" disabled=""
@@ -160,10 +165,8 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmaill" class="form-label"> </label>
-            <img id="showImage" class="image-rec-full" src="{{ asset('gt_manager/media/no_image.jpg') }}"
-                alt="...">
-        </div>
+        @if ($logo && !is_string($logo))
+            <img class="image-rec-full" src="{{ $logo->temporaryURL() }}" alt="">
+        @endif
     </x-modal.create>
 </div>

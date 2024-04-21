@@ -10,9 +10,9 @@ class Manufacturer extends Model
 {
     use HasFactory , HasTranslations;
 
-    protected $fillable = ['name', 'logo', 'slug'];
+    protected $fillable = ['name', 'logo', 'slug' ];
 
     public $translatable = ['name','slug'];
 
-    
+
 }

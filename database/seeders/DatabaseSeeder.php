@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
             EngineCcSeeder::class,
             EngineKmSeeder::class,
             ColorSeeder::class,
+            FeatureSeeder::class,
+            GovernorateSeeder::class,
+            ManufacturerSeeder::class,
         ]);
     }
 

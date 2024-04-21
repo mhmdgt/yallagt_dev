@@ -3,12 +3,20 @@
 namespace App\Livewire\GtManager\ProductAssets;
 
 use Livewire\Component;
+<<<<<<< HEAD
+=======
+use App\Traits\SlugTrait;
+>>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Manufacturer as manufact;
 use App\Http\Requests\GtManager\Manufacturer\StoreRequest;
+<<<<<<< HEAD
 use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
 use App\Traits\SlugTrait;
+=======
+use App\Http\Requests\GtManager\Manufacturer\UpdateRequest;
+>>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
 
 class Manufacturer extends Component
 {
@@ -17,19 +25,28 @@ class Manufacturer extends Component
     public $name_en;
     public $name_ar;
     public $logo;
+    public $newLogo;
     public $delete_id;
 
-    public function delete($id)
+    // -------------------- Render -------------------- //
+    public function render()
     {
-        manufact::findOrFail($id)->delete();
-        $this->dispatch('hide-modal-dispatch')->self();
-        $this->dispatch(
-            'toast',
-            type: 'success',
-            title: 'deleted successfully'
-
-        );
+        $manufacturers = manufact::latest()->paginate(50, ['name', 'logo', 'id']);
+        return view('livewire.gt-manager.product-assets.manufacturer', compact('manufacturers'));
     }
+    // -------------------- clearValidationErrors -------------------- //
+    public function clearValidationErrors()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+    // -------------------- resetFields -------------------- //
+    public function resetFields()
+    {
+        $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->clearValidationErrors();
+    }
+    // -------------------- store -------------------- //
     public function store()
     {
         $validatedData = $this->validate((new StoreRequest('manufacturers'))->rules());
@@ -37,8 +54,7 @@ class Manufacturer extends Component
         manufact::create([
             'name' => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
             'logo' => $this->logo ? $this->logo->store('media/manufacturer_logos', 'public') : null,
-            'slug' => $this->slug(['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']])
-
+            'slug' => $this->slug(['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']]),
         ]);
         // Clear form fields after successful storage
         $this->resetFields();
@@ -52,6 +68,7 @@ class Manufacturer extends Component
             position: 'center'
         );
     }
+    // -------------------- edit -------------------- //
     public function edit($id)
     {
         $manufacturer = manufact::findOrFail($id);
@@ -60,45 +77,44 @@ class Manufacturer extends Component
         $this->name_ar = $manufacturer ? $manufacturer->getTranslations('name')['ar'] : '';
         $this->clearValidationErrors();
     }
-
+    // -------------------- update -------------------- //
     public function update($id)
     {
-        $validatedData = $this->validate((new UpdateRequest($id, 'manufacturers'))->rules());
+        $validatedData = $this->validate((new UpdateRequest( $id , 'manufacturers' ))->rules());
         $manufacturer = manufact::findOrFail($id);
-        // Store data...
+
         $manufacturer->update([
-            "name" => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
-            'logo' => $this->logo ? $this->logo->store('media/spec_category_imgs/body_shape', 'public') : $manufacturer->logo,
-            'slug' => $this->slug(['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']])
+            "name" => ['en' => $validatedData['name_en'] ?? $manufacturer->name->en, 'ar' => $validatedData['name_ar'] ?? $manufacturer->name->ar],
+            "slug" => $this->slug(['en' => $validatedData['name_en'] ?? $manufacturer->name->en, 'ar' => $validatedData['name_ar'] ?? $manufacturer->name->ar]),
+            "logo" => $this->logo instanceof \Illuminate\Http\UploadedFile ?
+            $this->logo->store('media/manufacturer_logos', 'public') :
+            $manufacturer->logo,
         ]);
+
         // Clear form fields after successful storage
-        $this->reset(['name_en', 'name_ar', 'logo']);
+        $this->reset(['name_en', 'name_ar', 'newLogo']);
+
         // Clear form fields after successful storage
         $this->resetFields();
+
         // Dispatching a browser event after storing the date
-
         $this->dispatch('hide-modal-dispatch')->self();
-
         $this->dispatch(
             'toast',
             type: 'success',
             title: 'updated successfully'
         );
     }
+    // -------------------- delete -------------------- //
+    public function delete($id)
+    {
+        manufact::findOrFail($id)->delete();
+        $this->dispatch('hide-modal-dispatch')->self();
+        $this->dispatch(
+            'toast',
+            type: 'success',
+            title: 'Deleted successfully'
 
-    public function clearValidationErrors()
-    {
-        $this->resetErrorBag();
-        $this->resetValidation();
-    }
-    public function resetFields()
-    {
-        $this->reset(['name_en', 'name_ar', 'logo']);
-        $this->clearValidationErrors();
-    }
-    public function render()
-    {
-        $manufacturers = manufact::latest()->paginate(10, ['name', 'logo', 'id']);
-        return view('livewire.gt-manager.product-assets.manufacturer', compact('manufacturers'));
+        );
     }
 }

@@ -11,7 +11,6 @@
         </div>
     </div>
     {{-- END of upper Section --}}
-
     <div class="sidebar-body">
         <ul class="nav">
             {{-- Main --}}
@@ -25,7 +24,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#CarsAssets" role="button" aria-expanded="false"
                     aria-controls="CarsAssets">
-                    <i class="link-icon" data-feather="navigation-2"></i>
+                    <i class="link-icon" data-feather="slack"></i>
                     <span class="link-title">Car Assets</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
@@ -46,21 +45,23 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ProdutcAssets" role="button" aria-expanded="false"
                     aria-controls="ProdutcAssets">
-                    <i class="link-icon" data-feather="navigation-2"></i>
+                    <i class="link-icon" data-feather="save"></i>
                     <span class="link-title">Product Assets</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="ProdutcAssets">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
+                            <a href="{{ route('product-categories.index')}}" class="nav-link">
+                                Product Categories</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('manufacturers.index')}}" class="nav-link">
                                 Manufacturers</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('pro-categories.index')}}" class="nav-link">
-                                Product Categories</a>
+                            <a href="" class="nav-link">+ Add Products</a>
                         </li>
-
                     </ul>
                 </div>
             </li>
@@ -86,19 +87,16 @@
                 <a class="nav-link" data-toggle="collapse" href="#ProductSystem" role="button" aria-expanded="false"
                     aria-controls="ProductSystem">
                     <i class="link-icon" data-feather="package"></i>
-                    <span class="link-title">Stock Products</span>
+                    <span class="link-title">in-House Products</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="ProductSystem">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/email/compose.html" class="nav-link">+ Add Products</a>
+                            <a href="pages/email/compose.html" class="nav-link">Storehouses</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/email/compose.html" class="nav-link">Products List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/email/compose.html" class="nav-link">Available Products</a>
+                            <a href="pages/email/compose.html" class="nav-link">in-House Products</a>
                         </li>
                     </ul>
                 </div>
@@ -202,15 +200,15 @@
             </li>
 
             {{-- Customer Web --}}
-            <li class="nav-item nav-category">Customer Web</li>
+            <li class="nav-item nav-category">Customer Theme</li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#cstTheme" role="button" aria-expanded="false"
-                    aria-controls="cstTheme">
+                <a class="nav-link" data-toggle="collapse" href="#webMedia" role="button" aria-expanded="false"
+                    aria-controls="webMedia">
                     <i class="link-icon" data-feather="sliders"></i>
-                    <span class="link-title">Customer Theme</span>
+                    <span class="link-title">Web Media</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
-                <div class="collapse" id="cstTheme">
+                <div class="collapse" id="webMedia">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="#" class="nav-link">Branding</a>
@@ -225,7 +223,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="" class="nav-link">
                     <i class="link-icon" data-feather="info"></i>
                     <span class="link-title">Contact Us</span>
                 </a>

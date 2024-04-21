@@ -15,7 +15,6 @@
                 <form class="forms-sample car-brand-model-edit" wire:submit.prevent="update({{ $id }})"
                     enctype="multipart/form-data">
 
-
                     {{ $slot }}
 
                     <div class="modal-footer">
