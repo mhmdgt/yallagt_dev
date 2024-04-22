@@ -606,6 +606,7 @@
             }
         });
     }
+    
     var $carsforsaleContainer = $('.carsforsaleContainer');
     if ($carsforsaleContainer.length > 0) {
         $('.carsforsaleContainer').on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -903,12 +904,12 @@
 
 
     /*---  ScrollUp Active ---*/
-    $.scrollUp({
-        scrollText: '<img width=" 20" height="20" src="yalla_gt/assets/img/icon/up_arrow.png">',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
+    // $.scrollUp({
+    //     scrollText: '<img width=" 20" height="20" src="yalla_gt/assets/img/icon/up_arrow.png">',
+    //     easingType: 'linear',
+    //     scrollSpeed: 900,
+    //     animation: 'fade'
+    // });
 
     /*---countdown activation---*/
 

@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/* @import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap"); */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Cairo:wght@200..1000&display=swap'); */
+
+
+/* @font-face {
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/Cairo-ar-font.woff") format('woff');
+
+} */
+
+body {
+    direction: rtl;
+}
+
+* {
+    /* font-family: "Cairo" !important; */
+    /* font-family: "Rubik" !important; */
+    /* font-family: "Alexandria" !important; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================================= Custom CSS For RTL =================================================== */
+
+.owl-carousel {
+    direction: ltr !important;
+}
+
+.container-fluid {
+    text-align: right;
+}
+
+.ar-style {
+    text-align: left;
+}
+
+.new-section {
+    padding-top: 40px;
+}
+
+
+.login-btn {
+    border-radius: 14px;
+    /* padding: 8px; */
+    font-size: 16px;
+}
+
+@media screen and (max-width: 996px) {
+    header .main_header .header_icons {
+        display: none;
+    }
+}
+
+.text-custom-direction {
+    text-align: left;
+}
+
+.sale_car_img img {
+    background-position: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 280px;
+    object-fit: cover;
+    width: 100%;
+}

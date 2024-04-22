@@ -121,20 +121,20 @@
             </li>
             <li class="nav-list">
                 <a href="#" class="link-item">
-                    <i class='bx bxs-caret-right-square link-icon'></i>
-                    <span class="link-text">Content</span>
+                    <i class='bx bxs-shopping-bags link-icon'></i>
+                    <span class="link-text">Shop</span>
                 </a>
             </li>
             <li class="nav-list">
                 <a href="#" class="link-item">
-                    <i class='bx bxs-bar-chart-square link-icon'></i>
-                    <span class="link-text">Analytics</span>
+                    <i class='bx bxs-message-square-add link-icon'></i>
+                    <span class="link-text">Sell</span>
                 </a>
             </li>
             <li class="nav-list">
                 <a href="#" class="link-item">
-                    <i class='bx bxs-message-rounded link-icon'></i>
-                    <span class="link-text">Comments</span>
+                    <i class='bx bxs-car link-icon'></i>
+                    <span class="link-text">Cars</span>
                 </a>
             </li>
             <li class="nav-list">

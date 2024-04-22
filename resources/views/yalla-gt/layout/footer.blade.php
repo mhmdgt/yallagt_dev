@@ -44,15 +44,14 @@
                         <li class="widget_sub_categories sub_categories4">
                             <a href="javascript:void(0)">Find More</a>
                             <ul class="widget_dropdown_categories dropdown_categories4">
-                                <p><span class="font-weight-bold">Address:</span>
-                                    {{ get_contact_us()->headqurter_address }}</p>
-                                <p><span class="font-weight-bold">Email:</span>
-                                    <a
+                                <li><span class="font-weight-bold">Address:</span><a
+                                        href="tel:{{ get_contact_us()->google_maps }}">{{ get_contact_us()->headqurter_address }}</a>
+                                </li>
+                                <li><span class="font-weight-bold">Email:</span><a
                                         href="{{ get_contact_us()->support_email }}">{{ get_contact_us()->support_email }}</a>
-                                </p>
-                                <p><span class="font-weight-bold">Tel:</span>
-                                    <a href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a>
-                                </p>
+                                </li>
+                                <li><span class="font-weight-bold">Tel:</span><a
+                                        href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -131,7 +130,7 @@
                 </div>
             </div>
             <!-- Coming soon & Social Media -->
-            <div class="row justify-content-between align-items-center">
+            <div class="row justify-content-between align-items-center mt-4">
                 <div class="pt-2 col-lg-6">
                     <div class="footer_widgets--content">
                         <div class="row align-items-center justify-content-between footer_widgets--content-row">
@@ -141,9 +140,9 @@
                             </div>
 
                             <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                                <img class="mr-2" width="180px" height="20px"
+                                <img class="mr-2" width="140px"
                                     src="yalla_gt/media/social_media_icons/google_play.png" alt="">
-                                <img class="mr-2" width="180px" height="20px"
+                                <img class="mr-2" width="140px"
                                     src="yalla_gt/media/social_media_icons/app_store.png"alt="">
                             </div>
                         </div>
@@ -152,14 +151,13 @@
                 <!-- Social Media -->
                 <div class="col-lg-3">
                     <ul class="list-unstyled footer_widgets--ul">
-                        <li><a href="{{ get_contact_us()->facebook }}"><img src="yalla_gt/assets/img/icon/facebook.png"
-                                    alt=""></a></li>
-                        <li><a href="{{ get_contact_us()->phone }}"><img src="yalla_gt/assets/img/icon/instgram.png"
-                                    alt=""></a></li>
-                        <li><a href="https://wa.me/{{ get_contact_us()->phone }}"><img
-                                    src="yalla_gt/assets/img/icon/whatsapp.png" alt=""></a></li>
-                        <li><a href="https://maps.app.goo.gl/kd17T8JzX4Sjek5CA"><img
-                                    src="yalla_gt/assets/img/icon/location.png" alt=""></a></li>
+                        <div class="media_icons mb-4">
+                            <a href="#"><i class='bx bxl-facebook-square' ></i></a>
+                            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                            <a href="#"><i class='bx bxl-youtube' ></i></a>
+                            <a href="#"><i class='bx bxl-whatsapp' ></i></a>
+                            <a href="#"><i class='bx bx-map' ></i></i></a>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -172,13 +170,11 @@
     <div class="footer_bottom">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-6 col-md-7">
+                <div class="col-lg-6">
                     <div class="copyright_area">
-                        <p>Copyright © 2024 Yalla GT. All rights reserved.</p>
+                        <h5>Copyright © 2024 Yalla GT. All rights reserved | <span
+                                class="font-weight-bold">EGYPT</span> </h5>
                     </div>
-                </div>
-                <div class="col-lg-6 text-custom-direction">
-                    <p>Egypt</p>
                 </div>
 
             </div>

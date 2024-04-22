@@ -59,7 +59,6 @@ class ManufacturerSeeder extends Seeder
                 Manufacturer::create([
                     "name" => $manufacturer,
                     "slug" => Str::slug($manufacturer['en']),
-                    "logo" => "logo.png"
                 ]);
         }
     }

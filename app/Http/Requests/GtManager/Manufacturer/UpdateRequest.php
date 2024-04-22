@@ -3,18 +3,10 @@
 namespace App\Http\Requests\GtManager\Manufacturer;
 
 use Illuminate\Validation\Rule;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
-
-    public $newLogo;
-
-    public function __construct( protected $id , protected $table )
-    {
-
-    }
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -22,6 +14,7 @@ class UpdateRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,20 +22,13 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return  [
-            'name_ar' => [
-                'nullable',
-                'string',
-                'max:200',
-                Rule::unique('manufacturers', 'name->ar')->ignore($this->id),
-            ],
-            'name_en' => [
-                'nullable',
-                'string',
-                'max:200',
-                Rule::unique('manufacturers', 'name->en')->ignore($this->id),
-            ],
-            'logo' => $this->newLogo ? 'nullable|mimetypes:image/png' : 'nullable',
+
+        return [
+            'name_ar' => ['required','string','max:200',
+            Rule::unique('manufacturers', 'name->ar')->ignore($this->manufacturer->id)],
+            'name_en' => ['required','string','max:200',
+            Rule::unique('manufacturers', 'name->en')->ignore($this->manufacturer->id)],
+            'logo' => 'nullable|image|mimes:png', // Adjust allowed extensions
         ];
     }
 }

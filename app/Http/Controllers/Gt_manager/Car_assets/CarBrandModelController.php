@@ -55,7 +55,7 @@ class CarBrandModelController extends Controller
     public function destroy(CarBrandModel $carBrandModel)
     {
         $carBrandModel->delete();
-        Alert::success('Successfully', 'Your brand model has been deleted');
+        Session::flash('success', 'Deleted Successfully');
         return redirect()->back();
     }
 } // End Class

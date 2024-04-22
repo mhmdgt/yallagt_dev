@@ -33,10 +33,13 @@
                                     data-target="#EditCarBrand" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <a href="{{ route('car-brand.destroy', $carBrand->id) }}" class="btn btn-inverse-danger"
-                                    data-confirm-delete="true">
+
+                                <button type="button" class="btn btn-inverse-danger"
+                                data-toggle="modal" data-target="#confirmDeleteModal{{ $carBrand->id }}" title="Edit">
                                     <i class="bi bi-trash3"></i>
-                                </a>
+                                </button>
+                                <x-modal.confirm-delete-modal route="{{ route('car-brand.destroy', $carBrand->id) }}"
+                                    id="{{ $carBrand->id }}" />
                             </td>
 
                         </div>
@@ -130,11 +133,13 @@
                                                     data-target="#editModel{{ $model->id }}" title="Edit">
                                                     Edit
                                                 </button>
+                                                <button type="button" class="btn btn-inverse-danger"
+                                                data-toggle="modal" data-target="#confirmDeleteModal{{ $model->id }}" title="Edit">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                                <x-modal.confirm-delete-modal route="{{ route('car-brand-model.destroy', $model->id) }}"
+                                                    id="{{ $model->id }}" />
 
-                                                <a href="{{ route('car-brand-model.destroy', $model->id) }}"
-                                                    class="btn btn-inverse-danger" data-confirm-delete="true">
-                                                    Delete
-                                                </a>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}

@@ -69,8 +69,9 @@
                                                     Edit
                                                 </button>
                                                 <x-modal.delete id="{{ $color->id }}">
-                                                    <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
-                                                    data-target="#confirmDeleteModal{{ $color->id}}">Delete</button>
+                                                    <button type="button" class="btn btn-inverse-danger"
+                                                        data-toggle="modal"
+                                                        data-target="#confirmDeleteModal{{ $color->id }}">Delete</button>
                                                 </x-modal.delete>
                                             </td>
                                     </tr>
@@ -80,23 +81,19 @@
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(EN)</span></label>
                                             <input type="text" class="form-control" wire:model='name_en'>
-                                            @include('gt-manager.error.error', [
-                                                'property' => 'name_en',
-                                            ])
+                                            <x-errors.display-validation-error property="name_en" />
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Name <span
                                                     class="text-danger">(AR)</span></label>
                                             <input type="text" class="form-control" wire:model='name_ar'>
-                                            @include('gt-manager.error.error', [
-                                                'property' => 'name_ar',
-                                            ])
+                                            <x-errors.display-validation-error property="name_ar" />
                                         </div>
 
                                         <div class="form-group">
                                             <label> Logo</label>
-                                            <input type="file" wire:model="logo" class="file-upload-default"  accept=".png"
-                                                id="image">
+                                            <input type="file" wire:model="logo" class="file-upload-default"
+                                                accept=".png" id="image">
 
                                             <div class="input-group col-xs-12">
                                                 <input type="text" class="form-control file-upload-info"
@@ -106,7 +103,7 @@
                                                         type="button">Upload</button>
                                                 </span>
                                             </div>
-                                            @include('gt-manager.error.error', ['property' => 'logo'])
+                                            <x-errors.display-validation-error property="logo" />
                                         </div>
                                         @if ($logo)
                                             @if (is_string($logo))
@@ -137,22 +134,17 @@
             <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
             <input type="text" class="form-control" wire:model="name_en" autocomplete="off"
                 placeholder="English Name" value="{{ old('name_en') ?? '' }}">
-            @error('name_en')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
-
+            <x-errors.display-validation-error property="name_en" />
         </div>
         <div class="form-group">
             <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
             <input type="text" class="form-control" wire:model="name_ar" placeholder="Arabic Name"
                 value="{{ old('name_ar') ?? '' }}">
-            @error('name_ar')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
+            <x-errors.display-validation-error property="name_ar" />
         </div>
         <div class="form-group">
             <label>Brand Logo</label>
-            <input type="file" wire:model="logo" class="file-upload-default" id="image"  accept=".png">
+            <input type="file" wire:model="logo" class="file-upload-default" id="image" accept=".png">
 
             <div class="input-group col-xs-12">
                 <input type="text" class="form-control file-upload-info" disabled=""
@@ -161,9 +153,7 @@
                     <button class="file-upload-browse btn btn-success" type="button">Upload</button>
                 </span>
             </div>
-            @error('logo')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
+            <x-errors.display-validation-error property="logo" />
         </div>
         @if ($logo && !is_string($logo))
             <img class="image-rec-full" src="{{ $logo->temporaryURL() }}" alt="">

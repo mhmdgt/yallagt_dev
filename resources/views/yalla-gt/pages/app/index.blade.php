@@ -121,6 +121,7 @@
                 </div>
                 <div class="col-12 ">
 
+                    {{-- <div class="carsforsaleContainer owl-carousel "> --}}
                     <div class="carsforsaleContainer owl-carousel ">
                         <!-- loop starts here -->
                         <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
@@ -216,33 +217,123 @@
     </section>
 
     <!-- Categories area start-->
-    <section class="category_section_1">
+    <section class="new-section category_section_1">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="section_title section_title_border text-left">
+                    <div class="section_title section_title_border en-style">
                         <h2>Featured Categories</h2>
                         <hr>
                     </div>
                 </div>
             </div>
-            <div class="product_container">
+
+            <div class="product_container" style="width: 1390px;">
                 <div class="row no-gutters align-items-center">
+
                     <!-- loop starts here -->
-                    <div class="featured_categories product_carousel owl-carousel">
-                        <a href=""class="primary_img">
-                            <article class="single_category">
-                                <div class="category_thumb">
-                                    <img src="yalla_gt/assets/img/product_imgs/1688582470.webp" alt="">
-                                </div>
-                                <figcaption class="category_content">
-                                    <h6 class="category_name">Stock</h6>
-                                    <h4 class="properities">12 Groups</h4>
-                                </figcaption>
-                            </article>
-                        </a>
+                    <div class="featured_categories owl-carousel">
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/battery.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Filters</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/SeekPng.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Car breaks</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/engine-parts.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Engine parts</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/pngwing.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Suspension</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/clutch-parts.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Clutch parts</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb ">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/turbochargers.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content ">
+                                <h6 class="category_name">Turbo chargers</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/custom-wheels.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Custom wheels</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
+                        <article class="single_category">
+                            <div class="category_thumb">
+                                <a class="primary_img">
+                                    <img src="assets/img/categories/pngegg.png" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="category_content">
+                                <h6 class="category_name">Custom wheels</h6>
+                                <h4 class="properities">4 groups</h4>
+                            </figcaption>
+                        </article>
+
                         <!-- loop end here -->
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -715,31 +806,31 @@
                     <div class="carsforsaleContainer owl-carousel ">
                         <!-- loop starts here -->
                         <!-- <div class="card cars_for_sale_home_layout" style="  width:auto; border-radius: 16px; ">
-                                        <a href="#">
-                                            <div class="card-image sale_car_img">
-                                                <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                            </div>
-                                        </a>
-                                        <div class="card-body">
+                                                <a href="#">
+                                                    <div class="card-image sale_car_img">
+                                                        <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
+                                                    </div>
+                                                </a>
+                                                <div class="card-body">
 
-                                            <a href="#">
-                                                <h4 class="font-weight-bold" style="line-height: 28px">
-                                                    <a href="#">تضعك مدرسة BMW M4 GT4 في سيارة سباق حقيقية</a>
-                                                </h4>
-                                            </a>
+                                                    <a href="#">
+                                                        <h4 class="font-weight-bold" style="line-height: 28px">
+                                                            <a href="#">تضعك مدرسة BMW M4 GT4 في سيارة سباق حقيقية</a>
+                                                        </h4>
+                                                    </a>
 
-                                            <h5 class="mt-3">بواسطة: محمد أحمد</h5>
+                                                    <h5 class="mt-3">بواسطة: محمد أحمد</h5>
 
-                                            <div class="card-text-4 mb-2">
-                                                <span class="badge_icon_second">قبل: 5 أشهر</span>
-                                                <i class="fa-regular fa-clock"></i>
-                                            </div>
-                                            <div class="courses-info font-weight-bold">
-                                                <a href="#" class="section-btn btn btn-primary btn-block mt-2">اقرأ
-                                                    المزيد</a>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                                    <div class="card-text-4 mb-2">
+                                                        <span class="badge_icon_second">قبل: 5 أشهر</span>
+                                                        <i class="fa-regular fa-clock"></i>
+                                                    </div>
+                                                    <div class="courses-info font-weight-bold">
+                                                        <a href="#" class="section-btn btn btn-primary btn-block mt-2">اقرأ
+                                                            المزيد</a>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                         <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
                             <a href="#">
                                 <div class="card-image sale_car_img">

@@ -10,7 +10,7 @@ class SaleCarsController extends Controller
     // -------------------- Create car for sale -------------------- //
     public function live()
     {
-        return view('gt-manager.cars_for_sale.live');
+        return view('gt-manager.pages.sale_cars.live');
 
     }
     // -------------------- Create car for sale -------------------- //

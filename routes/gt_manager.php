@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
-use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProCategoriesController;
-use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use App\Http\Controllers\Gt_manager\Stock_Products\ProductController;
-use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
+use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductCategoryController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
 
 Route::middleware('admin')->group(function () {
     // Dashboard Index//
@@ -83,15 +83,32 @@ Route::middleware('admin')->group(function () {
     // Product Manufacturers //
     Route::controller(ManufacturersController::class)->prefix('manage/manufacturers')->name('manufacturers.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{manufacturer}/details', 'show')->name('show');
+        Route::put('/{manufacturer}', 'update')->name('update');
+        Route::delete('destroy/{manufacturer}', 'destroy')->name('destroy');
+
     });
     // Product Categories //
-    Route::controller(ProCategoriesController::class)->prefix('manage/pro-categories')->name('pro-categories.')->group(function () {
+    Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/sub', 'show')->name('show');
+        Route::get('/sub/{productCategory:translatedSlug}', 'show')->name('show');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{productCategory}/edit', 'edit')->name('edit');
+        Route::put('/{productCategory}', 'update')->name('update');
+        Route::delete('/{productCategory}', 'destroy')->name('destroy');
+    });
+    // Sub Product Categories //
+    Route::controller(ProductSubCategoryController::class)->prefix('product-subcategories')->name('product-subcategories.')->group(function () {
+        Route::post('/', 'store')->name('store');
+        Route::get('/{productSubCategory}/edit', 'edit')->name('edit');
+        Route::put('/{productSubCategory}', 'update')->name('update');
+        Route::delete('/{productSubCategory}', 'destroy')->name('destroy');
     });
     // Product //
     // Route::controller(ProductController::class)->prefix('manage/products')->name('products.')->group(function () {
-        Route::view('/create-product', 'gt-manager.pages.product_assets.products.create')->name('products.create');
+    Route::view('/create-product', 'gt-manager.pages.product_assets.products.create')->name('products.create');
     // });
 });
 

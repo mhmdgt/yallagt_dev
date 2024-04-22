@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Gt_manager\Stock_cars;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\GtManager\StockCar\UpdateRequest;
 use App\Models\CarBrand;
-use App\Models\StockCar;
-use Illuminate\Http\Request;
 use App\Models\CarBrandModel;
+use App\Models\StockCar;
 use App\Models\StockCarImage;
 use App\Models\TemporaryFile;
-use App\Http\Controllers\Controller;
-use Intervention\Image\ImageManager;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Drivers\Imagick\Driver;
-use App\Http\Requests\GtManager\StockCar\UpdateRequest;
-use App\Http\Requests\GtManager\StockCar\StoreStockCarRequest;
+use Intervention\Image\ImageManager;
 
 class StockCarsController extends Controller
 {
@@ -140,17 +140,31 @@ class StockCarsController extends Controller
         }
     }
     // -------------------- Store Stock Car -------------------- //
-    public function store(StoreStockCarRequest $request)
+    public function store(Request $request)
     {
-        $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
         $temporaryImages = TemporaryFile::all();
+
+        $validator = Validator::make($request->all(), [
+            'car_brand_model_id' => 'required|exists:car_brand_models,id',
+            'year' => 'required|integer|digits:4',
+            'brochure' => 'file|mimes:pdf',
+        ]);
+
+        if ($validator->fails()) {
+            foreach ($temporaryImages as $temporaryImage) {
+                Storage::delete('filepond-tmp/stock_car_imgs/' . $temporaryImage->name);
+                $temporaryImage->delete();
+            }
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
         $brand = $BrandModel->brand;
         $brandModelSlug = $BrandModel->slug;
         $ModelYear = $request->year;
         $brochure = null;
         $firstImage = true;
 
-        // dd( $BrandModel->id );
         if ($request->brochure) {
             $brochure = $brand['slug'] . '_' . $brandModelSlug . '_brochure' . '_' . $ModelYear . '.' . $request->brochure->extension();
             $request->brochure->storeAs('media/stock_car_brochure/' . $brochure);
@@ -207,12 +221,10 @@ class StockCarsController extends Controller
             'status' => 'active',
         ]);
 
-
         // Delete existing images associated with the stock car
         foreach ($stockCar->images as $image) {
             $image->delete();
         };
-
 
         // Store new images
         foreach ($temporaryImages as $temporaryImage) {
@@ -242,19 +254,3 @@ class StockCarsController extends Controller
     }
 
 } // End Class
-
-
-// if ($request->validated()->fails()) {
-//     dd('hi');
-// foreach ($temporaryImages as $temporaryImage) {
-//     Storage::deleteDirectory('tmp/stock_car_imgs/' . $temporaryImage->folder);
-//     $temporaryImage->delete();
-// }
-// }
-
-
-// Brand name
-// $imageParameter = $request->input('image');
-// $imageData = json_decode($imageParameter, true);
-// $brandData = $imageData['brandData'];
-// $brandData = $brandData['slug'];

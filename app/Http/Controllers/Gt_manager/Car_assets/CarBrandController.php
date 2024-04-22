@@ -7,7 +7,7 @@ use App\Traits\ImageTrait;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Http\Requests\GtManager\CarBrand\StoreCarBrandRequest;
 use App\Http\Requests\GtManager\CarBrand\UpdateCarBrandRequest;
 
@@ -25,8 +25,6 @@ class CarBrandController extends Controller
     public function show(CarBrand $carBrand)
     {
         $carBrand->with('models');
-
-        confirmDelete('Delete Brand!', 'Are you sure you want to delete?');
         return view('gt-manager.pages.car_assets.models', compact('carBrand'));
 
     }
@@ -83,13 +81,9 @@ class CarBrandController extends Controller
     // -------------------- destroy -------------------- //
     public function destroy(CarBrand $carBrand)
     {
-        $logo = $carBrand->logo;
-
-        if ($carBrand->delete()) {
-            $this->deleteImage($logo, 'car_brands_logo');
-
-        }
-        Alert::success('Successfully', 'Your brand has been deleted');
+        $carBrand->delete();
+        
+        Session::flash('success', 'Deleted Successfully');
         return redirect()->route('car-brand.index');
     }
 }
