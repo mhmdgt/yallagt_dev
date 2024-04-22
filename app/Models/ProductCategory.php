@@ -20,4 +20,13 @@ class ProductCategory extends Model
     // function getRouteKeyName(){
     //     return 'id';
     // }
+     public function getRouteKeyName()
+     {
+         return 'slug'; 
+     }
+      // Accessor to retrieve translated slug for current locale
+    public function getTranslatedSlugAttribute()
+    {
+        return $this->getTranslation('slug', app()->getLocale());
+    }
 }

@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
+use App\Models\CarBrand;
+use App\Models\ProductCategory;
 
+Route::bind('productCategory', function ($value) {
+    return ProductCategory::where('slug->' . app()->getLocale(), $value)->firstOrFail();
+});
 require __DIR__ . '/gt_manager.php';
 
 /*
@@ -22,6 +27,8 @@ require __DIR__ . '/gt_manager.php';
 
 
 Route::get('/', function () {
+
+   
 return view('yalla-gt.pages.app.index');
 });
 

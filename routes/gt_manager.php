@@ -93,7 +93,7 @@ Route::middleware('admin')->group(function () {
 
     Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/sub/{productCategory}', 'show')->name('show');
+        Route::get('/sub/{productCategory:translatedSlug}', 'show')->name('show');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
         Route::get('/{productCategory}/edit', 'edit')->name('edit');

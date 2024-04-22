@@ -18,5 +18,8 @@ class CarBrand extends Model
     {
         return $this->hasMany(CarBrandModel::class);
     }
+    // function stockCars(){
+    //     return $this->hasManyThrough();
+    // }
 
 } // END CLASS

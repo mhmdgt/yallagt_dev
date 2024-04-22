@@ -82,7 +82,9 @@
                                 {{-- LOOP --}}
                                 @foreach ($categories as  $category)
                                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
-                                    <a href="{{ route('product-categories.show',  $category->id) }}">
+                                    <a href="{{ route('product-categories.show', $category->translatedSlug) }}">
+
+
                                         <div class="border border-light rounded shadow-sm">
                                             <div class="card-logo ">
                                                 <img width="100px"
