@@ -28,4 +28,5 @@ class StoreProductCategoryRequest extends FormRequest
             'logo' => 'nullable|image|mimes:png',
         ];
     }
+    
 }
