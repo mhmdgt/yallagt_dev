@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Gt_manager\Product_assets;
 
 use App\Traits\SlugTrait;
 use App\Traits\ImageTrait;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+
 use App\Models\ProductCategory;
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\GtManager\Product\ProductCategory\StoreProductCategoryRequest;
 use App\Http\Requests\GtManager\Product\ProductCategory\updateProductCategoryRequest;
 
@@ -32,14 +32,15 @@ class ProductCategoryController extends Controller
         return back()->with('success', 'Created Successfully');
     }
     // -------------------- Method -------------------- //
-    function show(ProductCategory $productCategory)
+    function show($slug)
     {
-        $productCategory->load('productSubCategories');
+        $productCategory = ProductCategory::getByTranslatedSlug($slug)->with('productSubCategories')->first();
         return view('gt-manager.pages.product_assets.categories.show', compact('productCategory'));
     }
     // -------------------- Method -------------------- //
-    function update(updateProductCategoryRequest $request, ProductCategory $productCategory)
+    function update(updateProductCategoryRequest $request, $slug)
     {
+        $productCategory = ProductCategory::getByTranslatedSlug($slug)->first();
         $productCategory->update([
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
             'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
@@ -48,10 +49,11 @@ class ProductCategoryController extends Controller
         return back()->with('success', 'Updated Successfully');
     }
     // -------------------- Method -------------------- //
-    function destroy(ProductCategory $productCategory)
+    function destroy($slug)
     {
+        $productCategory = ProductCategory::getByTranslatedSlug($slug)->first();
         $this->deleteImage($productCategory->logo);
         $productCategory->delete();
-        return redirect()->route('product-categories.index');
+        return redirect()->route('product-categories.index')->with('success', 'Deleted Successfully');;
     }
 }

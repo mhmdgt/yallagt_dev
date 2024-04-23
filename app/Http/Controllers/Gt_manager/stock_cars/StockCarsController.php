@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Gt_manager\Stock_cars;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GtManager\StockCar\UpdateRequest;
 use App\Models\CarBrand;
 use App\Models\CarBrandModel;
 use App\Models\StockCar;
@@ -79,20 +78,6 @@ class StockCarsController extends Controller
         $brandData = CarBrand::where('slug', $brandSlug)->first();
         $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
         return view('gt-manager.pages.stock_cars.stock_car_models.create', compact('brandData', 'brandSlug', 'brandModels'));
-    }
-    // -------------------- Edit Stock Car -------------------- //
-    public function edit($brandSlug, $modelSlug, $stockYear, $id)
-    {
-        $brandData = CarBrand::where('slug', $brandSlug)->first();
-        $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
-        $stockCar = StockCar::with('images')->find($id);
-        $modelData = CarBrandModel::find($stockCar->car_brand_model_id);
-        $images = $stockCar->images;
-
-        // dd( $brandModels[] );
-        // dd( $stockCar->id , $brandData->name , $modelSlug , $modelData->id , $modelData->name , $stockCar->year , $images );
-        return view('gt-manager.pages.stock_cars.stock_car_models.edit',
-            compact('brandData', 'brandSlug', 'modelData', 'modelSlug', 'brandModels', 'images', 'stockCar'));
     }
     // -------------------- Image TmpUpload -------------------- //
     public function TmpUpload(Request $request)
@@ -196,9 +181,26 @@ class StockCarsController extends Controller
         Session::flash('success', 'Model Stored Successfully');
         return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
     }
-    // -------------------- Update Stock Car -------------------- //
-    public function update(UpdateRequest $request, $stockCar)
+    // -------------------- Edit Stock Car -------------------- //
+    public function edit($brandSlug, $modelSlug, $stockYear, $id)
     {
+        $brandData = CarBrand::where('slug', $brandSlug)->first();
+        $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
+        $stockCar = StockCar::with('images')->find($id);
+        $modelData = CarBrandModel::find($stockCar->car_brand_model_id);
+        $images = $stockCar->images;
+
+        // dd( $images );
+        // dd( $brandModels[] );
+        // dd( $stockCar->id , $brandData->name , $modelSlug , $modelData->id , $modelData->name , $stockCar->year , $images );
+        return view('gt-manager.pages.stock_cars.stock_car_models.edit',
+            compact('brandData', 'brandSlug', 'modelData', 'modelSlug', 'brandModels', 'images', 'stockCar'));
+    }
+    // -------------------- Update Stock Car -------------------- //
+    public function update(Request $request, $stockCar)
+    {
+        dd($request->all());
+
 
         $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
         $temporaryImages = TemporaryFile::all();
@@ -208,6 +210,19 @@ class StockCarsController extends Controller
         $brochure = null;
         $firstImage = true;
         $stockCar = StockCar::findOrFail($stockCar);
+
+        // if ($request->has('images')) {
+        //     $images = $request->input('images');
+        //     foreach ($images as $index => $imageData) {
+        //         // Check if the image should be removed
+        //         if (isset($imageData['_remove']) && $imageData['_remove'] == true) {
+        //             // Remove the image from the database
+        //             $stockCar->images()->where('id', $index)->delete();
+        //         }
+        //     }
+        // }
+
+
 
         if ($request->brochure) {
             $brochure = $brand['slug'] . '_' . $brandModelSlug . '_brochure' . '_' . $ModelYear . '.' . $request->brochure->extension();

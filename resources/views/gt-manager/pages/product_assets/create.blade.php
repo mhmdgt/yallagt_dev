@@ -63,18 +63,28 @@
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label for="exampleInputNumber1">Official price</label>
-                                    <input type="number" class="form-control" id="exampleInputNumber1">
-                                </div>
-                            </div>
-                            <div class="form-group row pt-0">
-                                <div class="col">
                                     <label>Description <span class="text-danger">(EN)</span></label>
                                     <textarea class="form-control" name="name" rows="3"></textarea>
                                 </div>
                                 <div class="col">
                                     <label>Description <span class="text-danger">(AR)</span></label>
                                     <textarea class="form-control" name="name" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Price --}}
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Payment</h6>
+                            <div class="form-group row pt-0">
+                                <div class="col">
+                                    <label for="exampleInputNumber1">Official price</label>
+                                    <input type="number" class="form-control" id="exampleInputNumber1">
                                 </div>
                             </div>
                         </div>
@@ -280,6 +290,4 @@
             document.getElementById('sukGenerator').value = id;
         }
     </script>
-
-
 @endsection

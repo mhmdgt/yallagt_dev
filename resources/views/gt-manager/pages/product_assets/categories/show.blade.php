@@ -32,7 +32,7 @@
                                 <form action="{{ route('product-subcategories.store') }}" method="POST"
                                     enctype="multipart/form-data" id="car-brand">
                                     @csrf
-                                    <input type="text" name="product_category_id" value="{{ $productCategory->id }}"
+                                    <input type="text" name="product_category_id" value="{{ $productCategory->slug }}"
                                         hidden>
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">(EN)</span></label>
@@ -89,19 +89,19 @@
                             <span class="profile-name ml-3 h4">{{ $productCategory->name }}</span>
                             <td>
                                 <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
-                                    data-target="#EditCategory{{ $productCategory->id }}" title="Edit">
+                                    data-target="#EditCategory{{ $productCategory->slug }}" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
 
                                 <button class="btn btn-inverse-danger" data-toggle="modal"
-                                    data-target="#confirmDeleteModal{{ $productCategory->id }}" title="Edit">
+                                    data-target="#confirmDeleteModal{{ $productCategory->slug }}" title="Edit">
                                     <i class="bi bi-trash3"></i>
                                 </button>
 
                                 <x-modal.confirm-delete-modal
-                                    route="{{ route('product-categories.destroy', $productCategory) }}"
-                                    id="{{ $productCategory->id }}" />
+                                    route="{{ route('product-categories.destroy', $productCategory->slug) }}"
+                                    id="{{ $productCategory->slug }}" />
                             </td>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
             </div>
         </div>
         {{-- ========================== Edit Category ========================== --}}
-        <div class="modal fade" id="EditCategory{{ $productCategory->id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="EditCategory{{ $productCategory->slug }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -120,7 +120,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="forms-sample" action="{{ route('product-categories.update', $productCategory) }}"
+                        <form class="forms-sample" action="{{ route('product-categories.update', $productCategory->slug) }}"
                             method="POST" enctype="multipart/form-data" id="car-brand">
                             @csrf
                             @method('PUT')
@@ -177,6 +177,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Logo</th>
                                         <th>Model Name <span class="text-danger">(EN)</span></th>
                                         <th>Model Name <span class="text-danger">(AR)</span></th>
                                         <th>Actions</th>
@@ -187,28 +188,29 @@
                                         {{-- LOOP --}}
                                         @foreach ($productCategory->productSubCategories as $productSubCategory)
                                             <td>#</td>
+                                            <td><img class="image-in-box" src="{{ display_img($productSubCategory->logo) }}" alt="No Image"></td>
                                             <td>{{ $productSubCategory->getTranslations('name')['en'] }}</td>
                                             <td>{{ $productSubCategory->getTranslations('name')['ar'] }}</td>
                                             <td>
                                                 <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
-                                                    data-target="#editModelproductSubCategory{{ $productSubCategory->id }}"
+                                                    data-target="#editModelproductSubCategory{{ $productSubCategory->slug }}"
                                                     title="Edit">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </button>
 
                                                 <button class="btn btn-inverse-danger" data-toggle="modal"
-                                                    data-target="#confirmDeleteModal{{ $productSubCategory->id }}"
+                                                    data-target="#confirmDeleteModal{{ $productSubCategory->slug }}"
                                                     title="Edit">
                                                     <i class="bi bi-trash3"></i>
                                                 </button>
 
                                                 <x-modal.confirm-delete-modal
-                                                    route="{{ route('product-subcategories.destroy', $productSubCategory) }}"
-                                                    id="{{ $productSubCategory->id }}"/>
+                                                    route="{{ route('product-subcategories.destroy', $productSubCategory->slug) }}"
+                                                    id="{{ $productSubCategory->slug }}"/>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <div class="modal fade" id="editModelproductSubCategory{{ $productSubCategory->id }}"
+                                    <div class="modal fade" id="editModelproductSubCategory{{ $productSubCategory->slug }}"
                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -222,11 +224,11 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="forms-sample car-brand-model-edit" method="POST"
-                                                        action="{{ route('product-subcategories.update', $productSubCategory->id) }}">
+                                                        action="{{ route('product-subcategories.update', $productSubCategory->slug) }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <input hidden type="text" class="form-control" name="id"
-                                                            value="{{ $productSubCategory->id }}">
+                                                            value="{{ $productSubCategory->slug }}">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Name <span
                                                                     class="text-danger">(EN)</span></label>
@@ -262,8 +264,7 @@
                                                         <div class="mb-3">
                                                             <label for="exampleInputEmaill" class="form-label"> </label>
                                                             <img width="100px" id="showImage" class="image-rec-full"
-                                                                src="{{ !empty($productSubCategory->logo) ? asset('storage/' . $productSubCategory->logo) : asset('gt_manager/media/no_image.jpg') }}"
-                                                                alt="No_IMG">
+                                                                src="{{ display_img($productSubCategory->logo) }}"alt="No_IMG">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" id="add_employee_btn"

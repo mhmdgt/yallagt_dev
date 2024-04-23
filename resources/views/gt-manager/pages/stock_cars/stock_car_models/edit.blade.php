@@ -6,13 +6,15 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Home</a></li>
                     <li class="breadcrumb-item" aria-current="page"><a href="{{ route('stock-car.index') }}">Brands</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('stock-car.show', $brandSlug) }}">{{ $brandData->name }}</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a
+                            href="{{ route('stock-car.show', $brandSlug) }}">{{ $brandData->name }}</a></li>
                     <li class="breadcrumb-item" aria-current="page">{{ $modelData->name }}</a></li>
                 </ol>
             </div>
         </nav>
         {{-- Form --}}
-        <form method="POST" action="{{ route('stock-car.update',  $stockCar->id) }}" enctype="multipart/form-data" id="my-form">
+        <form method="POST" action="{{ route('stock-car.update', $stockCar->id) }}" enctype="multipart/form-data"
+            id="my-form">
             @csrf
             @method('PUT')
             {{-- Details --}}
@@ -42,8 +44,7 @@
                                                 $endYear = $currentYear - 65;
                                             @endphp
                                             @for ($year = $currentYear + 1; $year >= $endYear; $year--)
-                                                <option value="{{ $year }}"
-                                                    @selected( $year == $stockCar->year) >
+                                                <option value="{{ $year }}" @selected($year == $stockCar->year)>
                                                     {{ $year }}
                                                 </option>
                                             @endfor
@@ -62,14 +63,32 @@
                     <div class="card">
                         <div class="card-body">
                             <h4>Media</h4>
+                            {{-- images --}}
 
-                            <div class="form-group pt-0 mt-4">
-                                <label>Model Images</label>
-
-                                <input type="file" name="image"
-                                    file="asset('storage/media/stock_cars_imgs/' . $images->name)" multiple>
+                            <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
+                                @foreach ($stockCar->images as $index => $image)
+                                    <div class="img-container position-relative">
+                                        <img src="{{ display_img('media/stock_cars_imgs/' . $image->name) }}"
+                                            alt="">
+                                        <button class="delete-btn" data-index="{{ $index }}">&times;</button>
+                                        <input class="select-btn" name="main_img" value="{{ $image->id }}"></input>
+                                        <input type="hidden" name="images[{{ $index }}][url]"
+                                            value="{{ display_img('media/stock_cars_imgs/' . $image->name) }}">
+                                    </div>
+                                @endforeach
                             </div>
 
+                            {{-- <button class="select-btn"></button> --}}
+                            {{-- <div class="form-check form-check-inline"> --}}
+                            {{-- <input class="select-btn" ></input> --}}
+                            {{-- </div> --}}
+
+                            <div class="form-group pt-0 mt-4">
+                                <label>Add More Images</label>
+                                {{-- <input type="file" name="image" file="asset('storage/media/stock_cars_imgs/' . $images->name)" multiple> --}}
+                                <input type="file" class="filepond" name="image" multiple>
+                            </div>
+                            {{-- brochure --}}
                             <div class="form-group pt-0 mt-4">
                                 <label>PDF Brochure</label>
                                 <input type="file" name="img[]" accept="application/pdf" class="file-upload-default">
@@ -113,7 +132,6 @@
                                     </div>
                                 @endif
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -164,7 +182,75 @@
     </div>
 @endsection
 
-@section('script')
+{{-- The one that maybe working  --}}
+{{-- @section('script')
+    <script>
+        const existingImages = {!! json_encode($images) !!};
+        const existingBrand = {!! json_encode($brandData->slug) !!};
+        const inputElement = document.querySelector('input[name="image"]');
+        const pondOptions = {
+            allowMultiple: true,
+            allowReorder: true,
+            server: {
+                process: {
+                    url: '/manage/stock-car/tmp-upload',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    onload: (response) => {
+                        // Parse the response and handle it as needed
+                    }
+                },
+                revert: {
+                    url: '/manage/stock-car/tmp-delete',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
+            },
+            onaddfile: (error, file) => {
+                if (!error) {
+                    // Include metadata with the file
+                    const metadata = {
+                        brandData: existingBrand
+                    };
+                    file.setMetadata(metadata);
+                } else {
+                    console.error(error);
+                }
+            },
+            imageTransformOutputStripImageHead: true,
+            imageTransformCanvasMemoryLimit: 50000000,
+            imageTransformOutputQuality: 80
+        };
+
+        // Initialize FilePond with existing images
+        if (existingImages.length > 0) {
+            pondOptions.files = existingImages.map(image => ({
+                source: `{{ asset('storage/media/stock_cars_imgs/') }}/${image.name}`,
+                options: {
+                    type: 'local',
+                    file: {
+                        name: image.name,
+                        size: image.size,
+                        type: image.type,
+                        metadata: {
+                            brandData: existingBrand
+                        }
+                    }
+                }
+            }));
+        }
+
+        // Create FilePond instance
+        const pond = FilePond.create(inputElement, pondOptions);
+    </script>
+@endsection --}}
+
+{{-- The one which is made by friend --}}
+{{-- @section('script')
     <script>
         FilePond.registerPlugin(FilePondPluginImagePreview);
         const inputElement = document.querySelector('input[type="file"]');
@@ -230,6 +316,90 @@
             imageTransformOutputStripImageHead: true,
             imageTransformCanvasMemoryLimit: 50000000,
             imageTransformOutputQuality: 80,
+        });
+    </script>
+@endsection --}}
+
+{{-- The one that created for upload new only  --}}
+@section('script')
+    <script>
+        // ----------------------------------------
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginImageTransform);
+        FilePond.registerPlugin(FilePondPluginFileMetadata);
+
+        const existingBrand = {!! json_encode($brandData->slug) !!};
+
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[type="file"]');
+
+        // Create a FilePond instance
+        const pond = FilePond.create(inputElement);
+
+        // Set the options for you files
+        pond.setOptions({
+            allowMultiple: true,
+            allowReorder: true,
+            server: {
+                process: '/manage/stock-car/tmp-upload',
+                revert: '/manage/stock-car/tmp-delete',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            },
+
+            fileMetadataObject: {
+                brandData: existingBrand,
+            },
+
+            imageTransformOutputStripImageHead: true,
+            imageTransformCanvasMemoryLimit: 50000000,
+            imageTransformOutputQuality: 80,
+        });
+
+        // ----------------------------------------
+        $(document).ready(function() {
+            var owl = $('#image-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 2,
+                        slideBy: 2
+                    },
+                    600: {
+                        items: 3,
+                        slideBy: 3
+                    },
+                    1000: {
+                        items: 6,
+                        slideBy: 5
+                    }
+                }
+            });
+            // ----------------------------------------
+            $('.delete-btn').click(function(event) {
+                event
+                    .preventDefault(); // Prevent any default action associated with the button (e.g., form submission)
+
+                var index = $(this).data(
+                    'index'); // Get the index of the image associated with the delete button
+
+                // Remove the item from the Owl Carousel's internal data structure
+                owl.trigger('remove.owl.carousel', [index]).trigger('refresh.owl.carousel');
+
+                // Remove the corresponding input field
+                $('input[name="images[' + index + '][url]"]').remove();
+            });
+            // ----------------------------------------
+            $('.select-btn').click(function() {
+                // Get the ID of the selected image
+                var imageId = $(this).attr('value');
+
+                // Set the value of the main_img input to the ID of the selected image
+                $('input[name="main_img"]').val(imageId);
+            });
         });
     </script>
 @endsection

@@ -142,38 +142,7 @@
             }
         });
     }
-    var $featured_categories = $('.featured_categories');
-    if ($featured_categories.length > 0) {
-        $featured_categories.on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')
-        }).owlCarousel({
-            loop: false,
-            autoplay: true,
-            autoplayTimeout: 8000,
-            items: 5,
-            margin: 10,
-            dots: false,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 2.2,
-                },
-                576: {
-                    items: 2.2,
-                },
-                768: {
-                    items: 4,
-                },
-                992: {
-                    items: 8,
-                },
-                1200: {
-                    items: 8,
-                },
 
-            }
-        });
-    }
     var $banner_carousel = $('.banner_carousel');
     if ($banner_carousel.length > 0) {
         $banner_carousel.on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -571,113 +540,6 @@
     }
 
 
-    /*---brand container activation---*/
-    var $brandContainer = $('.brand_container');
-    if ($brandContainer.length > 0) {
-        $('.brand_container').on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')
-        }).owlCarousel({
-            loop: false,
-            nav: false,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 4,
-            margin: 20,
-            dots: false,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                300: {
-                    items: 2,
-                    margin: 15,
-                },
-                480: {
-                    items: 2,
-                },
-                768: {
-                    items: 3,
-                },
-                992: {
-                    items: 4,
-                },
-
-            }
-        });
-    }
-    
-    var $carsforsaleContainer = $('.carsforsaleContainer');
-    if ($carsforsaleContainer.length > 0) {
-        $('.carsforsaleContainer').on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')
-        }).owlCarousel({
-            loop: true,
-            nav: false,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 4,
-            margin: 20,
-            dots: false,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1.1,
-                },
-                300: {
-                    items: 1.1,
-                    margin: 15,
-                },
-                480: {
-                    items: 1.1,
-                },
-                768: {
-                    items: 3,
-                },
-                992: {
-                    items: 4,
-                },
-
-            }
-        });
-    }
-
-    var $brandContainerPage = $('.brand_container_choose_page');
-    if ($brandContainerPage.length > 0) {
-        $('.brand_container_choose_page').on('changed.owl.carousel initialized.owl.carousel', function (event) {
-            $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')
-        }).owlCarousel({
-            loop: true,
-            nav: false,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 5,
-            margin: 20,
-            navText: ['', ''],
-            dots: false,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                300: {
-                    items: 2,
-                    margin: 15,
-                },
-                480: {
-                    items: 3,
-                },
-                768: {
-                    items: 4,
-                },
-                992: {
-                    items: 5,
-                },
-
-            }
-        });
-    }
-
     var $checkoutContainer = $('.checkout_container');
     if ($checkoutContainer.length > 0) {
         $('.checkout_container').on('changed.owl.carousel initialized.owl.carousel', function (event) {
@@ -904,12 +766,12 @@
 
 
     /*---  ScrollUp Active ---*/
-    // $.scrollUp({
-    //     scrollText: '<img width=" 20" height="20" src="yalla_gt/assets/img/icon/up_arrow.png">',
-    //     easingType: 'linear',
-    //     scrollSpeed: 900,
-    //     animation: 'fade'
-    // });
+    $.scrollUp({
+        scrollText: '<img width=" 20" height="20" src="assets/img/icon/up_arrow.png">',
+        easingType: 'linear',
+        scrollSpeed: 900,
+        animation: 'fade'
+    });
 
     /*---countdown activation---*/
 
@@ -968,7 +830,6 @@
 
     });
 
-
     /*---categories slideToggle---*/
     $(".categories_title").on("click", function () {
         $(this).toggleClass('active');
@@ -992,15 +853,8 @@
         $(this).toggleClass('active');
         $('.dropdown_categories3').slideToggle('medium');
     });
-    /*---widget sub categories---*/
-    $(".sub_categories4> a").on("click", function () {
-        $(this).toggleClass('active');
-        $('.dropdown_categories4').slideToggle('medium');
-    });
-
 
     /*----------  Category more toggle  ----------*/
-
     $(".categories_menu_toggle li.hidden").hide();
     $("#more-btn").on('click', function (e) {
 
@@ -1016,7 +870,6 @@
             $(this).html(htmlBefore);
         }
     });
-
 
     /*---MailChimp---*/
     $('#mc-form').ajaxChimp({
@@ -1063,7 +916,6 @@
     }
     categorySubMenuToggle();
 
-
     /*---shop grid activation---*/
     $('.shop_toolbar_btn > button').on('click', function (e) {
 
@@ -1093,9 +945,7 @@
 
     });
 
-
     /*---Newsletter Popup activation---*/
-
     setTimeout(function () {
         if ($.cookie('shownewsletter') == 1) $('.newletter-popup').hide();
         $('#subscribe_pemail').keypress(function (e) {
@@ -1123,21 +973,17 @@
         });
     }, 2500);
 
-
     /*---search box slideToggle---*/
     $(".search_box > a").on("click", function () {
         $(this).toggleClass('active');
         $('.search_widget').slideToggle('medium');
     });
 
-
     /*---header account slideToggle---*/
     $(".header_account > a").on("click", function () {
         $(this).toggleClass('active');
         $('.dropdown_account').slideToggle('medium');
     });
-
-
 
     /*---canvas menu activation---*/
     $('.canvas_open,.off_canvars_overlay').on('click', function () {
@@ -1147,9 +993,6 @@
     $('.canvas_close,.off_canvars_overlay').on('click', function () {
         $('.offcanvas_menu_wrapper,.off_canvars_overlay').removeClass('active')
     });
-
-
-
 
     /*---Off Canvas Menu---*/
     var $offcanvasNav = $('.offcanvas_main_menu'),
@@ -1192,56 +1035,8 @@
         }
     });
 
-
-
-
-
 })(jQuery);
 
-
-
-
-
-
-
-jQuery("#carousel").owlCarousel({
-
-    autoplay: true,
-    rewind: true,
-    responsiveClass: true,
-    smartSpeed: 1200,
-    slideSpeed: 800,
-    loop: true,
-    nav: true,
-    responsive: {
-        0: {
-            items: 1
-        },
-
-        600: {
-            items: 1
-        },
-
-        1024: {
-            items: 1
-        },
-
-        1366: {
-            items: 1
-        }
-    }
-});
-
-//   const btn = document.getElementById('does-not-exist');
-
-//   console.log(btn); // null
-
-//   // ✅ Check if element exists before calling addEventListener()
-//   if (btn) {
-//     // Not called
-//     btn.addEventListener('click', () => {
-//       alert('You clicked the button');
-//     });
 
 var minus_A = document.querySelector("#product_A_form .btn-subtract")
 var add_A = document.querySelector("#product_A_form .btn-add");
@@ -1259,6 +1054,7 @@ if (minus_A) {
 
 
 }
+
 if (add_A) {
     add_A.addEventListener("click", function () {
         quantity_A.value++;

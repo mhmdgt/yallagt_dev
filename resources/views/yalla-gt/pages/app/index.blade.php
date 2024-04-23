@@ -1,7 +1,8 @@
 @extends('yalla-gt.layout.app')
 @section('content')
-    <!-- Slider area start-->
-    <div class="owl-slider">
+
+    <!-- Slider -->
+    <div class="owlslider">
         <div id="carousel" class="owl-carousel">
             <div class="item">
                 <img src="yalla_gt/assets/img/home_slider/1688828797.webp" alt="">
@@ -15,18 +16,17 @@
         </div>
     </div>
 
-    <!-- Services area start-->
+    <!-- Services -->
     <div class="new-section banner_area">
-        <div class="container-fluid">
+        <div class="container-fluid ">
             <div class="row">
-
                 <!--Shop Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/media/main_services/shop.png"></a>
+                                    <a href="#"><img src="yalla_gt/assets/media/main_services/shop.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">PRODUCTS</h4>
@@ -40,14 +40,12 @@
                     </div>
                 </div>
                 <!--Shop Service-->
-
-                <!--Shop Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/media/main_services/stock_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/assets/media/main_services/stock_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Stock Cars</h4>
@@ -61,14 +59,12 @@
                     </div>
                 </div>
                 <!--Shop Service-->
-
-                <!--Shop Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/media/main_services/sale_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/assets/media/main_services/sale_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Sale Cars</h4>
@@ -82,14 +78,12 @@
                     </div>
                 </div>
                 <!--Shop Service-->
-
-                <!--Shop Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/media/main_services/sell_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/assets/media/main_services/sell_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Sell Car</h4>
@@ -102,14 +96,11 @@
                         </div>
                     </div>
                 </div>
-                <!--Shop Service-->
-
-
             </div>
         </div>
     </div>
 
-    <!-- Sale Car area start  -->
+    <!-- Sale Car -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
@@ -120,8 +111,6 @@
                     </div>
                 </div>
                 <div class="col-12 ">
-
-                    {{-- <div class="carsforsaleContainer owl-carousel "> --}}
                     <div class="carsforsaleContainer owl-carousel ">
                         <!-- loop starts here -->
                         <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
@@ -164,7 +153,7 @@
         </div>
     </section>
 
-    <!-- Car Brands area start  -->
+    <!-- Car Brands -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
@@ -177,12 +166,10 @@
                 <div class="col-12">
                     <div class="brand_container owl-carousel ">
                         <!-- loop starts here -->
-
                         <div class="single_brand">
                             <a href="#"><img src="yalla_gt/assets/img/brand/mazda.png" alt=""></a>
                         </div>
                         <!-- loop end here -->
-
                         <div class="single_brand">
                             <a href="#"><img src="yalla_gt/assets/img/brand/nissan.png" alt=""></a>
                         </div>
@@ -216,9 +203,10 @@
         </div>
     </section>
 
-    <!-- Categories area start-->
+    <!-- Categories -->
     <section class="new-section category_section_1">
         <div class="container-fluid">
+
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
@@ -234,17 +222,17 @@
                     <!-- loop starts here -->
                     <div class="featured_categories owl-carousel">
 
-                        <article class="single_category">
+                        <div class="single_category">
                             <div class="category_thumb">
                                 <a class="primary_img">
                                     <img src="assets/img/categories/battery.png" alt="">
                                 </a>
                             </div>
-                            <figcaption class="category_content">
+                            <div class="category_content">
                                 <h6 class="category_name">Filters</h6>
                                 <h4 class="properities">4 groups</h4>
-                            </figcaption>
-                        </article>
+                            </div>
+                        </div>
 
                         <article class="single_category">
                             <div class="category_thumb">
@@ -339,7 +327,7 @@
         </div>
     </section>
 
-    <!--New Arrival area start-->
+    <!--Shop -->
     <section class="new-section product_area product_deals">
         <div class="container-fluid">
 
@@ -622,7 +610,7 @@
         </div>
     </section>
 
-    <!-- Manufacturers area start-->
+    <!-- Manufacturers -->
     <section class="new-section brand_area">
         <div class="container-fluid">
             <div class="row">
@@ -791,7 +779,7 @@
         </div>
     </section>
 
-    <!-- Blog area start-->
+    <!-- Blog -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
@@ -806,31 +794,31 @@
                     <div class="carsforsaleContainer owl-carousel ">
                         <!-- loop starts here -->
                         <!-- <div class="card cars_for_sale_home_layout" style="  width:auto; border-radius: 16px; ">
-                                                <a href="#">
-                                                    <div class="card-image sale_car_img">
-                                                        <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                                    </div>
-                                                </a>
-                                                <div class="card-body">
-
                                                     <a href="#">
-                                                        <h4 class="font-weight-bold" style="line-height: 28px">
-                                                            <a href="#">تضعك مدرسة BMW M4 GT4 في سيارة سباق حقيقية</a>
-                                                        </h4>
+                                                        <div class="card-image sale_car_img">
+                                                            <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
+                                                        </div>
                                                     </a>
+                                                    <div class="card-body">
 
-                                                    <h5 class="mt-3">بواسطة: محمد أحمد</h5>
+                                                        <a href="#">
+                                                            <h4 class="font-weight-bold" style="line-height: 28px">
+                                                                <a href="#">تضعك مدرسة BMW M4 GT4 في سيارة سباق حقيقية</a>
+                                                            </h4>
+                                                        </a>
 
-                                                    <div class="card-text-4 mb-2">
-                                                        <span class="badge_icon_second">قبل: 5 أشهر</span>
-                                                        <i class="fa-regular fa-clock"></i>
+                                                        <h5 class="mt-3">بواسطة: محمد أحمد</h5>
+
+                                                        <div class="card-text-4 mb-2">
+                                                            <span class="badge_icon_second">قبل: 5 أشهر</span>
+                                                            <i class="fa-regular fa-clock"></i>
+                                                        </div>
+                                                        <div class="courses-info font-weight-bold">
+                                                            <a href="#" class="section-btn btn btn-primary btn-block mt-2">اقرأ
+                                                                المزيد</a>
+                                                        </div>
                                                     </div>
-                                                    <div class="courses-info font-weight-bold">
-                                                        <a href="#" class="section-btn btn btn-primary btn-block mt-2">اقرأ
-                                                            المزيد</a>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                                </div> -->
                         <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
                             <a href="#">
                                 <div class="card-image sale_car_img">
@@ -878,7 +866,7 @@
 
     <!-- ========================= ========================= Footer ========================= ========================= -->
 
-    <!--shipping area start-->
+    <!-- shipping -->
     <div class="shipping_area pt-6">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-center">
@@ -930,3 +918,9 @@
         </div>
     </div>
 @endsection
+
+{{-- @section('script')
+    $(document).ready(function(){
+    $(".owl-carousel").owlCarousel();
+    });
+@endsection --}}

@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Gt_manager\Car_assets;
 
 use App\Models\CarBrand;
+use App\Traits\SlugTrait;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\GtManager\CarBrand\StoreCarBrandRequest;
 use App\Http\Requests\GtManager\CarBrand\UpdateCarBrandRequest;
 
 class CarBrandController extends Controller
 {
-    use ImageTrait;
+    use SlugTrait , ImageTrait;
 
     // -------------------- index -------------------- //
     public function index()
@@ -31,21 +32,10 @@ class CarBrandController extends Controller
     // -------------------- Store -------------------- //
     public function store(StoreCarBrandRequest $request)
     {
-        if ($request->hasFile('logo')) {
-            $randomString = Str::random(16);
-            $extension = $request->file('logo')->getClientOriginalExtension();
-            $imageName = Str::slug($request->name_en) . '-' . $randomString . '.' . $extension;
-            $path = $request->file('logo')->storeAs('media/brand_logos', $imageName);
-        } else {
-            $path = null;
-        }
         CarBrand::create([
-            'name' => [
-                'en' => $request->name_en,
-                'ar' => $request->name_ar,
-            ],
+            'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
             'slug' => Str::slug($request->name_en),
-            'logo' => $path,
+            'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/brand_logos' ,$request->name_en) : null,
         ]);
 
         Session::flash('success', 'Stored Successfully');
@@ -57,22 +47,11 @@ class CarBrandController extends Controller
         // Validate the request
         $validatedData = $request->validated();
 
-        // Update logo if a new one is provided
-        if ($request->hasFile('logo')) {
-            $randomString = Str::random(16);
-            $extension = $request->file('logo')->getClientOriginalExtension();
-            $imageName = Str::slug($request->name_en) . '-' . $randomString . '.' . $extension;
-            $path = $request->file('logo')->storeAs('media/brand_logos', $imageName);
-            $carBrand->update(['logo' => $path]);
-        }
-
         // Update other fields
         $carBrand->update([
-            'name' => [
-                'en' => $validatedData['name_en'],
-                'ar' => $validatedData['name_ar'],
-            ],
+            'name' => [ 'en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar'], ],
             'slug' => Str::slug($validatedData['name_en']),
+            'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/brand_logos' ,$request->name_en, $carBrand->logo) : $carBrand->logo,
         ]);
 
         Session::flash('success', 'Updated Successfully');
@@ -81,8 +60,8 @@ class CarBrandController extends Controller
     // -------------------- destroy -------------------- //
     public function destroy(CarBrand $carBrand)
     {
+        $this->deleteImage($carBrand->logo);
         $carBrand->delete();
-        
         Session::flash('success', 'Deleted Successfully');
         return redirect()->route('car-brand.index');
     }

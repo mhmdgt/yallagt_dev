@@ -19,8 +19,10 @@ trait ImageTrait
 
     private function deleteImage($imagePath)
     {
-        if (Storage::disk('public')->exists($imagePath)) {
+        if ($imagePath !== null && Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
+        } else {
+            // Optionally log or handle the case when the image path is null or the image does not exist
         }
     }
 }

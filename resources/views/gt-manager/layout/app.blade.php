@@ -20,7 +20,7 @@
     <link rel="stylesheet"
         href="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 
-    <!-- icon pages -->
+    <!-- icon -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/mdi/css/materialdesignicons.min.css">
 
     <!-- inject:css -->
@@ -47,7 +47,11 @@
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- End layout styles -->
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Fav Icon -->
     <link rel="shortcut icon" href="{{ asset('gt_manager') }}/media/favicon.ico" />
 
     <!-- ------------------------------- END Head ------------------------------- -->
@@ -130,9 +134,13 @@
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
+    <!-- owl carousel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Add More -->
     <script src="{{ asset('gt_manager') }}/assets/js/multi_imgs/multiple-uploader.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/multi_imgs/util.js"></script>
-
+    
     <!-- ------------------------------- END js ------------------------------- -->
 
     @livewireScripts

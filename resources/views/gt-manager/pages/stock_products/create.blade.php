@@ -251,16 +251,18 @@
                                     <h6 class="card-title">Status</h6>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optionsRadios5"
-                                                id="optionsRadios5" value="option5">
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios5" value="active"
+                                                {{-- {{ $stockCar->status == 'active' ? 'checked' : '' }}> --}}
                                             Active
                                             <i class="input-frame"></i></label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optionsRadios5"
-                                                id="optionsRadios6" value="option5">
-                                            Pending
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios6" value="hidden"
+                                                {{-- {{ $stockCar->status == 'hidden' ? 'checked' : '' }}> --}}
+                                            Hidden
                                             <i class="input-frame"></i></label>
                                     </div>
                                 </div>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\GtManager\Product\ProductSubCategory;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductSubCategoryRequest extends FormRequest
 {
@@ -23,10 +23,8 @@ class StoreProductSubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_ar' => ['required', 'string', 'max:200',
-                Rule::unique('product_sub_categories', 'name->ar')],
-            'name_en' => ['required', 'string', 'max:200',
-                Rule::unique('product_sub_categories', 'name->en')],
+            'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_sub_categories', 'name->ar')],
+            'name_en' => ['required', 'string', 'max:200', Rule::unique('product_sub_categories', 'name->en')],
             'logo' => 'nullable|image|mimes:png',
         ];
     }
