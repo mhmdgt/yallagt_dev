@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Gt_manager\Blog\BlogController;
+use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
 use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
 use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
@@ -93,25 +95,59 @@ Route::middleware('admin')->group(function () {
 
     Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/sub/{productCategory:translatedSlug}', 'show')->name('show');
+       Route::get('/sub/{slug}', 'show')->name('show');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
-        Route::get('/{productCategory}/edit', 'edit')->name('edit');
-        Route::put('/{productCategory}', 'update')->name('update');
-        Route::delete('/{productCategory}', 'destroy')->name('destroy');
+        Route::get('/{slug}/edit', 'edit')->name('edit');
+        Route::put('/{slug}', 'update')->name('update');
+        Route::delete('/{slug}', 'destroy')->name('destroy');
     });
+ 
+    // Route::prefix('product-categories')->name('product-categories.')->group(function () {
+    //     Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
+    //     // Route::get('/sub/{productCategory:slug}', [ProductCategoryController::class, 'show'])->name('show');
+    //     Route::get('/create', [ProductCategoryController::class, 'create'])->name('create');
+    //     Route::post('/', [ProductCategoryController::class, 'store'])->name('store');
+    //     Route::get('/{productCategory}/edit', [ProductCategoryController::class, 'edit'])->name('edit');
+    //     Route::put('/{productCategory}', [ProductCategoryController::class, 'update'])->name('update');
+    //     Route::delete('/{productCategory}', [ProductCategoryController::class, 'destroy'])->name('destroy');
+    // });
+    
+    // Route::get('/product-categories/{slug}', [ProductCategoryController::class, 'show'])
+    // ->name('product-categories.show');
+    
 
     Route::controller(ProductSubCategoryController::class)->prefix('product-subcategories')->name('product-subcategories.')->group(function () {
     
         Route::post('/', 'store')->name('store');
-        Route::get('/{productSubCategory}/edit', 'edit')->name('edit');
-        Route::put('/{productSubCategory}', 'update')->name('update');
-        Route::delete('/{productSubCategory}', 'destroy')->name('destroy');
+        Route::get('/{slug}/edit', 'edit')->name('edit');
+        Route::put('/{slug}', 'update')->name('update');
+        Route::delete('/{slug}', 'destroy')->name('destroy');
     });
     // Product //
     // Route::controller(ProductController::class)->prefix('manage/products')->name('products.')->group(function () {
         Route::view('/create-product', 'gt-manager.pages.product_assets.products.create')->name('products.create');
     // });
+
+// blog categories
+    Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{slug}/edit', 'edit')->name('edit');
+        Route::put('/{slug}', 'update')->name('update');
+        Route::delete('/{slug}', 'destroy')->name('destroy');
+    });
+
+    // blogs 
+    Route::controller(BlogController::class)->prefix('blogs')->name('blogs.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{slug}/edit', 'edit')->name('edit');
+        Route::put('/{slug}', 'update')->name('update');
+        Route::delete('/{slug}', 'destroy')->name('destroy');
+    });
 });
 
 ////////////// Middleware of PreventBackHistory //////////////

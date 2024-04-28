@@ -25,12 +25,6 @@
                             <div class="row">
                                 @foreach ($manufacturers as $manufacturer)
                                     <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
-<<<<<<< HEAD
-
-                                        
-                                     
-=======
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
                                         <div class="border border-light rounded shadow-sm position-relative">
                                             <!-- 3 Dots -->
                                             <div class="dropdown position-absolute" style="top: 4px; right: 0;">
@@ -41,72 +35,6 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                     aria-labelledby="dropdownMenuButton">
-<<<<<<< HEAD
-                                                    <a class="dropdown-item d-flex align-items-center" href="#"               wire:click="edit({{ $manufacturer->id }})" data-toggle="modal"
-                                                        data-target="#editModal{{ $manufacturer->id }}"><i
-                                                            data-feather="edit-2" class="icon-sm mr-2"></i> <span
-                                                            class="">Edit</span>
-                                                    </a>
-                                                    <x-modal.edit title="Body Shape" id="{{$manufacturer->id }}">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Name <span
-                                                                    class="text-danger">(EN)</span></label>
-                                                            <input type="text" class="form-control" wire:model='name_en'>
-                                                            @include('gt-manager.error.error', ['property' => 'name_en'])
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleInputUsername1">Name <span
-                                                                    class="text-danger">(AR)</span></label>
-                                                            <input type="text" class="form-control" wire:model='name_ar'>
-                                                            @include('gt-manager.error.error', ['property' => 'name_ar'])
-                                                        </div>
-                
-                
-                                                        <div class="form-group">
-                                                            <label> Logo</label>
-                                                            <input type="file" wire:model="logo" class="file-upload-default"
-                                                                id="image">
-                
-                                                            <div class="input-group col-xs-12">
-                                                                <input type="text" class="form-control file-upload-info"
-                                                                    disabled="" placeholder="Upload Image">
-                                                                <span class="input-group-append">
-                                                                    <button class="file-upload-browse btn btn-success"
-                                                                        type="button">Upload</button>
-                                                                </span>
-                                                            </div>
-                                                            @include('gt-manager.error.error', ['property' => 'logo'])
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputEmaill" class="form-label"> </label>
-                                                            <img id="showImage" class="image-rec-full"
-                                                            src="{{ !empty($manufacturer->logo)
-                                                                ? asset('storage/'.$manufacturer->logo)
-                                                                : asset('gt_manager/media/no_image.jpg') }}"
-                                                            alt="...">
-                
-                                                        </div>
-                                                    </x-modal.edit>
-                                                    {{-- @dd($manufacturer['id']); --}}
-
-                                                    {{-- <x-modal.delete id="{{ $manufacturer['id'] }}">
-                                                        <button type="button"
-                                                            class="dropdown-item d-flex align-items-center"
-                                                            data-toggle="modal"
-                                                            data-target="#confirmDeleteModal{{ $manufacturer['id'] }}">
-                                                            <i data-feather="trash" class="icon-sm mr-2"></i>
-                                                            <span>Delete</span>
-                                                        </button>
-                                                
-                                                    </x-modal.delete> --}}
-
-
-                                                    <x-modal.delete id="{{$manufacturer->id}}">
-                                                        <button type="button" class="btn btn-inverse-danger" data-toggle="modal"
-                                                        data-target="#confirmDeleteModal{{ $manufacturer->id}}">Delete</button>
-                                                    </x-modal.delete>
-                                                </div> 
-=======
 
                                                     <button type="button" wire:click="edit({{ $manufacturer->id }})"
                                                         class="dropdown-item d-flex align-items-center"
@@ -125,7 +53,6 @@
                                                     </button>
 
                                                 </div>
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
                                             </div>
                                             <!-- Edit Modal -->
                                             <x-modal.edit title="Manufacturer" id="{{ $manufacturer->id }}">

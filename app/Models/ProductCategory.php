@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,16 +18,17 @@ class ProductCategory extends Model
         return $this->hasMany(ProductSubCategory::class);
     }
 
-    // function getRouteKeyName(){
-    //     return 'id';
-    // }
-     public function getRouteKeyName()
-     {
-         return 'slug'; 
-     }
-      // Accessor to retrieve translated slug for current locale
-    public function getTranslatedSlugAttribute()
+    public function getRouteKeyName()
     {
-        return $this->getTranslation('slug', app()->getLocale());
+        $locale = app()->getLocale();
+
+        // Return the attribute name dynamically based on the current language
+        return "slug->{$locale}";
     }
+
+    public static function getByTranslatedSlug($slug)
+{
+    $locale = App::getLocale();
+    return self::where("slug->{$locale}", $slug);
+}
 }

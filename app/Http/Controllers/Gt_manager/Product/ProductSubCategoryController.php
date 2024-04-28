@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Gt_manager\Product;
 
 use App\Traits\SlugTrait;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use App\Models\ProductSubCategory;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GtManager\Product\ProductSubCategory\StoreProductSubCategoryRequest;
 use App\Http\Requests\GtManager\Product\ProductSubCategory\updateProductSubCategoryRequest;
-use App\Traits\ImageTrait;
 
 class ProductSubCategoryController extends Controller
 {
@@ -28,8 +29,12 @@ class ProductSubCategoryController extends Controller
 
 
 
-    function update(updateProductSubCategoryRequest $request, ProductSubCategory $productSubCategory)
+    function update(updateProductSubCategoryRequest $request, $slug)
     {
+        $locale=App::getLocale();
+        
+        $productSubCategory = ProductSubCategory::where("slug->{$locale}", $slug)->first();
+
         $productSubCategory->update([
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
             'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
@@ -38,8 +43,12 @@ class ProductSubCategoryController extends Controller
         return back()->with('success', 'Product Category Updated Successfully');
     }
 
-    function destroy(ProductSubCategory $productSubCategory)
+    function destroy($slug)
     {
+        $locale=App::getLocale();
+        
+        $productSubCategory = ProductSubCategory::where("slug->{$locale}", $slug)->first();
+
         $this->deleteImage($productSubCategory->logo);
         $productSubCategory->delete();
         return redirect()->back();

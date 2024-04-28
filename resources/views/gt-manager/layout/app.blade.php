@@ -52,7 +52,10 @@
 
     <!-- ------------------------------- END Head ------------------------------- -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @livewireStyles
+
+    @yield('style')
 
 </head>
 

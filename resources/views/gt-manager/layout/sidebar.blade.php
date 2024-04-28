@@ -110,9 +110,9 @@
                 </a>
                 <div class="collapse" id="BlogSystem">
                     <ul class="nav sub-menu">
-                        <li class="nav-item"><a href="pages/email/inbox.html" class="nav-link">Add New Blog</a></li>
-                        <li class="nav-item"><a href="pages/email/compose.html" class="nav-link">Add Category</a></li>
-                        <li class="nav-item"><a href="pages/email/read.html" class="nav-link">Blog List</a></li>
+                        <li class="nav-item"><a href="{{ route('blogs.create') }}" class="nav-link">Add New Blog</a></li>
+                        <li class="nav-item"><a href="{{ route('blog-categories.index') }}" class="nav-link">Categories</a></li>
+                        <li class="nav-item"><a href="{{ route('blogs.index') }}" class="nav-link">Blog List</a></li>
                     </ul>
                 </div>
             </li>

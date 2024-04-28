@@ -18,4 +18,12 @@ class ProductSubCategory extends Model
     function productCategory(){
         return $this->belongsTo(ProductCategory::class);
     }
+    public function getRouteKeyName()
+    {
+        $locale = app()->getLocale();
+
+        // Return the attribute name dynamically based on the current language
+        return "slug->{$locale}";
+    }
+
 }

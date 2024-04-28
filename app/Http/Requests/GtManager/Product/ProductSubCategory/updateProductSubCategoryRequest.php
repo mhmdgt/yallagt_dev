@@ -24,9 +24,9 @@ class updateProductSubCategoryRequest extends FormRequest
     {
         return [
             'name_ar' => ['required','string','max:200',
-            Rule::unique('product_sub_categories', 'name->ar')->ignore($this->productSubCategory->id)],
+            Rule::unique('product_sub_categories', 'name->ar')->ignore($this->id)],
             'name_en' => ['required','string','max:200',
-            Rule::unique('product_sub_categories', 'name->en')->ignore($this->productSubCategory->id)],
+            Rule::unique('product_sub_categories', 'name->en')->ignore($this->id)],
             'logo' => 'nullable|image|mimes:png', // Adjust allowed extensions
         ];
     }

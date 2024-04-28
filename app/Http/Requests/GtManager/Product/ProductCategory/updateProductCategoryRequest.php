@@ -23,9 +23,9 @@ class updateProductCategoryRequest extends FormRequest
     {
         return [
             'name_ar' => ['required','string','max:200',
-            Rule::unique('product_categories', 'name->ar')->ignore($this->productCategory->id)],
+            Rule::unique('product_categories', 'name->ar')->ignore($this->id)],
             'name_en' => ['required','string','max:200',
-            Rule::unique('product_categories', 'name->en')->ignore($this->productCategory->id)],
+            Rule::unique('product_categories', 'name->en')->ignore($this->id)],
             'logo' => 'nullable|image|mimes:png', // Adjust allowed extensions
         ];
     }

@@ -5,9 +5,8 @@ use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
 use App\Models\CarBrand;
 use App\Models\ProductCategory;
 
-Route::bind('productCategory', function ($value) {
-    return ProductCategory::where('slug->' . app()->getLocale(), $value)->firstOrFail();
-});
+
+
 require __DIR__ . '/gt_manager.php';
 
 /*

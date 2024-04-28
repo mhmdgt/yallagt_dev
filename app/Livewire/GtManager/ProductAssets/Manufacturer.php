@@ -3,20 +3,12 @@
 namespace App\Livewire\GtManager\ProductAssets;
 
 use Livewire\Component;
-<<<<<<< HEAD
-=======
 use App\Traits\SlugTrait;
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Manufacturer as manufact;
 use App\Http\Requests\GtManager\Manufacturer\StoreRequest;
-<<<<<<< HEAD
-use App\Http\Requests\GtManager\CarSpecCategory\UpdateRequest;
-use App\Traits\SlugTrait;
-=======
 use App\Http\Requests\GtManager\Manufacturer\UpdateRequest;
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
 
 class Manufacturer extends Component
 {

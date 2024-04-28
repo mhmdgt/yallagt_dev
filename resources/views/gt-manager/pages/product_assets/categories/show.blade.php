@@ -100,7 +100,7 @@
                             </button>
 
                             <x-modal.confirm-delete-modal
-                                route="{{ route('product-categories.destroy', $productCategory) }}"
+                                route="{{ route('product-categories.destroy', $productCategory->slug) }}"
                                 id="{{ $productCategory->id }}" />
                         </td>
                     </div>
@@ -121,7 +121,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" action="{{ route('product-categories.update',  $productCategory) }}"
+                    <form class="forms-sample" action="{{ route('product-categories.update',  $productCategory->slug) }}"
                         method="POST" enctype="multipart/form-data" id="car-brand">
                         @csrf
                         @method('PUT')
@@ -195,22 +195,23 @@
 
                                     <td>
                                         <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
-                                            data-target="#editModelproductSubCategory{{ $productSubCategory->id }}" title="Edit">
+                                            data-target="#editModelproductSubCategory{{ $productSubCategory->slug }}" title="Edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
 
                                         <button class="btn btn-inverse-danger ml-4 mr-1" data-toggle="modal"
-                                        data-target="#confirmDeleteModal{{  $productSubCategory->id }}" title="Edit">
+                                        data-target="#confirmDeleteModal{{  $productSubCategory->slug
+                                         }}" title="Edit">
                                         <i class="bi bi-trash3"></i>
                                     </button>
         
                                     <x-modal.confirm-delete-modal
-                                        route="{{ route('product-subcategories.destroy',  $productSubCategory) }}"
-                                        id="{{  $productSubCategory->id }}" />
+                                        route="{{ route('product-subcategories.destroy',  $productSubCategory->slug) }}"
+                                        id="{{  $productSubCategory->slug }}" />
                                     </td>
                                 </tr>
                                 {{-- ========================== Edit Modal ========================== --}}
-                                <div class="modal fade" id="editModelproductSubCategory{{ $productSubCategory->id }}" tabindex="-1"
+                                <div class="modal fade" id="editModelproductSubCategory{{ $productSubCategory->slug }}" tabindex="-1"
                                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -223,11 +224,11 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form class="forms-sample car-brand-model-edit" method="POST"
-                                                    action="{{ route('product-subcategories.update', $productSubCategory->id) }}">
+                                                    action="{{ route('product-subcategories.update', $productSubCategory->slug) }}"  enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
                                                     <input hidden type="text" class="form-control" name="id"
-                                                        value="{{ $productSubCategory->id }}">
+                                                        value="{{ $productSubCategory->slug }}">
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername1">Name <span
                                                                 class="text-danger">(EN)</span></label>
