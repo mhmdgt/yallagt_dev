@@ -10,7 +10,7 @@
                 </ol>
                 {{-- ====== Create button ====== --}}
                 {{-- <a  href="{{ route('stock-car.update', ['brandSlug' => $brandSlug, 'modelSlug' =>'-', 'stockYear' => '-']) }}"> --}}
-                <a href="{{ route('stock-car.create', $brandSlug) }}" class="btn btn-success">
+                <a href="{{ route('stock-car.create', $brandData->slug ) }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
                     Create Model
                 </a>
@@ -36,8 +36,8 @@
 
                             {{-- <a href="{{ route('stock-car.update', ['brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year]) }}"> --}}
                             {{-- <a href="{{ route('stock-car.edit', [ 'brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' =>$stockCar->id ]) }}"> --}}
-                            <a
-                                href="{{ route('stock-car.edit', ['brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}">
+                            {{-- <a href="{{ route('stock-car.edit', ['brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}"> --}}
+                            <a href="{{ route('stock-car.edit', ['slug' => $brandData->slug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}">
 
                                 <button class="btn btn-light btn-icon stockCarImageEdit">
                                     <i data-feather="edit"></i>

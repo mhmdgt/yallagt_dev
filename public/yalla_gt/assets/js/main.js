@@ -766,12 +766,12 @@
 
 
     /*---  ScrollUp Active ---*/
-    $.scrollUp({
-        scrollText: '<img width=" 20" height="20" src="assets/img/icon/up_arrow.png">',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
+    // $.scrollUp({
+    //     scrollText: '<img width=" 20" height="20" src="assets/img/icon/up_arrow.png">',
+    //     easingType: 'linear',
+    //     scrollSpeed: 900,
+    //     animation: 'fade'
+    // });
 
     /*---countdown activation---*/
 
@@ -852,6 +852,11 @@
     $(".sub_categories3 > a").on("click", function () {
         $(this).toggleClass('active');
         $('.dropdown_categories3').slideToggle('medium');
+    });
+    /*---widget sub categories---*/
+    $(".sub_categories4 > a").on("click", function () {
+        $(this).toggleClass('active');
+        $('.dropdown_categories4').slideToggle('medium');
     });
 
     /*----------  Category more toggle  ----------*/

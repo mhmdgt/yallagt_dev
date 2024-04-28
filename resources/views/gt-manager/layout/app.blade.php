@@ -12,23 +12,11 @@
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.css">
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css">
 
-
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/core/core.css">
 
     <!-- this page -->
-    <link rel="stylesheet"
-        href="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
-
-    <!-- icon -->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/mdi/css/materialdesignicons.min.css">
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/fonts/feather-font/css/iconfont.css">
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/flag-icon-css/css/flag-icon.min.css">
-
-    <!-- Data Tables -->
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/light_theme/style.css">
@@ -36,16 +24,17 @@
     <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/custom.css">
 
     <!-- filepond -->
-    {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/filepond/filepond.css"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/filepond/filepond_preview.css"> --}}
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"rel="stylesheet" />
 
-    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/css/multi_imgs/main.css">
-
-    <!-- Bootstrap icons -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/fonts/feather-font/css/iconfont.css">
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
 
     <!-- owl carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -99,36 +88,32 @@
     <script src="{{ asset('gt_manager') }}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/progressbar.js/progressbar.min.js"></script>
-
-    <!-- inject:js -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/feather-icons/feather.min.js"></script>
-    <script src="{{ asset('gt_manager') }}/assets/js/template.js"></script>
-
-    <!-- custom js-->
     <script src="{{ asset('gt_manager') }}/assets/js/dashboard.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/datepicker.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/file-upload.js"></script>
+
+    <!-- inject:js -->
+    <script src="{{ asset('gt_manager') }}/assets/js/template.js"></script>
+
+    <!-- Image Real-Time JS -->
+    <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
 
     <!-- Data Tables -->
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/data-table.js"></script>
 
-    <!-- Image Real-Time JS -->
-    <script src="{{ asset('gt_manager') }}/assets/js/imageRealTime.js"></script>
-
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Select2 -->
-    <script src="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/select2.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/vendors/select2/select2.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/tags-input.js"></script>
 
     <!-- filepond -->
-    {{-- <script src="{{ asset('gt_manager') }}/assets/js/filepond/filepond_preview.js"></script> --}}
-    {{-- <script src="{{ asset('gt_manager') }}/assets/js/filepond/filepond.js"></script> --}}
     <script src="https://unpkg.com/filepond-plugin-file-metadata/dist/filepond-plugin-file-metadata.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
@@ -137,10 +122,11 @@
     <!-- owl carousel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-    <!-- Add More -->
-    <script src="{{ asset('gt_manager') }}/assets/js/multi_imgs/multiple-uploader.js"></script>
-    <script src="{{ asset('gt_manager') }}/assets/js/multi_imgs/util.js"></script>
-    
+    <!-- tinymce -->
+    <script src="{{ asset('gt_manager') }}/assets/vendors/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/tinymce.js"></script>
+
+
     <!-- ------------------------------- END js ------------------------------- -->
 
     @livewireScripts

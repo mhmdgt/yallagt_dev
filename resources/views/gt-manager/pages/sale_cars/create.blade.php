@@ -257,9 +257,11 @@
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
-                                <label for="exampleInputName1">Name</label>
-                                <input type="text" class="form-control" id="exampleInputName1"
-                                    autocomplete="off" name="name" value="">
+                                <div class="col">
+                                    <label for="exampleInputName1">Name</label>
+                                    <input type="text" class="form-control" id="exampleInputName1" autocomplete="off"
+                                        name="name" value="">
+                                </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">

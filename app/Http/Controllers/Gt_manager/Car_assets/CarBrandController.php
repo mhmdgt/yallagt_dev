@@ -23,18 +23,17 @@ class CarBrandController extends Controller
         return view('gt-manager.pages.car_assets.brands', compact('brands'));
     }
     // -------------------- show -------------------- //
-    public function show(CarBrand $carBrand)
+    public function show($slug)
     {
-        $carBrand->with('models');
+        $carBrand = CarBrand::getByTranslatedSlug($slug)->with('models')->first();
         return view('gt-manager.pages.car_assets.models', compact('carBrand'));
-
     }
     // -------------------- Store -------------------- //
     public function store(StoreCarBrandRequest $request)
     {
         CarBrand::create([
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
-            'slug' => Str::slug($request->name_en),
+            'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
             'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/brand_logos' ,$request->name_en) : null,
         ]);
 
@@ -42,8 +41,10 @@ class CarBrandController extends Controller
         return redirect()->route('car-brand.index');
     }
     // -------------------- update -------------------- //
-    public function update(UpdateCarBrandRequest $request, CarBrand $carBrand)
+    public function update(UpdateCarBrandRequest $request, $slug)
     {
+        $carBrand = CarBrand::getByTranslatedSlug($slug)->first();
+
         // Validate the request
         $validatedData = $request->validated();
 
@@ -58,8 +59,9 @@ class CarBrandController extends Controller
         return redirect()->back();
     }
     // -------------------- destroy -------------------- //
-    public function destroy(CarBrand $carBrand)
+    public function destroy($slug)
     {
+        $carBrand = CarBrand::getByTranslatedSlug($slug)->first();
         $this->deleteImage($carBrand->logo);
         $carBrand->delete();
         Session::flash('success', 'Deleted Successfully');

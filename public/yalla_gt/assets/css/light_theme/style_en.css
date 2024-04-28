@@ -42,11 +42,6 @@ html[lang=ar] * {
   background: #18a449;
 } */
 
-@media screen and (max-width: 996px) {
-    header .main_header .header_icons {
-        display: none;
-    }
-}
 
 .text-custom-direction {
     text-align: right;

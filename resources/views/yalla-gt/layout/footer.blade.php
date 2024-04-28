@@ -1,3 +1,53 @@
+<!-- shipping -->
+<div class="shipping_area pt-6">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-xl-4 col-md-8 text-xl-left text-md-center  mb-3">
+                <div class="shipping_area--content">
+                    <h4>We are ready to help you</h4>
+                    <p>Contact us through any of the following support channels:</p>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="d-flex contact_info">
+                            <div class="icon" style="font-size: 26px">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="content">
+                                <p>Call us anytime</p>
+                                <a href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex contact_info">
+                            <div class="icon" style="font-size: 26px">
+                                <i class="bi bi-envelope-arrow-down"></i>
+                            </div>
+                            <div class="content">
+                                <p>E-mail Support</p>
+                                <a href="mailto:Support@yallagt.com">Support@yallagt.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex contact_info">
+                            <div class="icon" style="font-size: 26px">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="content">
+                                <p>Help center</p>
+                                <a href="Help.yallagt.com">Help.yallagt.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--footer area start-->
 <footer class="footer_widgets">
     <div class="footer_top">
@@ -51,7 +101,8 @@
                                         href="{{ get_contact_us()->support_email }}">{{ get_contact_us()->support_email }}</a>
                                 </li>
                                 <li><span class="font-weight-bold">Tel:</span><a
-                                        href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a></li>
+                                        href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -152,11 +203,11 @@
                 <div class="col-lg-3">
                     <ul class="list-unstyled footer_widgets--ul">
                         <div class="media_icons mb-4">
-                            <a href="#"><i class='bx bxl-facebook-square' ></i></a>
+                            <a href="#"><i class='bx bxl-facebook-square'></i></a>
                             <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                            <a href="#"><i class='bx bxl-youtube' ></i></a>
-                            <a href="#"><i class='bx bxl-whatsapp' ></i></a>
-                            <a href="#"><i class='bx bx-map' ></i></i></a>
+                            <a href="#"><i class='bx bxl-youtube'></i></a>
+                            <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                            <a href="#"><i class='bx bx-map'></i></i></a>
                         </div>
                     </ul>
                 </div>

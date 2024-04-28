@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Gt_manager\Car_assets;
 
+use App\Traits\SlugTrait;
 use Illuminate\Support\Str;
 use App\Models\CarBrandModel;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,8 @@ use App\Http\Requests\GtManager\CarBrandModel\UpdateCarBrandModelRequest;
 
 class CarBrandModelController extends Controller
 {
+    use SlugTrait;
+
     // -------------------- Store Brand Models Method -------------------- //
     public function store(StoreCarBrandModelRequest $request)
     {
@@ -20,12 +23,9 @@ class CarBrandModelController extends Controller
 
         // Create a new CarBrandModel instance with the validated data
         $carBrandModel = CarBrandModel::create([
-            'name' => [
-                'en' => $validatedData['name_en'],
-                'ar' => $validatedData['name_ar'],
-            ],
+            'name' => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar'],],
             "car_brand_id" => $request->car_brand_id,
-            "slug" => Str::slug($validatedData['name_en']),
+            'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
         ]);
 
         // Flash success message and redirect back
@@ -33,8 +33,10 @@ class CarBrandModelController extends Controller
         return redirect()->back();
     }
     // -------------------- Update Brand Models Method -------------------- //
-    public function update(UpdateCarBrandModelRequest $request, CarBrandModel $carBrandModel)
+    public function update(UpdateCarBrandModelRequest $request, $slug)
     {
+        $carBrandModel = CarBrandModel::getByTranslatedSlug($slug)->first();
+
         // Validate the request and get the validated data
         $validatedData = $request->validated();
 
@@ -52,8 +54,9 @@ class CarBrandModelController extends Controller
         return redirect()->back();
     }
     // -------------------- Delete Brand Models Method -------------------- //
-    public function destroy(CarBrandModel $carBrandModel)
+    public function destroy($slug)
     {
+        $carBrandModel = CarBrandModel::getByTranslatedSlug($slug)->first();
         $carBrandModel->delete();
         Session::flash('success', 'Deleted Successfully');
         return redirect()->back();

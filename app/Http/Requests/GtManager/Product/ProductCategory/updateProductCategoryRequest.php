@@ -27,10 +27,10 @@ class updateProductCategoryRequest extends FormRequest
 
         return [
             // 'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->ar')->ignore($this->slug)],
-            'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->ar')->ignore($name_en)],
+            'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->ar')->ignore($this->id)],
 
             // 'name_en' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->en')->ignore($this->slug)],
-            'name_en' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->en')->ignore($name_en)],
+            'name_en' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->en')->ignore($this->id)],
             'logo' => 'nullable|image|mimes:png',
         ];
     }

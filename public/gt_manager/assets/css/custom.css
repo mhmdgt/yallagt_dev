@@ -77,6 +77,18 @@
     z-index: 1; /* Ensures the button is above the image */
 }
 
+.select-btn:hover {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.select-btn:focus {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.active_main_img {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
 .select-text {
     position: absolute;
     bottom: 8px; /* Adjust this value to position the text vertically */
@@ -85,9 +97,7 @@
     color: rgba(0, 0, 0, 0.8); /* Text color */
 }
 
-.select-btn:hover {
-    background-color: #1db954; /* Darker background on hover */
-}
+
 
 .card-img-container {
     overflow: hidden; /* Ensure that the image is contained within the card */
@@ -203,3 +213,6 @@
   display: flex;
   margin: 1%;
 }
+
+
+

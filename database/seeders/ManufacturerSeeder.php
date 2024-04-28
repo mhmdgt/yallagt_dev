@@ -4,10 +4,12 @@ namespace Database\Seeders;
 
 use Illuminate\Support\Str;
 use App\Models\Manufacturer;
+use App\Traits\SlugTrait;
 use Illuminate\Database\Seeder;
 
 class ManufacturerSeeder extends Seeder
 {
+    use SlugTrait;
     /**
      * Run the database seeds.
      */
@@ -58,7 +60,7 @@ class ManufacturerSeeder extends Seeder
         foreach ($manufacturers as $manufacturer) {
                 Manufacturer::create([
                     "name" => $manufacturer,
-                    "slug" => Str::slug($manufacturer['en']),
+                    "slug" => $this->slug(['en' => $manufacturer['en'], 'ar' => $manufacturer['ar']]),
                 ]);
         }
     }

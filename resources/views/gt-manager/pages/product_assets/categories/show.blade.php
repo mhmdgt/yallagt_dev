@@ -124,6 +124,7 @@
                             method="POST" enctype="multipart/form-data" id="car-brand">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $productCategory->id }}">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
                                 <input type="text" class="form-control" name="name_en" autocomplete="off"
@@ -227,8 +228,7 @@
                                                         action="{{ route('product-subcategories.update', $productSubCategory->slug) }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input hidden type="text" class="form-control" name="id"
-                                                            value="{{ $productSubCategory->slug }}">
+                                                        <input type="hidden" name="id" value="{{ $productSubCategory->id }}">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Name <span
                                                                     class="text-danger">(EN)</span></label>

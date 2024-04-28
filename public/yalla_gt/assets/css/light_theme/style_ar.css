@@ -51,11 +51,6 @@ body {
     font-size: 16px;
 }
 
-@media screen and (max-width: 996px) {
-    header .main_header .header_icons {
-        display: none;
-    }
-}
 
 .text-custom-direction {
     text-align: left;

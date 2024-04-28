@@ -31,7 +31,7 @@
                             <div class="row">
                                 @foreach ($manufacturers as $manufacturer)
                                     <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
-                                        <a href="{{ route('manufacturers.show', $manufacturer->id ) }}">
+                                        <a href="{{ route('manufacturers.show', $manufacturer->slug ) }}">
                                             <div class="border border-light rounded shadow-sm">
                                                 <div class="card-logo ">
                                                     <img width="100px"

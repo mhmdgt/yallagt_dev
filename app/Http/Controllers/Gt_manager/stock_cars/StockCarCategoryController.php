@@ -55,7 +55,7 @@ class StockCarCategoryController extends Controller
         $brand = $BrandModel->brand;
 
         Session::flash('success', 'Category Stored Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
+        return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- edit -------------------- //
     public function edit($stockCarCategory)
@@ -78,8 +78,6 @@ class StockCarCategoryController extends Controller
     // -------------------- update -------------------- //
     public function update(UpdateRequest $request, $stockCarCategory)
     {
-
-        // dd($request->all());
         $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
         $validatedData = $request->validated();
         $validatedData['slug'] = Str::slug($validatedData['name']);
@@ -90,7 +88,7 @@ class StockCarCategoryController extends Controller
         $brand = $brandModel->brand;
 
         Session::flash('success', 'Category Updated Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug ]);
+        return redirect()->route('stock-car.show', $brand->slug );
     }
     // -------------------- destroy -------------------- //
     function destroy(StockCarCategory $stockCarCategory)
@@ -101,6 +99,6 @@ class StockCarCategoryController extends Controller
         $brand = $BrandModel->brand;
 
         Session::flash('success', 'Deleted Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
+        return redirect()->route('stock-car.show', $brand->slug );
     }
 }

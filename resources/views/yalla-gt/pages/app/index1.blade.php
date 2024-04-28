@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="yalla_gt/assets/img/fav_icon/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="yalla_gt/media/fav_icon/favicon.ico">
 
     <!-- ========================= Start CSS ========================= -->
 
@@ -52,7 +52,7 @@
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-between px-3">
                         <div class="logo">
-                            <a href="index.html"><img src="yalla_gt/assets/img/logo/logo.png" alt=""></a>
+                            <a href="index.html"><img src="yalla_gt/media/logo/logo.png" alt=""></a>
                         </div>
 
                         <div class="search_container">
@@ -60,7 +60,7 @@
                                 <div class="search_box">
                                     <input placeholder="Search..." type="text">
                                     <button type="submit" class="search_icon_bar">
-                                        <img width=" 25" height="25" src="yalla_gt/assets/img/icon/search-260.png"
+                                        <img width=" 25" height="25" src="yalla_gt/media/icon/search-260.png"
                                             alt="">
                                     </button>
                                 </div>
@@ -71,20 +71,20 @@
                             <div class="header_account_list  mini_cart_wrapper d-flex align-items-center">
                                 <!-- <a class="btn btn-primary" href="#">
                                     <span name="search-outline""></span>
-                                    <img width=" 20" height="20" src="yalla_gt/assets/img/icon/add_sell.png" alt="">
+                                    <img width=" 20" height="20" src="yalla_gt/media/icon/add_sell.png" alt="">
                                         <p class="ml-2 mr-2"> Sell </p>
                                 </a> -->
                                 <a class="loginPopUpForm btn btn-light text-dark ml-2">
-                                    <img width=" 20" height="20" src="yalla_gt/assets/img/icon/login_icon.png"
+                                    <img width=" 20" height="20" src="yalla_gt/media/icon/login_icon.png"
                                         alt="">
                                     <p class="ml-1">Login</p>
                                 </a>
                                 <a class=" ml-2">
-                                    <img width="120" height="120" src="yalla_gt/assets/img/icon/trans_lang.png"
+                                    <img width="120" height="120" src="yalla_gt/media/icon/trans_lang.png"
                                         alt="">
                                 </a>
                                 <!-- <a class="text-dark p-3 border ml-2" href="login.html">
-                                    <img width="30" height="30" src="yalla_gt/assets/img/icon/language_icon.png" alt="">
+                                    <img width="30" height="30" src="yalla_gt/media/icon/language_icon.png" alt="">
                                 </a> -->
 
                             </div>
@@ -101,15 +101,15 @@
                         <div class="main_menu menu_position">
                             <nav>
                                 <ul class="align-items-center">
-                                    <!-- <li><a href="index.html"><img src="yalla_gt/assets/img/logo/white_logo.png" alt=""></a></li> -->
-                                    <li><a href="index.html"><img src="yalla_gt/assets/img/icon/home.png"
+                                    <!-- <li><a href="index.html"><img src="yalla_gt/media/logo/white_logo.png" alt=""></a></li> -->
+                                    <li><a href="index.html"><img src="yalla_gt/media/icon/home.png"
                                                 alt=""></a></li>
                                     <li><a href="shop.html">Products Shop</a></li>
                                     <li><a href="#">New Car Prices</a></li>
                                     <li><a href="#">Cars For Sale</a></li>
                                     <li>
                                         <a class="" href="#">Oils
-                                            <img src="yalla_gt/assets/img/icon/navbar-dropdown-white.png"
+                                            <img src="yalla_gt/media/icon/navbar-dropdown-white.png"
                                                 class="arrow" alt="">
                                         </a>
                                         <ul class="sub_menu home_sub_menu d-flex">
@@ -126,7 +126,7 @@
                                     <li>
                                         <a href="#">Filters
                                             <img class="arrow"
-                                                src="yalla_gt/assets/img/icon/navbar-dropdown-white.png"
+                                                src="yalla_gt/media/icon/navbar-dropdown-white.png"
                                                 alt="">
                                         </a>
                                         <ul class="sub_menu home_sub_menu d-flex"><!--  -->
@@ -145,7 +145,7 @@
                                     <li><a href="#">About us</a></li>
                                     <li><a href="#">Contact</a></li>
                                     <li><a href="index.html"><img width="50" height="50"
-                                                src="yalla_gt/assets/img/icon/shopping-cart-header-solid.png"
+                                                src="yalla_gt/media/icon/shopping-cart-header-solid.png"
                                                 alt=""></a></li>
 
                                 </ul>
@@ -206,13 +206,13 @@
             <div class="owl-slider">
                 <div id="carousel" class="owl-carousel">
                     <div class="item">
-                        <img src="yalla_gt/assets/img/home_slider/1688828797.webp" alt="">
+                        <img src="yalla_gt/media/home_slider/1688828797.webp" alt="">
                     </div>
                     <div class="item">
-                        <img src="yalla_gt/assets/img/home_slider/1688828827.webp" alt="">
+                        <img src="yalla_gt/media/home_slider/1688828827.webp" alt="">
                     </div>
                     <div class="item">
-                        <img src="yalla_gt/assets/img/home_slider/1688828869.webp" alt="">
+                        <img src="yalla_gt/media/home_slider/1688828869.webp" alt="">
                     </div>
                 </div>
             </div>
@@ -228,7 +228,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-7 col-12 text-center">
-                                            <a href="#"><img src="yalla_gt/assets/img/services/Shop.webp"></a>
+                                            <a href="#"><img src="yalla_gt/media/services/Shop.webp"></a>
                                         </div>
                                         <div class="col-md-5 col-12 text-center">
                                             <h4 class="h-service">PRODUCTS</h4>
@@ -249,7 +249,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-7 col-12 text-center">
-                                            <a href="#"><img src="yalla_gt/assets/img/services/Shop.webp"></a>
+                                            <a href="#"><img src="yalla_gt/media/services/Shop.webp"></a>
                                         </div>
                                         <div class="col-md-5 col-12 text-center">
                                             <h4 class="h-service">PRODUCTS</h4>
@@ -270,7 +270,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-7 col-12 text-center">
-                                            <a href="#"><img src="yalla_gt/assets/img/services/Shop.webp"></a>
+                                            <a href="#"><img src="yalla_gt/media/services/Shop.webp"></a>
                                         </div>
                                         <div class="col-md-5 col-12 text-center">
                                             <h4 class="h-service">PRODUCTS</h4>
@@ -291,7 +291,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-md-7 col-12 text-center">
-                                            <a href="#"><img src="yalla_gt/assets/img/services/Shop.webp"></a>
+                                            <a href="#"><img src="yalla_gt/media/services/Shop.webp"></a>
                                         </div>
                                         <div class="col-md-5 col-12 text-center">
                                             <h4 class="h-service">PRODUCTS</h4>
@@ -328,7 +328,7 @@
                                 <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
                                     <a href="#">
                                         <div class="card-image sale_car_img">
-                                            <img src="yalla_gt/assets/img/sale_cars_img/IMG_1408.JPG" alt="no_img">
+                                            <img src="yalla_gt/media/sale_cars_img/IMG_1408.JPG" alt="no_img">
                                         </div>
                                     </a>
                                     <div class="card-body container-fluid">
@@ -380,25 +380,24 @@
                                 <!-- loop starts here -->
 
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/mazda.png"
-                                            alt=""></a>
+                                    <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
                                 </div>
                                 <!-- loop end here -->
 
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/nissan.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/nissan.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/Mercedes-Benz.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/Mercedes-Benz.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/Volkswagen.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/Volkswagen.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/skoda.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/skoda.png"
                                             alt=""></a>
                                 </div>
                             </div>
@@ -412,11 +411,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="yalla_gt/assets/img/ad_imgaes/1688832343.webp" class="w-100 mb-3"
+                            <img src="yalla_gt/media/ad_imgaes/1688832343.webp" class="w-100 mb-3"
                                 alt="">
                         </div>
                         <div class="col-md-6">
-                            <img src="yalla_gt/assets/img/ad_imgaes/1688832364.webp" class="w-100 mb-3"
+                            <img src="yalla_gt/media/ad_imgaes/1688832364.webp" class="w-100 mb-3"
                                 alt="">
                         </div>
                     </div>
@@ -443,7 +442,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/battery.png" alt="">
+                                            <img src="yalla_gt/media/categories/battery.png" alt="">
                                         </a>
 
 
@@ -460,7 +459,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/SeekPng.png" alt="">
+                                            <img src="yalla_gt/media/categories/SeekPng.png" alt="">
                                         </a>
                                     </div>
                                     <figcaption class="category_content">
@@ -473,7 +472,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/engine-parts.png" alt="">
+                                            <img src="yalla_gt/media/categories/engine-parts.png" alt="">
                                         </a>
                                     </div>
                                     <figcaption class="category_content">
@@ -486,7 +485,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/pngwing.png" alt="">
+                                            <img src="yalla_gt/media/categories/pngwing.png" alt="">
                                         </a>
                                     </div>
                                     <figcaption class="category_content">
@@ -499,7 +498,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/clutch-parts.png" alt="">
+                                            <img src="yalla_gt/media/categories/clutch-parts.png" alt="">
                                         </a>
                                     </div>
                                     <figcaption class="category_content">
@@ -512,7 +511,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb ">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/turbochargers.png"
+                                            <img src="yalla_gt/media/categories/turbochargers.png"
                                                 alt="">
                                         </a>
                                     </div>
@@ -526,7 +525,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/custom-wheels.png"
+                                            <img src="yalla_gt/media/categories/custom-wheels.png"
                                                 alt="">
                                         </a>
                                     </div>
@@ -540,7 +539,7 @@
                                 <article class="single_category">
                                     <div class="category_thumb">
                                         <a class="primary_img">
-                                            <img src="yalla_gt/assets/img/categories/pngegg.png" alt="">
+                                            <img src="yalla_gt/media/categories/pngegg.png" alt="">
                                         </a>
                                     </div>
                                     <figcaption class="category_content">
@@ -584,7 +583,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -612,7 +611,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -629,7 +628,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -657,7 +656,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -674,7 +673,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -702,7 +701,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -719,7 +718,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -747,7 +746,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -764,7 +763,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -792,7 +791,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -809,7 +808,7 @@
                                     <div>
                                         <div class="container-fluid product_thumb">
                                             <a class="primary_img d-flex justify-content-center" href="#">
-                                                <img src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                <img src="yalla_gt/media/product_imgs/1688582470.webp"
                                                     alt=""></a>
 
                                         </div>
@@ -837,7 +836,7 @@
                                                 </div>
                                                 <div class="ml-auto p-0">
                                                     <img width="80" height="80"
-                                                        src="yalla_gt/assets/img/cart/cart_icon.png"
+                                                        src="yalla_gt/media/cart/cart_icon.png"
                                                         alt=""></a>
                                                 </div>
                                             </div>
@@ -868,25 +867,25 @@
                             <div class="brand_container owl-carousel ">
                                 <!-- loop starts here -->
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/BOSCH.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/BOSCH.png"
                                             alt=""></a>
                                 </div>
                                 <!-- loop end here -->
 
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/Bilstein.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/Bilstein.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/luk.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/luk.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/motocraft.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/motocraft.png"
                                             alt=""></a>
                                 </div>
                                 <div class="single_brand">
-                                    <a href="#"><img src="yalla_gt/assets/img/brand/SACHS.png"
+                                    <a href="#"><img src="yalla_gt/media/brand/SACHS.png"
                                             alt=""></a>
                                 </div>
                             </div>
@@ -912,7 +911,7 @@
                                         <figure>
                                             <div class="product_thumb">
                                                 <a class="primary_img" href="#"><img
-                                                        src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                        src="yalla_gt/media/product_imgs/1688582470.webp"
                                                         alt=""></a>
                                             </div>
                                             <figcaption class="product_content">
@@ -944,7 +943,7 @@
                                         <figure>
                                             <div class="product_thumb">
                                                 <a class="primary_img" href="#"><img
-                                                        src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                        src="yalla_gt/media/product_imgs/1688582470.webp"
                                                         alt=""></a>
                                             </div>
                                             <figcaption class="product_content">
@@ -976,7 +975,7 @@
                                         <figure>
                                             <div class="product_thumb">
                                                 <a class="primary_img" href="#"><img
-                                                        src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                        src="yalla_gt/media/product_imgs/1688582470.webp"
                                                         alt=""></a>
                                             </div>
                                             <figcaption class="product_content">
@@ -1008,7 +1007,7 @@
                                         <figure>
                                             <div class="product_thumb">
                                                 <a class="primary_img" href="#"><img
-                                                        src="yalla_gt/assets/img/product_imgs/1688582470.webp"
+                                                        src="yalla_gt/media/product_imgs/1688582470.webp"
                                                         alt=""></a>
                                             </div>
                                             <figcaption class="product_content">
@@ -1049,7 +1048,7 @@
                                 <!-- <div class="card cars_for_sale_home_layout" style="  width:auto; border-radius: 16px; ">
                                     <a href="#">
                                         <div class="card-image sale_car_img">
-                                            <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
+                                            <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
                                         </div>
                                     </a>
                                     <div class="card-body">
@@ -1075,7 +1074,7 @@
                                 <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
                                     <a href="#">
                                         <div class="card-image sale_car_img">
-                                            <img src="yalla_gt/assets/img/sale_cars_img/honda.jpg" alt="NO_IMG">
+                                            <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
                                         </div>
                                     </a>
                                     <div class="card-body">
@@ -1131,7 +1130,7 @@
                                 <div class="col-md-4">
                                     <div class="d-flex contact_info">
                                         <div class="icon">
-                                            <img src="yalla_gt/assets/img/icon/call__contact.png" alt="">
+                                            <img src="yalla_gt/media/icon/call__contact.png" alt="">
                                         </div>
                                         <div class="content">
                                             <p>Call us anytime</p>
@@ -1142,7 +1141,7 @@
                                 <div class="col-md-4">
                                     <div class="d-flex contact_info">
                                         <div class="icon">
-                                            <img src="yalla_gt/assets/img/icon/msg.png" alt="">
+                                            <img src="yalla_gt/media/icon/msg.png" alt="">
                                         </div>
                                         <div class="content">
 
@@ -1154,7 +1153,7 @@
                                 <div class="col-md-4">
                                     <div class="d-flex contact_info">
                                         <div class="icon">
-                                            <img src="yalla_gt/assets/img/icon/info.png" alt="">
+                                            <img src="yalla_gt/media/icon/info.png" alt="">
                                         </div>
                                         <div class="content">
                                             <p>Help center</p>
@@ -1314,9 +1313,9 @@
 
                                         <div class="col-lg-5 d-flex images__container align-items-end">
                                             <div class="images d-flex align-items-end">
-                                                <img class="mr-2" src="yalla_gt/assets/img/icon/google.png"
+                                                <img class="mr-2" src="yalla_gt/media/icon/google.png"
                                                     alt="">
-                                                <img src="yalla_gt/assets/img/icon/apple.png" alt="">
+                                                <img src="yalla_gt/media/icon/apple.png" alt="">
 
                                             </div>
                                         </div>
@@ -1327,13 +1326,13 @@
                             <div class="col-lg-3">
                                 <ul class="list-unstyled footer_widgets--ul">
                                     <li><a href="https://facebook.com/yallagtx"><img
-                                                src="yalla_gt/assets/img/icon/facebook.png" alt=""></a></li>
+                                                src="yalla_gt/media/icon/facebook.png" alt=""></a></li>
                                     <li><a href="https://instagram.com/yallagt"><img
-                                                src="yalla_gt/assets/img/icon/instgram.png" alt=""></a></li>
+                                                src="yalla_gt/media/icon/instgram.png" alt=""></a></li>
                                     <li><a href="https://wa.me/2001110120316"><img
-                                                src="yalla_gt/assets/img/icon/whatsapp.png" alt=""></a></li>
+                                                src="yalla_gt/media/icon/whatsapp.png" alt=""></a></li>
                                     <li><a href="https://maps.app.goo.gl/kd17T8JzX4Sjek5CA"><img
-                                                src="yalla_gt/assets/img/icon/location.png" alt=""></a></li>
+                                                src="yalla_gt/media/icon/location.png" alt=""></a></li>
 
                                 </ul>
                             </div>

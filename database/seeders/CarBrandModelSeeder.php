@@ -2,14 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
 use App\Models\CarBrand;
 use App\Models\CarBrandModel;
+use App\Traits\SlugTrait;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 
 class CarBrandModelSeeder extends Seeder
 {
+    use SlugTrait;
     /**
      * Run the database seeds.
      */
@@ -28,26 +29,26 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Mito", "ar" => "ميتو"],
             ["en" => "Spider", "ar" => "اسبايدر"],
             ["en" => "Stelvio", "ar" => "ستيلفيو"],
-            ["en" => "Tonale", "ar" => "تونالي"]
+            ["en" => "Tonale", "ar" => "تونالي"],
         ];
         $brandAlfaRomeo = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Alfa Romeo'")->first();
         foreach ($AlfaRomeoModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandAlfaRomeo->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandAlfaRomeo->id,
             ]);
         }
         #################### Alpine ####################
-        $AlpineModels=[
-            ["en"=>"A110s","ar"=>"A110s"],
+        $AlpineModels = [
+            ["en" => "A110s", "ar" => "A110s"],
         ];
         $brandAlpine = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Alpine'")->first();
-        foreach( $AlpineModels as $model){
+        foreach ($AlpineModels as $model) {
             CarBrandModel::create([
-                "name"=>$model,
-                "slug"=> Str::slug($model['en']),
-                'car_brand_id'=> $brandAlpine->id
+                "name" => $model,
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandAlpine->id,
             ]);
         }
         #################### Aston Martin ####################
@@ -57,7 +58,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "DBX", "ar" => "DBX"],
             ["en" => "Rapide S", "ar" => "رابيد اس"],
             ["en" => "Vanquish", "ar" => "Vanquish"],
-            ["en" => "Vantage", "ar" => "فانتاج"]
+            ["en" => "Vantage", "ar" => "فانتاج"],
         ];
 
         $brandAstonMartin = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Aston Martin'")->first();
@@ -65,8 +66,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($AstonMartinModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandAstonMartin->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandAstonMartin->id,
             ]);
         }
         #################### Audi ####################
@@ -90,7 +91,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "TT", "ar" => "TT"],
             ["en" => "TT Roadster", "ar" => "TT Roadster"],
             ["en" => "TT coupe", "ar" => "TT كوبيه"],
-            ["en" => "TT450", "ar" => "TT450"]
+            ["en" => "TT450", "ar" => "TT450"],
         ];
 
         $brandAudi = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Audi'")->first();
@@ -98,13 +99,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($AudiModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandAudi->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandAudi->id,
             ]);
         }
         #################### Avatr ####################
         $AvatrModels = [
-            ["en" => "11", "ar" => "11"]
+            ["en" => "11", "ar" => "11"],
         ];
 
         $brandAvatr = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Avatr'")->first();
@@ -112,15 +113,15 @@ class CarBrandModelSeeder extends Seeder
         foreach ($AvatrModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandAvatr->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandAvatr->id,
             ]);
         }
         #################### BAIC ####################
         $BAICModels = [
             ["en" => "X3", "ar" => "X3"],
             ["en" => "X5", "ar" => "X5"],
-            ["en" => "X7", "ar" => "X7"]
+            ["en" => "X7", "ar" => "X7"],
         ];
 
         $brandBAIC = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'BAIC'")->first();
@@ -128,15 +129,15 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BAICModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBAIC->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBAIC->id,
             ]);
         }
         #################### Bentley ####################
         $BentleyModels = [
             ["en" => "Bentiaga", "ar" => "Bentiaga"],
             ["en" => "Continental GT", "ar" => "Continental GT"],
-            ["en" => "Flying spur", "ar" => "Flying spur"]
+            ["en" => "Flying spur", "ar" => "Flying spur"],
         ];
 
         $brandBentley = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Bentley'")->first();
@@ -144,8 +145,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BentleyModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBentley->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBentley->id,
             ]);
         }
         #################### Bestune ####################
@@ -153,7 +154,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "B70", "ar" => "B70"],
             ["en" => "T33", "ar" => "T33"],
             ["en" => "T55", "ar" => "T55"],
-            ["en" => "T77", "ar" => "T77"]
+            ["en" => "T77", "ar" => "T77"],
         ];
 
         $brandBestune = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Bestune'")->first();
@@ -161,8 +162,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BestuneModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBestune->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBestune->id,
             ]);
         }
         #################### BMW ####################
@@ -238,7 +239,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "i8", "ar" => "i8"],
             ["en" => "iX", "ar" => "iX"],
             ["en" => "iX1", "ar" => "iX1"],
-            ["en" => "iX3", "ar" => "iX3"]
+            ["en" => "iX3", "ar" => "iX3"],
         ];
 
         $brandBMW = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'BMW'")->first();
@@ -246,8 +247,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BMWModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBMW->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBMW->id,
             ]);
         }
         #################### Brilliance ####################
@@ -263,7 +264,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Splendor", "ar" => "سبلندور"],
             ["en" => "V3", "ar" => "V3"],
             ["en" => "V5", "ar" => "V5"],
-            ["en" => "V6", "ar" => "V6"]
+            ["en" => "V6", "ar" => "V6"],
         ];
 
         $brandBrilliance = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Brilliance'")->first();
@@ -271,13 +272,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BrillianceModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBrilliance->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBrilliance->id,
             ]);
         }
         #################### Buick ####################
         $BuickModels = [
-            ["en" => "Skylark", "ar" => "سكاي لارك"]
+            ["en" => "Skylark", "ar" => "سكاي لارك"],
         ];
 
         $brandBuick = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Buick'")->first();
@@ -285,8 +286,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BuickModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBuick->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBuick->id,
             ]);
         }
         #################### BYD ####################
@@ -303,7 +304,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Song Plus", "ar" => "سونج بلس"],
             ["en" => "Tang", "ar" => "تانج"],
             ["en" => "Yuan Plus", "ar" => "يوان بلس"],
-            ["en" => "dolphin", "ar" => "دولفين"]
+            ["en" => "dolphin", "ar" => "دولفين"],
         ];
 
         $brandBYD = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'BYD'")->first();
@@ -311,8 +312,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($BYDModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBYD->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBYD->id,
             ]);
         }
         #################### Cadillac ####################
@@ -321,7 +322,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "DTS", "ar" => "DTS"],
             ["en" => "Dls", "ar" => "Dls"],
             ["en" => "Escalade", "ar" => "اسكاليد"],
-            ["en" => "SRX", "ar" => "SRX"]
+            ["en" => "SRX", "ar" => "SRX"],
         ];
 
         $brandCadillac = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Cadillac'")->first();
@@ -329,13 +330,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($CadillacModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandCadillac->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandCadillac->id,
             ]);
         }
         #################### Chana ####################
         $ChanaModels = [
-            ["en" => "Benni", "ar" => "بيني"]
+            ["en" => "Benni", "ar" => "بيني"],
         ];
 
         $brandChana = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Chana'")->first();
@@ -343,8 +344,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ChanaModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChana->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChana->id,
             ]);
         }
         #################### Changan ####################
@@ -358,7 +359,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Combo", "ar" => "كومبو"],
             ["en" => "EADO", "ar" => "إيدو"],
             ["en" => "UNI-T", "ar" => "UNI-T"],
-            ["en" => "V7", "ar" => "V7"]
+            ["en" => "V7", "ar" => "V7"],
         ];
 
         $brandChangan = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Changan'")->first();
@@ -366,14 +367,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ChanganModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChangan->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChangan->id,
             ]);
         }
         #################### Changan ####################
         $ChangheModels = [
             ["en" => "M50s", "ar" => "M50s"],
-            ["en" => "Q35", "ar" => "Q35"]
+            ["en" => "Q35", "ar" => "Q35"],
         ];
 
         $brandChanghe = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Changhe'")->first();
@@ -381,8 +382,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ChangheModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChanghe->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChanghe->id,
             ]);
         }
         #################### Chery ####################
@@ -400,7 +401,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Tiggo 7", "ar" => "تيجو 7"],
             ["en" => "Tiggo 7 Pro", "ar" => "تيجو 7 برو"],
             ["en" => "Tiggo 8", "ar" => "تيجو 8"],
-            ["en" => "Tiggo 8 PRO", "ar" => "تيجو 8 برو"]
+            ["en" => "Tiggo 8 PRO", "ar" => "تيجو 8 برو"],
         ];
 
         $brandChery = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Chery'")->first();
@@ -408,8 +409,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($CheryModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChery->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChery->id,
             ]);
         }
         #################### Chevrolet ####################
@@ -437,7 +438,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Sonic", "ar" => "سونيك"],
             ["en" => "Spark", "ar" => "سبارك"],
             ["en" => "TFR", "ar" => "TFR"],
-            ["en" => "Trailblazer", "ar" => "تريلبليزر"]
+            ["en" => "Trailblazer", "ar" => "تريلبليزر"],
         ];
 
         $brandChevrolet = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Chevrolet'")->first();
@@ -445,8 +446,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ChevroletModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChevrolet->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChevrolet->id,
             ]);
         }
         #################### Chrysler ####################
@@ -460,7 +461,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Sebring", "ar" => "سبرينج"],
             ["en" => "Stratus", "ar" => "ستراتوس"],
             ["en" => "Town & Country", "ar" => "تاون أند كانتري"],
-            ["en" => "Voyager", "ar" => "فوياجر"]
+            ["en" => "Voyager", "ar" => "فوياجر"],
         ];
 
         $brandChrysler = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Chrysler'")->first();
@@ -468,8 +469,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ChryslerModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandChrysler->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandChrysler->id,
             ]);
         }
         #################### Citroen ####################
@@ -498,7 +499,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Picasso", "ar" => "بيكاسو"],
             ["en" => "Xsara", "ar" => "اكسارا"],
             ["en" => "Zara", "ar" => "زارا"],
-            ["en" => "ZX", "ar" => "ZX"]
+            ["en" => "ZX", "ar" => "ZX"],
         ];
 
         $brandCitroen = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Citroen'")->first();
@@ -506,14 +507,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($CitroenModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandCitroen->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandCitroen->id,
             ]);
         }
         #################### Cupra ####################
         $CupraModels = [
             ["en" => "Formentor", "ar" => "فورمينتور"],
-            ["en" => "Leon", "ar" => "ليون"]
+            ["en" => "Leon", "ar" => "ليون"],
         ];
 
         $brandCupra = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Cupra'")->first();
@@ -521,14 +522,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($CupraModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandCupra->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandCupra->id,
             ]);
         }
         #################### Dacia ####################
         $DaciaModels = [
             ["en" => "1100", "ar" => "1100"],
-            ["en" => "1300", "ar" => "1300"]
+            ["en" => "1300", "ar" => "1300"],
         ];
 
         $brandDacia = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Dacia'")->first();
@@ -536,8 +537,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DaciaModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDacia->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDacia->id,
             ]);
         }
         #################### Daewoo ####################
@@ -552,7 +553,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Matiz", "ar" => "ماتيز"],
             ["en" => "Nubira", "ar" => "نوبيرا"],
             ["en" => "Racer", "ar" => "رايسر"],
-            ["en" => "Zaz", "ar" => "زاز"]
+            ["en" => "Zaz", "ar" => "زاز"],
         ];
 
         $brandDaewoo = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Daewoo'")->first();
@@ -560,8 +561,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DaewooModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDaewoo->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDaewoo->id,
             ]);
         }
         #################### Daihatsu ####################
@@ -574,7 +575,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Mira", "ar" => "ميرا"],
             ["en" => "Sirion", "ar" => "سيريون"],
             ["en" => "Terios", "ar" => "تريوس"],
-            ["en" => "YRV", "ar" => "YRV"]
+            ["en" => "YRV", "ar" => "YRV"],
         ];
 
         $brandDaihatsu = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Daihatsu'")->first();
@@ -582,8 +583,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DaihatsuModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDaihatsu->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDaihatsu->id,
             ]);
         }
         #################### Dodge ####################
@@ -596,7 +597,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Durango", "ar" => "دورانجو"],
             ["en" => "Nitro", "ar" => "نايترو"],
             ["en" => "RS", "ar" => "RS"],
-            ["en" => "Ram", "ar" => "رام"]
+            ["en" => "Ram", "ar" => "رام"],
         ];
 
         $brandDodge = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Dodge'")->first();
@@ -604,8 +605,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DodgeModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDodge->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDodge->id,
             ]);
         }
         #################### Dodge ####################
@@ -618,7 +619,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Durango", "ar" => "دورانجو"],
             ["en" => "Nitro", "ar" => "نايترو"],
             ["en" => "RS", "ar" => "RS"],
-            ["en" => "Ram", "ar" => "رام"]
+            ["en" => "Ram", "ar" => "رام"],
         ];
 
         $brandDodge = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Dodge'")->first();
@@ -626,8 +627,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DodgeModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDodge->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDodge->id,
             ]);
         }
         #################### Dongfeng ####################
@@ -636,7 +637,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Aeolus e70 pro", "ar" => "أيولوس e70 pro"],
             ["en" => "Eagel 580", "ar" => "إيجل 508"],
             ["en" => "HUGE-Hybrid", "ar" => "هيوج-هايبرد"],
-            ["en" => "Venucia", "ar" => "فينوتشيا"]
+            ["en" => "Venucia", "ar" => "فينوتشيا"],
         ];
 
         $brandDongfeng = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Dongfeng'")->first();
@@ -644,8 +645,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DongfengModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDongfeng->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDongfeng->id,
             ]);
         }
         #################### DS ####################
@@ -653,7 +654,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "3 Crossback", "ar" => "كروس باك 3"],
             ["en" => "7 Crossback", "ar" => "7 كروس باك"],
             ["en" => "DS4", "ar" => "DS4"],
-            ["en" => "DS5", "ar" => "DS5"]
+            ["en" => "DS5", "ar" => "DS5"],
         ];
 
         $brandDS = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'DS'")->first();
@@ -661,8 +662,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($DSModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandDS->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandDS->id,
             ]);
         }
         #################### Faw ####################
@@ -671,7 +672,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Bestune", "ar" => "Bestune"],
             ["en" => "Vita", "ar" => "فيتا"],
             ["en" => "X40", "ar" => "X40"],
-            ["en" => "Xiali", "ar" => "زياللى"]
+            ["en" => "Xiali", "ar" => "زياللى"],
         ];
 
         $brandFaw = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Faw'")->first();
@@ -679,8 +680,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($FawModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandFaw->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandFaw->id,
             ]);
         }
         #################### Ferrari ####################
@@ -704,7 +705,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "FF", "ar" => "FF"],
             ["en" => "Roma", "ar" => "Roma"],
             ["en" => "Scuderia spider 16m", "ar" => "Scuderia Spider 16M"],
-            ["en" => "Superamerica", "ar" => "Superamerica"]
+            ["en" => "Superamerica", "ar" => "Superamerica"],
         ];
 
         $brandFerrari = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Ferrari'")->first();
@@ -712,8 +713,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($FerrariModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandFerrari->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandFerrari->id,
             ]);
         }
         #################### Fiat ####################
@@ -755,7 +756,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Tipo", "ar" => "تيبو"],
             ["en" => "Uno", "ar" => "اونو"],
             ["en" => "Zastava", "ar" => "زستافا"],
-            ["en" => "Fabrino van", "ar" => "فابرينو فان"]
+            ["en" => "Fabrino van", "ar" => "فابرينو فان"],
         ];
 
         $brandFiat = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Fiat'")->first();
@@ -763,8 +764,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($FiatModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandFiat->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandFiat->id,
             ]);
         }
         #################### Ford ####################
@@ -792,7 +793,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Mondeo", "ar" => "مونديو"],
             ["en" => "Mustang", "ar" => "موستانج"],
             ["en" => "Ranger", "ar" => "رينجر"],
-            ["en" => "Taurus", "ar" => "تورس"]
+            ["en" => "Taurus", "ar" => "تورس"],
         ];
 
         $brandFord = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Ford'")->first();
@@ -800,13 +801,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($FordModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandFord->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandFord->id,
             ]);
         }
         #################### Forthing ####################
         $ForthingModels = [
-            ["en" => "T5 Evo", "ar" => "T5 Evo"]
+            ["en" => "T5 Evo", "ar" => "T5 Evo"],
         ];
 
         $brandForthing = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Forthing'")->first();
@@ -814,8 +815,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ForthingModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandForthing->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandForthing->id,
             ]);
         }
         #################### GAC ####################
@@ -823,7 +824,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "EMKOO", "ar" => "إم كو"],
             ["en" => "EMPOW", "ar" => "إمباو"],
             ["en" => "EMZOOM", "ar" => "إم زووم"],
-            ["en" => "GS4", "ar" => "GS4"]
+            ["en" => "GS4", "ar" => "GS4"],
         ];
 
         $brandGAC = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'GAC'")->first();
@@ -831,8 +832,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($GACModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandGAC->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandGAC->id,
             ]);
         }
         #################### Geely ####################
@@ -850,7 +851,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Okavango", "ar" => "اوكافانجو"],
             ["en" => "Pandino", "ar" => "باندينو"],
             ["en" => "X 7", "ar" => "X 7"],
-            ["en" => "X Pandino", "ar" => "اكس باندينو"]
+            ["en" => "X Pandino", "ar" => "اكس باندينو"],
         ];
 
         $brandGeely = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Geely'")->first();
@@ -858,8 +859,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($GeelyModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandGeely->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandGeely->id,
             ]);
         }
         #################### GMC ####################
@@ -869,7 +870,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Savana", "ar" => "سافانا"],
             ["en" => "Sierra", "ar" => "Sierra"],
             ["en" => "Super pan", "ar" => "سوبربان"],
-            ["en" => "Yukon", "ar" => "يوكون"]
+            ["en" => "Yukon", "ar" => "يوكون"],
         ];
 
         $brandGMC = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'GMC'")->first();
@@ -877,8 +878,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($GMCModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandGMC->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandGMC->id,
             ]);
         }
         #################### Great Wall ####################
@@ -888,7 +889,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Florid", "ar" => "فلوريد"],
             ["en" => "Florida", "ar" => "فلوريدا"],
             ["en" => "Hover", "ar" => "هوف"],
-            ["en" => "Peri", "ar" => "بيرى"]
+            ["en" => "Peri", "ar" => "بيرى"],
         ];
 
         $brandGreatWall = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Great Wall'")->first();
@@ -896,8 +897,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($GreatWallModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandGreatWall->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandGreatWall->id,
             ]);
         }
         #################### Haima ####################
@@ -907,7 +908,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Haima 2", "ar" => "هايما 2"],
             ["en" => "Haima 3", "ar" => "هايما 3"],
             ["en" => "M3", "ar" => "M3"],
-            ["en" => "S5", "ar" => "S5"]
+            ["en" => "S5", "ar" => "S5"],
         ];
 
         $brandHaima = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Haima'")->first();
@@ -915,14 +916,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HaimaModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHaima->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHaima->id,
             ]);
         }
         #################### Haval ####################
         $HavalModels = [
             ["en" => "H6", "ar" => "H6"],
-            ["en" => "JOLION", "ar" => "جولايون"]
+            ["en" => "JOLION", "ar" => "جولايون"],
         ];
 
         $brandHaval = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Haval'")->first();
@@ -930,13 +931,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HavalModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHaval->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHaval->id,
             ]);
         }
         #################### Havi ####################
         $HaviModels = [
-            ["en" => "Lopo", "ar" => "لوبو"]
+            ["en" => "Lopo", "ar" => "لوبو"],
         ];
 
         $brandHavi = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Havi'")->first();
@@ -944,13 +945,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HaviModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHavi->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHavi->id,
             ]);
         }
         #################### Hawtai ####################
         $HawtaiModels = [
-            ["en" => "A25", "ar" => "A25"]
+            ["en" => "A25", "ar" => "A25"],
         ];
 
         $brandHawtai = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Hawtai'")->first();
@@ -958,8 +959,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HawtaiModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHawtai->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHawtai->id,
             ]);
         }
         #################### Honda ####################
@@ -979,7 +980,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Prelude", "ar" => "بريلود"],
             ["en" => "Stream", "ar" => "ستريم"],
             ["en" => "ZR-V", "ar" => "ZR-V"],
-            ["en" => "e:NS1", "ar" => "e:NS1"]
+            ["en" => "e:NS1", "ar" => "e:NS1"],
         ];
 
         $brandHonda = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Honda'")->first();
@@ -987,8 +988,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HondaModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHonda->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHonda->id,
             ]);
         }
         #################### Hummer ####################
@@ -996,7 +997,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "H 1", "ar" => "H 1"],
             ["en" => "H 2", "ar" => "H 2"],
             ["en" => "H3", "ar" => "H3"],
-            ["en" => "Hummer EV SUV", "ar" => "هامر EV"]
+            ["en" => "Hummer EV SUV", "ar" => "هامر EV"],
         ];
 
         $brandHummer = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Hummer'")->first();
@@ -1004,8 +1005,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HummerModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHummer->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHummer->id,
             ]);
         }
         #################### Hyundai ####################
@@ -1048,7 +1049,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Veloster", "ar" => "فيلوستر"],
             ["en" => "Verna", "ar" => "فرنا"],
             ["en" => "Viva", "ar" => "فيفا"],
-            ["en" => "Venue", "ar" => "فينيو"]
+            ["en" => "Venue", "ar" => "فينيو"],
         ];
 
         $brandHyundai = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Hyundai'")->first();
@@ -1056,8 +1057,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($HyundaiModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandHyundai->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandHyundai->id,
             ]);
         }
         #################### Infiniti ####################
@@ -1067,7 +1068,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Fx50", "ar" => "Fx50"],
             ["en" => "Q30", "ar" => "Q30"],
             ["en" => "QX56", "ar" => "QX56"],
-            ["en" => "QX70", "ar" => "QX70"]
+            ["en" => "QX70", "ar" => "QX70"],
         ];
 
         $brandInfiniti = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Infiniti'")->first();
@@ -1075,13 +1076,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($InfinitiModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandInfiniti->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandInfiniti->id,
             ]);
         }
         #################### Isuzu ####################
         $IsuzuModels = [
-            ["en" => "NPR", "ar" => "NPR"]
+            ["en" => "NPR", "ar" => "NPR"],
         ];
 
         $brandIsuzu = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Isuzu'")->first();
@@ -1089,8 +1090,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($IsuzuModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandIsuzu->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandIsuzu->id,
             ]);
         }
         #################### JAC ####################
@@ -1105,7 +1106,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "S2", "ar" => "S2"],
             ["en" => "S3", "ar" => "S3"],
             ["en" => "S4", "ar" => "S4"],
-            ["en" => "S7", "ar" => "S7"]
+            ["en" => "S7", "ar" => "S7"],
         ];
 
         $brandJAC = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'JAC'")->first();
@@ -1113,8 +1114,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($JACModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandJAC->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandJAC->id,
             ]);
         }
         #################### Jaguar ####################
@@ -1132,7 +1133,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "XJL", "ar" => "XJL"],
             ["en" => "XK", "ar" => "XK"],
             ["en" => "XS", "ar" => "XS"],
-            ["en" => "i Pace", "ar" => "i Pace"]
+            ["en" => "i Pace", "ar" => "i Pace"],
         ];
 
         $brandJaguar = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Jaguar'")->first();
@@ -1140,8 +1141,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($JaguarModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandJaguar->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandJaguar->id,
             ]);
         }
         #################### Jeep ####################
@@ -1155,7 +1156,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Renegade", "ar" => "رينجيد"],
             ["en" => "Wagoneer", "ar" => "واجنر"],
             ["en" => "Wings", "ar" => "وينجز"],
-            ["en" => "Wrangler", "ar" => "رانجلر"]
+            ["en" => "Wrangler", "ar" => "رانجلر"],
         ];
 
         $brandJeep = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Jeep'")->first();
@@ -1163,8 +1164,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($JeepModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandJeep->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandJeep->id,
             ]);
         }
 
@@ -1174,7 +1175,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "X70", "ar" => "X70"],
             ["en" => "X70 Plus", "ar" => "X70 Plus"],
             ["en" => "X90 Plus", "ar" => "X90 Plus"],
-            ["en" => "X95", "ar" => "X95"]
+            ["en" => "X95", "ar" => "X95"],
         ];
 
         $brandJETOUR = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'JETOUR'")->first();
@@ -1182,14 +1183,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($JETOURModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandJETOUR->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandJETOUR->id,
             ]);
         }
         #################### JinBe ####################
         $JinBeModels = [
             ["en" => "Jinbe", "ar" => "جين بى"],
-            ["en" => "X30", "ar" => "X30"]
+            ["en" => "X30", "ar" => "X30"],
         ];
 
         $brandJinBe = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'JinBe'")->first();
@@ -1197,15 +1198,15 @@ class CarBrandModelSeeder extends Seeder
         foreach ($JinBeModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandJinBe->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandJinBe->id,
             ]);
         }
 
         #################### Kaiyi ####################
         $KaiyiModels = [
             ["en" => "X-3", "ar" => "X-3"],
-            ["en" => "X3 Pro", "ar" => "X3 Pro"]
+            ["en" => "X3 Pro", "ar" => "X3 Pro"],
         ];
 
         $brandKaiyi = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Kaiyi'")->first();
@@ -1213,8 +1214,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($KaiyiModels as $model) {
             CarBrandModel::create([
                 "name" => ["en" => $model['en'], "ar" => $model['ar']],
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandKaiyi->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandKaiyi->id,
             ]);
         }
         #################### Kia ####################
@@ -1243,7 +1244,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Sportage", "ar" => "سبورتاج"],
             ["en" => "Sportage NQ5", "ar" => "سبورتاج NQ5"],
             ["en" => "Xceed", "ar" => "أكسيد"],
-            ["en" => "Seltos", "ar" => "سيلتوس"]
+            ["en" => "Seltos", "ar" => "سيلتوس"],
         ];
 
         $brandKia = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Kia'")->first();
@@ -1251,8 +1252,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($KiaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandKia->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandKia->id,
             ]);
         }
         #################### Lada ####################
@@ -1272,7 +1273,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Largus", "ar" => "لارجوس"],
             ["en" => "Niva", "ar" => "نيفا"],
             ["en" => "Oka", "ar" => "أوكا"],
-            ["en" => "Samara", "ar" => "سمارا"]
+            ["en" => "Samara", "ar" => "سمارا"],
         ];
 
         $brandLada = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lada'")->first();
@@ -1280,8 +1281,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LadaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLada->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLada->id,
             ]);
         }
         #################### Lamborghini ####################
@@ -1292,7 +1293,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Diablo", "ar" => "ديابلو"],
             ["en" => "Murcielago", "ar" => "مورسيلاغو"],
             ["en" => "Gallardo", "ar" => "غالاردو"],
-            ["en" => "Aventador", "ar" => "أفينتادور"]
+            ["en" => "Aventador", "ar" => "أفينتادور"],
         ];
 
         $brandLamborghini = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lamborghini'")->first();
@@ -1300,13 +1301,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LamborghiniModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLamborghini->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLamborghini->id,
             ]);
         }
         #################### Lancia ####################
         $LanciaModels = [
-            ["en" => "Dedra", "ar" => "ديدرا"]
+            ["en" => "Dedra", "ar" => "ديدرا"],
         ];
 
         $brandLancia = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lancia'")->first();
@@ -1314,8 +1315,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LanciaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLancia->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLancia->id,
             ]);
         }
         #################### Land Rover ####################
@@ -1324,7 +1325,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "LR2", "ar" => "LR2"],
             ["en" => "LR3", "ar" => "LR3"],
             ["en" => "LR4", "ar" => "LR4"],
-            ["en" => "Land rover", "ar" => "لاند روفر"]
+            ["en" => "Land rover", "ar" => "لاند روفر"],
         ];
 
         $brandLandRover = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Land Rover'")->first();
@@ -1332,8 +1333,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LandRoverModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLandRover->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLandRover->id,
             ]);
         }
         #################### Lexus ####################
@@ -1348,7 +1349,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "LX600", "ar" => "LX600"],
             ["en" => "RX300", "ar" => "RX300"],
             ["en" => "RX330", "ar" => "RX330"],
-            ["en" => "RX350", "ar" => "RX350"]
+            ["en" => "RX350", "ar" => "RX350"],
         ];
 
         $brandLexus = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lexus'")->first();
@@ -1356,15 +1357,15 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LexusModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLexus->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLexus->id,
             ]);
         }
         #################### Lifan ####################
         $LifanModels = [
             ["en" => "320", "ar" => "320"],
             ["en" => "520", "ar" => "520"],
-            ["en" => "520i", "ar" => "520i"]
+            ["en" => "520i", "ar" => "520i"],
         ];
 
         $brandLifan = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lifan'")->first();
@@ -1372,14 +1373,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LifanModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLifan->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLifan->id,
             ]);
         }
         #################### Lincoln ####################
         $LincolnModels = [
             ["en" => "Navigator", "ar" => "نافيجاتور"],
-            ["en" => "Town Car", "ar" => "تاون كار"]
+            ["en" => "Town Car", "ar" => "تاون كار"],
         ];
 
         $brandLincoln = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lincoln'")->first();
@@ -1387,8 +1388,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LincolnModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLincoln->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLincoln->id,
             ]);
         }
         #################### Lotus ####################
@@ -1398,7 +1399,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Emira", "ar" => "Emira"],
             ["en" => "Evija", "ar" => "Evija"],
             ["en" => "Evora", "ar" => "Evora"],
-            ["en" => "Exige", "ar" => "Exige"]
+            ["en" => "Exige", "ar" => "Exige"],
         ];
 
         $brandLotus = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Lotus'")->first();
@@ -1406,13 +1407,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($LotusModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandLotus->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandLotus->id,
             ]);
         }
         #################### Mahindra ####################
         $MahindraModels = [
-            ["en" => "Scorpio", "ar" => "سكوربيو"]
+            ["en" => "Scorpio", "ar" => "سكوربيو"],
         ];
 
         $brandMahindra = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mahindra'")->first();
@@ -1420,13 +1421,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MahindraModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMahindra->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMahindra->id,
             ]);
         }
         #################### Mapel ####################
         $MapelModels = [
-            ["en" => "ASPIRE", "ar" => "أسباير"]
+            ["en" => "ASPIRE", "ar" => "أسباير"],
         ];
 
         $brandMapel = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mapel'")->first();
@@ -1434,8 +1435,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MapelModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMapel->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMapel->id,
             ]);
         }
         #################### Maserati ####################
@@ -1447,7 +1448,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Levante", "ar" => "ليفانتى"],
             ["en" => "Levante S", "ar" => "ليفانتى اس"],
             ["en" => "Quattroporte", "ar" => "كواتروبورتى"],
-            ["en" => "Quattroporte S", "ar" => "كواتروبورتى اس"]
+            ["en" => "Quattroporte S", "ar" => "كواتروبورتى اس"],
         ];
 
         $brandMaserati = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Maserati'")->first();
@@ -1455,8 +1456,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MaseratiModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMaserati->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMaserati->id,
             ]);
         }
         #################### Mazda ####################
@@ -1475,7 +1476,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "M2", "ar" => "M2"],
             ["en" => "M3", "ar" => "M3"],
             ["en" => "Miata", "ar" => "مياتا"],
-            ["en" => "Mx6", "ar" => "MX6"]
+            ["en" => "Mx6", "ar" => "MX6"],
         ];
 
         $brandMazda = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mazda'")->first();
@@ -1483,8 +1484,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MazdaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMazda->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMazda->id,
             ]);
         }
         #################### Mercedes ####################
@@ -1611,7 +1612,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Slr", "ar" => "Slr"],
             ["en" => "Sls", "ar" => "Sls"],
             ["en" => "Smart", "ar" => "سمارت"],
-            ["en" => "V 250", "ar" => "V 250"]
+            ["en" => "V 250", "ar" => "V 250"],
         ];
 
         $brandMercedes = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mercedes'")->first();
@@ -1619,8 +1620,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MercedesModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMercedes->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMercedes->id,
             ]);
         }
         #################### Mercury ####################
@@ -1628,7 +1629,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Grand Marquis", "ar" => "جراند ماركيز"],
             ["en" => "Crown victoria", "ar" => "كراون فيكتوريا"],
             ["en" => "Mountaineer", "ar" => "مازنتانر"],
-            ["en" => "Sable", "ar" => "سبلي"]
+            ["en" => "Sable", "ar" => "سبلي"],
         ];
 
         $brandMercury = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mercury'")->first();
@@ -1636,8 +1637,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MercuryModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMercury->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMercury->id,
             ]);
         }
         #################### MG ####################
@@ -1653,7 +1654,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "3 Cross Over", "ar" => "3 كروس اوفر"],
             ["en" => "RX5", "ar" => "RX5"],
             ["en" => "RX5 Plus", "ar" => "RX5 بلس"],
-            ["en" => "ZS", "ar" => "ZS"]
+            ["en" => "ZS", "ar" => "ZS"],
         ];
 
         $brandMG = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'MG'")->first();
@@ -1661,8 +1662,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MGModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMG->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMG->id,
             ]);
         }
         #################### Mini ####################
@@ -1677,7 +1678,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Cooper S Countryman", "ar" => "Cooper S Countryman"],
             ["en" => "Countryman", "ar" => "Countryman"],
             ["en" => "Countryman S", "ar" => "Countryman S"],
-            ["en" => "John Cooper Works", "ar" => "John Cooper Works"]
+            ["en" => "John Cooper Works", "ar" => "John Cooper Works"],
         ];
 
         $brandMini = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mini'")->first();
@@ -1685,8 +1686,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MiniModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMini->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMini->id,
             ]);
         }
         #################### Mitsubishi ####################
@@ -1705,7 +1706,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Outlander", "ar" => "أوت لاندر"],
             ["en" => "Pajero", "ar" => "باجيرو"],
             ["en" => "Vr4", "ar" => "VR4"],
-            ["en" => "Xpander", "ar" => "اكسباندر"]
+            ["en" => "Xpander", "ar" => "اكسباندر"],
         ];
 
         $brandMitsubishi = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Mitsubishi'")->first();
@@ -1713,8 +1714,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($MitsubishiModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMitsubishi->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMitsubishi->id,
             ]);
         }
         #################### Nasr ####################
@@ -1724,7 +1725,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Florida", "ar" => "فلوريدا"],
             ["en" => "Nova", "ar" => "نوفا"],
             ["en" => "Polonez", "ar" => "بولونيز"],
-            ["en" => "Shahin", "ar" => "شاهين"]
+            ["en" => "Shahin", "ar" => "شاهين"],
         ];
 
         $brandNasr = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Nasr'")->first();
@@ -1732,8 +1733,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($NasrModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandNasr->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandNasr->id,
             ]);
         }
         #################### Nissan ####################
@@ -1758,7 +1759,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Sunny", "ar" => "صني"],
             ["en" => "Tiida", "ar" => "تيدا"],
             ["en" => "Titan", "ar" => "تيتان"],
-            ["en" => "X-Trail", "ar" => "اكس ترايل"]
+            ["en" => "X-Trail", "ar" => "اكس ترايل"],
         ];
 
         $brandNissan = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Nissan'")->first();
@@ -1766,8 +1767,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($NissanModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandNissan->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandNissan->id,
             ]);
         }
         #################### OPEL ####################
@@ -1784,7 +1785,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Mokka", "ar" => "موكا"],
             ["en" => "Tigra", "ar" => "تيجرا"],
             ["en" => "Vectra", "ar" => "فيكترا"],
-            ["en" => "Zafira", "ar" => "زافيرا"]
+            ["en" => "Zafira", "ar" => "زافيرا"],
         ];
 
         $brandOpel = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Opel'")->first();
@@ -1792,14 +1793,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($OpelModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandOpel->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandOpel->id,
             ]);
         }
         #################### Perodua ####################
         $PeroduaModels = [
             ["en" => "Kancil", "ar" => "كانشيل"],
-            ["en" => "Kelisa", "ar" => "كيليزا"]
+            ["en" => "Kelisa", "ar" => "كيليزا"],
         ];
 
         $brandPerodua = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Perodua'")->first();
@@ -1807,8 +1808,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($PeroduaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandPerodua->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandPerodua->id,
             ]);
         }
         #################### Peugeot ####################
@@ -1847,7 +1848,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Pars", "ar" => "بارس"],
             ["en" => "Partner", "ar" => "بارتنر"],
             ["en" => "RCZ", "ar" => "RCZ"],
-            ["en" => "Samand", "ar" => "ساماند"]
+            ["en" => "Samand", "ar" => "ساماند"],
         ];
 
         $brandPeugeot = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Peugeot'")->first();
@@ -1855,13 +1856,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($PeugeotModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandPeugeot->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandPeugeot->id,
             ]);
         }
         #################### Pontiac ####################
         $PontiacModels = [
-            ["en" => "Pontiac", "ar" => "بونتياك"]
+            ["en" => "Pontiac", "ar" => "بونتياك"],
         ];
 
         $brandPontiac = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Pontiac'")->first();
@@ -1869,8 +1870,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($PontiacModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandPontiac->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandPontiac->id,
             ]);
         }
         #################### Porsche ####################
@@ -1911,7 +1912,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Panamera Turbo S", "ar" => "باناميرا تيربو S"],
             ["en" => "Targa", "ar" => "تارجا"],
             ["en" => "Targa 4S", "ar" => "4S - تارجا"],
-            ["en" => "Taycan", "ar" => "تايكان"]
+            ["en" => "Taycan", "ar" => "تايكان"],
         ];
 
         $brandPorsche = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Porsche'")->first();
@@ -1919,8 +1920,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($PorscheModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandPorsche->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandPorsche->id,
             ]);
         }
         #################### Proton ####################
@@ -1931,7 +1932,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Preve", "ar" => "بريفى"],
             ["en" => "Saga", "ar" => "ساجا"],
             ["en" => "Waja", "ar" => "واجا"],
-            ["en" => "Wira", "ar" => "ويرا"]
+            ["en" => "Wira", "ar" => "ويرا"],
         ];
 
         $brandProton = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Proton'")->first();
@@ -1939,8 +1940,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ProtonModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandProton->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandProton->id,
             ]);
         }
         #################### Range Rover ####################
@@ -1957,7 +1958,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Rover 75", "ar" => "روفر 75"],
             ["en" => "SVR", "ar" => "SVR"],
             ["en" => "VOGUE", "ar" => "VOGUE"],
-            ["en" => "Velar", "ar" => "فيلر"]
+            ["en" => "Velar", "ar" => "فيلر"],
         ];
 
         $brandRangeRover = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Range Rover'")->first();
@@ -1965,8 +1966,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($RangeRoverModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandRangeRover->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandRangeRover->id,
             ]);
         }
         #################### Renault ####################
@@ -1997,7 +1998,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Scala", "ar" => "اسكالا"],
             ["en" => "Scenic", "ar" => "سينيك"],
             ["en" => "Symbol", "ar" => "سيمبول"],
-            ["en" => "Taliant", "ar" => "تاليانت"]
+            ["en" => "Taliant", "ar" => "تاليانت"],
         ];
 
         $brandRenault = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Renault'")->first();
@@ -2005,8 +2006,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($RenaultModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandRenault->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandRenault->id,
             ]);
         }
         #################### Rolls Royce ####################
@@ -2015,7 +2016,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Ghost", "ar" => "جوست"],
             ["en" => "Phantom", "ar" => "فانتم"],
             ["en" => "Silver Wraith", "ar" => "سيلفر واريس"],
-            ["en" => "Other", "ar" => "آخري"]
+            ["en" => "Other", "ar" => "آخري"],
         ];
 
         $brandRollsRoyce = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Rolls Royce'")->first();
@@ -2023,13 +2024,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($RollsRoyceModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandRollsRoyce->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandRollsRoyce->id,
             ]);
         }
         #################### Saab ####################
         $SaabModels = [
-            ["en" => "900", "ar" => "900"]
+            ["en" => "900", "ar" => "900"],
         ];
 
         $brandSaab = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Saab'")->first();
@@ -2037,14 +2038,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SaabModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSaab->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSaab->id,
             ]);
         }
         #################### Saipa ####################
         $SaipaModels = [
             ["en" => "Pride", "ar" => "برايد"],
-            ["en" => "Tiipa", "ar" => "تييبا"]
+            ["en" => "Tiipa", "ar" => "تييبا"],
         ];
 
         $brandSaipa = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Saipa'")->first();
@@ -2052,13 +2053,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SaipaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSaipa->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSaipa->id,
             ]);
         }
         #################### Samsung ####################
         $SamsungModels = [
-            ["en" => "Q5", "ar" => "Q5"]
+            ["en" => "Q5", "ar" => "Q5"],
         ];
 
         $brandSamsung = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Samsung'")->first();
@@ -2066,8 +2067,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SamsungModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSamsung->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSamsung->id,
             ]);
         }
         #################### Seat ####################
@@ -2080,7 +2081,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Ibiza", "ar" => "ابيزا"],
             ["en" => "Leon", "ar" => "ليون"],
             ["en" => "Tarraco", "ar" => "تاراكو"],
-            ["en" => "Toledo", "ar" => "توليدو"]
+            ["en" => "Toledo", "ar" => "توليدو"],
         ];
 
         $brandSeat = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Seat'")->first();
@@ -2088,8 +2089,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SeatModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSeat->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSeat->id,
             ]);
         }
         #################### Senova ####################
@@ -2097,7 +2098,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "A1", "ar" => "A1"],
             ["en" => "A3", "ar" => "A3"],
             ["en" => "X25", "ar" => "X25"],
-            ["en" => "X35", "ar" => "X35"]
+            ["en" => "X35", "ar" => "X35"],
         ];
 
         $brandSenova = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Senova'")->first();
@@ -2105,8 +2106,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SenovaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSenova->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSenova->id,
             ]);
         }
         #################### Skoda ####################
@@ -2124,7 +2125,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "SCALA", "ar" => "سكالا"],
             ["en" => "Superb", "ar" => "سوبيرب"],
             ["en" => "Yeti", "ar" => "ييتي"],
-            ["en" => "Favorite", "ar" => "فافوريت"]
+            ["en" => "Favorite", "ar" => "فافوريت"],
         ];
 
         $brandSkoda = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Skoda'")->first();
@@ -2132,13 +2133,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SkodaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSkoda->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSkoda->id,
             ]);
         }
         #################### Smart ####################
         $SmartModels = [
-            ["en" => "samrt", "ar" => "سمارت"]
+            ["en" => "samrt", "ar" => "سمارت"],
         ];
 
         $brandSmart = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Smart'")->first();
@@ -2146,8 +2147,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SmartModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSmart->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSmart->id,
             ]);
         }
         #################### Soueast ####################
@@ -2157,7 +2158,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Dx7 NOVA", "ar" => "Dx7 نوفا"],
             ["en" => "V3", "ar" => "V3"],
             ["en" => "V5", "ar" => "V5"],
-            ["en" => "V6", "ar" => "V6"]
+            ["en" => "V6", "ar" => "V6"],
         ];
 
         $brandSoueast = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Soueast'")->first();
@@ -2165,8 +2166,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SoueastModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSoueast->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSoueast->id,
             ]);
         }
         #################### Speranza ####################
@@ -2179,7 +2180,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "M11", "ar" => "M11"],
             ["en" => "M12", "ar" => "M12"],
             ["en" => "Marke", "ar" => "Marke"],
-            ["en" => "Tiggo", "ar" => "تيجو"]
+            ["en" => "Tiggo", "ar" => "تيجو"],
         ];
 
         $brandSperanza = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Speranza'")->first();
@@ -2187,8 +2188,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SperanzaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSperanza->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSperanza->id,
             ]);
         }
         #################### SsangYong ####################
@@ -2198,7 +2199,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "STAVIC", "ar" => "ستافيك"],
             ["en" => "Tivoli", "ar" => "تيفولي"],
             ["en" => "Torres", "ar" => "توريس"],
-            ["en" => "XLV", "ar" => "XLV"]
+            ["en" => "XLV", "ar" => "XLV"],
         ];
 
         $brandSsangYong = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'SsangYong'")->first();
@@ -2206,8 +2207,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SsangYongModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSsangYong->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSsangYong->id,
             ]);
         }
         #################### Subaru ####################
@@ -2218,7 +2219,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Impreza", "ar" => "امبريزا"],
             ["en" => "Legacy", "ar" => "ليجاسى"],
             ["en" => "Outback", "ar" => "اوتباك"],
-            ["en" => "XV", "ar" => "XV"]
+            ["en" => "XV", "ar" => "XV"],
         ];
 
         $brandSubaru = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Subaru'")->first();
@@ -2226,8 +2227,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SubaruModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSubaru->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSubaru->id,
             ]);
         }
         #################### Suzuki ####################
@@ -2251,7 +2252,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Swift", "ar" => "سويفت"],
             ["en" => "Van", "ar" => "فان"],
             ["en" => "Vitara", "ar" => "فيتارا"],
-            ["en" => "Zen", "ar" => "زن"]
+            ["en" => "Zen", "ar" => "زن"],
         ];
 
         $brandSuzuki = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Suzuki'")->first();
@@ -2259,8 +2260,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($SuzukiModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandSuzuki->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandSuzuki->id,
             ]);
         }
         #################### Tesla ####################
@@ -2268,7 +2269,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "3 Model", "ar" => "3 Model"],
             ["en" => "Model Y", "ar" => "Model Y"],
             ["en" => "Model S", "ar" => "Model S"],
-            ["en" => "Model X", "ar" => "Model X"]
+            ["en" => "Model X", "ar" => "Model X"],
         ];
 
         $brandTesla = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Tesla'")->first();
@@ -2276,8 +2277,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($TeslaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandTesla->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandTesla->id,
             ]);
         }
         #################### Toyota ####################
@@ -2312,7 +2313,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "Tercel", "ar" => "تريسل"],
             ["en" => "Tundra", "ar" => "تاندرا"],
             ["en" => "Yaris", "ar" => "ياريس"],
-            ["en" => "bZ4X", "ar" => "bZ4X"]
+            ["en" => "bZ4X", "ar" => "bZ4X"],
         ];
 
         $brandToyota = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Toyota'")->first();
@@ -2320,13 +2321,13 @@ class CarBrandModelSeeder extends Seeder
         foreach ($ToyotaModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandToyota->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandToyota->id,
             ]);
         }
         #################### VGV ####################
         $VGVModels = [
-            ["en" => "U70 PRO", "ar" => "U70 PRO"]
+            ["en" => "U70 PRO", "ar" => "U70 PRO"],
         ];
 
         $brandVGV = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'VGV'")->first();
@@ -2334,8 +2335,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($VGVModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandVGV->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandVGV->id,
             ]);
         }
         #################### Volkswagen ####################
@@ -2382,8 +2383,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($VolkswagenModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandVolkswagen->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandVolkswagen->id,
             ]);
         }
         #################### Volvo ####################
@@ -2418,14 +2419,14 @@ class CarBrandModelSeeder extends Seeder
         foreach ($volvoModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandVolvo->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandVolvo->id,
             ]);
         }
         #################### Zeekr ####################
         $zeekrModels = [
             ["en" => "1", "ar" => "1"],
-            ["en" => "7", "ar" => "7"]
+            ["en" => "7", "ar" => "7"],
         ];
 
         $brandZeekr = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Zeekr'")->first();
@@ -2433,8 +2434,8 @@ class CarBrandModelSeeder extends Seeder
         foreach ($zeekrModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandZeekr->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandZeekr->id,
             ]);
         }
         #################### Zotye ####################
@@ -2442,7 +2443,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "T500", "ar" => "T500"],
             ["en" => "T600", "ar" => "T600"],
             ["en" => "Xplosion", "ar" => "اكسبلوجن"],
-            ["en" => "sr7", "ar" => "sr7"]
+            ["en" => "sr7", "ar" => "sr7"],
         ];
 
         $brandZotye = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Zotye'")->first();
@@ -2450,8 +2451,26 @@ class CarBrandModelSeeder extends Seeder
         foreach ($zotyeModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandZotye->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandZotye->id,
+            ]);
+        }
+        #################### Bugatti ####################
+        $bugattiModels = [
+            ["en" => "EB110", "ar" => "EB110"],
+            ["en" => "Veyron", "ar" => "Veyron"],
+            ["en" => "Les Légendes De Bugatti", "ar" => "Les Légendes De Bugatti"],
+            ["en" => "Chiron", "ar" => "Chiron"],
+            ["en" => "Mistral", "ar" => "Mistral"],
+        ];
+
+        $brandBugatti = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Bugatti'")->first();
+
+        foreach ($bugattiModels as $model) {
+            CarBrandModel::create([
+                "name" => $model,
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandBugatti->id,
             ]);
         }
         #################### Mclaren ####################
@@ -2470,7 +2489,7 @@ class CarBrandModelSeeder extends Seeder
             ["en" => "720S GT3X", "ar" => "720S GT3X"],
             ["en" => "570S GT4", "ar" => "570S GT4"],
             ["en" => "Artura GT4", "ar" => "Artura GT4"],
-            ["en" => "Solus GT", "ar" => "Solus GT"]
+            ["en" => "Solus GT", "ar" => "Solus GT"],
         ];
 
         $brandMcLaren = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'McLaren'")->first();
@@ -2478,30 +2497,11 @@ class CarBrandModelSeeder extends Seeder
         foreach ($mclarenModels as $model) {
             CarBrandModel::create([
                 "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandMcLaren->id
-            ]);
-        }
-        #################### Bugatti ####################
-        $bugattiModels = [
-            ["en" => "EB110", "ar" => "EB110"],
-            ["en" => "Veyron", "ar" => "Veyron"],
-            ["en" => "Les Légendes De Bugatti", "ar" => "Les Légendes De Bugatti"],
-            ["en" => "Chiron", "ar" => "Chiron"],
-            ["en" => "Mistral", "ar" => "Mistral"]
-        ];
-
-        $brandBugatti = CarBrand::whereRaw("JSON_EXTRACT(name, '$.en') = 'Bugatti'")->first();
-
-        foreach ($bugattiModels as $model) {
-            CarBrandModel::create([
-                "name" => $model,
-                "slug" => Str::slug($model['en']),
-                'car_brand_id' => $brandBugatti->id
+                "slug" => $this->slug(['en' => $model['en'], 'ar' => $model['ar']]),
+                'car_brand_id' => $brandMcLaren->id,
             ]);
         }
         #################### END OF LIST ####################
 
-    } // End OF Method
-
-} // End of Class
+    }
+}

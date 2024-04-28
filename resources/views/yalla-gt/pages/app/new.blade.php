@@ -14,20 +14,20 @@
                     <div class="brand_container owl-carousel ">
                         <!-- loop starts here -->
                         <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/assets/img/brand/mazda.png" alt=""></a>
+                            <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
                         </div>
                         <!-- loop end here -->
                         <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/assets/img/brand/nissan.png" alt=""></a>
+                            <a href="#"><img src="yalla_gt/media/brand/nissan.png" alt=""></a>
                         </div>
                         <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/assets/img/brand/Mercedes-Benz.png" alt=""></a>
+                            <a href="#"><img src="yalla_gt/media/brand/Mercedes-Benz.png" alt=""></a>
                         </div>
                         <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/assets/img/brand/Volkswagen.png" alt=""></a>
+                            <a href="#"><img src="yalla_gt/media/brand/Volkswagen.png" alt=""></a>
                         </div>
                         <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/assets/img/brand/skoda.png" alt=""></a>
+                            <a href="#"><img src="yalla_gt/media/brand/skoda.png" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/assets/media/main_services/shop.png"></a>
+                                    <a href="#"><img src="yalla_gt/media/main_services/shop.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">PRODUCTS</h4>
@@ -64,7 +64,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/assets/media/main_services/stock_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/media/main_services/stock_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Stock Cars</h4>
@@ -83,7 +83,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/assets/media/main_services/sale_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/media/main_services/sale_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Sale Cars</h4>
@@ -102,7 +102,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-7 col-12 text-center">
-                                    <a href="#"><img src="yalla_gt/assets/media/main_services/sell_cars.png"></a>
+                                    <a href="#"><img src="yalla_gt/media/main_services/sell_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
                                     <h4 class="h-service">Sell Car</h4>
