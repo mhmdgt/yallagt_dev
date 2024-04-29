@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             GovernorateSeeder::class,
             ManufacturerSeeder::class,
             ProductCategorySeeder::class,
+            BlogCategorySeeder::class,
         ]);
     }
 

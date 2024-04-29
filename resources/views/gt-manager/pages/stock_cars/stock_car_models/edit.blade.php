@@ -40,15 +40,10 @@
                                     <label for="year">Year</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="year">
-                                            @php
-                                                $currentYear = date('Y');
-                                                $endYear = $currentYear - 65;
-                                            @endphp
-                                            @for ($year = $currentYear + 1; $year >= $endYear; $year--)
-                                                <option value="{{ $year }}" @selected($year == $stockCar->year)>
-                                                    {{ $year }}
-                                                </option>
-                                            @endfor
+                                            <option value="Select Model">Select Year</option>
+                                            @foreach (getYearsRange() as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <x-errors.display-validation-error property="year" />
@@ -419,7 +414,7 @@
                 $('input[name="main_img"]').val(imageId);
             });
             // ---------------------------------------
-            
+
 
         });
     </script>

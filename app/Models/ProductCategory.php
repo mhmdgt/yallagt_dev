@@ -13,23 +13,15 @@ class ProductCategory extends Model
 
     protected $fillable = ['name', 'logo', 'slug'];
     public $translatable = ['name', 'slug'];
-
-    public function productSubCategories()
-    {
-        return $this->hasMany(ProductSubCategory::class);
-    }
-
-    public function getRouteKeyName()
-    {
-        $locale = app()->getLocale();
-
-        // Return the attribute name dynamically based on the current language
-        return "slug->{$locale}";
-    }
-
+    // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {
         $locale = App::getLocale();
         return self::where("slug->{$locale}", $slug);
+    }
+    // -------------------- Method -------------------- //
+    public function productSubCategories()
+    {
+        return $this->hasMany(ProductSubCategory::class);
     }
 }

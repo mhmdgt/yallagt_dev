@@ -44,6 +44,8 @@ Route::middleware('admin')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('destroy/{slug}', 'destroy')->name('destroy');
+        Route::get('/models/{brandId}', 'getModelsByBrand');
+
     });
     // Spec Categories //
     Route::prefix('manage/spec-categroies')->name('spec-categories.')->group(function () {

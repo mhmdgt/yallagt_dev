@@ -37,13 +37,9 @@
                                     <div>
                                         <select class="js-example-basic-single w-100" name="year">
                                             <option value="Select Model">Select Year</option>
-                                            @php
-                                                $currentYear = date('Y');
-                                                $endYear = $currentYear - 65;
-                                            @endphp
-                                            @for ($year = $currentYear + 1; $year >= $endYear; $year--)
+                                            @foreach (getYearsRange() as $year)
                                                 <option value="{{ $year }}">{{ $year }}</option>
-                                            @endfor
+                                            @endforeach
                                         </select>
                                     </div>
                                     <x-errors.display-validation-error property="year" />

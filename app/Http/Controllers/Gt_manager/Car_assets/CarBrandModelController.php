@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Gt_manager\Car_assets;
 
+use App\Models\CarBrand;
 use App\Traits\SlugTrait;
 use Illuminate\Support\Str;
 use App\Models\CarBrandModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\GtManager\CarBrandModel\StoreCarBrandModelRequest;
 use App\Http\Requests\GtManager\CarBrandModel\UpdateCarBrandModelRequest;
 
@@ -15,6 +15,12 @@ class CarBrandModelController extends Controller
 {
     use SlugTrait;
 
+    public function getModelsByBrand($brandId)
+    {
+        $brand = CarBrand::findOrFail($brandId);
+        $models = $brand->models()->select('id', 'name')->get();
+        return response()->json($models);
+    }
     // -------------------- Store Brand Models Method -------------------- //
     public function store(StoreCarBrandModelRequest $request)
     {
@@ -23,7 +29,7 @@ class CarBrandModelController extends Controller
 
         // Create a new CarBrandModel instance with the validated data
         $carBrandModel = CarBrandModel::create([
-            'name' => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar'],],
+            'name' => ['en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar']],
             "car_brand_id" => $request->car_brand_id,
             'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
         ]);

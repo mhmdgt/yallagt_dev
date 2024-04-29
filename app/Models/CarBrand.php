@@ -11,20 +11,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CarBrand extends Model
 {
     use HasFactory  ,HasTranslations;
+
     protected $fillable = ['name', 'slug' , 'logo'];
     public $translatable = ['name' , 'slug'];
-
-
-    public function models()
-    {
-        return $this->hasMany(CarBrandModel::class);
-    }
-
+    // -------------------- Method -------------------- //
 
     public static function getByTranslatedSlug($slug)
     {
         $locale = App::getLocale();
         return self::where("slug->{$locale}", $slug);
     }
-
-} // END CLASS
+    // -------------------- Method -------------------- //
+    public function models()
+    {
+        return $this->hasMany(CarBrandModel::class);
+    }
+    // -------------------- Method -------------------- //
+    public function getAllModels()
+    {
+        return $this->models()->get();
+    }
+}
