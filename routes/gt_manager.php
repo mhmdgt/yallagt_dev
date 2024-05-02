@@ -98,20 +98,20 @@ Route::middleware('admin')->group(function () {
     });
     // Product //
     Route::controller(ProductController::class)->prefix('manage/products')->name('products.')->group(function () {
+        // Pages
+        Route::get('/', 'index')->name('index');
         Route::get('/create-product', 'create')->name('create');
         Route::get('{slug}/edit-product', 'edit')->name('edit');
+        // Actions
         Route::post('/store', 'store')->name('store');
-
+        Route::post('/{slug}', 'update')->name('update');
         Route::delete('{slug}/destroy', 'destroy')->name('destroy');
-
-
-
-
-
-
-
-
     });
+
+    // FilePond
+    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
+    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
+
     // Product Categories //
     Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -128,6 +128,8 @@ Route::middleware('admin')->group(function () {
         Route::get('/{slug}/edit', 'edit')->name('edit');
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('/{slug}', 'destroy')->name('destroy');
+        Route::get('/categories/{categoryId}', 'getCategoriesByCategory');
+
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {

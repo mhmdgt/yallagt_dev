@@ -11,7 +11,6 @@
                     <li class="breadcrumb-item"><a>{{ $manufacturer->name }}</a></li>
                 </ol>
                 {{-- ====== Product button ====== --}}
-                {{-- <a href="{{ route('manufacturers.create', $manufacturer->slug) }}" class="btn btn-success"> --}}
                 <a href="{{ route('products.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
                     Create Product
@@ -105,7 +104,7 @@
                 </div>
             </div>
         </div>
-        {{-- ========================== All Models ========================== --}}
+        {{-- ========================== All Products ========================== --}}
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -144,9 +143,9 @@
                                                                 <i data-feather="edit-2" class="icon-sm mr-2"></i>
                                                                 <span class="">Edit</span></a>
                                                             <a class="dropdown-item d-flex align-items-center"
-                                                                href="#">
+                                                                href="">
                                                                 <i data-feather="folder-plus" class="icon-sm mr-2"></i>
-                                                                <span>Add SKU</span>
+                                                                <span>Download</span>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -164,56 +163,3 @@
         </div>
     </div>
 @endsection
-
-@section('script')
-    @if ($errors->any() || Session::has('success') || Session::has('fail'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
-
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        Toast.fire({
-                            icon: 'error',
-                            title: '{{ $error }}'
-                        });
-                    @endforeach
-                @endif
-
-                @if (Session::has('success'))
-                    Toast.fire({
-                        icon: 'success',
-                        title: '{{ Session::get('success') }}'
-                    });
-                @elseif (Session::has('fail'))
-                    Toast.fire({
-                        icon: 'error',
-                        title: '{{ Session::get('fail') }}'
-                    });
-                @endif
-            });
-        </script>
-    @endif
-@endsection
-
-
-{{-- <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
-    data-target="#editModel{{ $model->id }}" title="Edit">
-    <i class="bi bi-pencil-square"></i>
-</button>
-<button type="button" class="btn btn-inverse-danger"
-data-toggle="modal" data-target="#confirmDeleteModal{{ $model->id }}" title="Edit">
-    <i class="bi bi-trash3"></i>
-</button>
-<x-modal.confirm-delete-modal route="{{ route('car-brand-model.destroy', $model->slug) }}"
-    id="{{ $model->id }}" /> --}}

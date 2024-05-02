@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_skus', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products')->cascadeOnDelete();
-
-            $table->string('sku')->unique();
-            $table->string('part_number')->nullable();
-            $table->decimal('main_price', 10, 2);
-            $table->enum('status', ['active', 'hidden'])->default('active');
+            $table->string('name');
+            $table->enum('main_img' , ['1' , '0'] );
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_skus');
+        Schema::dropIfExists('product_images');
     }
 };

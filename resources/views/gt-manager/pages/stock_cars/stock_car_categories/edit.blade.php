@@ -22,7 +22,6 @@
                     id="{{ $stockCarCategory->id }}" />
             </div>
         </nav>
-
         <form action="{{ route('model-category.update', $stockCarCategory->id) }}" method="POST">
             @csrf
             @method('put')
@@ -284,7 +283,6 @@
                     Update
                 </button>
             </div>
-
         </form>
     </div>
 @endsection

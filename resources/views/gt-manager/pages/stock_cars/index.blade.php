@@ -30,7 +30,6 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td> <a href="{{ route("stock-car.show" , $brand->slug  ) }}">{{ $brand->name }}</a></td>
-                                        {{-- <td><a href="{{ route('stock-car.show', ['brand' => $brand, 'modelName' => $modelName]) }}">Show</a></td> --}}
                                         <td>15</td>
                                     </tr>
                                     @endforeach

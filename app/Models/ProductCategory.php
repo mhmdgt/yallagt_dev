@@ -13,6 +13,7 @@ class ProductCategory extends Model
 
     protected $fillable = ['name', 'logo', 'slug'];
     public $translatable = ['name', 'slug'];
+
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {
@@ -23,5 +24,15 @@ class ProductCategory extends Model
     public function productSubCategories()
     {
         return $this->hasMany(ProductSubCategory::class);
+    }
+    // -------------------- Method -------------------- //
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    // -------------------- Method -------------------- //
+    public function getAllSubCategories()
+    {
+        return $this->productSubCategories()->get();
     }
 }

@@ -1,4 +1,14 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+@font-face {
+    font-family: url(" https://fonts.google.com/specimen/Hind");
+    src: url("https://fonts.google.com/specimen/Hind");
+}
+
 * {
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     padding: 0px;
     margin: 0px;
 }
@@ -7,7 +17,7 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
-    
+
 }
 
 .signup_box {
@@ -152,14 +162,14 @@ body {
 
 .form_box form .input_box input:focus,
 .form_box form .input_box input:valid {
-    border-color: blue;
+    border-color: #102a71;
 }
 
 .form_box form .input_box input:focus+label,
 .form_box form .input_box input:valid+label {
     top: -16px;
     font-size: 18px;
-    color: blue;
+    color: #102a71;
 }
 
 .form_box form .link,
@@ -171,7 +181,7 @@ body {
 
 .form_box form .link a,
 .form_box form .contact_link a {
-    color: blue;
+    color: #102a71;
     text-decoration: none;
     font-weight: bold;
 }
@@ -185,7 +195,7 @@ body {
 .form_box form .password_link a {
     text-decoration: none;
     font-weight: bold;
-    color: blue;
+    color: #102a71;
 }
 
 .form_box form button {

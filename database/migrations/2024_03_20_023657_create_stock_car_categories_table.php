@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('stock_car_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique()->default('');
+            $table->string('name');
+            $table->string('slug');
             $table->decimal('price');
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
             $table->integer('rims_size')->nullable();

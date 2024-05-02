@@ -1,8 +1,3 @@
-{{-- @extends('gt-manager.layout.app')
-@section('content')
-    @livewire('gt-manager.product-assets.manufacturer')
-@endsection --}}
-
 @extends('gt-manager.layout.app')
 @section('content')
     <div class="page-content">
@@ -101,45 +96,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    @if ($errors->any() || Session::has('success') || Session::has('fail'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
-
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        Toast.fire({
-                            icon: 'error',
-                            title: '{{ $error }}'
-                        });
-                    @endforeach
-                @endif
-
-                @if (Session::has('success'))
-                    Toast.fire({
-                        icon: 'success',
-                        title: '{{ Session::get('success') }}'
-                    });
-                @elseif (Session::has('fail'))
-                    Toast.fire({
-                        icon: 'error',
-                        title: '{{ Session::get('fail') }}'
-                    });
-                @endif
-            });
-        </script>
-    @endif
 @endsection

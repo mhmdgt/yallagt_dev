@@ -7,7 +7,7 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
-    
+
 }
 
 .signup_box {
@@ -153,14 +153,14 @@ body {
 
 .form_box form .input_box input:focus,
 .form_box form .input_box input:valid {
-    border-color: blue;
+    border-color: #102a71;
 }
 
 .form_box form .input_box input:focus+label,
 .form_box form .input_box input:valid+label {
     top: -16px;
     font-size: 18px;
-    color: blue;
+    color: #102a71;
 }
 
 .form_box form .link,
@@ -172,7 +172,7 @@ body {
 
 .form_box form .link a,
 .form_box form .contact_link a {
-    color: blue;
+    color: #102a71;
     text-decoration: none;
     font-weight: bold;
 }
@@ -186,7 +186,7 @@ body {
 .form_box form .password_link a {
     text-decoration: none;
     font-weight: bold;
-    color: blue;
+    color: #102a71;
 }
 
 .form_box form button {
