@@ -6,3 +6,5 @@ function get_contact_us()
 {
     return ContactUs::first();
 }
+
+

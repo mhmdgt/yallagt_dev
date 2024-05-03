@@ -29,9 +29,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('car_brand_model_id')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+                                    <x-errors.display-validation-error property="car_brand_model_id" />
                                 </div>
 
                                 <div class="col">
@@ -39,18 +37,13 @@
                                     <div>
                                         <select class="js-example-basic-single w-100" name="year">
                                             <option value="Select Model">Select Year</option>
-                                            @php
-                                                $currentYear = date('Y');
-                                                $endYear = $currentYear - 65;
-                                            @endphp
-                                            @for ($year = $currentYear + 1; $year >= $endYear; $year--)
+                                            @foreach (getYearsRange() as $year)
                                                 <option value="{{ $year }}">{{ $year }}</option>
-                                            @endfor
+                                            @endforeach
                                         </select>
                                     </div>
-                                    @error('year')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+                                    <x-errors.display-validation-error property="year" />
+
                                 </div>
 
                             </div>
@@ -68,9 +61,8 @@
                             <div class="form-group pt-0 mt-4">
                                 <label>Model Images</label>
                                 <input type="file" class="filepond" name="image" multiple credits="false">
-                                @error('image')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <x-errors.display-validation-error property="image" />
+
                             </div>
 
                             <div class="form-group pt-0 mt-4">
@@ -83,9 +75,7 @@
                                         <button class="file-upload-browse btn btn-light" type="button">Upload</button>
                                     </span>
                                 </div>
-                                @error('brochure')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <x-errors.display-validation-error property="brochure" />
                             </div>
 
                         </div>

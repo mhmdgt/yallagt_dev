@@ -13,8 +13,8 @@
                 </ol>
 
 
-                <button type="button" class="btn btn-danger btn-icon-text mb-2 mb-md-0"
-                data-toggle="modal" data-target="#confirmDeleteModal{{ $stockCarCategory->id }}" title="Edit">
+                <button type="button" class="btn btn-danger btn-icon-text mb-2 mb-md-0" data-toggle="modal"
+                    data-target="#confirmDeleteModal{{ $stockCarCategory->id }}" title="Edit">
                     <i class="bi bi-trash3"></i>
                     Delete
                 </button>
@@ -289,10 +289,10 @@
             <div class="form-group float-right">
                 <button class="btn btn-primary mr-2" type="submit">
                     <i class="bi bi-bookmark-check"></i>
-                    Save
+                    Update
                 </button>
             </div>
 
+        </form>
     </div>
-    </form>
 @endsection

@@ -12,12 +12,21 @@
                 <button type="button" class="btn btn-success btn-icon-text mb-2 mb-md-0" data-toggle="modal"
                     data-target="#blog-category-add">
                     <i class="bi bi-plus-lg mr-2"></i>
+<<<<<<< HEAD
                     Add  Category Blog
                 </button>
             </div>
         </nav>
          {{-- ========================== All category ========================== --}}
          <div class="row">
+=======
+                    Add Category Blog
+                </button>
+            </div>
+        </nav>
+        {{-- ========================== All category ========================== --}}
+        <div class="row">
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -35,16 +44,24 @@
                                 </thead>
                                 <tbody>
                                     <tr>
+<<<<<<< HEAD
                                         @foreach ($categories as  $category)
                                             <td>{{ $loop->iteration }}</td>
                                             <td> <img id="showImage" class="image-rec-full"
                                                 src="{{ display($category->image) }}" alt="..."></td>
+=======
+                                        @foreach ($categories as $category)
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td> <img id="showImage" class="image-rec-full"
+                                                    src="{{ display_img($category->image) }}" alt="..."></td>
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                             <td> {{ $category->getTranslations('name')['en'] }}</td>
                                             <td> {{ $category->getTranslations('name')['ar'] }}</td>
 
                                             <td>
                                                 <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
                                                     data-target="#editcategory{{ $category->id }}" title="Edit">
+<<<<<<< HEAD
                                                     Edit
                                                 </button>
                                                 <button class="btn btn-inverse-danger ml-4 mr-1" data-toggle="modal"
@@ -57,6 +74,19 @@
                                                 route="{{ route('blog-categories.destroy',  $category->slug) }}"
                                                 id="{{  $category->slug }}" />
                                                
+=======
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </button>
+                                                <button class="btn btn-inverse-danger" data-toggle="modal"
+                                                    data-target="#confirmDeleteModal{{ $category->slug }}" title="Edit">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+
+                                                <x-modal.confirm-delete-modal
+                                                    route="{{ route('blog-categories.destroy', $category->slug) }}"
+                                                    id="{{ $category->slug }}" />
+
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                             </td>
                                     </tr>
                                     {{-- ========================== Editcategory ========================== --}}
@@ -74,10 +104,19 @@
                                                 <div class="modal-body">
                                                     <form class="forms-sample car-brand-category-edit" method="POST"
                                                         data-category-id="{{ $category->id }}"
+<<<<<<< HEAD
                                                         action="{{ route('blog-categories.update',$category->slug) }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <input type="text" hidden name="id" value="{{ $category->id }}">
+=======
+                                                        action="{{ route('blog-categories.update', $category->slug) }}"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="text" hidden name="id"
+                                                            value="{{ $category->id }}">
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                                         <input hidden type="text" class="form-control" name="id"
                                                             value="{{ $category->id }}">
                                                         <div class="form-group">
@@ -100,6 +139,7 @@
 
                                                         <div class="form-group">
                                                             <label>Category Image</label>
+<<<<<<< HEAD
                                                             <input type="file" name="logo" class="file-upload-default" >
                             
                                                             <div class="input-group col-xs-12">
@@ -107,13 +147,28 @@
                                                                     placeholder="Upload Image" name="logo">
                                                                 <span class="input-group-append">
                                                                     <button class="file-upload-browse btn btn-success" type="button">Upload</button>
+=======
+                                                            <input type="file" name="image"
+                                                                class="file-upload-default" accept=".png,.jpg">
+                                                            <div class="input-group col-xs-12">
+                                                                <input type="text" class="form-control file-upload-info"
+                                                                    disabled="" placeholder="Upload Image"
+                                                                    name="logo">
+                                                                <span class="input-group-append">
+                                                                    <button class="file-upload-browse btn btn-success"
+                                                                        type="button">Upload</button>
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="exampleInputEmaill" class="form-label"> </label>
                                                             <img id="showImage" class="image-rec-full"
+<<<<<<< HEAD
                                                                 src="{{ display($category->image) }}" alt="...">
+=======
+                                                                src="{{ display_img($category->image) }}" alt="...">
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" id="add_employee_btn"
@@ -137,8 +192,13 @@
             </div>
         </div>
         {{-- ========================== Add category ========================== --}}
+<<<<<<< HEAD
         <div class="modal fade" id="blog-category-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
+=======
+        <div class="modal fade" id="blog-category-add" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -151,7 +211,11 @@
                         <form action="{{ route('blog-categories.store') }}" method="POST" enctype="multipart/form-data"
                             id="car-brand">
                             @csrf
+<<<<<<< HEAD
                           
+=======
+
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                             <div class="form-group">
                                 <label>Name <span class="text-danger">(EN)</span></label>
                                 <input type="text" class="form-control" name="name_en" placeholder="English Name">
@@ -164,10 +228,17 @@
 
                             <div class="form-group">
                                 <label>Category Image</label>
+<<<<<<< HEAD
                                 <input type="file" name="logo" class="file-upload-default" accept=".png">
 
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled=""
+=======
+                                <input type="file" name="image" class="file-upload-default" accept=".png,.jpg">
+
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info"
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                         placeholder="Upload Image" name="logo">
                                     <span class="input-group-append">
                                         <button class="file-upload-browse btn btn-success" type="button">Upload</button>
@@ -180,7 +251,12 @@
                                     src="{{ asset('gt_manager/media/no_image.jpg') }}" alt="...">
                             </div>
                             <div class="modal-footer">
+<<<<<<< HEAD
                                 <button type="submit" id="add_employee_btn" class="btn btn-primary">Save changes</button>
+=======
+                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                    changes</button>
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </form>

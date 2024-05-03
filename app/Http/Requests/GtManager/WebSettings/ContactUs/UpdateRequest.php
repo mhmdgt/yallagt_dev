@@ -32,7 +32,7 @@ class UpdateRequest extends FormRequest
             'youtube' => 'nullable|url',
             'twitter' => 'nullable|url',
             'tiktok' => 'nullable|url',
-            'linkedin' => 'nullable|url',
+            '-' => 'nullable|url',
             'whatsapp' => 'nullable|url',
             'google_maps' => 'nullable|url',
         ];

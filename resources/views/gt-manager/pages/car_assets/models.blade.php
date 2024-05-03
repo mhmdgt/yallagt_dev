@@ -6,9 +6,8 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('car-brand.index') }}">Brands</a>
-                    </li>
-                    <li class="breadcrumb-item"><a>Brand Details</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('car-brand.index') }}">Brands</a></li>
+                    <li class="breadcrumb-item"><a>{{ $carBrand->name }}</a></li>
                 </ol>
                 {{-- ====== Modal button ====== --}}
                 <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0" data-toggle="modal"
@@ -33,10 +32,13 @@
                                     data-target="#EditCarBrand" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <a href="{{ route('car-brand.destroy', $carBrand->id) }}" class="btn btn-inverse-danger"
-                                    data-confirm-delete="true">
+
+                                <button type="button" class="btn btn-inverse-danger"
+                                data-toggle="modal" data-target="#confirmDeleteModal{{ $carBrand->id }}" title="Edit">
                                     <i class="bi bi-trash3"></i>
-                                </a>
+                                </button>
+                                <x-modal.confirm-delete-modal route="{{ route('car-brand.destroy', $carBrand->slug) }}"
+                                    id="{{ $carBrand->id }}" />
                             </td>
 
                         </div>
@@ -56,10 +58,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="forms-sample" action="{{ route('car-brand.update', ['carBrand' => $carBrand]) }}"
+                        <form class="forms-sample" action="{{ route('car-brand.update', $carBrand->slug) }}"
                             method="POST" enctype="multipart/form-data" id="car-brand">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $carBrand->id }}">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
                                 <input type="text" class="form-control" name="name_en" autocomplete="off"
@@ -128,13 +131,15 @@
                                             <td>
                                                 <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
                                                     data-target="#editModel{{ $model->id }}" title="Edit">
-                                                    Edit
+                                                    <i class="bi bi-pencil-square"></i>
                                                 </button>
+                                                <button type="button" class="btn btn-inverse-danger"
+                                                data-toggle="modal" data-target="#confirmDeleteModal{{ $model->id }}" title="Edit">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                                <x-modal.confirm-delete-modal route="{{ route('car-brand-model.destroy', $model->slug) }}"
+                                                    id="{{ $model->id }}" />
 
-                                                <a href="{{ route('car-brand-model.destroy', $model->id) }}"
-                                                    class="btn btn-inverse-danger" data-confirm-delete="true">
-                                                    Delete
-                                                </a>
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
@@ -152,7 +157,7 @@
                                                 <div class="modal-body">
                                                     <form class="forms-sample car-brand-model-edit" method="POST"
                                                         data-model-id="{{ $model->id }}"
-                                                        action="{{ route('car-brand-model.update', ['carBrandModel' => $model->id]) }}">
+                                                        action="{{ route('car-brand-model.update', $model->slug ) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <input hidden type="text" class="form-control" name="id"

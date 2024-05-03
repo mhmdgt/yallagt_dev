@@ -1,7 +1,11 @@
 @extends('gt-manager.layout.app')
 @section('content')
+<<<<<<< HEAD
 <div class="page-content">
 
+=======
+    <div class="page-content">
+>>>>>>> 7328177af53978532a98bed1752bdd12337689aa
         <nav class="page-breadcrumb">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">

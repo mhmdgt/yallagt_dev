@@ -17,8 +17,6 @@ return new class extends Migration
             $table->year('year');
             $table->string('brochure')->nullable();
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
-            // $table->unsignedBigInteger('created_by')->nullable();
-            // $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

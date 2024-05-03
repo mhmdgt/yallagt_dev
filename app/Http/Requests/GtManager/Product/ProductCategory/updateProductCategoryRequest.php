@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\GtManager\Product\ProductCategory;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\ProductCategory;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+
 class updateProductCategoryRequest extends FormRequest
 {
     /**
@@ -21,12 +23,15 @@ class updateProductCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $name_en = ProductCategory::where('slug->en', $this->slug)->value('name->en');
+
         return [
-            'name_ar' => ['required','string','max:200',
-            Rule::unique('product_categories', 'name->ar')->ignore($this->id)],
-            'name_en' => ['required','string','max:200',
-            Rule::unique('product_categories', 'name->en')->ignore($this->id)],
-            'logo' => 'nullable|image|mimes:png', // Adjust allowed extensions
+            // 'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->ar')->ignore($this->slug)],
+            'name_ar' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->ar')->ignore($this->id)],
+
+            // 'name_en' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->en')->ignore($this->slug)],
+            'name_en' => ['required', 'string', 'max:200', Rule::unique('product_categories', 'name->en')->ignore($this->id)],
+            'logo' => 'nullable|image|mimes:png',
         ];
     }
 }

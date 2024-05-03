@@ -6,11 +6,11 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item" aria-current="page">Create Product</li>
+                    <li class="breadcrumb-item" aria-current="page">addddddddd Product</li>
                 </ol>
             </div>
         </nav>
-        {{-- ========================== All Categories ========================== --}}
+        {{-- ========================== Add Product ========================== --}}
         <Form action="" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- General Details --}}

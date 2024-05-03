@@ -21,48 +21,25 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-<<<<<<< HEAD
-        return  [
-            'name' => 'required|max:250|unique:car_stock_categories,name,'.$this->id,
-                'price' => 'required|numeric',
-                'rims_size' => 'required|integer',
-                'number_of_seat' => 'required|integer',
-                'trunk_size' => 'required|integer',
-                'fuel_tank_capacity' => 'required|integer',
-                'cylinder' => 'required|integer',
-                'acceleration' => 'required|integer',
-                'maximum_speed' => 'required|integer',
-                'newton_meter' => 'required|integer',
-                'horsepower' => 'required|integer',
-                'transmission_speed' => 'required|integer',
-                'fuel_consumption' => 'required|integer',
-                'status' => 'required|in:hidden,active',
-                'body_shape_id' => 'required|exists:body_shapes,id',
-                'fuel_type_id' => 'required|exists:fuel_types,id',
-                'transmission_type_id' => 'required|exists:transmission_types,id',
-                'engine_aspiration_id' => 'required|exists:engine_aspirations,id',];
-               
-=======
         return [
             'name' => 'required|max:250|unique:car_stock_categories,name,' . $this->id,
             'price' => 'required|numeric',
             'status' => 'required|in:hidden,active',
-            'rims_size' => 'required|integer',
+            'rims_size' => 'nullable|integer',
             'number_of_seat' => 'required|integer',
-            'trunk_size' => 'required|integer',
-            'fuel_tank_capacity' => 'required|integer',
+            'trunk_size' => 'nullable|integer',
+            'fuel_tank_capacity' => 'nullable|integer',
             'cylinder' => 'required|integer',
-            'acceleration' => 'required|integer',
-            'maximum_speed' => 'required|integer',
+            'acceleration' => 'nullable|integer',
+            'maximum_speed' => 'nullable|integer',
             'newton_meter' => 'required|integer',
             'horsepower' => 'required|integer',
             'transmission_speed' => 'required|integer',
-            'fuel_consumption' => 'required|integer',
+            'fuel_consumption' => 'nullable|integer',
             'body_shape_id' => 'required|exists:body_shapes,id',
             'fuel_type_id' => 'required|exists:fuel_types,id',
             'transmission_type_id' => 'required|exists:transmission_types,id',
             'engine_aspiration_id' => 'required|exists:engine_aspirations,id'];
 
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
             $table->string('name');
-            $table->boolean('main_img');
+            $table->enum('main_img' , ['1' , '0'] );
             $table->timestamps();
         });
     }

@@ -5,8 +5,6 @@ namespace App\Traits;
 
 trait SlugTrait
 {
-
-
     function slug(array $nameArray)
     {
         $slugArray = [];

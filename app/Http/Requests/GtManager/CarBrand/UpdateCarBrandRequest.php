@@ -25,9 +25,9 @@ class UpdateCarBrandRequest extends FormRequest
 
         return [
             'name_ar' => ['required','string','max:200',
-            Rule::unique('car_brands', 'name->ar')->ignore($this->carBrand->id)],
+            Rule::unique('car_brands', 'name->ar')->ignore($this->id)],
             'name_en' => ['required','string','max:200',
-            Rule::unique('car_brands', 'name->en')->ignore($this->carBrand->id)],
+            Rule::unique('car_brands', 'name->en')->ignore($this->id)],
             'logo' => 'nullable|image|mimes:png', // Adjust allowed extensions
         ];
     }

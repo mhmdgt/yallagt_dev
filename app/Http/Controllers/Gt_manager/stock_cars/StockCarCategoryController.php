@@ -12,7 +12,6 @@ use App\Traits\GetModelTrait;
 use App\Models\EngineAspiration;
 use App\Models\StockCarCategory;
 use App\Models\TransmissionType;
-use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\GtManager\StockCarCategory\StoreRequest;
@@ -57,7 +56,7 @@ class StockCarCategoryController extends Controller
         $brand = $BrandModel->brand;
 
         Session::flash('success', 'Category Stored Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
+        return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- edit -------------------- //
     public function edit($stockCarCategory)
@@ -82,8 +81,6 @@ class StockCarCategoryController extends Controller
     // -------------------- update -------------------- //
     public function update(UpdateRequest $request, $stockCarCategory)
     {
-
-        // dd($request->all());
         $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
         $validatedData = $request->validated();
         $validatedData['slug'] = Str::slug($validatedData['name']);
@@ -94,7 +91,7 @@ class StockCarCategoryController extends Controller
         $brand = $brandModel->brand;
 
         Session::flash('success', 'Category Updated Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
+        return redirect()->route('stock-car.show', $brand->slug );
     }
     // -------------------- destroy -------------------- //
     function destroy(StockCarCategory $stockCarCategory)
@@ -105,6 +102,6 @@ class StockCarCategoryController extends Controller
         $brand = $BrandModel->brand;
 
         Session::flash('success', 'Deleted Successfully');
-        return redirect()->route('stock-car.show', ['brandSlug' => $brand->slug]);
+        return redirect()->route('stock-car.show', $brand->slug );
     }
 }

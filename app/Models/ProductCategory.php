@@ -9,26 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductCategory extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = ['name', 'logo', 'slug' ];
-// protected $table="product_categories";
-    public $translatable = ['name','slug'];
-    function productSubCategories(){
+    protected $fillable = ['name', 'logo', 'slug'];
+    public $translatable = ['name', 'slug'];
+    // -------------------- Method -------------------- //
+    public static function getByTranslatedSlug($slug)
+    {
+        $locale = App::getLocale();
+        return self::where("slug->{$locale}", $slug);
+    }
+    // -------------------- Method -------------------- //
+    public function productSubCategories()
+    {
         return $this->hasMany(ProductSubCategory::class);
     }
-
-    public function getRouteKeyName()
-    {
-        $locale = app()->getLocale();
-
-        // Return the attribute name dynamically based on the current language
-        return "slug->{$locale}";
-    }
-
-    public static function getByTranslatedSlug($slug)
-{
-    $locale = App::getLocale();
-    return self::where("slug->{$locale}", $slug);
-}
 }

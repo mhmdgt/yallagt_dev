@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             FeatureSeeder::class,
             GovernorateSeeder::class,
             ManufacturerSeeder::class,
+            ProductCategorySeeder::class,
+            BlogCategorySeeder::class,
         ]);
     }
 

@@ -25,21 +25,23 @@ class StoreRequest extends FormRequest
             'name' => 'required|unique:car_stock_categories,name|max:250',
             'price' => 'required|numeric',
             'status' => 'in:hidden,active',
-            'rims_size' => 'required|integer',
+            'rims_size' => 'nullable|integer',
             'number_of_seat' => 'required|integer',
-            'trunk_size' => 'required|integer',
-            'fuel_tank_capacity' => 'required|integer',
+            'trunk_size' => 'nullable|integer',
+            'fuel_tank_capacity' => 'nullable|integer',
             'cylinder' => 'required|integer',
-            'acceleration' => 'required|integer',
-            'maximum_speed' => 'required|integer',
+            'acceleration' => 'nullable|integer',
+            'maximum_speed' => 'nullable|integer',
             'newton_meter' => 'required|integer',
             'horsepower' => 'required|integer',
             'transmission_speed' => 'required|integer',
+
             'fuel_consumption' => 'required|integer',
-<<<<<<< HEAD
+
             'status' => 'required|in:hidden,active',
-=======
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
+
+       
+
             'body_shape_id' => 'required|exists:body_shapes,id',
             'fuel_type_id' => 'required|exists:fuel_types,id',
             'transmission_type_id' => 'required|exists:transmission_types,id',

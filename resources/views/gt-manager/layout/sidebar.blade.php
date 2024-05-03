@@ -52,15 +52,15 @@
                 <div class="collapse" id="ProdutcAssets">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('product-categories.index')}}" class="nav-link">
-                                Product Categories</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('manufacturers.index')}}" class="nav-link">
                                 Manufacturers</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">+ Add Products</a>
+                            <a href="{{ route('product-categories.index')}}" class="nav-link">
+                                Product Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('products.create')}}" class="nav-link">+ Add Products</a>
                         </li>
                     </ul>
                 </div>

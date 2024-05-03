@@ -23,9 +23,9 @@ class UpdateCarBrandModelRequest extends FormRequest
     {
         return [
             'name_ar' => ['required','string','max:200',
-            Rule::unique('car_brand_models', 'name->ar')->ignore($this->carBrandModel->id)],
+            Rule::unique('car_brand_models', 'name->ar')->ignore($this->id)],
             'name_en' => ['required','string','max:200',
-            Rule::unique('car_brand_models', 'name->en')->ignore($this->carBrandModel->id)],
+            Rule::unique('car_brand_models', 'name->en')->ignore($this->id)],
 
         ];
     }

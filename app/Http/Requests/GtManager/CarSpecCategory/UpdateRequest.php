@@ -29,13 +29,13 @@ class UpdateRequest extends FormRequest
     {
         return  [
             'name_ar' => [
-                'nullable',
+                'required',
                 'string',
                 'max:200',
                 Rule::unique('manufacturers', 'name->ar')->ignore($this->id),
             ],
             'name_en' => [
-                'nullable',
+                'required',
                 'string',
                 'max:200',
                 Rule::unique('manufacturers', 'name->en')->ignore($this->id),

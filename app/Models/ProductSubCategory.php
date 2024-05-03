@@ -2,28 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductSubCategory extends Model
 {
-   
-    use HasFactory , HasTranslations;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = ['name', 'logo', 'slug','product_category_id' ];
-
-    public $translatable = ['name','slug'];
-
-    function productCategory(){
+    protected $fillable = ['name', 'logo', 'slug', 'product_category_id'];
+    public $translatable = ['name', 'slug'];
+    // -------------------- Method -------------------- //
+    public static function getByTranslatedSlug($slug)
+    {
+        $locale = App::getLocale();
+        return self::where("slug->{$locale}", $slug);
+    }
+    // -------------------- Method -------------------- //
+    public function productCategory()
+    {
         return $this->belongsTo(ProductCategory::class);
     }
-    public function getRouteKeyName()
-    {
-        $locale = app()->getLocale();
-
-        // Return the attribute name dynamically based on the current language
-        return "slug->{$locale}";
-    }
-
 }

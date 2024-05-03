@@ -31,5 +31,7 @@ Route::get('/', function () {
 return view('yalla-gt.pages.app.index');
 });
 
+Route::view('/home' , 'yalla-gt.pages.app.new');
+
 
 

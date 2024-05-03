@@ -11,11 +11,11 @@
                 Are you sure you want to delete this item?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 <form id="deleteForm" method="POST" action="{{ $route }}">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-secondary">Delete</button>
                 </form>
             </div>
         </div>
