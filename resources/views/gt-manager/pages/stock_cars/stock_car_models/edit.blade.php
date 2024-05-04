@@ -41,7 +41,7 @@
                                     <label for="year">Year</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="year">
-                                            <option value="Select Model">Select Year</option>
+                                            <option value="{{ $stockCar->year }}">{{ $stockCar->year }}</option>
                                             @foreach (getYearsRange() as $year)
                                                 <option value="{{ $year }}">{{ $year }}</option>
                                             @endforeach
@@ -63,22 +63,12 @@
                             {{-- images --}}
                             <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
                                 @foreach ($stockCar->images as $index => $image)
-                                    <div class="img-container position-relative">
-
-                                        <img src="{{ display_img('media/stock_cars_imgs/' . $image->name) }}"
-                                            alt="">
-
+                                    <div class="img-container position-relative" id="image-container-{{ $index }}">
+                                        <img src="{{ display_img('media/stock_cars_imgs/' . $image->name) }}" alt="">
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
-
-                                        {{-- <input class="select-btn " name="main_img" value="{{ $image->id }}"></input> --}}
-                                        <input class="select-btn {{ $image->main_img ? 'active_main_img' : '' }}"
-                                            name="main_img" value="{{ $image->id }}" />
-
-
-
-                                        <input type="hidden" name="images[{{ $index }}][name]"
-                                            value="{{ $image->name }}">
-
+                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
+                                               {{ $image->main_img ? 'checked' : '' }}>
                                     </div>
                                 @endforeach
                             </div>
@@ -321,19 +311,16 @@
 {{-- The one that created for upload new only  --}}
 @section('script')
     <script>
-        // ----------------------------------------
+        // ---------------------------------------- Filepond
         FilePond.registerPlugin(FilePondPluginImagePreview);
         FilePond.registerPlugin(FilePondPluginImageTransform);
         FilePond.registerPlugin(FilePondPluginFileMetadata);
-
+        // Get images data from the incoming php var to the blade
         const existingBrand = {!! json_encode($brandData->slug) !!};
-
         // Get a reference to the file input element
         const inputElement = document.querySelector('input[type="file"]');
-
         // Create a FilePond instance
         const pond = FilePond.create(inputElement);
-
         // Set the options for you files
         pond.setOptions({
             allowMultiple: true,
@@ -354,12 +341,12 @@
             imageTransformCanvasMemoryLimit: 50000000,
             imageTransformOutputQuality: 80,
         });
-
-        // ----------------------------------------
+        // ---------------------------------------- Carousel & buttons
         $(document).ready(function() {
             var owl = $('#image-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
+                slideBy: 2,
                 nav: true,
                 navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
                     "<i class='bi bi-arrow-right-circle-fill'></i>"
@@ -380,7 +367,7 @@
                     }
                 }
             });
-            // ----------------------------------------
+            // ---------------------------------------- Delete Button
             $('.delete-btn').click(function(event) {
                 event.preventDefault();
 
@@ -405,18 +392,15 @@
                     $(this).attr('name', newName);
                 });
             });
+            // --------------------------------------- Select button
+            // $('.select-btn').click(function() {
+            //     // Get the ID of the selected image
+            //     var imageId = $(this).attr('value');
 
+            //     // Set the value of the main_img input to the ID of the selected image
+            //     $('input[name="main_img"]').val(imageId);
+            // });
             // ---------------------------------------
-            $('.select-btn').click(function() {
-                // Get the ID of the selected image
-                var imageId = $(this).attr('value');
-
-                // Set the value of the main_img input to the ID of the selected image
-                $('input[name="main_img"]').val(imageId);
-            });
-            // ---------------------------------------
-
-
         });
     </script>
 @endsection

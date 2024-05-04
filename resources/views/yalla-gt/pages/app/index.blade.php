@@ -14,7 +14,6 @@
             </div>
         </div>
     </div>
-
     <!-- Services -->
     <div class="banner_area">
         <div class="container-fluid ">
@@ -98,14 +97,13 @@
             </div>
         </div>
     </div>
-
     <!-- Sale Car -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>Cars for sale</h2>
+                        <h2>{{__('home_page.SaleCars')}}</h2>
                         <hr>
                     </div>
                 </div>
@@ -186,11 +184,10 @@
                             </a>
                             <div class="card-body container-fluid">
                                 <a href="#">
+                                    <h4><span>جديد</span></h4>
                                     <h4 class="card-text">
-                                        <span>New</span>
-                                        Mercedes
-                                        C180
-                                        2023
+                                        <span>مرسيدس</span>
+                                        C180 2023
                                     </h4>
                                 </a>
                                 <h3 class="card-text-h3 mt-3">
@@ -249,14 +246,13 @@
             </div>
         </div>
     </section>
-
     <!-- Car Brands -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>CAR BRANDS</h2>
+                        <h2>{{__('home_page.CarBrands')}}</h2>
                         <hr>
                     </div>
                 </div>
@@ -293,14 +289,13 @@
             </div>
         </div>
     </section>
-
     <!-- Categories -->
     <section class="new-section category_section_1">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>Featured Categories</h2>
+                        <h2>{{__('home_page.FeaturedCategories')}}</h2>
                         <hr>
                     </div>
                 </div>
@@ -399,19 +394,17 @@
             </div>
         </div>
     </section>
-
     <!-- Products Shop -->
     <section class="new-section product_area product_deals">
         <div class="container-fluid">
             <div class="col-12">
                 <div class="section_title section_title_border en-style">
-                    <h2>Products Shop</h2>
+                    <h2>{{__('home_page.ProductShop')}}</h2>
                     <hr>
                 </div>
             </div>
             <div class="product_container">
                 <div class="row product_carousel no-gutters">
-
                     <!-- Single Card -->
                     <div class="col-md-20 col-6 product_item">
                         <div class="single_product">
@@ -674,14 +667,13 @@
             </div>
         </div>
     </section>
-
     <!-- Manufacturers -->
     <section class="new-section brand_area">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2> Featured manufacturers</h2>
+                        <h2>{{__('home_page.FeaturedManufacturers')}}</h2>
                         <hr>
                     </div>
                 </div>
@@ -718,7 +710,6 @@
             </div>
         </div>
     </section>
-
     <!-- Vertical Shop -->
     <section class="new-section vertical_shop">
         <div class="container-fluid">
@@ -851,14 +842,14 @@
             </div>
         </div>
     </section>
-
     <!-- Blog -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>Latest Blog posts</h2>
+                        <h2>{{__('home_page.LatestBlogNews')}}</h2>
+
                         <hr>
                     </div>
                 </div>
@@ -881,7 +872,7 @@
                                     <i class="bi bi-bookmark-check"></i>
                                     By Mohamed Ahmed
                                 </h5>
-                                <div class="card-text-4 mb-2">
+                                <div class=" card-text-4 mb-2">
                                     <i class="bi bi-stopwatch"></i>
                                     <span class="badge_icon_second">5 moths ago</span>
                                 </div>
@@ -983,7 +974,6 @@
             </div>
         </div>
     </section>
-
     <!-- Ad Start area -->
     <section class="new-section">
         <div class="container-fluid">
@@ -998,5 +988,4 @@
 
         </div>
     </section>
-
 @endsection

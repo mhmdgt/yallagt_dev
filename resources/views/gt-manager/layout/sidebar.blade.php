@@ -52,15 +52,15 @@
                 <div class="collapse" id="ProdutcAssets">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('manufacturers.index')}}" class="nav-link">
-                                Manufacturers</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('product-categories.index')}}" class="nav-link">
                                 Product Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('products.create')}}" class="nav-link">+ Add Products</a>
+                            <a href="{{ route('manufacturers.index')}}" class="nav-link">
+                                Manufacturers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('products.index')}}" class="nav-link">All Products</a>
                         </li>
                     </ul>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="collapse" id="StockCars">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('stock-car.index') }}" class="nav-link">Show All</a>
+                            <a href="{{ route('stock-car.index') }}" class="nav-link">All Stock Cars</a>
                         </li>
                     </ul>
                 </div>
@@ -110,9 +110,9 @@
                 </a>
                 <div class="collapse" id="BlogSystem">
                     <ul class="nav sub-menu">
-                        <li class="nav-item"><a href="{{ route('blogs.create') }}" class="nav-link">Add New Blog</a></li>
                         <li class="nav-item"><a href="{{ route('blog-categories.index') }}" class="nav-link">Categories</a></li>
                         <li class="nav-item"><a href="{{ route('blogs.index') }}" class="nav-link">Blog List</a></li>
+                        <li class="nav-item"><a href="{{ route('blogs.create') }}" class="nav-link">+ Add Blog</a></li>
                     </ul>
                 </div>
             </li>

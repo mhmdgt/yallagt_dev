@@ -57,14 +57,11 @@
                     <div class="card">
                         <div class="card-body">
                             <h4>Media</h4>
-
                             <div class="form-group pt-0 mt-4">
                                 <label>Model Images</label>
                                 <input type="file" class="filepond" name="image" multiple credits="false">
                                 <x-errors.display-validation-error property="image" />
-
                             </div>
-
                             <div class="form-group pt-0 mt-4">
                                 <label>PDF Brochure</label>
                                 <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
@@ -77,7 +74,6 @@
                                 </div>
                                 <x-errors.display-validation-error property="brochure" />
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -107,7 +103,7 @@
 
 @section('script')
     <script>
-        // Get a preview for you uploaded images
+        // FilePond Settings For Stock Car Images
         FilePond.registerPlugin(FilePondPluginImagePreview);
         FilePond.registerPlugin(FilePondPluginImageTransform);
         FilePond.registerPlugin(FilePondPluginFileMetadata);

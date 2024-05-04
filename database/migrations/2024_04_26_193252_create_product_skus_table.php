@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('product_skus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->references('id')->on('products')->cascadeOnDelete();
 
             $table->string('sku')->unique();
             $table->string('part_number')->nullable();
-            $table->decimal('price', 10, 2);
+            $table->decimal('main_price', 10, 2);
             $table->enum('status', ['active', 'hidden'])->default('active');
-
             $table->timestamps();
         });
     }

@@ -53,29 +53,16 @@
 </head>
 
 <body class="sidebar-dark">
-
     <div class="main-wrapper">
-
-        <!-- partial:partials/_sidebar.html -->
         @include('gt-manager.layout.sidebar')
 
-        <!-- partial -->
-
         <div class="page-wrapper">
-
-            <!-- partial:partials/_navbar.html -->
             @include('gt-manager.layout.header')
-            <!-- partial -->
-
             @yield('content')
-
-            <!-- partial:partials/_footer.html -->
             @include('gt-manager.layout.footer')
-            <!-- partial -->
-
         </div>
-    </div>
 
+    </div>
     <!-- ------------------------------- Scripts ------------------------------- -->
 
     <!-- jqaury -->
@@ -122,6 +109,8 @@
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
+
+
     <!-- owl carousel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
@@ -133,6 +122,7 @@
     <!-- ------------------------------- END js ------------------------------- -->
 
     @livewireScripts
+    @include('gt-manager.partials.session_messages')
     @yield('script')
 
 </body>

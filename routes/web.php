@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Models\CarBrand;
-use App\Models\ProductCategory;
 
 
 
 require __DIR__ . '/gt_manager.php';
+require __DIR__ . '/yalla_gt.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +22,6 @@ require __DIR__ . '/gt_manager.php';
      Route::view('/manager/login', 'gt-manager.pages.auth.login')->name('admin-login');
     Route::post('/manager/check-login', [AdminController::class, 'login'])->name('admin.check.login');
 }); // END OF Guest Routes
-
-
-Route::get('/', function () {
-
-   
-return view('yalla-gt.pages.app.index');
-});
-
-Route::view('/home' , 'yalla-gt.pages.app.new');
 
 
 

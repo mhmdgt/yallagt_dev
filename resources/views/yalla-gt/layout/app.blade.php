@@ -19,19 +19,29 @@
 
     <!-- Layout styles -->
     <link rel="stylesheet" href="yalla_gt/assets/css/light_theme/style.css" />
-    <link rel="stylesheet" href="yalla_gt/assets/css/light_theme/style_en.css" />
-    {{-- <link rel="stylesheet" href="yalla_gt/assets/css/light_theme/style_ar.css" /> --}}
+
+    <!-- Style AR &E N -->
+    @if (App::getLocale() == 'en')
+        <link rel="stylesheet" href="yalla_gt/assets/css/light_theme/style_en.css" />
+    @else
+        <link rel="stylesheet" href="yalla_gt/assets/css/light_theme/style_ar.css" />
+    @endif
 
     <!-- Login popup -->
-    <link rel="stylesheet" href="yalla_gt/assets/vendors/login_popup/login_popup_en.css" />
-    {{-- <link rel="stylesheet" href="yalla_gt/assets/vendors/login_popup/login_popup_ar.css" /> --}}
+    @if (App::getLocale() == 'en')
+        <link rel="stylesheet" href="yalla_gt/assets/vendors/login_popup/login_popup_en.css" />
+    @else
+        <link rel="stylesheet" href="yalla_gt/assets/vendors/login_popup/login_popup_ar.css" />
+    @endif
+
 
     <!-- Mobile NavBar -->
     <link rel="stylesheet" href="yalla_gt/assets/vendors/mobile_navbar/mobile_navbar.css" />
 
     <!-- owl carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
     <!-- icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -51,7 +61,7 @@
         </section>
     </main>
     <!-- Pop-up -->
-    @include('yalla-gt.layout.auth_popup')
+    @include('yalla-gt.pages.auth.auth_popup')
     <!-- ========================= ========================= Content ========================= ========================= -->
 
     <!-- jQuery -->
@@ -79,8 +89,12 @@
     <script src="yalla_gt/assets/js/mobile_navbar.js"></script>
 
     <!-- Pop up -->
-    <script src="yalla_gt/assets/js/auth_popup/login_popup_en.js"></script>
-    {{-- <script src="yalla_gt/assets/js/auth_popup/login_popup_ar.js"></script> --}}
+    @if (App::getLocale() == 'en')
+        <script src="yalla_gt/assets/js/auth_popup/login_popup_en.js"></script>
+    @else
+        <script src="yalla_gt/assets/js/auth_popup/login_popup_ar.js"></script>
+    @endif
+
 
     <!-- owl carousel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>

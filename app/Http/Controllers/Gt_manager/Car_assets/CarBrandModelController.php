@@ -15,6 +15,7 @@ class CarBrandModelController extends Controller
 {
     use SlugTrait;
 
+    // -------------------- Jquery Method Link -------------------- //
     public function getModelsByBrand($brandId)
     {
         $brand = CarBrand::findOrFail($brandId);
@@ -35,7 +36,7 @@ class CarBrandModelController extends Controller
         ]);
 
         // Flash success message and redirect back
-        Session::flash('success', 'Updated Successfully');
+        Session::flash('success', 'Stored Successfully');
         return redirect()->back();
     }
     // -------------------- Update Brand Models Method -------------------- //

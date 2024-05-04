@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:250|unique:car_stock_categories,name,' . $this->id,
+            'name' => 'required|max:250',
             'price' => 'required|numeric',
             'status' => 'required|in:hidden,active',
             'rims_size' => 'nullable|integer',

@@ -9,7 +9,6 @@
                     <li class="breadcrumb-item" aria-current="page">Edit Product</li>
                 </ol>
                 <div class="d-flex justify-content-between">
-                    <a href="{{ URL::previous() }}" class="btn btn-primary"><i class="bi bi-backspace mr-2"></i>Back</a>
                     <button type="button" class="btn btn-danger btn-icon-text mb-2 mb-md-0 ml-2" data-toggle="modal"
                         data-target="#confirmDeleteModal{{ $product->id }}" title="Edit">
                         <i class="bi bi-trash3"></i>
@@ -21,14 +20,14 @@
             </div>
         </nav>
         {{-- ========================== All Categories ========================== --}}
-        <Form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('products.update', $product->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- General Details --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">General Details</h6>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> General</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Manufacturer</label>
@@ -46,6 +45,41 @@
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
+                                    <label>Category</label>
+                                    <div>
+                                        <select id="categorySelect" class="js-example-basic-single w-100"
+                                            name="category_id">
+                                            <option value="">Select Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ $product->category && $product->category->id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <label>Sub Category</label>
+                                    <div>
+                                        <select id="subcategorySelect" class="js-example-basic-single w-100"
+                                            name="subcategory_id">
+                                            <option value="">Select Category First</option>
+                                            @foreach ($subCategories as $subcategory)
+                                                <option value="{{ $subcategory->id }}"
+                                                    {{ $subCategory->id == $subcategory->id ? 'selected' : '' }}>
+                                                    {{ $subcategory->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group row pt-0">
+                                <div class="col">
                                     <label>Product Name <span class="text-danger">(EN)</span></label>
                                     <input type="text" class="form-control" name="name_en"
                                         value="{{ $product->getTranslations('name')['en'] }}">
@@ -57,6 +91,15 @@
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Description</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Description<span class="text-danger">(EN)</span></label>
@@ -73,10 +116,38 @@
                                     </textarea>
                                 </div>
                             </div>
-                            {{-- Media --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Media --}}
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Media</label>
+                            {{-- images --}}
+                            <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
+                                @foreach ($product->images as $index => $image)
+                                    <div class="img-container position-relative" id="image-container-{{ $index }}">
+                                        <img src="{{ display_img('media/product_imgs/' . $image->name) }}" alt="">
+                                        <button class="delete-btn" data-index="{{ $index }}">&times;</button>
+                                        <input type="hidden" name="images[{{ $index }}][name]"
+                                            value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img"
+                                            value="{{ $image->id }}" {{ $image->main_img ? 'checked' : '' }}>
+                                    </div>
+                                @endforeach
+                            </div>
                             <div class="form-group pt-0 mt-4">
+                                <label>Add More Images</label>
+                                <input type="file" class="filepond" name="image" multiple>
+                            </div>
+                            {{-- Brochure --}}
+                            <div class="form-group pt-0">
                                 <label>PDF Brochure</label>
-                                <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
+                                <input type="file" name="brochure" accept="application/pdf"
+                                    class="file-upload-default">
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled=""
                                         placeholder="Upload Borchur">
@@ -99,14 +170,16 @@
                                                 <!-- Dropdown button positioned at top-left corner -->
                                                 <div class="dropdown position-absolute" style="top: 8px; right: 8px;">
                                                     <button class="btn p-1" type="button" id="dropdownMenuButton"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
                                                         <i class="icon-lg text-muted pb-3px"
                                                             data-feather="more-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-left"
                                                         aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                                                data-feather="download" class="icon-sm mr-2"></i> <span
+                                                        <a class="dropdown-item d-flex align-items-center"
+                                                            href="#"><i data-feather="download"
+                                                                class="icon-sm mr-2"></i> <span
                                                                 class="">download</span></a>
                                                         <a class="dropdown-item d-flex align-items-center"
                                                             href="#"><i data-feather="trash"
@@ -119,13 +192,51 @@
                                     </div>
                                 @endif
                             </div>
-
-                            {{-- Tags --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Tags --}}
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Tags</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label> <i class="bi bi-tags"></i> Tags input </label>
+                                    <label>Tags</label>
                                     <div>
                                         <input name="tags" id="tags" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Status --}}
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row pt-0">
+                                <div class="col">
+                                    <h6 class="card-title">Status</h6>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios5" value="active"
+                                                {{ $product->status == 'active' ? 'checked' : '' }}>
+                                            Active
+                                            <i class="input-frame"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios6" value="hidden"
+                                                {{ $product->status == 'hidden' ? 'checked' : '' }}>
+                                            Hidden
+                                            <i class="input-frame"></i></label>
                                     </div>
                                 </div>
                             </div>
@@ -136,8 +247,109 @@
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">
                 <i class="bi bi-bookmark-check"></i>
-                    Update
+                Update
             </button>
         </Form>
     </div>
+@endsection
+@section('script')
+    <script>
+        // ---------------------------------------- Filepond
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create(inputElement);
+        pond.setOptions({
+            allowMultiple: true,
+            allowReorder: true,
+            server: {
+                process: '/manage/tmpFilepondUpload',
+                revert: '/manage/tmpFilepondDelete',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            },
+
+        });
+        // ---------------------------------------- SubCategories
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('categorySelect');
+            const subcategorySelect = document.getElementById('subcategorySelect');
+
+            categorySelect.addEventListener('change', function() {
+                const categoryId = this.value;
+
+                // Clear existing options
+                subcategorySelect.innerHTML = '<option value="">Loading...</option>';
+
+                // Send AJAX request to fetch subcategories
+                fetch(`/get-subcategories/${categoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear existing options
+                        subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+
+                        // Populate subcategory options
+                        data.forEach(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            subcategorySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching subcategories:', error));
+            });
+        });
+        // ---------------------------------------- Carousel & buttons
+        $(document).ready(function() {
+            var owl = $('#image-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                slideBy: 2,
+                nav: true,
+                navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
+                    "<i class='bi bi-arrow-right-circle-fill'></i>"
+                ],
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 2,
+                        slideBy: 2
+                    },
+                    600: {
+                        items: 3,
+                        slideBy: 3
+                    },
+                    1000: {
+                        items: 6,
+                        slideBy: 5
+                    }
+                }
+            });
+            // ---------------------------------------- Delete Button
+            $('.delete-btn').click(function(event) {
+                event.preventDefault();
+
+                var index = $(this).data('index');
+
+                // Remove the corresponding input fields
+                $('input[name="images[' + index + '][name]"]').remove();
+                $('input[name="images[' + index + '][url]"]').remove();
+
+                // Remove the item from the Owl Carousel's internal data structure
+                owl.trigger('remove.owl.carousel', [index]).trigger('refresh.owl.carousel');
+
+                // After removing the item, update the index values for remaining items
+                // Update the index data attribute for delete buttons
+                $('.delete-btn').each(function(i) {
+                    $(this).data('index', i);
+                });
+
+                // Update the name attribute for input fields
+                $('input[name^="images"]').each(function(i) {
+                    var newName = $(this).attr('name').replace(/\[\d+\]/, '[' + i + ']');
+                    $(this).attr('name', newName);
+                });
+            });
+        });
+    </script>
 @endsection

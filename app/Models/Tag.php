@@ -19,4 +19,9 @@ class Tag extends Model
         return $this->morphedByMany(Product::class, 'taggable');
     }
 
+    public function blogs()
+    {
+        return $this->morphedByMany(Blog::class, 'taggable');
+    }
+
 }

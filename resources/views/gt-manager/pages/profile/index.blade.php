@@ -1,9 +1,7 @@
 @extends('gt-manager.layout.app')
 @section('content')
     <div class="page-content">
-
         <div class="profile-page tx-13">
-
             <div class="row profile-body">
                 <!-- left wrapper start -->
                 <div class="col-md-4 col-xl-4 left-wrapper mb-4">
@@ -37,7 +35,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- left wrapper end -->
                 <!-- middle wrapper start -->
                 <div class="col-md-8 col-xl-8 middle-wrapper">
                     <div class="row">
@@ -101,21 +98,22 @@
                         </div>
                     </div>
                 </div>
-                <!-- middle wrapper end -->
             </div>
         </div>
 
     </div>
-    <!-- ============= Real-Time Image loader ============= -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#image').change(function(e) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#showImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
         });
-    </script>
+    });
+</script>
 @endsection

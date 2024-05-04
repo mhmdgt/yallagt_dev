@@ -34,9 +34,6 @@
                                 @endforeach
                             </div>
 
-                            {{-- <a href="{{ route('stock-car.update', ['brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year]) }}"> --}}
-                            {{-- <a href="{{ route('stock-car.edit', [ 'brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' =>$stockCar->id ]) }}"> --}}
-                            {{-- <a href="{{ route('stock-car.edit', ['brandSlug' => $brandSlug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}"> --}}
                             <a
                                 href="{{ route('stock-car.edit', ['slug' => $brandData->slug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}">
 
@@ -114,43 +111,4 @@
         @endforeach
     </div>
 </div>
-@endsection
-
-@section('script')
-@if (Session::has('success'))
-    {{-- Popup-seccuss --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: true, // Set to true to show confirm button
-                confirmButtonText: 'Done', // Customize the button text
-                // timer: 1500
-            });
-        });
-    </script>
-
-    {{-- toast-seccuss --}}
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer);
-                    toast.addEventListener('mouseleave', Swal.resumeTimer);
-                }
-            });
-
-            Toast.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}'
-            });
-        });
-    </script> --}}
-@endif
 @endsection

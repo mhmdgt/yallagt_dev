@@ -89,9 +89,10 @@ class StockCarsController extends Controller
             // Brand name
             $imageParameter = $request->input('image');
             $imageData = json_decode($imageParameter, true);
-            // dd($imageData);
             $brandData = $imageData['brandData'];
+            // dd($imageData);
             // dd($imageParameter);
+
             // Convert to Jpeg
             $manager = new ImageManager(new Driver());
             $imageMngr = $manager->read($image);
@@ -128,6 +129,14 @@ class StockCarsController extends Controller
     // -------------------- Store Stock Car -------------------- //
     public function store(Request $request)
     {
+        // dd($request->all());
+        // Chech The Validation
+        $validator = Validator::make($request->all(), [
+            'car_brand_model_id' => 'required|exists:car_brand_models,id',
+            'year' => 'required|integer|digits:4',
+            'brochure' => 'file|mimes:pdf',
+        ]);
+        // Properties
         $temporaryImages = TemporaryFile::all();
         $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
         $brand = $BrandModel->brand;
@@ -135,12 +144,6 @@ class StockCarsController extends Controller
         $ModelYear = $request->year;
         $brochure = null;
         $firstImage = 1;
-        // Chech The Validation
-        $validator = Validator::make($request->all(), [
-            'car_brand_model_id' => 'required|exists:car_brand_models,id',
-            'year' => 'required|integer|digits:4',
-            'brochure' => 'file|mimes:pdf',
-        ]);
         // Remove TMP images if validation fails
         if ($validator->fails()) {
             foreach ($temporaryImages as $temporaryImage) {
@@ -149,19 +152,19 @@ class StockCarsController extends Controller
             }
             return redirect()->back()->withErrors($validator->errors());
         }
-
+        // Check if request has a brochure
         if ($request->brochure) {
             $brochure = $brand['slug'] . '_' . $brandModelSlug . '_brochure' . '_' . $ModelYear . '.' . $request->brochure->extension();
             $request->brochure->storeAs('media/stock_car_brochures/' . $brochure);
         }
-
+        // store stock car into the database
         $stock_car = StockCar::create([
             'car_brand_model_id' => $BrandModel->id,
             'year' => $request->year,
             'brochure' => $brochure,
             'status' => 'active',
         ]);
-
+        // store images into stock car images table
         foreach ($temporaryImages as $temporaryImage) {
             Storage::copy('filepond-tmp/stock_car_imgs/' . $temporaryImage->name,
                 'media/stock_cars_imgs/' . $temporaryImage->name);
@@ -177,7 +180,7 @@ class StockCarsController extends Controller
             Storage::delete('filepond-tmp/stock_car_imgs/' . $temporaryImage->name);
             $temporaryImage->delete();
         }
-
+        // Success message
         Session::flash('success', 'Stored Successfully');
         return redirect()->route('stock-car.show', $brand->slug);
     }
@@ -196,6 +199,14 @@ class StockCarsController extends Controller
     // -------------------- Update Stock Car -------------------- //
     public function update(Request $request, $stockCar)
     {
+        // Chech The Validation
+        $validator = Validator::make($request->all(), [
+            'car_brand_model_id' => 'required|exists:car_brand_models,id',
+            'year' => 'required|integer|digits:4',
+            'brochure' => 'file|mimes:pdf',
+            'main_img' => 'required', // Ensure main_img is present
+        ]);
+        // Properties
         $temporaryImages = TemporaryFile::all();
         $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
         $brand = $BrandModel->brand;
@@ -203,14 +214,9 @@ class StockCarsController extends Controller
         $ModelYear = $request->year;
         $brochure = null;
         $stockCar = StockCar::with('images')->findOrFail($stockCar);
-        // Chech The Validation
-        $validator = Validator::make($request->all(), [
-            'car_brand_model_id' => 'required|exists:car_brand_models,id',
-            'year' => 'required|integer|digits:4',
-            'brochure' => 'file|mimes:pdf',
-        ]);
-        // Remove TMP images if validation failsc
+        // Remove TMP images if validation failed
         if ($validator->fails()) {
+            Session::flash('fail', 'Please select main photo');
             foreach ($temporaryImages as $temporaryImage) {
                 Storage::delete('filepond-tmp/stock_car_imgs/' . $temporaryImage->name);
                 $temporaryImage->delete();
@@ -229,19 +235,33 @@ class StockCarsController extends Controller
             'brochure' => $brochure,
             'status' => $request->status,
         ]);
-        // Handle Last Images
+        // Deleted removed images and leave only stayed images into the update request
         if ($request->has('images')) {
             // Get the list of image names from the request
             $requestedImageNames = collect($request->images)->pluck('name')->toArray();
 
             // Find the existing images associated with the stock car
-            $existingImages = $stockCar->images->pluck('name')->toArray();
+            $existingImages = $stockCar->images;
+
+            // Store the main image ID before removal
+            $mainImageId = null;
+            foreach ($existingImages as $image) {
+                if ($image->main_img === '1') {
+                    $mainImageId = $image->id;
+                    break;
+                }
+            }
 
             // Determine which images should be removed
-            $imagesToRemove = array_diff($existingImages, $requestedImageNames);
+            $imagesToRemove = [];
+            foreach ($existingImages as $image) {
+                if (!in_array($image->name, $requestedImageNames)) {
+                    $imagesToRemove[] = $image->id;
+                }
+            }
 
             // Remove the images that are not included in the request
-            $stockCar->images()->whereIn('name', $imagesToRemove)->delete();
+            $stockCar->images()->whereIn('id', $imagesToRemove)->delete();
 
             // Update the names of the existing images
             foreach ($request->images as $imageData) {
@@ -249,24 +269,37 @@ class StockCarsController extends Controller
                 $stockCar->images()->where('name', $imageName)->update(['name' => $imageName]);
             }
 
-            // Update the main_img value
-            if ($request->has('main_img')) {
-                $newMainImageId = $request->main_img;
-
-                // Reset all main_img values to 0 except for the new main image
-                $stockCar->images()->update(['main_img' => '0']);
-
-                // Set the new main_img value to 1 for the image with the new main image ID
-                $stockCar->images()->where('id', $newMainImageId)->update(['main_img' => '1']);
+            // If no new main image is selected, retain the existing main image
+            if ($mainImageId) {
+                $stockCar->images()->where('id', $mainImageId)->update(['main_img' => '1']);
             }
-        }
-        // Determine the new main_img value if it's provided in the request
-        if ($request->has('main_img')) {
-            $mainImageId = $request->main_img;
-        }
 
-        // dd($mainImageId);
+            // Update the main_img value
+            if (!$request->has('main_img')) {
+                // Check if there are images in the request
+                if (!empty($request->images)) {
+                    // Get the ID of the first image in the request
+                    $newMainImageId = key($request->images);
+                } else {
+                    // No images in the request, set main_img to null
+                    $newMainImageId = null;
+                }
+            } else {
+                $newMainImageId = $request->main_img;
+            }
 
+            // If main_img is null, set it to the ID of the first image in the request
+            if ($newMainImageId === null && isset($request->images[0])) {
+                $newMainImageId = $request->images[0]['id'];
+            }
+
+            // Reset main_img to 0 for all images except the new main image
+            $stockCar->images()->where('id', '!=', $newMainImageId)->update(['main_img' => '0']);
+
+            // Set the new main_img value to 1 for the image with the new main image ID
+            $stockCar->images()->where('id', $newMainImageId)->update(['main_img' => '1']);
+
+        }
         // Store new images
         foreach ($temporaryImages as $temporaryImage) {
             Storage::copy('filepond-tmp/stock_car_imgs/' . $temporaryImage->name,
@@ -280,13 +313,13 @@ class StockCarsController extends Controller
             StockCarImage::create([
                 'stock_car_id' => $request->stockCar,
                 'name' => $temporaryImage->name,
-                'main_img' => $mainImageId,
+                'main_img' => "0",
             ]);
 
             Storage::delete('filepond-tmp/stock_car_imgs/' . $temporaryImage->name);
             $temporaryImage->delete();
         }
-        // Success
+        // Success message
         Session::flash('success', 'Update Successfully');
         return redirect()->route('stock-car.show', $brand->slug);
     }
@@ -297,4 +330,4 @@ class StockCarsController extends Controller
         Session::flash('success', 'Deleted Successfully');
         return redirect()->back();
     }
-} // End Class
+}

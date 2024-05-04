@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             // Foreign key constraint
             $table->foreignId('manufacturer_id')->references('id')->on('manufacturers')->cascadeOnDelete();
+            $table->foreignId('product_category_id')->references('id')->on('product_categories')->cascadeOnDelete();
+            $table->foreignId('product_sub_category_id')->references('id')->on('product_sub_categories')->cascadeOnDelete();
 
             // Main Products Details
             $table->string('name')->unique();

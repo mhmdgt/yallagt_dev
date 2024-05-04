@@ -105,7 +105,7 @@
                                 <form action="{{ route('product-subcategories.store') }}" method="POST"
                                     enctype="multipart/form-data" id="car-brand">
                                     @csrf
-                                    <input type="text" name="product_category_id" value="{{ $productCategory->slug }}"
+                                    <input type="text" name="product_category_id" value="{{ $productCategory->id }}"
                                         hidden>
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">(EN)</span></label>
@@ -182,6 +182,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
     </nav>
     {{-- ====== CATEGORY Details ====== --}}
@@ -387,6 +388,9 @@
                                                     <span aria-hidden="true">&times;</span>
 =======
         {{-- ====== All Models ====== --}}
+=======
+        {{-- ====== All Categories ====== --}}
+>>>>>>> bf332b81088ddf26806ca0baeb4fa20e185958c4
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -408,7 +412,9 @@
                                         {{-- LOOP --}}
                                         @foreach ($productCategory->productSubCategories as $productSubCategory)
                                             <td>#</td>
-                                            <td><img class="image-in-box" src="{{ display_img($productSubCategory->logo) }}" alt="No Image"></td>
+                                            <td><img class="image-in-box"
+                                                    src="{{ display_img($productSubCategory->logo) }}" alt="No Image">
+                                            </td>
                                             <td>{{ $productSubCategory->getTranslations('name')['en'] }}</td>
                                             <td>{{ $productSubCategory->getTranslations('name')['ar'] }}</td>
                                             <td>
@@ -488,13 +494,13 @@
 
                                                 <x-modal.confirm-delete-modal
                                                     route="{{ route('product-subcategories.destroy', $productSubCategory->slug) }}"
-                                                    id="{{ $productSubCategory->slug }}"/>
+                                                    id="{{ $productSubCategory->slug }}" />
                                             </td>
                                     </tr>
                                     {{-- ========================== Edit Modal ========================== --}}
-                                    <div class="modal fade" id="editModelproductSubCategory{{ $productSubCategory->slug }}"
-                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true">
+                                    <div class="modal fade"
+                                        id="editModelproductSubCategory{{ $productSubCategory->slug }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -506,17 +512,19 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form class="forms-sample car-brand-model-edit" method="POST"
-                                                        action="{{ route('product-subcategories.update', $productSubCategory->slug) }}" enctype="multipart/form-data">
+                                                        action="{{ route('product-subcategories.update', $productSubCategory->slug) }}"
+                                                        enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" name="id" value="{{ $productSubCategory->id }}">
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $productSubCategory->id }}">
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Name <span
                                                                     class="text-danger">(EN)</span></label>
                                                             <input type="text" class="form-control" name="name_en"
                                                                 autocomplete="off" placeholder="English Name"
                                                                 value="{{ $productSubCategory->getTranslations('name')['en'] }}">
-                                                                <x-errors.display-validation-error property="name_en" />
+                                                            <x-errors.display-validation-error property="name_en" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputUsername1">Name <span
@@ -524,7 +532,7 @@
                                                             <input type="text" class="form-control" name="name_ar"
                                                                 placeholder="Arabic Name"
                                                                 value="{{ $productSubCategory->getTranslations('name')['ar'] }}">
-                                                                <x-errors.display-validation-error property="name_ar" />
+                                                            <x-errors.display-validation-error property="name_ar" />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>sub category Logo</label>
@@ -570,11 +578,72 @@
                 </div>
             </div>
         </div>
+        {{-- ====== Edit Modal ====== --}}
+        <div class="modal fade" id="EditCategory{{ $productCategory->slug }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Product Category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="forms-sample"
+                            action="{{ route('product-categories.update', $productCategory->slug) }}" method="POST"
+                            enctype="multipart/form-data" id="car-brand">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $productCategory->id }}">
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
+                                <input type="text" class="form-control" name="name_en" autocomplete="off"
+                                    value="{{ $productCategory->getTranslations('name')['en'] }}">
+                                <x-errors.display-validation-error property="name_en" />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
+                                <input type="text" class="form-control" name="name_ar" autocomplete="off"
+                                    value="{{ $productCategory->getTranslations('name')['ar'] }}">
+                                <x-errors.display-validation-error property="name_ar" />
+                            </div>
+                            <div class="form-group">
+                                <label>Brand Logo</label>
+                                <input type="file" name="logo" class="file-upload-default" id="image"
+                                    accept=".png">
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" disabled=""
+                                        placeholder="Upload Image">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-success" type="button">Upload</button>
+                                    </span>
+                                </div>
+                                <x-errors.display-validation-error property="logo" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmaill" class="form-label"> </label>
+                                <img width="100px" id="showImage" class="image-rec-full"
+                                    src="{{ !empty($productCategory->logo) ? asset('storage/' . $productCategory->logo) : asset('gt_manager/media/no_image.jpg') }}"
+                                    alt="No_IMG">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                    changes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 </div>
 @endsection
+<<<<<<< HEAD
 
 @section('script')
 <<<<<<< HEAD
@@ -628,3 +697,5 @@
     @endif
 @endsection
 >>>>>>> 7328177af53978532a98bed1752bdd12337689aa
+=======
+>>>>>>> bf332b81088ddf26806ca0baeb4fa20e185958c4
