@@ -3,15 +3,19 @@
 namespace App\Models;
 
 
+use App\Traits\UserStampTrait;
+use Illuminate\Support\Facades\App;
+use App\Traits\UserStampWithTypeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\App;
+
 class BlogCategory extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory,HasTranslations,SoftDeletes,UserStampWithTypeTrait;
 
-    protected $fillable = ['name', 'image', 'slug'];
+    protected $fillable = ['name', 'image', 'slug','deleted_by','created_by','updated_by','deleted_type','created_type','updated_type'];
   
     public $translatable = ['name', 'slug'];
     function blogs()
@@ -25,4 +29,7 @@ class BlogCategory extends Model
         $locale = App::getLocale();
         return self::where("slug->{$locale}", $slug);
     }
+
+
+    
 }

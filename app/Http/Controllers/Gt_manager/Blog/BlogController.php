@@ -41,7 +41,7 @@ class BlogController extends Controller{
     public function store(BlogRequest $request)
     {
        
-        $blog=Blog::create([
+        $blog= Blog::create([
             'title'=>['en'=>$request->title_en,'ar'=>$request->title_ar],
             'slug'=>$this->slug(['en'=>$request->title_en,'ar'=>$request->title_ar]),
             'blog_category_id'=>$request->blog_category_id,

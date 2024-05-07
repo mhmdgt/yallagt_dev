@@ -37,6 +37,8 @@
                             {{-- Categories --}}
                             <div class="form-group row pt-0">
                                 <div class="col">
+
+                                  
                                     <label>Category</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="blog_category_id">
