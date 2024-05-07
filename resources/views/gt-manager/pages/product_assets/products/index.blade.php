@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item">Stock Car Brands</li>
+                    <li class="breadcrumb-item">Products</li>
                 </ol>
                 <a href="{{ route('products.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
@@ -29,6 +29,7 @@
                                         <th>Price</th>
                                         <th>SKU</th>
                                         <th>Manufacturer</th>
+                                        <th>status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -45,10 +46,12 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-                                            <td>{{ $product->name }}</td>
+                                            <td><a href="{{ route('products.edit', $product->slug) }}">{{ $product->name }}</a></td>
                                             <td>{{ $sku->main_price }}</td>
                                             <td>{{ $sku->sku }}</td>
                                             <td>{{ $product->manufacturer->name }}</td>
+                                            <td>{{ $product->status }}</td>
+
                                             <td>
                                                 <div class="position-relative">
                                                     <!-- Dropdown button positioned at top-left corner -->

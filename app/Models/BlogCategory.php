@@ -9,20 +9,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\App;
 class BlogCategory extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory ,HasTranslations;
 
     protected $fillable = ['name', 'image', 'slug'];
-  
     public $translatable = ['name', 'slug'];
-    function blogs()
-    {
-        return $this->hasMany(Blog::class);
-    }
 
-   
+    // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {
         $locale = App::getLocale();
         return self::where("slug->{$locale}", $slug);
     }
+    // -------------------- Method -------------------- //
+    function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+    // -------------------- Method -------------------- //
+
 }

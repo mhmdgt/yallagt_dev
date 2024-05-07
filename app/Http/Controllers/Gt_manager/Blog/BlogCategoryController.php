@@ -16,7 +16,7 @@ class BlogCategoryController extends Controller
     // -------------------- Method -------------------- //
     public function index()
     {
-        $categories=BlogCategory::paginate(10);
+        $categories=BlogCategory::latest()->get();
         return view('gt-manager.pages.blogs.blog_categories.index',compact('categories'));
     }
     // -------------------- Method -------------------- //
@@ -50,7 +50,7 @@ class BlogCategoryController extends Controller
         $this->deleteImage($category->image);
         $category->delete();
 
-        Session::flash('success', 'Updated Successfully');
+        Session::flash('success', 'Deleted Successfully');
         return back();
     }
 }

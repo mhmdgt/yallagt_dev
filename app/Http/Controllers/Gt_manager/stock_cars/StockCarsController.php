@@ -128,13 +128,6 @@ class StockCarsController extends Controller
     // -------------------- Store Stock Car -------------------- //
     public function store(Request $request)
     {
-        // dd($request->all());
-        // Chech The Validation
-        $validator = Validator::make($request->all(), [
-            'car_brand_model_id' => 'required|exists:car_brand_models,id',
-            'year' => 'required|integer|digits:4',
-            'brochure' => 'file|mimes:pdf',
-        ]);
         // Properties
         $temporaryImages = TemporaryFile::all();
         $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
@@ -143,6 +136,13 @@ class StockCarsController extends Controller
         $ModelYear = $request->year;
         $brochure = null;
         $firstImage = 1;
+        // Chech The Validation
+        $validator = Validator::make($request->all(), [
+            'car_brand_model_id' => 'required|exists:car_brand_models,id',
+            'year' => 'required|integer|digits:4',
+            'brochure' => 'file|mimes:pdf',
+            'image' => 'required',
+        ]);
         // Remove TMP images if validation fails
         if ($validator->fails()) {
             foreach ($temporaryImages as $temporaryImage) {
@@ -198,13 +198,6 @@ class StockCarsController extends Controller
     // -------------------- Update Stock Car -------------------- //
     public function update(Request $request, $stockCar)
     {
-        // Chech The Validation
-        $validator = Validator::make($request->all(), [
-            'car_brand_model_id' => 'required|exists:car_brand_models,id',
-            'year' => 'required|integer|digits:4',
-            'brochure' => 'file|mimes:pdf',
-            'main_img' => 'required', // Ensure main_img is present
-        ]);
         // Properties
         $temporaryImages = TemporaryFile::all();
         $BrandModel = CarBrandModel::with('brand')->find($request->car_brand_model_id);
@@ -213,6 +206,13 @@ class StockCarsController extends Controller
         $ModelYear = $request->year;
         $brochure = null;
         $stockCar = StockCar::with('images')->findOrFail($stockCar);
+        // Chech The Validation
+        $validator = Validator::make($request->all(), [
+            'car_brand_model_id' => 'required|exists:car_brand_models,id',
+            'year' => 'required|integer|digits:4',
+            'brochure' => 'file|mimes:pdf',
+            'main_img' => 'required', // Ensure main_img is present
+        ]);
         // Remove TMP images if validation failed
         if ($validator->fails()) {
             Session::flash('fail', 'Please select main photo');

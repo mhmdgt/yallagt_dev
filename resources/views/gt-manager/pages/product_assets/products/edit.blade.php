@@ -6,6 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">Products</a></li>
                     <li class="breadcrumb-item" aria-current="page">Edit Product</li>
                 </ol>
                 <div class="d-flex justify-content-between">
@@ -22,6 +23,7 @@
         {{-- ========================== All Categories ========================== --}}
         <Form action="{{ route('products.update', $product->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             {{-- General Details --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -40,6 +42,7 @@
                                                     {{ $manufacturer->name }}</option>
                                             @endforeach
                                         </select>
+                                        <x-errors.display-validation-error property="manufacturer_id" />
                                     </div>
                                 </div>
                             </div>
@@ -57,6 +60,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <x-errors.display-validation-error property="category_id" />
                                     </div>
                                 </div>
 
@@ -65,55 +69,70 @@
                                     <div>
                                         <select id="subcategorySelect" class="js-example-basic-single w-100"
                                             name="subcategory_id">
-                                            <option value="">Select Category First</option>
+                                            <option>Select Category First</option>
                                             @foreach ($subCategories as $subcategory)
-                                                <option value="{{ $subcategory->id }}"
+                                                <option value="{{ $subCategory->id }}"
                                                     {{ $subCategory->id == $subcategory->id ? 'selected' : '' }}>
                                                     {{ $subcategory->name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <x-errors.display-validation-error property="subcategory_id" />
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Product Name <span class="text-danger">(EN)</span></label>
                                     <input type="text" class="form-control" name="name_en"
                                         value="{{ $product->getTranslations('name')['en'] }}">
+                                        <x-errors.display-validation-error property="name_en" />
                                 </div>
                                 <div class="col">
                                     <label>Product Name <span class="text-danger">(AR)</span></label>
                                     <input type="text" class="form-control" name="name_ar"
                                         value="{{ $product->getTranslations('name')['ar'] }}">
-
+                                        <x-errors.display-validation-error property="name_ar" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- SKU / Part number / Price  --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Description</label>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Details</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Description<span class="text-danger">(EN)</span></label>
-                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10">
-                                        {{ $product->getTranslations('description')['en'] }}
-                                    </textarea>
+                                    <label>SKU</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="sukGenerator" name="sku" required
+                                            value="{{ $product->skus->first()->sku }}" readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                onclick="generateUniqueId()">Generate Unique ID</button>
+                                        </div>
+                                    </div>
+                                    <x-errors.display-validation-error property="sku" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Description<span class="text-danger">(AR)</span></label>
-                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10">
-                                        {{ $product->getTranslations('description')['ar'] }}
-                                    </textarea>
+                                    <label>Part Number / OEM</label>
+                                    <input type="text" class="form-control" autocomplete="off" name="part_number"
+                                        value="{{ $product->skus->first()->part_number }}">
+                                    <x-errors.display-validation-error property="part_number" />
+                                </div>
+                            </div>
+                            <div class="form-group row pt-0">
+                                <div class="col">
+                                    <label for="exampleInputNumber1">Main price</label>
+                                    <input type="main_price" class="form-control" name="main_price"
+                                        value="{{ $product->skus->first()->main_price }}">
+                                    <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
                         </div>
@@ -132,22 +151,23 @@
                                     <div class="img-container position-relative" id="image-container-{{ $index }}">
                                         <img src="{{ display_img('media/product_imgs/' . $image->name) }}" alt="">
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
-                                        <input type="hidden" name="images[{{ $index }}][name]"
-                                            value="{{ $image->name }}">
-                                        <input type="radio" class="select-btn" name="main_img"
-                                            value="{{ $image->id }}" {{ $image->main_img ? 'checked' : '' }}>
+                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
+                                               {{ $image->main_img ? 'checked' : '' }}>
                                     </div>
                                 @endforeach
                             </div>
+                            <x-errors.display-validation-error property="main_img" />
                             <div class="form-group pt-0 mt-4">
                                 <label>Add More Images</label>
                                 <input type="file" class="filepond" name="image" multiple>
+                                <x-errors.display-validation-error property="image" />
                             </div>
                             {{-- Brochure --}}
                             <div class="form-group pt-0">
                                 <label>PDF Brochure</label>
-                                <input type="file" name="brochure" accept="application/pdf"
-                                    class="file-upload-default">
+                                <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
+                                <x-errors.display-validation-error property="brochure" />
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled=""
                                         placeholder="Upload Borchur">
@@ -196,18 +216,28 @@
                     </div>
                 </div>
             </div>
-            {{-- Tags --}}
+            {{-- DES --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Tags</label>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Description</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Tags</label>
-                                    <div>
-                                        <input name="tags" id="tags" value="" />
-                                    </div>
+                                    <label>Description<span class="text-danger">(EN)</span></label>
+                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10">
+                                        {{ $product->getTranslations('description')['en'] }}
+                                    </textarea>
+                                    <x-errors.display-validation-error property="description_en" />
+                                </div>
+                            </div>
+                            <div class="form-group row pt-0">
+                                <div class="col">
+                                    <label>Description<span class="text-danger">(AR)</span></label>
+                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10">
+                                        {{ $product->getTranslations('description')['ar'] }}
+                                    </textarea>
+                                    <x-errors.display-validation-error property="description_ar" />
                                 </div>
                             </div>
                         </div>
@@ -271,33 +301,100 @@
 
         });
         // ---------------------------------------- SubCategories
-        document.addEventListener('DOMContentLoaded', function() {
-            const categorySelect = document.getElementById('categorySelect');
-            const subcategorySelect = document.getElementById('subcategorySelect');
+        $(document).ready(function() {
+            // Select the correct option based on the value of the "category" input
+            var selectedCategoryId = $('#categorySelect').val();
+            $('#categorySelect option[value="' + selectedCategoryId + '"]').prop('selected', true);
 
-            categorySelect.addEventListener('change', function() {
-                const categoryId = this.value;
+            // Select the correct option based on the value of the "subcategory" input
+            var selectedSubcategoryId = '{{ $subCategory->id }}'; // Get the product's subcategory ID
+            $('#subcategorySelect option[value="' + selectedSubcategoryId + '"]').prop('selected',
+            true); // Set the selected option for subcategory
 
-                // Clear existing options
-                subcategorySelect.innerHTML = '<option value="">Loading...</option>';
+            // Handle change event on the category select
+            $('#categorySelect').change(function() {
+                var categoryId = $(this).val();
+                if (!categoryId) {
+                    $('#subcategorySelect').html('<option value="">Select Category First</option>');
+                    return;
+                }
 
-                // Send AJAX request to fetch subcategories
-                fetch(`/get-subcategories/${categoryId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Clear existing options
-                        subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+                // Perform AJAX request to fetch subcategories
+                $.ajax({
+                    url: '/product-subcategories/categories/' + categoryId,
+                    type: 'GET',
+                    success: function(data) {
+                        var options = '<option value="">Select Subcategory</option>';
+                        $.each(data, function(index, subcategory) {
+                            // Get the translation based on the current locale
+                            var subcategoryName = subcategory.name[
+                                "{{ App::getLocale() }}"];
 
-                        // Populate subcategory options
-                        data.forEach(subcategory => {
-                            const option = document.createElement('option');
-                            option.value = subcategory.id;
-                            option.textContent = subcategory.name;
-                            subcategorySelect.appendChild(option);
+                            // Append the option to the select dropdown
+                            options += '<option value="' + subcategory.id + '">' +
+                                subcategoryName + '</option>';
                         });
-                    })
-                    .catch(error => console.error('Error fetching subcategories:', error));
+                        $('#subcategorySelect').html(options);
+
+                        // Set the selected option based on the product's subcategory ID
+                        $('#subcategorySelect').val(selectedSubcategoryId);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching subcategories:', error);
+                    }
+                });
             });
+
+            // Trigger change event on category select to load subcategories initially
+            $('#categorySelect').trigger('change');
+        });
+        // ---------------------------------------- Brands&Models
+        $(document).ready(function() {
+            // Select the correct option based on the value of the "brand" input
+            var selectedBrandId = $('#brandSelect').val();
+            $('#brandSelect option[value="' + selectedBrandId + '"]').prop('selected', true);
+
+            // Select the correct option based on the value of the "model" input
+            var selectedModelId = $('#modelSelect').val();
+            $('#modelSelect option[value="' + selectedModelId + '"]').prop('selected', true);
+
+            // Handle change event on the brand select
+            $('#brandSelect').change(function() {
+                var brandId = $(this).val();
+                if (!brandId) {
+                    $('#modelSelect').html('<option value="">Select Brand First</option>');
+                    return;
+                }
+
+                // Perform AJAX request to fetch models
+                $.ajax({
+                    url: '/manage/car-brand-models/models/' + brandId,
+                    type: 'GET',
+                    success: function(data) {
+                        var options = '<option value="">Select Model</option>';
+                        $.each(data, function(index, model) {
+                            // Get the translation based on the current locale
+                            var modelName = model.name["{{ App::getLocale() }}"];
+
+                            // Append the option to the select dropdown
+                            options += '<option value="' + model.id + '">' + modelName +
+                                '</option>';
+                        });
+                        $('#modelSelect').html(options);
+
+                        // Select the correct option based on the value of the "model" input
+                        var selectedModelId = $('#modelSelect').val();
+                        $('#modelSelect option[value="' + selectedModelId + '"]').prop(
+                            'selected', true);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching models:', error);
+                    }
+                });
+            });
+
+            // Trigger change event on brand select to load models initially
+            $('#brandSelect').trigger('change');
         });
         // ---------------------------------------- Carousel & buttons
         $(document).ready(function() {
@@ -305,7 +402,7 @@
                 loop: false,
                 margin: 10,
                 slideBy: 2,
-                nav: true,
+                nav: false,
                 navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
                     "<i class='bi bi-arrow-right-circle-fill'></i>"
                 ],

@@ -1,48 +1,3 @@
-/*-----------------------------------------------------------------------------------
-
-    CSS INDEX
-    =========================================
-    01. header css here
-    02. slider area css here
-    03. product section css here
-    04. banner section css here
-    05. blog area css here
-    06. newsletter area css here
-    07. footer area css here
-    08. shop page css here
-    09. error page css heer
-    10. about page css here
-    11. blog page css here
-    12. blog details css here
-    13. cart page css here
-    14. checkout page css here
-    15. contact page css here
-    16. faq page css here
-    17. login page css here
-    18. my account css here
-    19. portfolio page css here
-    20. services page css here
-    21. shipping css here
-    22. wishlist css here
-    23. newsletter popup css here
-    24. modal css here
-    25. new home page css here
------------------------------------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Work+Sans:100,200,300,400,500,600,700,800,900&amp;display=swap");
-
-* {
-    box-sizing: border-box;
-}
-
-/* transition */
-/* flex */
-/* transform */
-/* opacity */
-/*----------------------------------------*/
-/*  01. Theme default CSS
-/*----------------------------------------*/
-/*-- Google Font --*/
-/*-- Common Style --*/
 *,
 *::after,
 *::before {
@@ -52,7 +7,16 @@
 html,
 body {
     height: 100%;
+    padding-top: 38px;
+    padding-bottom: 138px;
 }
+@media screen and (max-width: 770px) {
+    html,
+    body {
+        padding-top: 37px;
+    }
+}
+
 
 body {
     line-height: 24px;
@@ -117,24 +81,6 @@ button {
     line-height: inherit;
     text-decoration: none;
     cursor: pointer;
-}
-
-a,
-button,
-img,
-input,
-span {
-    transition: all 0.3s ease 0s;
-}
-
-*:focus {
-    outline: none !important;
-}
-
-a:focus {
-    color: inherit;
-    outline: none;
-    text-decoration: none;
 }
 
 a:hover {
@@ -644,32 +590,21 @@ textarea:-ms-input-placeholder {
     border-color: #40A944;
 }
 
-.sticky-header.sticky {
+
+.sticky-header {
     position: fixed;
+    top: 0;
     z-index: 99;
     width: 100%;
-    top: 0;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.11);
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 500ms;
-    animation-duration: 500ms;
-    -webkit-animation-timing-function: cubic-bezier(0.2, 1, 0.22, 1);
-    animation-timing-function: cubic-bezier(0.2, 1, 0.22, 1);
-    -webkit-animation-delay: 0s;
-    animation-delay: 0s;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: 1;
-    -webkit-animation-direction: normal;
-    animation-direction: normal;
-    -webkit-animation-fill-mode: none;
-    animation-fill-mode: none;
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
-    border-bottom: 0;
-    display: block;
+    transition: top 0.3s ease;
 }
+
+.sticky {
+    top: -1px; /* Move the header 1 pixel above the viewport */
+}
+
 
 /* @media only screen and (min-width: 768px) and (max-width: 991px) {
   .sticky-header.sticky {
@@ -14506,7 +14441,7 @@ header .header_bottom .arrow {
 @media screen and (max-width: 660px) {
     .product_deals .product_carousel .single_product {
         padding: 7px;
-        height: 380px;
+        height: 365px;
     }
 
 }
@@ -16157,6 +16092,44 @@ footer .footer_bottom p {
     width: 10px;
     height: auto;
 }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px;
+    width: 100%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px;
+    /* right: 8px; */
+}
+
+.select2-container--default .select2-selection--multiple {
+    background: rgba(217, 217, 217, 0.1);
+    border: 2px solid #D9D9D9;
+    line-height: 24px;
+    width: 100%;
+
+}
+
+.select2-dropdown .select2-results__option {
+    position: relative;
+}
+
+.select2-container .select2-selection--single {
+    height: 38px;
+}
+.select2-container--open .select2-dropdown--above {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    top: 280px;
+}
+
+.select2-dropdown select2-dropdown--above {
+    position: relative;
+    top: 280px;
+}
+
 
 .detailedSearch__content--card {
     background: rgba(255, 255, 255, 0.02);
@@ -16806,7 +16779,6 @@ footer .footer_bottom p {
     border-radius: 8px;
     padding: 15px 31px;
     margin-top: 24px;
-    /* identical to box height */
     text-transform: uppercase;
     color: #000000;
     white-space: break-spaces;
@@ -16825,7 +16797,6 @@ footer .footer_bottom p {
     font-weight: 500;
     font-size: 12px;
     line-height: 19px;
-    /* identical to box height */
     text-transform: uppercase;
     color: #000000;
     text-align: center;
@@ -16864,7 +16835,6 @@ footer .footer_bottom p {
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    /* identical to box height */
     text-transform: uppercase;
     color: #908E8E;
 }
@@ -16888,7 +16858,6 @@ footer .footer_bottom p {
 }
 
 @media screen and (max-width: 660px) {
-
     .forms input,
     .forms select {
         font-size: 14px;
@@ -16909,9 +16878,6 @@ footer .footer_bottom p {
     -o-object-position: center;
     object-position: center;
 }
-
-/*# sourceMappingURL=style.css.map */
-
 
 #carousel .owl-nav {
     display: none;
@@ -17440,33 +17406,6 @@ li.selected {
     background: #f2f2f2;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 38px;
-    width: 100%;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 38px;
-    right: 8px;
-
-}
-
-.select2-container--default .select2-selection--multiple {
-    background: rgba(217, 217, 217, 0.1);
-    border: 2px solid #D9D9D9;
-    line-height: 24px;
-    width: 100%;
-
-}
-
-.select2-dropdown .select2-results__option {
-    position: relative;
-}
-
-.select2-container .select2-selection--single {
-    height: 38px;
-}
-
 #status_car label {
     border-radius: 4px;
     border: 0.1rem solid #bdbebf;
@@ -17526,28 +17465,7 @@ li.selected {
   }
 } */
 
-.select2-container--open .select2-dropdown--above {
-    border-bottom: none;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    position: relative;
-    top: 280px;
-}
-
-.select2-dropdown select2-dropdown--above {
-    position: relative;
-    top: 280px;
-
-
-}
-
-.select2-hidden-accessible {
-    position: fixed !important;
-}
-
-
 /* User Profile  */
-
 .user-profile-name {
 
     font-size: 24px;
@@ -17564,7 +17482,8 @@ li.selected {
     display: block;
     opacity: 0;
     position: fixed;
-    bottom: 58px;
+    height: 54px;
+    bottom: 68px;
     left: 0;
     right: 0;
     z-index: 999;
@@ -17575,14 +17494,21 @@ li.selected {
     border-bottom: 2px solid #f5f5f5;
 }
 
-@media screen and (max-width: 800px) {
-
+@media screen and (max-width: 991px) {
     #call_nav {
         opacity: 1;
-
-
     }
 }
+
+@media (max-width: 990px) {
+    .sell_button {
+        display: none;
+    }
+}
+.sell-now-text {
+    font-size: 1.1em; /* Adjust the font size as needed */
+}
+
 
 .hello_login {
     /*background-color:#F5F5F5;*/
@@ -17655,14 +17581,224 @@ li.selected {
 .GFG3 {
     text-decoration-line: overline;
 }
-
+/* ------------------------------------- Mine ------------------------------------- */
 .new-section {
  padding-top: 40px;
 }
-
 
 @media screen and (max-width: 800px) {
     .new-section {
         padding-top: 20px;
        }
+}
+
+.page-div {
+    padding: 30px 100px; /* Default padding for larger screens */
+    background-color: #f5f5f7;
+}
+
+@media (max-width: 620px) {
+    .page-div {
+        padding: 30px 15px; /* Adjusted padding for screens under 520px */
+    }
+}
+
+
+.profile-card
+{
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.image-in-box {
+    width: 50px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 100%;
+}
+
+
+.profile-name{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.profile-email{
+    font-size: 12px;
+}
+
+.profile-info span {
+    display: block; /* Ensure each span appears on a new line */
+    margin-bottom: 1px; /* Adjust the margin as needed */
+}
+
+.shortcut-card{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.card-title{
+    font-size: 14px;
+}
+.sub-title{
+    font-size: 10px;
+}
+
+
+.product_card_price
+{
+    font-size: 24px;
+    font-weight: bold;
+}
+.product_card_precentage
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+@media (max-width: 620px) {
+    .product_card_price
+    {
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
+.product_card_cart{
+    width: 65px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 620px) {
+    .product_card_cart{
+        width: 50px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+.cars__card--header .card-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+.cars__card--image img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center center;
+     object-position: center center;
+  height: 300px;
+  width: 100%;
+}
+.cars__card--type {
+  margin-bottom: 20px;
+}
+.cars__card--type .badge {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 15px 31px;
+  margin-top: 24px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #000000;
+  white-space: break-spaces;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cars__card--specifications .badge {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 15px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #000000;
+  text-align: center;
+  white-space: break-spaces;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 450px) {
+  .cars__card--specifications .badge:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+.cars__card--specifications .badge p {
+  line-height: 11px;
+}
+.cars__card--price {
+  margin-top: 48px;
+}
+.cars__card--price h5 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-transform: uppercase;
+  color: #23272A;
+  margin-bottom: 0;
+}
+.cars__card--price span {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #908E8E;
+}
+.cars__card--price .btn-third {
+  background: #F25E3D;
+  border-radius: 16px;
+  width: 100%;
+}
+
+@media screen and (max-width: 660px) {
+  .forms .section_title h2 {
+    font-size: 24px;
+  }
+}
+.forms input, .forms select {
+  background: rgba(217, 217, 217, 0.01);
+  border: 2px solid #D9D9D9;
+  border-radius: 16px;
+  font-family: "SFProDisplay";
+}
+@media screen and (max-width: 660px) {
+  .forms input, .forms select {
+    font-size: 14px;
+  }
+}
+
+.specifications__image .show.active img {
+  height: 500px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.modal_tab_button img {
+  height: 104px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.gradient-green-bg {
+    background: linear-gradient(to right, #4CAF50, #2E8B57);
 }

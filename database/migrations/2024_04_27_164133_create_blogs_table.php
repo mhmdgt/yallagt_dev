@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('blog_category_id')->references('id')->on('blog_categories')->cascadeOnDelete();
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->longText('content')->nullable();
-            $table->foreignId('blog_category_id')->references('id')->on('blog_categories')->cascadeOnDelete();
-            $table->foreignId('brand_model_id')->references('id')->on('car_brand_models')->cascadeOnDelete();
+            $table->longText('content');
+            $table->enum('status' , ['active' , 'hidden'] )->default('active');
             $table->timestamps();
         });
     }

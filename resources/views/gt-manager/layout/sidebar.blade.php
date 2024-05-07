@@ -112,7 +112,6 @@
                     <ul class="nav sub-menu">
                         <li class="nav-item"><a href="{{ route('blog-categories.index') }}" class="nav-link">Categories</a></li>
                         <li class="nav-item"><a href="{{ route('blogs.index') }}" class="nav-link">Blog List</a></li>
-                        <li class="nav-item"><a href="{{ route('blogs.create') }}" class="nav-link">+ Add Blog</a></li>
                     </ul>
                 </div>
             </li>
@@ -128,18 +127,10 @@
                 </a>
                 <div class="collapse" id="CarsForSale">
                     <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="{{ route('sale-car.live') }}" class="nav-link">All Live</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/ui-components/badges.html" class="nav-link">Pending</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/ui-components/badges.html" class="nav-link">Declined</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sale-car.create') }}" class="nav-link">+ Add</a>
-                        </li>
+                        <li class="nav-item"><a href="{{ route('sale-car.live') }}" class="nav-link">All Live</a></li>
+                        <li class="nav-item"><a href="pages/ui-components/badges.html" class="nav-link">Pending</a></li>
+                        <li class="nav-item"><a href="pages/ui-components/badges.html" class="nav-link">Declined</a></li>
+                        {{-- <li class="nav-item"><a href="{{ route('sale-car.create') }}" class="nav-link">+ Add</a></li> --}}
                     </ul>
                 </div>
             </li>
@@ -193,7 +184,7 @@
                 <div class="collapse" id="customers">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/ui-components/alerts.html" class="nav-link">Customers List</a>
+                            <a href="{{route('customers.index')}}" class="nav-link">Customers List</a>
                         </li>
                     </ul>
                 </div>

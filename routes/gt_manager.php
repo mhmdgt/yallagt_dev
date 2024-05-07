@@ -6,6 +6,7 @@ use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
 use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
 use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
+use App\Http\Controllers\Gt_manager\Customers\CustomersController;
 use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
 use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
@@ -26,6 +27,10 @@ Route::middleware('admin')->group(function () {
         Route::get('/change-password', 'AdminChangePassword')->name('change-password');
         Route::post('/update-password', 'AdminPasswordUpdate')->name('update-password');
     });
+    // Customers
+    Route::controller(CustomersController::class)->prefix('manage/customers')->name('customers.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
     // Customer Web
     Route::controller(ContactUsController::class)->prefix('manage/cst_web')->name('cst_web.')->group(function () {
         Route::view('/contact_us', 'gt-manager.pages.web_settings.contact_us.index')->name('contact_us');
@@ -45,7 +50,6 @@ Route::middleware('admin')->group(function () {
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('destroy/{slug}', 'destroy')->name('destroy');
         Route::get('/models/{brandId}', 'getModelsByBrand');
-
     });
     // Spec Categories //
     Route::prefix('manage/spec-categroies')->name('spec-categories.')->group(function () {
@@ -59,6 +63,11 @@ Route::middleware('admin')->group(function () {
         Route::view('/spec-colors', 'gt-manager.pages.car_assets.spec_categories.colors')->name('colors');
         Route::view('/spec-features', 'gt-manager.pages.car_assets.spec_categories.features')->name('features');
     });
+    // FilePond
+    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
+    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
+    Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
+    Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
     // Stock Cars //
     Route::controller(StockCarsController::class)->prefix('manage/stock-car')->name('stock-car.')->group(function () {
         // Route::get('/{brandSlug}/{modelSlug}/{stockYear}/update-model', 'create')->name('update');
@@ -104,14 +113,9 @@ Route::middleware('admin')->group(function () {
         Route::get('{slug}/edit-product', 'edit')->name('edit');
         // Actions
         Route::post('/store', 'store')->name('store');
-        Route::post('/{slug}', 'update')->name('update');
+        Route::put('/{slug}', 'update')->name('update');
         Route::delete('{slug}/destroy', 'destroy')->name('destroy');
     });
-
-    // FilePond
-    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
-    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
-
     // Product Categories //
     Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -151,6 +155,8 @@ Route::middleware('admin')->group(function () {
         Route::delete('/{slug}', 'destroy')->name('destroy');
     });
 });
+
+
 
 ////////////// Middleware of PreventBackHistory //////////////
 Route::middleware('admin', 'PreventBackHistory')->group(function () {

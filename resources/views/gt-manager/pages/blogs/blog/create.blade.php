@@ -11,7 +11,7 @@
             </div>
         </nav>
         {{-- ========================== Add Product ========================== --}}
-        <Form action="" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- Title & Content --}}
             <div class="row">
@@ -23,13 +23,15 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(EN)</span></label>
-                                    <input type="text" class="form-control" name="name_en" value="">
+                                    <input type="text" class="form-control" name="title_en" value="">
+                                    <x-errors.display-validation-error property="title_en" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="name_en" value="">
+                                    <input type="text" class="form-control" name="title_ar" value="">
+                                    <x-errors.display-validation-error property="title_ar" />
                                 </div>
                             </div>
                             {{-- Categories --}}
@@ -37,27 +39,30 @@
                                 <div class="col">
                                     <label>Category</label>
                                     <div>
-                                        <select class="js-example-basic-single w-100" name="manufacturer_id">
+                                        <select class="js-example-basic-single w-100" name="blog_category_id">
                                             <option value="Select Model">Select Category</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <x-errors.display-validation-error property="blog_category_id" />
                                     </div>
                                 </div>
                             </div>
                             {{-- Description --}}
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Description<span class="text-danger">(EN)</span></label>
-                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10"></textarea>
+                                    <label>Content<span class="text-danger">(EN)</span></label>
+                                    <textarea class="form-control" name="content_en" id="tinymceExample" rows="10"></textarea>
+                                    <x-errors.display-validation-error property="content_en" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Description<span class="text-danger">(AR)</span></label>
-                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10"></textarea>
+                                    <label>Content<span class="text-danger">(AR)</span></label>
+                                    <textarea class="form-control" name="content_ar" id="tinymceExample2" rows="10"></textarea>
+                                    <x-errors.display-validation-error property="content_ar" />
                                 </div>
                             </div>
                         </div>
@@ -65,25 +70,39 @@
                 </div>
             </div>
             {{-- Media --}}
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <div class="form-group pt-0 mt-4">
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Media</label>
+                            <div class="form-group pt-0">
                                 <label>Model Images</label>
                                 <input type="file" class="filepond" name="image" multiple credits="false">
                                 <x-errors.display-validation-error property="image" />
                             </div>
+                            {{-- <div class="form-group pt-0">
+                                <label>PDF Brochure</label>
+                                <input type="file" name="brochure" accept="application/pdf"
+                                    class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" disabled=""
+                                        placeholder="Upload Borchur">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-light" type="button">Upload</button>
+                                    </span>
+                                </div>
+                                <x-errors.display-validation-error property="brochure" />
+                            </div> --}}
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             {{-- releated to --}}
             {{-- <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Compatible With</label>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Releated to</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <div>
@@ -175,7 +194,7 @@
                 </div>
             </div> --}}
             {{-- Tags --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -191,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">Submit form</button>
         </Form>
@@ -201,6 +220,31 @@
 
 @section('script')
     <script>
+        // ---------------------------------------- Filepond
+        // Plugins
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginImageTransform);
+        FilePond.registerPlugin(FilePondPluginFileMetadata);
+        // Vars
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create(inputElement);
+        // Option
+        pond.setOptions({
+            allowMultiple: true,
+            allowReorder: true,
+            server: {
+                process: '/manage/blogTmpUpload',
+                revert: '/manage/blogTmpDelete',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            },
+            // Plugin Services
+            imageTransformOutputStripImageHead: true,
+            imageTransformCanvasMemoryLimit: 50000000,
+            imageTransformOutputQuality: 80,
+        });
+        // ---------------------------------------- Brands_Models
         $(document).ready(function() {
             // Select the correct option based on the value of the "brand" input
             var selectedBrandId = $('#brandSelect').val();

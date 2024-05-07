@@ -23,14 +23,19 @@
     });
 
     /*--- ==================================== sticky menu ==================================== ---*/
+    var lastScrollTop = 0;
+    var headerHeight = $("header:not('.responsive')").outerHeight(); // Get header height
     $(window).on('scroll', function () {
         var scroll = $(window).scrollTop();
-        if (scroll < 100) {
-            $("header:not('.responsive') .sticky-header").removeClass("sticky");
-        } else {
+        if (scroll > lastScrollTop && scroll >= headerHeight) {
             $("header:not('.responsive') .sticky-header").addClass("sticky");
+        } else {
+            $("header:not('.responsive') .sticky-header").removeClass("sticky");
         }
+        lastScrollTop = scroll;
     });
+
+
 
     $('#nav-tab a,#nav-tab2 a ').on('click', function (e) {
         e.preventDefault()

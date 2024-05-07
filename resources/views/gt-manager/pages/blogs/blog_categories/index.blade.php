@@ -167,13 +167,14 @@
 
                             <div class="form-group">
                                 <label>Category Image</label>
-                                <input type="file" name="image" class="file-upload-default" accept=".png,.jpg">
+                                <input type="file" name="image" class="file-upload-default" accept=".png">
 
                                 <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control file-upload-info"
-                                        placeholder="Upload Image" name="logo">
+                                    <input type="text" class="form-control file-upload-info" disabled=""
+                                        placeholder="Upload Image" name="image">
                                     <span class="input-group-append">
-                                        <button class="file-upload-browse btn btn-success" type="button">Upload</button>
+                                        <button class="file-upload-browse btn btn-success"
+                                            type="button">Upload</button>
                                     </span>
                                 </div>
                             </div>
