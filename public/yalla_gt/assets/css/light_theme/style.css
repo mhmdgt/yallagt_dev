@@ -4,7 +4,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     padding-top: 38px;
 
@@ -21,6 +22,7 @@ body {
 }
 
 @media screen and (max-width: 770px) {
+
     html,
     body {
         padding-top: 37px;
@@ -613,7 +615,8 @@ textarea:-ms-input-placeholder {
 }
 
 .sticky {
-    top: -1px; /* Move the header 1 pixel above the viewport */
+    top: -1px;
+    /* Move the header 1 pixel above the viewport */
 }
 
 
@@ -16089,6 +16092,7 @@ footer .footer_bottom p {
     width: 10px;
     height: auto;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 38px;
     width: 100%;
@@ -16114,6 +16118,7 @@ footer .footer_bottom p {
 .select2-container .select2-selection--single {
     height: 38px;
 }
+
 .select2-container--open .select2-dropdown--above {
     border-bottom: none;
     border-bottom-left-radius: 0;
@@ -16855,6 +16860,7 @@ footer .footer_bottom p {
 }
 
 @media screen and (max-width: 660px) {
+
     .forms input,
     .forms select {
         font-size: 14px;
@@ -17502,8 +17508,10 @@ li.selected {
         display: none;
     }
 }
+
 .sell-now-text {
-    font-size: 1.1em; /* Adjust the font size as needed */
+    font-size: 1.1em;
+    /* Adjust the font size as needed */
 }
 
 
@@ -17578,36 +17586,39 @@ li.selected {
 .GFG3 {
     text-decoration-line: overline;
 }
+
 /* ------------------------------------- Mine ------------------------------------- */
 .new-section {
- padding-top: 40px;
+    padding-top: 40px;
 }
 
 @media screen and (max-width: 800px) {
     .new-section {
         padding-top: 20px;
-       }
+    }
 }
 
 .page-div {
-    padding: 30px 100px; /* Default padding for larger screens */
+    padding: 30px 120px;
+    /* Default padding for larger screens */
     /* background-color: #f9fafb; */
 }
 
 @media (max-width: 620px) {
     .page-div {
-        padding: 30px 15px; /* Adjusted padding for screens under 520px */
+        padding: 30px 15px;
+        /* Adjusted padding for screens under 520px */
     }
 }
 
 
-.profile-card
-{
+.profile-card {
     padding-left: 6px;
     padding-right: 6px;
     padding-top: 12px;
     padding-bottom: 12px;
 }
+
 .image-in-box {
     width: 50px;
     margin-left: 6px;
@@ -17616,61 +17627,63 @@ li.selected {
 }
 
 
-.profile-name{
+.profile-name {
     font-size: 1rem;
     font-weight: bold;
 }
 
-.profile-email{
+.profile-email {
     font-size: 12px;
 }
 
 .profile-info span {
-    display: block; /* Ensure each span appears on a new line */
-    margin-bottom: 1px; /* Adjust the margin as needed */
+    display: block;
+    /* Ensure each span appears on a new line */
+    margin-bottom: 1px;
+    /* Adjust the margin as needed */
 }
 
-.shortcut-card{
+.shortcut-card {
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
 }
 
-.card-title{
+.card-title {
     font-size: 14px;
 }
-.sub-title{
+
+.sub-title {
     font-size: 10px;
 }
 
 
-.product_card_price
-{
+.product_card_price {
     font-size: 24px;
     font-weight: bold;
 }
-.product_card_precentage
-{
+
+.product_card_precentage {
     font-size: 14px;
     font-weight: bold;
 }
+
 @media (max-width: 620px) {
-    .product_card_price
-    {
+    .product_card_price {
         font-size: 20px;
         font-weight: bold;
     }
 }
 
-.product_card_cart{
+.product_card_cart {
     width: 65px;
     margin-right: auto;
     margin-left: auto;
 }
 
 @media (max-width: 620px) {
-    .product_card_cart{
+    .product_card_cart {
         width: 50px;
         margin-right: auto;
         margin-left: auto;
@@ -17678,122 +17691,137 @@ li.selected {
 }
 
 .cars__card--header .card-text {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  /* identical to box height */
-  display: flex;
-  align-items: center;
-  color: #000000;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+    color: #000000;
 }
+
 .cars__card--image img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: center center;
-     object-position: center center;
-  height: 300px;
-  width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: center center;
+    object-position: center center;
+    height: 300px;
+    width: 100%;
 }
+
 .cars__card--type {
-  margin-bottom: 20px;
-}
-.cars__card--type .badge {
-  background: #FFFFFF;
-  border-radius: 8px;
-  padding: 15px 31px;
-  margin-top: 24px;
-  /* identical to box height */
-  text-transform: uppercase;
-  color: #000000;
-  white-space: break-spaces;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  line-height: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cars__card--specifications .badge {
-  background: #FFFFFF;
-  border-radius: 8px;
-  padding: 15px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 19px;
-  /* identical to box height */
-  text-transform: uppercase;
-  color: #000000;
-  text-align: center;
-  white-space: break-spaces;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-@media screen and (max-width: 450px) {
-  .cars__card--specifications .badge:not(:last-child) {
     margin-bottom: 20px;
-  }
 }
+
+.cars__card--type .badge {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 15px 31px;
+    margin-top: 24px;
+    /* identical to box height */
+    text-transform: uppercase;
+    color: #000000;
+    white-space: break-spaces;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cars__card--specifications .badge {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 19px;
+    /* identical to box height */
+    text-transform: uppercase;
+    color: #000000;
+    text-align: center;
+    white-space: break-spaces;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 450px) {
+    .cars__card--specifications .badge:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
 .cars__card--specifications .badge p {
-  line-height: 11px;
+    line-height: 11px;
 }
+
 .cars__card--price {
-  margin-top: 48px;
+    margin-top: 48px;
 }
+
 .cars__card--price h5 {
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 38px;
-  text-transform: uppercase;
-  color: #23272A;
-  margin-bottom: 0;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    text-transform: uppercase;
+    color: #23272A;
+    margin-bottom: 0;
 }
+
 .cars__card--price span {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  /* identical to box height */
-  text-transform: uppercase;
-  color: #908E8E;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    text-transform: uppercase;
+    color: #908E8E;
 }
+
 .cars__card--price .btn-third {
-  background: #F25E3D;
-  border-radius: 16px;
-  width: 100%;
+    background: #F25E3D;
+    border-radius: 16px;
+    width: 100%;
 }
 
 @media screen and (max-width: 660px) {
-  .forms .section_title h2 {
-    font-size: 24px;
-  }
+    .forms .section_title h2 {
+        font-size: 24px;
+    }
 }
-.forms input, .forms select {
-  background: rgba(217, 217, 217, 0.01);
-  border: 2px solid #D9D9D9;
-  border-radius: 16px;
-  font-family: "SFProDisplay";
+
+.forms input,
+.forms select {
+    background: rgba(217, 217, 217, 0.01);
+    border: 2px solid #D9D9D9;
+    border-radius: 16px;
+    font-family: "SFProDisplay";
 }
+
 @media screen and (max-width: 660px) {
-  .forms input, .forms select {
-    font-size: 14px;
-  }
+
+    .forms input,
+    .forms select {
+        font-size: 14px;
+    }
 }
 
 .specifications__image .show.active img {
-  height: 500px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+    height: 500px;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
 
 .modal_tab_button img {
-  height: 104px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  -o-object-position: center;
-     object-position: center;
+    height: 104px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: center;
+    object-position: center;
 }
 
 .gradient-green-bg {
@@ -17802,22 +17830,35 @@ li.selected {
 
 
 .product-media {
-    width: 60px; /* Set the width of the box */
-    height: 60px; /* Set the height of the box */
-    overflow: hidden; /* Hide overflow */
-    flex-shrink: 0; /* Prevent the image from shrinking */
-    margin-right: 10px; /* Add space between the image and the title */
-    position: relative; /* Add positioning context for absolutely positioned content */
+    width: 60px;
+    /* Set the width of the box */
+    height: 60px;
+    /* Set the height of the box */
+    overflow: hidden;
+    /* Hide overflow */
+    flex-shrink: 0;
+    /* Prevent the image from shrinking */
+    margin-right: 10px;
+    /* Add space between the image and the title */
+    position: relative;
+    /* Add positioning context for absolutely positioned content */
 }
 
 .product-image {
-    position: absolute; /* Position the image absolutely within its container */
-    top: 50%; /* Align the top of the image to the middle of the container */
-    left: 50%; /* Align the left side of the image to the center of the container */
-    transform: translate(-50%, -50%); /* Center the image horizontally and vertically */
-    max-width: 100%; /* Ensure the image fits within the container */
-    max-height: 100%; /* Ensure the image fits within the container */
-    object-fit: contain; /* Scale the image to maintain its aspect ratio and fit within the container */
+    position: absolute;
+    /* Position the image absolutely within its container */
+    top: 50%;
+    /* Align the top of the image to the middle of the container */
+    left: 50%;
+    /* Align the left side of the image to the center of the container */
+    transform: translate(-50%, -50%);
+    /* Center the image horizontally and vertically */
+    max-width: 100%;
+    /* Ensure the image fits within the container */
+    max-height: 100%;
+    /* Ensure the image fits within the container */
+    object-fit: contain;
+    /* Scale the image to maintain its aspect ratio and fit within the container */
 }
 
 .product {
@@ -17827,11 +17868,12 @@ li.selected {
 
 .product-cart {
     display: flex;
-    justify-content: center; /* Horizontally center the content within the container */
+    justify-content: center;
+    /* Horizontally center the content within the container */
 }
 
 
-.cart-prod-brand{
+.cart-prod-brand {
     font-size: 14px;
 }
 
@@ -17839,42 +17881,69 @@ li.selected {
     font-size: 12px;
 }
 
-.cart-prod-title{
+.cart-prod-title {
     font-size: 14px;
     font-weight: 600;
 }
 
-.cart-prod-attributes{
+.cart-prod-attributes {
 
     font-size: 12px;
 }
 
 .cart-btn {
     margin-top: 16px;
-    border: 1px solid #ccc; /* Add border */
-    border-radius: 4px; /* Add border radius to round the corners */
-    padding: 4px 8px; /* Add padding for better spacing */
-    display: inline-block; /* Make it an inline-block element */
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-    transition: all 0.3s ease; /* Add transition for smooth hover effect */
+    border: 1px solid #ccc;
+    /* Add border */
+    border-radius: 4px;
+    /* Add border radius to round the corners */
+    padding: 4px 8px;
+    /* Add padding for better spacing */
+    display: inline-block;
+    /* Make it an inline-block element */
+    cursor: pointer;
+    /* Change cursor to pointer to indicate it's clickable */
+    transition: all 0.3s ease;
+    /* Add transition for smooth hover effect */
 }
 
 .cart-btn:hover {
-    background-color: #f0f0f0; /* Change background color on hover */
+    background-color: #f0f0f0;
+    /* Change background color on hover */
 }
 
 
 .cart-qty-counts {
-    display: none; /* Initially hide the counts */
+    display: none;
+    /* Initially hide the counts */
 }
 
 .cart-qty-counts.show {
-    display: block; /* Show the counts when the 'show' class is applied */
+    display: block;
+    /* Show the counts when the 'show' class is applied */
 }
 
-.stockCarImageEdit{
+.stockCarImageEdit {
     position: absolute;
     top: 10px;
     right: 10px;
     /* transform: translate(-50%, -50%); */
-  }
+}
+
+.img {
+    height: 160px;
+    width: 160px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    object-fit: cover;
+}
+
+.delete-btn {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 4px 8px;
+    border-radius: 100px;
+    cursor: pointer;
+    z-index: 1;
+    /* Ensures it's above the image */
+}

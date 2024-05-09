@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('model');
             $table->year('year');
 
+            $table->string('payment');
             $table->string('price');
 
+            $table->string('condition');
             $table->string('bodyShape');
             $table->string('color');
             $table->string('transmission');
@@ -36,8 +38,7 @@ return new class extends Migration
             $table->string('user_name');
             $table->string('phone');
 
-            $table->enum('payment' , ['cash' , 'downpayment'] );
-            $table->enum('condition' , ['new' , 'used'] );
+
             $table->enum('status' , ['approved' , 'pending' , 'declined'] )->default('pending');
 
             // Created by and its type

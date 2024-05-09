@@ -6,6 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">Blogs</a></li>
                     <li class="breadcrumb-item" aria-current="page">Create Blog</li>
                 </ol>
             </div>

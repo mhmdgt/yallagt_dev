@@ -2,17 +2,40 @@
 
 namespace App\Models;
 
-use App\Traits\UserStampTrait;
-use Illuminate\Support\Facades\App;
 use App\Traits\UserStampWithTypeTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
+use Spatie\Translatable\HasTranslations;
 
 class SaleCar extends Model
 {
-    use HasFactory, UserStampWithTypeTrait;
+    use HasFactory, HasTranslations, UserStampWithTypeTrait;
 
     protected $guarded = [];
+    public $translatable = ['slug'];
+
+    // protected $fillable = [
+    //     'slug',
+    //     'brand',
+    //     'model',
+    //     'year',
+    //     'color',
+    //     'condition',
+    //     'payment',
+    //     'price',
+    //     'description',
+    //     'bodyShape',
+    //     'transmission',
+    //     'fuelType',
+    //     'cc',
+    //     'features',
+    //     'aspiration',
+    //     'km',
+    //     'governorate',
+    //     'user_name',
+    //     'phone',
+    // ];
 
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
@@ -21,5 +44,7 @@ class SaleCar extends Model
         return self::where("slug->{$locale}", $slug);
     }
     // -------------------- Method -------------------- //
-
+    function images(){
+        return $this->hasMany(SaleCarImages::class, 'car_id', 'id');
+    }
 }

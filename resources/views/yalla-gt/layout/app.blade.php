@@ -94,7 +94,6 @@
 
     <script src="{{ asset('yalla_gt') }}/assets/js/main.js"></script>
 
-
     <!-- Mobile NAV JS -->
     <script src="{{ asset('yalla_gt') }}/assets/js/mobile_navbar.js"></script>
 
@@ -105,6 +104,8 @@
         <script src="{{ asset('yalla_gt') }}/assets/js/auth_popup/login_popup_ar.js"></script>
     @endif
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- owl carousel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -122,6 +123,7 @@
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
+    @include('gt-manager.partials.session_messages')
     @yield('script')
 
 </body>

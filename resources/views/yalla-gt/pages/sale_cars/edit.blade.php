@@ -37,7 +37,9 @@
                                         <select id="brandSelect" class="js-example-basic-single w-100 " name="brand">
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($brands as $brand)
-                                            <option value="{{ $brand->id }}" {{ $car->brand == $brand->id ? 'selected' : '' }}> {{ $brand->name }}</option>
+                                                <option value="{{ $brand->id }}"
+                                                    {{ $car->brand == $brand->id ? 'selected' : '' }}> {{ $brand->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <x-errors.display-validation-error property="brand" />
@@ -143,6 +145,38 @@
                                     </div>
                                     <x-errors.display-validation-error property="condition" />
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Media --}}
+            <div class="row mt-3">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Media</label>
+                            {{-- images --}}
+                            <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
+                                @php
+                                    // Reorder the images array so that the main image comes first
+                                    $images = $car->images->sortByDesc('main_img')->values();
+                                @endphp
+                                @foreach ($images as $index => $image)
+                                    <div class="img-container position-relative" id="image-container-{{ $index }}">
+                                        <img src="{{ display_img('media/sale_car_imgs/' . $image->name) }}" alt="">
+                                        <button class="delete-btn" data-index="{{ $index }}">&times;</button>
+                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
+                                            {{ $image->main_img ? 'checked' : '' }}>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <x-errors.display-validation-error property="main_img" />
+                            <div class="form-group pt-0 mt-4">
+                                <label>Add More Images</label>
+                                <input type="file" class="filepond" name="image" multiple>
+                                <x-errors.display-validation-error property="image" />
                             </div>
                         </div>
                     </div>
@@ -324,7 +358,7 @@
                                 <div class="col">
                                     <label for="exampleInputNumber1">{{ __('gt_cars_create.PhoneNumber') }}</label>
                                     <input type="text" class="form-control" readonly name="phone"
-                                        value="{{ user_data()->phone }}">
+                                        value="{{ user_data()->phone }}" style="direction: ltr;">
                                 </div>
                             </div>
                         </div>
@@ -366,4 +400,156 @@
 @section('footer')
     {{-- @include('yalla-gt.layout.upper-footer') --}}
     @include('yalla-gt.layout.footer')
+@endsection
+
+
+@section('script')
+    <script>
+        // ---------------------------------------- Filepond
+        // Plugins
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginImageTransform);
+        FilePond.registerPlugin(FilePondPluginFileMetadata);
+        // Vars
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create(inputElement);
+        // Option
+        pond.setOptions({
+            allowMultiple: true,
+            allowReorder: true,
+            server: {
+                process: '/manage/SaleCarTmpUpload',
+                revert: '/manage/SaleCarTmpDelete',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            },
+            // Plugin Services
+            imageTransformOutputStripImageHead: true,
+            imageTransformCanvasMemoryLimit: 50000000,
+            imageTransformOutputQuality: 80,
+        });
+        // ---------------------------------------- Carousel & buttons
+        $(document).ready(function() {
+            var owl = $('#image-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                slideBy: 2,
+                nav: false,
+                navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
+                    "<i class='bi bi-arrow-right-circle-fill'></i>"
+                ],
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 2,
+                        slideBy: 2
+                    },
+                    600: {
+                        items: 3,
+                        slideBy: 3
+                    },
+                    1000: {
+                        items: 6,
+                        slideBy: 5
+                    }
+                }
+            });
+            // ---------------------------------------- Delete Button
+            $('.delete-btn').click(function(event) {
+                event.preventDefault();
+
+                var index = $(this).data('index');
+
+                // Remove the corresponding input fields
+                $('input[name="images[' + index + '][name]"]').remove();
+                $('input[name="images[' + index + '][url]"]').remove();
+
+                // Remove the item from the Owl Carousel's internal data structure
+                owl.trigger('remove.owl.carousel', [index]).trigger('refresh.owl.carousel');
+
+                // After removing the item, update the index values for remaining items
+                // Update the index data attribute for delete buttons
+                $('.delete-btn').each(function(i) {
+                    $(this).data('index', i);
+                });
+
+                // Update the name attribute for input fields
+                $('input[name^="images"]').each(function(i) {
+                    var newName = $(this).attr('name').replace(/\[\d+\]/, '[' + i + ']');
+                    $(this).attr('name', newName);
+                });
+            });
+        });
+        // ---------------------------------------- Brands_Models
+        $(document).ready(function() {
+            // Select the correct option based on the value of the "brand" input
+            var selectedBrandId = $('#brandSelect').val();
+            $('#brandSelect option[value="' + selectedBrandId + '"]').prop('selected', true);
+
+            // Get the selected model ID from the server-side data
+            var selectedModelId = '{{ $car->model }}'; // Assuming $car->model contains the selected model ID
+
+            // Set the value of the input field to the selected model ID
+            $('#modelInput').val(selectedModelId);
+
+            // Remove name attribute from all model options
+            $('#modelSelect option').removeAttr('name');
+
+            // Handle change event on the brand select
+            $('#brandSelect').change(function() {
+                var brandId = $(this).val();
+                if (!brandId) {
+                    $('#modelSelect').html('<option value="">Select Brand First</option>');
+                    $('#modelInput').val(''); // Clear the input field
+                    return;
+                }
+
+                // Perform AJAX request to fetch models
+                $.ajax({
+                    url: '/car-brand-models/models/' + brandId,
+                    type: 'GET',
+                    success: function(data) {
+                        var options = '<option value="">Select Model</option>';
+                        $.each(data, function(index, model) {
+                            // Get the translation based on the current locale
+                            var modelName = model.name["{{ App::getLocale() }}"];
+
+                            // Append the option to the select dropdown
+                            options += '<option value="' + model.id + '">' + modelName +
+                                '</option>';
+                        });
+
+                        $('#modelSelect').html(options);
+
+                        // Select the correct option based on the selected model ID
+                        if (selectedModelId) {
+                            $('#modelSelect').val(selectedModelId);
+                        } else {
+                            $('#modelSelect').val(''); // Set default to "Select Model"
+                        }
+
+                        // Update the value of the input field
+                        $('#modelInput').val($('#modelSelect').val());
+
+                        // Remove name attribute from all model options except the selected one
+                        $('#modelSelect option').removeAttr('name');
+                        $('#modelSelect option:selected').attr('name', 'model');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching models:', error);
+                    }
+                });
+            });
+
+            // Handle change event on the model select
+            $('#modelSelect').change(function() {
+                // Update the value of the input field with the selected model ID
+                $('#modelInput').val($(this).val());
+            });
+
+            // Trigger change event on brand select to load models initially
+            $('#brandSelect').trigger('change');
+        });
+    </script>
 @endsection

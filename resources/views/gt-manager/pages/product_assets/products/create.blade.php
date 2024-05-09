@@ -6,6 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">Products</a></li>
                     <li class="breadcrumb-item" aria-current="page">Create Product</li>
                 </ol>
             </div>
@@ -95,12 +96,12 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sukGenerator" name="sku" required
                                             value="" readonly>
-                                        <div class="input-group-append">
+                                        {{-- <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="button"
                                                 onclick="generateUniqueId()">Generate Unique ID</button>
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <x-errors.display-validation-error property="sku" />
+                                    {{-- <x-errors.display-validation-error property="sku" /> --}}
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
@@ -318,19 +319,6 @@
             imageTransformCanvasMemoryLimit: 50000000,
             imageTransformOutputQuality: 80,
         });
-        // ---------------------------------------- SKU
-        function generateUniqueId() {
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            var id = '';
-
-            for (var i = 0; i < 10; i++) {
-                var randomIndex = Math.floor(Math.random() * characters.length);
-                var character = characters.charAt(randomIndex).toUpperCase(); // Convert character to uppercase
-                id += character;
-            }
-
-            document.getElementById('sukGenerator').value = id;
-        }
         // ---------------------------------------- SubCategories
         $(document).ready(function() {
             // Select the correct option based on the value of the "category" input

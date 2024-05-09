@@ -21,25 +21,40 @@
             @foreach ($cars as $car)
                 <div class="col-md-4 mb-4">
                     <div class="card">
+                        {{-- image --}}
+                        <div>
+                            <div class="card-img-container">
+                                @foreach ($car->images as $image)
+                                    @if ($image->main_img)
+                                        <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
+                                            class="card-img-top" alt="No_IMG">
+                                            <a href="{{route('sale-car.edit' , $car->slug)}}">
+                                                <button class="btn btn-light btn-icon stockCarImageEdit">
+                                                    <i data-feather="edit"></i>
+                                                </button>
+                                            </a>
+                                        @break
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                         {{-- Detalis --}}
                         <div class="card-body">
                             <h4 class="card-text">
+                                {{ ucwords($conditions[$car->condition]) }}
                                 {{ $brands[$car->brand] }}
                                 {{ $models[$car->model] }}
                                 {{ $car->year }}
                             </h4>
 
-                            <h4 class="card-text text-primary">
+                            <h4 class="card-text text-primary mt-2">
                                 <span class="h5 text-dark">{{ __('EGP:') }} </span>{{ number_format($car->price) }}
                             </h4>
 
                             <div class="card-text mt-4">
                                 <span class="badge bg-light p-2 h6">
-                                    {{ ucwords($car->condition) }}
-                                </span>
-                                <span class="badge bg-light p-2 h6">
                                     <i class="bi bi-speedometer2"></i>
-                                    {{ number_format($car->km) }} Km
+                                    {{ $kms[$car->km] }}
                                 </span>
                                 <span class="badge bg-light p-2 h6">
                                     <i class="bi bi-gear-wide-connected"></i>

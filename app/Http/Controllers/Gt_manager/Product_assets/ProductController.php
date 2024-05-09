@@ -97,6 +97,7 @@ class ProductController extends Controller
         $manufacturer = Manufacturer::find($request->manufacturer_id);
         $category = ProductCategory::find($request->category_id);
         $subcategory = ProductSubCategory::find($request->subcategory_id);
+        $sku = generateUniqueId();
         $firstImage = 1;
         // Validate the request data
         $validator = Validator::make($request->all(), [
@@ -107,7 +108,6 @@ class ProductController extends Controller
             'name_ar' => 'required|max:250',
             'description_en' => 'required',
             'description_ar' => 'required',
-            'sku' => 'required',
             'part_number' => 'required',
             'main_price' => 'required',
             'image' => 'required',
@@ -132,7 +132,7 @@ class ProductController extends Controller
         // Create the SKU
         $sku = ProductSku::create([
             'product_id' => $product->id,
-            'sku' => $request->sku, // Assuming 'suk' is the key for SKU in your request data
+            'sku' => $sku,
             'part_number' => $request->part_number,
             'main_price' => $request->main_price,
         ]);

@@ -68,7 +68,7 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="#">{{ __('footer.sellYourCar') }}</a></li>
+                                <li><a href="{{route('gt_car.create')}}">{{ __('footer.sellYourCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.saleCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.CarPrices') }}</a></li>
                                 <li><a href="#">{{ __('footer.productsShop') }}</a></li>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="#">{{ __('footer.AboutUS') }}</a></li>
+                                <li><a href="{{route('about_us')}}">{{ __('footer.AboutUS') }}</a></li>
                                 <li><a href="#">{{ __('footer.ContactUs') }}</a></li>
                                 <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
                                 <li><a href="#">{{ __('footer.OrdersandRefunds') }}</a></li>

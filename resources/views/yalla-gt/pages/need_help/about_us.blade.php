@@ -1,13 +1,14 @@
 @extends('yalla-gt.layout.app')
 @section('content')
-    {{-- Spare Parts--}}
+    {{-- Spare Parts --}}
     <div class="bg-light">
         <div class="container py-5">
             <div class="row h-100 align-items-center py-5">
                 <div class="col-lg-6">
                     <h1 class="display-4">About us</h1>
                     <p class="lead text-muted mb-0">
-                        Discover your perfect car, new or used, and sell yours with no limits and hassle-free at Yallagt.
+                        Discover your perfect car, new or used, and sell yours with no limits and hassle-free at
+                        Yallagt.
                         Browse our extensive inventory of new cars at competitive prices,
                         along with a selection of spare parts. Plus, stay informed with our informative car blogs. Your
                         one-stop destination for all things automotive.
@@ -18,16 +19,18 @@
             </div>
         </div>
     </div>
-    {{-- Win With Us / Looking For Spare Parts--}}
+    {{-- Win With Us / Looking For Spare Parts --}}
     <div class="bg-white py-5">
         <div class="container py-5">
             <div class="row align-items-center mb-5">
                 <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
                     <h2 class="font-weight-light">Win With Us</h2>
-                    <p class="font-italic text-muted mb-4">"Win With Us at Yallagt, Sell your car hassle-free and
+                    <p class="font-italic text-muted mb-4">"Win With Us at Yallagt, Sell your car, hassle-free and
                         commission-free. Our platform offers you the opportunity to list your vehicle without any fees,
-                        ensuring a seamless selling experience. Take advantage of our commitment to providing a transparent
-                        and cost-effective solution for selling your car. Join our community today and let's win together."
+                        ensuring a seamless selling experience. Take advantage of our commitment to providing a
+                        transparent
+                        and cost-effective solution for selling your car. Join our community today and let's win
+                        together."
                     </p>
                     <a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
                 </div>
@@ -41,9 +44,12 @@
                 <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
                     <h2 class="font-weight-light">Looking For Spare Parts?</h2>
                     <p class="font-italic text-muted mb-4">"Look no further! At Yallagt,
-                        we've got you covered. Explore our online store for a wide range of spare parts, all conveniently
-                        available for purchase directly from us. With our same-day delivery service, you can get the parts
-                        you need delivered to your doorstep as quickly as possible. Trust us to provide high-quality parts
+                        we've got you covered. Explore our online store for a wide range of spare parts, all
+                        conveniently
+                        available for purchase directly from us. With our same-day delivery service, you can get the
+                        parts
+                        you need delivered to your doorstep as quickly as possible. Trust us to provide high-quality
+                        parts
                         and fast service, so you can get back on the road in no time."
                     </p>
                     <a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
@@ -152,4 +158,5 @@
 @endsection
 @section('footer')
     @include('yalla-gt.layout.upper-footer')
+    @include('yalla-gt.layout.footer')
 @endsection
