@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSubCategorySeeder::class,
             BlogCategorySeeder::class,
+            SaleConditionSeeder::class,
+            PaymentMethodsSeeder::class,
         ]);
     }
 

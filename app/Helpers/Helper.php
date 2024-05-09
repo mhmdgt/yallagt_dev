@@ -40,7 +40,20 @@ function generateUniqueId() {
 
     return $id;
 }
-
+// -------------------- Display images -------------------- //
+if (!function_exists('callButton')) {
+    function callButton($phoneNumber)
+    {
+        return <<<HTML
+        <div class="col-9">
+            <button type="button" class="btn btn-success btn-block call-btn" data-phone="$phoneNumber">
+                <i class="mr-2 bi bi-telephone"></i>
+                <span class="call-text">Call</span>
+            </button>
+        </div>
+        HTML;
+    }
+}
 // -------------------- Display images -------------------- //
 if (!function_exists('getFirstName')) {
     function getFirstName($fullName)

@@ -10,7 +10,7 @@
             </div>
         </nav>
         {{-- ====== Content ====== --}}
-        <Form action="{{route('sale-car.store')}}" id="carForSaleID" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('sale-car.store') }}" id="carForSaleID" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- Brand , Model , Year , Color , Body , Trans & Condition --}}
             <div class="row">
@@ -22,10 +22,12 @@
                                     <div>
                                         <label>Brand</label>
                                         <select id="brandSelect" class="js-example-basic-single w-100" name="brand">
-                                            <option value="">Select Brand</option>
+                                            <option>Select Brand</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    {{ old('brand') == $brand->id ? 'selected' : '' }}> {{ $brand->name }}
+                                                <option value="{{ $brand->id }}" @selected(old('brand') == $brand->id)>
+                                                    {{-- {{ old('brand') == $brand->id ? 'selected' : '' }}> --}}
+                                                    {{ $brand->name }}
+
                                                 </option>
                                             @endforeach
                                         </select>
@@ -71,7 +73,7 @@
                                     <label>{{ __('gt_cars_create.transmission') }}</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="transmission">
-                                            <option value="">{{ __('gt_cars_create.select') }}</option>
+                                            <option disabled selected>{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($trans_types as $trans_type)
                                                 <option value="{{ $trans_type->id }}"
                                                     {{ old('trans_type') == $trans_type->id ? 'selected' : '' }}>
@@ -115,63 +117,56 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.condition') }}</h4>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="condition"
-                                                id="optionsRadios5" value="new">
-                                            {{ __('gt_cars_create.new') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="condition"
-                                                id="optionsRadios6" value="used">
-                                            {{ __('gt_cars_create.used') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
+                                    @foreach ($conditions as $condition)
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="condition"
+                                                    id="optionsRadios{{ $condition->id }}" value="{{ $condition->id }}">
+                                                {{ ucwords($condition->getTranslation('name', App::getLocale())) }}
+                                                <i class="input-frame"></i>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                     <x-errors.display-validation-error property="condition" />
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
             {{-- Media --}}
-            {{-- <div class="row mt-3">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.media') }}</h4>
                             <div>
-                                <input type="file" name="photos" class="file-upload-default" id="image">
-                                <x-errors.display-validation-error property="photos" />
+                                <input type="file" name="image" class="file-upload-default" id="image">
+                                <x-errors.display-validation-error property="image" />
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             {{-- Price --}}
-            <div class="row mt-3">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.payment_method') }}</h4>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="payment"
-                                                id="optionsRadios7" value="cash">
-                                            {{ __('gt_cars_create.cash') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="payment"
-                                                id="optionsRadios8" value="downpayment">
-                                            {{ __('gt_cars_create.downpayment') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
+                                    @foreach ($paymentMethods as $payment)
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="payment"
+                                                    id="optionsRadios{{ $payment->id }}" value="{{ $payment->id }}">
+                                                {{ ucwords($payment->getTranslation('name', App::getLocale())) }}
+                                                <i class="input-frame"></i>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                     <x-errors.display-validation-error property="payment" />
                                 </div>
                             </div>
@@ -188,7 +183,7 @@
                 </div>
             </div>
             {{-- Engine Details --}}
-            <div class="row mt-3">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -229,7 +224,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.ExtraFeatures') }}
-                                        <span class="text-success">{{ __('gt_cars_create.Choose_additional_features_for_your_car') }}</span>
+                                        <span
+                                            class="text-success">{{ __('gt_cars_create.Choose_additional_features_for_your_car') }}</span>
                                     </label>
                                     <div>
                                         <select class="js-example-basic-single w-100" multiple name="features[]">
@@ -278,14 +274,14 @@
                 </div>
             </div>
             {{-- Description --}}
-            <div class="row mt-3">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">{{ __('gt_cars_create.Description') }}</label>
-                                <textarea class="form-control" id="description" name="description" rows="8"
-                                maxlength="4200" style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="8" maxlength="4200"
+                                    style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
                                 <x-errors.display-validation-error property="description" />
                             </div>
                         </div>
@@ -293,7 +289,7 @@
                 </div>
             </div>
             {{-- Contact Details --}}
-            <div class="row mt-3">
+            <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -317,17 +313,15 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputName1">{{ __('gt_cars_create.name') }}</label>
-                                    <input type="text" class="form-control" name="user_name"
-                                        value="">
-                                        <x-errors.display-validation-error property="user_name" />
+                                    <input type="text" class="form-control" name="user_name" value="">
+                                    <x-errors.display-validation-error property="user_name" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputNumber1">{{ __('gt_cars_create.PhoneNumber') }}</label>
-                                    <input type="text" class="form-control"  name="phone"
-                                        value="">
-                                        <x-errors.display-validation-error property="phone" />
+                                    <input type="text" class="form-control" name="phone" value="">
+                                    <x-errors.display-validation-error property="phone" />
                                 </div>
                             </div>
                         </div>
@@ -366,8 +360,8 @@
             allowMultiple: true,
             allowReorder: true,
             server: {
-                process: '/manage/blogTmpUpload',
-                revert: '/manage/blogTmpDelete',
+                process: '/manage/SaleCarTmpUpload',
+                revert: '/manage/SaleCarTmpDelete',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }

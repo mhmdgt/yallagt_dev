@@ -18,10 +18,20 @@ use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
 use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('sale-car-store' , [SaleCarsController::class, 'store'])->name('sale-car.store');
+
+
 Route::middleware('admin')->group(function () {
+    // FilePond
+    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
+    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
+    Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
+    Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
+    Route::post('/manage/SaleCarTmpUpload', [SaleCarsController::class, 'SaleCarTmpUpload']);
+    Route::delete('/manage/SaleCarTmpDelete', [SaleCarsController::class, 'SaleCarTmpDelete']);
     // Dashboard Index//
     Route::get('manager', [AdminController::class, 'index'])->name('manager-index');
-
+    // All Admins
     Route::controller(AdminController::class)->prefix('manage/admins')->name('admins.')->group(function () {
         Route::get('/admins', 'show')->name('show');
     });
@@ -68,11 +78,6 @@ Route::middleware('admin')->group(function () {
         Route::view('/spec-colors', 'gt-manager.pages.car_assets.spec_categories.colors')->name('colors');
         Route::view('/spec-features', 'gt-manager.pages.car_assets.spec_categories.features')->name('features');
     });
-    // FilePond
-    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
-    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
-    Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
-    Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
     // Stock Cars //
     Route::controller(StockCarsController::class)->prefix('manage/stock-car')->name('stock-car.')->group(function () {
         // Route::get('/{brandSlug}/{modelSlug}/{stockYear}/update-model', 'create')->name('update');
@@ -106,7 +111,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/declined', 'declined')->name('declined');
 
         // Approve and Decline routes
-        Route::post('/', 'store')->name('store');
+        Route::post('/{slug}', 'update')->name('update');
         Route::post('{slug}/approve', 'approve')->name('approve-car');
         Route::post('{slug}/decline', 'decline')->name('decline-car');
     });

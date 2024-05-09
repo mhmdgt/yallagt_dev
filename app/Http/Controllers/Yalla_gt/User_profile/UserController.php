@@ -7,6 +7,7 @@ use App\Models\CarBrand;
 use App\Models\EngineKm;
 use App\Models\Governorate;
 use App\Models\CarBrandModel;
+use App\Models\SaleCondition;
 use App\Models\TransmissionType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -35,11 +36,11 @@ class UserController extends Controller
         $transmissions = TransmissionType::whereIn('id', $cars->pluck('transmission'))->pluck('name', 'id');
         $kms = EngineKm::whereIn('id', $cars->pluck('km'))->pluck('name', 'id');
         $governorates = Governorate::whereIn('id', $cars->pluck('governorate'))->pluck('name', 'id');
+        $conditions = SaleCondition::whereIn('id', $cars->pluck('condition'))->pluck('name', 'id');
 
         // dd($cars); // Uncomment for debugging
-
         return view('yalla-gt.pages.profile.ads',
-        compact('cars', 'brands', 'models', 'transmissions', 'kms', 'governorates'));
+        compact('conditions', 'cars', 'brands', 'models', 'transmissions', 'kms', 'governorates'));
 
     }
 

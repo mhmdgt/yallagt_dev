@@ -111,12 +111,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="sukGenerator" name="sku" required
                                             value="{{ $product->skus->first()->sku }}" readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button"
-                                                onclick="generateUniqueId()">Generate Unique ID</button>
-                                        </div>
                                     </div>
-                                    <x-errors.display-validation-error property="sku" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">

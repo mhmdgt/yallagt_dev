@@ -73,23 +73,27 @@
         {{-- Content --}}
         <div class="row">
 
-            @foreach($cars as $car)
-            <div class="col-md-4 mt-2 mb-4">
-                <div class="card">
-                    {{-- image --}}
-                    <div>
-                        <!-- If you have a car image, use $car->image_path or $car->image_url here -->
-                        <img src="{{ asset('gt_manager/media/test_car.jpg') }}" class="card-img-top" alt="Car Image">
-                        <a href="{{route('gt_car.edit' , $car->slug )}}">
-                            <button class="btn btn-light btn-icon stockCarImageEdit">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                        </a>
+            @foreach ($cars as $car)
+                <div class="col-md-4 mt-2 mb-4">
+                    <div class="card">
+                        {{-- image --}}
+                        <div>
+                            <div class="card-img-container">
+                                @foreach ($car->images as $image)
+                                    @if ($image->main_img)
+                                    <a href="{{ route('gt_car.edit', $car->slug) }}">
+                                        <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
+                                            class="card-img-top" alt="No_IMG">
+                                        </a>
+                                    @break
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                     {{-- Details --}}
                     <div class="card-body rtl-direction">
                         <h4 class="card-text">
-                            <span>{{ ucfirst($car->condition) }}</span>
+                            <span>{{ ucwords($conditions[$car->condition]) }}</span>
                             {{ $brands[$car->brand] }}
                             {{ $models[$car->model] }}
                             {{ $car->year }}
@@ -100,7 +104,7 @@
                         <div class="card-text mt-4">
                             <span class="badge bg-light p-2 h4">
                                 <i class="bi bi-speedometer2"></i>
-                                {{ $kms[$car->km] }} KM
+                                {{ $kms[$car->km] }}
                             </span>
                             <span class="badge bg-light p-2 h4">
                                 <i class="bi bi-gear-wide-connected"></i>
@@ -111,12 +115,13 @@
                             <i class="bi bi-geo-alt"></i>
                             <span class="badge_icon mr-2 h6">{{ $governorates[$car->governorate] }}</span>
                             <i class="bi bi-calendar-check"></i>
-                            <span class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
+                            <span
+                                class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
+        @endforeach
 
 
 
@@ -126,10 +131,10 @@
 
 
 
-        </div>
     </div>
+</div>
 @endsection
 @section('footer')
-    {{-- @include('yalla-gt.layout.upper-footer') --}}
-    @include('yalla-gt.layout.footer')
+{{-- @include('yalla-gt.layout.upper-footer') --}}
+@include('yalla-gt.layout.footer')
 @endsection

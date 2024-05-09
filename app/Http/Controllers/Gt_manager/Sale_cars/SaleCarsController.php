@@ -13,11 +13,18 @@ use App\Models\EngineKm;
 use App\Models\Feature;
 use App\Models\FuelType;
 use App\Models\Governorate;
+use App\Models\PaymentMethods;
 use App\Models\SaleCar;
+use App\Models\SaleCarImages;
+use App\Models\SaleCondition;
+use App\Models\TemporaryFile;
 use App\Models\TransmissionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\ImageManager;
 
 class SaleCarsController extends Controller
 {
@@ -28,6 +35,45 @@ class SaleCarsController extends Controller
 
         // Return the models data as JSON
         return response()->json($models);
+    }
+    // -------------------- Method -------------------- //
+    public function SaleCarTmpUpload(Request $request)
+    {
+        if ($request->has('image')) {
+            $image = $request->image;
+
+            // Convert to Jpeg
+            $manager = new ImageManager(new Driver());
+            $imageMngr = $manager->read($image);
+            $encoded = $imageMngr->toJpeg(80); // Intervention\Image\EncodedImage
+
+            // Image new name
+            $fileName = 'SALE-' . bin2hex(random_bytes(16)) . '.jpg';
+
+            // Save image to storage
+            Storage::disk('public')->put('/filepond-tmp/sale_car_imgs/' . $fileName, $encoded);
+
+            // Save to DB
+            TemporaryFile::create([
+                'name' => $fileName,
+            ]);
+
+            return $fileName;
+        } else {
+            return response()->json(['error' => 'saving failed'], 400);
+        }
+    }
+    // -------------------- Method -------------------- //
+    public function SaleCarTmpDelete(Request $request)
+    {
+        $temporaryImages = TemporaryFile::Where('name', $request->getContent())->first();
+        if ($temporaryImages) {
+            Storage::delete('filepond-tmp/sale_car_imgs/' . $temporaryImages->name);
+            $temporaryImages->delete();
+            return 'Done!';
+        } else {
+            return response()->json(['error' => 'deleting file failed'], 400);
+        }
     }
     // -------------------- Method -------------------- //
     public function gtCreate()
@@ -44,11 +90,12 @@ class SaleCarsController extends Controller
         $engineCCS = EngineCc::orderBy('name')->get();
         $governorates = Governorate::orderBy('name')->get();
         $features = Feature::orderBy('name')->get();
-
-        // dd($governorates);
+        $conditions = SaleCondition::orderBy('name')->get();
+        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
 
         return view('yalla-gt.pages.sale_cars.create',
-            compact('brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+            compact('brands', 'models',
+                'conditions', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'paymentMethods', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function create()
@@ -65,16 +112,21 @@ class SaleCarsController extends Controller
         $engineCCS = EngineCc::orderBy('name')->get();
         $governorates = Governorate::orderBy('name')->get();
         $features = Feature::orderBy('name')->get();
+        $conditions = SaleCondition::orderBy('name')->get();
+        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
 
         return view('gt-manager.pages.sale_cars.create',
-            compact('brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+            compact('brands', 'models',
+                'conditions', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'paymentMethods', 'governorates'));
 
     }
     // -------------------- Method -------------------- //
     public function gtEdit($slug)
     {
-        $car = SaleCar::where('slug', $slug)->firstOrFail();
-        // dd($car->description);
+
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+
+        // dd($car);
         $brands = CarBrand::orderBy('name')->get();
         $carBrand = new CarBrand();
         $models = $carBrand->getAllModels();
@@ -89,16 +141,17 @@ class SaleCarsController extends Controller
         $features = Feature::orderBy('name')->get();
 
         return view('yalla-gt.pages.sale_cars.edit',
-        compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+            compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function edit($slug)
     {
-        $car = SaleCar::where('slug', $slug)->firstOrFail();
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
         // dd($car->description);
         $brands = CarBrand::orderBy('name')->get();
         $carBrand = new CarBrand();
         $models = $carBrand->getAllModels();
+        $modelName = CarBrandModel::findOrFail($car->model)->name;
         $shapes = BodyShape::orderBy('name')->get();
         $colors = Color::orderBy('name')->get();
         $trans_types = TransmissionType::orderBy('name')->get();
@@ -106,26 +159,31 @@ class SaleCarsController extends Controller
         $EngineAspirations = EngineAspiration::orderBy('name')->get();
         $EngineKMS = EngineKm::orderBy('name')->get();
         $engineCCS = EngineCc::orderBy('name')->get();
-        $governorates = Governorate::orderBy('name')->get();
         $features = Feature::orderBy('name')->get();
+        $governorates = Governorate::orderBy('name')->get();
+        $conditions = SaleCondition::orderBy('name')->get();
+        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
 
+        // dd($car->model);
         return view('gt-manager.pages.sale_cars.edit',
-        compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+            compact('car', 'brands', 'models', 'modelName',
+                'shapes', 'colors', 'trans_types', 'EngineAspirations', 'FuelTypes',
+                'engineCCS', 'EngineKMS', 'features', 'governorates', 'conditions', 'paymentMethods'));
     }
     // -------------------- Method -------------------- //
     public function store(Request $request)
     {
-        // dd($request);
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'brand' => 'required',
-            'model' => 'required',
+            'brand' => 'required|exists:car_brands,id',
+            'model' => 'required|exists:car_brand_models,id',
             'year' => 'required',
             'color' => 'required',
+            'image' => 'required',
             'condition' => 'required',
             'payment' => 'required',
             'price' => 'required',
-            'description' => 'required',
+            'description' => 'required|string|max:4200',
             'bodyShape' => 'required',
             'transmission' => 'required',
             'fuelType' => 'required',
@@ -137,59 +195,239 @@ class SaleCarsController extends Controller
             'user_name' => 'required',
             'phone' => 'required',
         ]);
-
-        // dd($validator);
+        // Check the Validation
+        $temporaryImages = TemporaryFile::all();
         if ($validator->fails()) {
+            foreach ($temporaryImages as $temporaryImage) {
+                Storage::delete('filepond-tmp/sale_car_imgs/' . $temporaryImage->name);
+                $temporaryImage->delete();
+            }
             return redirect()->back()->withErrors($validator->errors());
         }
-
         // Get the names corresponding to the IDs
-        $brand = CarBrand::findOrFail($request->input('brand'))->name;
-        $model = CarBrandModel::findOrFail($request->input('model'))->name;
-        $trans = TransmissionType::findOrFail($request->input('transmission'))->name;
-        $condition = $request->input('condition');
+        $firstImage = 1;
+        $brand = CarBrand::findOrFail($request->input('brand'));
+        $brand_en = $brand->name;
+        $brand_ar = $brand->getTranslation('name', 'ar');
+        $model = CarBrandModel::findOrFail($request->input('model'));
+        $model_en = $model->name;
+        $model_ar = $model->getTranslation('name', 'ar');
+        $trans = TransmissionType::findOrFail($request->input('transmission'));
+        $trans_en = $trans->name;
+        $trans_ar = $trans->getTranslation('name', 'ar');
         $year = $request->input('year');
-        $uniqueId = generateUniqueId();
-        $slug = implode('-', [$condition, $brand, $model, $trans, $year, $uniqueId]);
-        $slug = str_replace(' ', '-', $slug);
+        $condition = SaleCondition::findOrFail($request->input('condition'));
+        $condition_en = $condition->name;
+        $condition_ar = $condition->getTranslation('name', 'ar');
         $selectedFeatures = $request->input('features', []);
         $featuresJson = json_encode($selectedFeatures);
+        $uniqueId = generateUniqueId();
+
+        // Replacing spaces with dashes
+        $slug_en = implode('-', [$brand_en, $model_en, $trans_en, $year, $condition_en, $uniqueId]);
+        $slug_en = str_replace(' ', '-', $slug_en);
+        $slug_ar = implode('-', [$uniqueId, $brand_ar, $model_ar, $trans_ar, $condition_ar, $year]);
+        $slug_ar = str_replace(' ', '-', $slug_ar);
+        $slug = ["en" => $slug_en, "ar" => $slug_ar];
 
         // Create a new SaleCar instance and populate its properties
-        $saleCar = new SaleCar();
-        $saleCar->slug = $slug;
-        $saleCar->brand = $request->input('brand');
-        $saleCar->model = $request->input('model');
-        $saleCar->year = $request->input('year');
-        $saleCar->color = $request->input('color');
-        $saleCar->condition = $request->input('condition');
-        $saleCar->payment = $request->input('payment');
-        $saleCar->price = $request->input('price');
-        $saleCar->description = $request->input('description');
-        $saleCar->bodyShape = $request->input('bodyShape');
-        $saleCar->transmission = $request->input('transmission');
-        $saleCar->fuelType = $request->input('fuelType');
-        $saleCar->cc = $request->input('cc');
-        $saleCar->features = $featuresJson;
-        $saleCar->aspiration = $request->input('aspiration');
-        $saleCar->km = $request->input('km');
-        $saleCar->governorate = $request->input('governorate');
-        $saleCar->user_name = $request->input('user_name');
-        $saleCar->phone = $request->input('phone');
-        $saleCar->phone = $request->input('phone');
+        $car = SaleCar::create([
+            'slug' => $slug,
+            'brand' => $request->input('brand'),
+            'model' => $request->input('model'),
+            'year' => $request->input('year'),
+            'color' => $request->input('color'),
+            'condition' => $request->input('condition'),
+            'payment' => $request->input('payment'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'bodyShape' => $request->input('bodyShape'),
+            'transmission' => $request->input('transmission'),
+            'fuelType' => $request->input('fuelType'),
+            'cc' => $request->input('cc'),
+            'features' => $featuresJson,
+            'aspiration' => $request->input('aspiration'),
+            'km' => $request->input('km'),
+            'governorate' => $request->input('governorate'),
+            'user_name' => $request->input('user_name'),
+            'phone' => $request->input('phone'),
+        ]);
+        // store images into stock car images table
+        foreach ($temporaryImages as $temporaryImage) {
+            Storage::copy('filepond-tmp/sale_car_imgs/' . $temporaryImage->name,
+                'media/sale_car_imgs/' . $temporaryImage->name);
 
-        // Save the SaleCar instance to the database
-        $saleCar->save();
+            SaleCarImages::create([
+                'car_id' => $car->id,
+                'name' => $temporaryImage->name,
+                'main_img' => $firstImage ? '1' : '0', // Set main_img to 1 for the first image, 0 for others
+            ]);
 
-        // dd($saleCar->user_name);
+            $firstImage = false; // Set the flag to false after the first iteration
+
+            Storage::delete('filepond-tmp/sale_car_imgs/' . $temporaryImage->name);
+            $temporaryImage->delete();
+        }
 
         Session::flash('success', 'Stored Successfully');
         return redirect()->back();
     }
     // -------------------- Method -------------------- //
+    public function update(Request $request, $slug)
+    {
+        $temporaryImages = TemporaryFile::all();
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+        $selectedFeatures = $request->input('features', []);
+        $featuresJson = json_encode($selectedFeatures);
+        // Make sure of car existence
+        if (!$car) {
+            return redirect()->back()->withErrors(['Car not found.']);
+        }
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'brand' => 'required|exists:car_brands,id',
+            'model' => 'required|exists:car_brand_models,id',
+            'year' => 'required',
+            'color' => 'required',
+            'condition' => 'required',
+            'payment' => 'required',
+            'price' => 'required',
+            'description' => 'required|string|max:4200',
+            'bodyShape' => 'required',
+            'transmission' => 'required',
+            'fuelType' => 'required',
+            'cc' => 'required',
+            'features' => 'required',
+            'aspiration' => 'required',
+            'km' => 'required',
+            'governorate' => 'required',
+            'user_name' => 'required',
+            'phone' => 'required',
+            'main_img' => 'required', // Ensure main_img is present
+        ]);
+        // Check the Validation
+        if ($validator->fails()) {
+            foreach ($temporaryImages as $temporaryImage) {
+                Storage::delete('filepond-tmp/sale_car_imgs/' . $temporaryImage->name);
+                $temporaryImage->delete();
+            }
+            return redirect()->back()->withErrors($validator->errors());
+        }
+        // Update the car
+        $car->update([
+            'brand' => $request->input('brand'),
+            'model' => $request->input('model'),
+            'year' => $request->input('year'),
+            'color' => $request->input('color'),
+            'condition' => $request->input('condition'),
+            'payment' => $request->input('payment'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'bodyShape' => $request->input('bodyShape'),
+            'transmission' => $request->input('transmission'),
+            'fuelType' => $request->input('fuelType'),
+            'cc' => $request->input('cc'),
+            'features' => $featuresJson,
+            'aspiration' => $request->input('aspiration'),
+            'km' => $request->input('km'),
+            'governorate' => $request->input('governorate'),
+            'user_name' => $request->input('user_name'),
+            'phone' => $request->input('phone'),
+            'status' => 'pending',
+        ]);
+        // Deleted removed images and leave only stayed images into the update request
+        if ($request->has('images')) {
+            // Get the list of image names from the request
+            $requestedImageNames = collect($request->images)->pluck('name')->toArray();
+
+            // Find the existing images associated with the stock car
+            $existingImages = $car->images;
+
+            // Store the main image ID before removal
+            $mainImageId = null;
+            foreach ($existingImages as $image) {
+                if ($image->main_img === '1') {
+                    $mainImageId = $image->id;
+                    break;
+                }
+            }
+
+            // Determine which images should be removed
+            $imagesToRemove = [];
+            foreach ($existingImages as $image) {
+                if (!in_array($image->name, $requestedImageNames)) {
+                    $imagesToRemove[] = $image->id;
+                }
+            }
+
+            // Remove the images that are not included in the request
+            $car->images()->whereIn('id', $imagesToRemove)->delete();
+
+            // Update the names of the existing images
+            foreach ($request->images as $imageData) {
+                $imageName = $imageData['name'];
+                $car->images()->where('name', $imageName)->update(['name' => $imageName]);
+            }
+
+            // If no new main image is selected, retain the existing main image
+            if ($mainImageId) {
+                $car->images()->where('id', $mainImageId)->update(['main_img' => '1']);
+            }
+
+            // Update the main_img value
+            if (!$request->has('main_img')) {
+                // Check if there are images in the request
+                if (!empty($request->images)) {
+                    // Get the ID of the first image in the request
+                    $newMainImageId = key($request->images);
+                } else {
+                    // No images in the request, set main_img to null
+                    $newMainImageId = null;
+                }
+            } else {
+                $newMainImageId = $request->main_img;
+            }
+
+            // If main_img is null, set it to the ID of the first image in the request
+            if ($newMainImageId === null && isset($request->images[0])) {
+                $newMainImageId = $request->images[0]['id'];
+            }
+
+            // Reset main_img to 0 for all images except the new main image
+            $car->images()->where('id', '!=', $newMainImageId)->update(['main_img' => '0']);
+
+            // Set the new main_img value to 1 for the image with the new main image ID
+            $car->images()->where('id', $newMainImageId)->update(['main_img' => '1']);
+
+        }
+        // Store new images
+        foreach ($temporaryImages as $temporaryImage) {
+            Storage::copy('filepond-tmp/sale_car_imgs/' . $temporaryImage->name,
+                'media/sale_car_imgs/' . $temporaryImage->name);
+
+            // Skip setting the main_img value if it's explicitly provided in the request
+            if (!$request->has('main_img')) {
+                $mainImageId = $temporaryImage->id; // Assuming $temporaryImage->id is the ID of the newly added image
+            }
+
+            SaleCarImages::create([
+                'car_id' => $car->id,
+                'name' => $temporaryImage->name,
+                'main_img' => "0",
+            ]);
+
+            Storage::delete('filepond-tmp/sale_car_imgs/' . $temporaryImage->name);
+            $temporaryImage->delete();
+        }
+
+        Session::flash('success', 'Updated Successfully');
+        return redirect()->route('sale-car.pending');
+
+    }
+    // -------------------- Method -------------------- //
     public function live()
     {
-        $cars = SaleCar::where('status', 'approved')->get();
+        $cars = SaleCar::where('status', 'approved')->latest()->get();
 
         // Fetch the names corresponding to the IDs
         $brands = CarBrand::whereIn('id', $cars->pluck('brand'))->pluck('name', 'id');
@@ -197,30 +435,43 @@ class SaleCarsController extends Controller
         $transmissions = TransmissionType::whereIn('id', $cars->pluck('transmission'))->pluck('name', 'id');
         $kms = EngineKm::whereIn('id', $cars->pluck('km'))->pluck('name', 'id');
         $governorates = Governorate::whereIn('id', $cars->pluck('governorate'))->pluck('name', 'id');
+        $conditions = SaleCondition::whereIn('id', $cars->pluck('condition'))->pluck('name', 'id');
 
         // Pass the data to the view
         return view('gt-manager.pages.sale_cars.live',
-            compact('cars', 'brands', 'models', 'transmissions', 'kms', 'governorates'));
+            compact('cars', 'conditions', 'brands', 'models', 'transmissions', 'kms', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function pending()
     {
-        $cars = SaleCar::where('status', 'pending')->get(); // Fetch pending cars from the database
+        $cars = SaleCar::where('status', 'pending')->latest()->get();
+        $images = [];
+
+        foreach ($cars as $car) {
+            // Retrieve images for the car if they exist
+            $carImages = $car->images ?? [];
+
+            // If there are images for this car, add them to the $images array
+            if ($carImages->isNotEmpty()) {
+                $images[] = $carImages->firstWhere('main_img', 1);
+            }
+        }
 
         $brands = CarBrand::whereIn('id', $cars->pluck('brand'))->pluck('name', 'id');
         $models = CarBrandModel::whereIn('id', $cars->pluck('model'))->pluck('name', 'id');
         $transmissions = TransmissionType::whereIn('id', $cars->pluck('transmission'))->pluck('name', 'id');
         $kms = EngineKm::whereIn('id', $cars->pluck('km'))->pluck('name', 'id');
+        $conditions = SaleCondition::whereIn('id', $cars->pluck('condition'))->pluck('name', 'id');
 
         $governorates = Governorate::whereIn('id', $cars->pluck('governorate'))->pluck('name', 'id');
 
         return view('gt-manager.pages.sale_cars.pending',
-            compact('cars', 'brands', 'models', 'transmissions', 'kms', 'governorates'));
+            compact('cars', 'images', 'brands', 'models', 'conditions', 'transmissions', 'kms', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function approve($slug)
     {
-        $car = SaleCar::where('slug', $slug)->firstOrFail();
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
         $car->update(['status' => 'approved']);
         Session::flash('success', 'Approved Successfully');
         return redirect()->back();
@@ -228,7 +479,8 @@ class SaleCarsController extends Controller
     // -------------------- Method -------------------- //
     public function decline($slug)
     {
-        $car = SaleCar::where('slug', $slug)->firstOrFail();
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+
         $car->update(['status' => 'declined']);
         Session::flash('success', 'Declined Successfully');
         return redirect()->back();

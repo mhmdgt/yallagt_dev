@@ -38,9 +38,9 @@
 @endif
 
 
-{{-- @if (Session::has('success')) --}}
+@if (Session::has('success'))
     {{-- Popup-seccuss --}}
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'success',
@@ -50,7 +50,7 @@
                 // timer: 1500
             });
         });
-    </script> --}}
+    </script>
 
     {{-- toast-seccuss --}}
     {{-- <script>
@@ -73,4 +73,4 @@
             });
         });
     </script> --}}
-{{-- @endif --}}
+@endif
