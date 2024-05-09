@@ -72,14 +72,17 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <x-errors.display-validation-error property="main_img" />
                             <div class="form-group pt-0 mt-4">
                                 <label>Add More Images</label>
                                 <input type="file" class="filepond" name="image" multiple>
+                                <x-errors.display-validation-error property="image" />
                             </div>
                             {{-- brochure --}}
                             <div class="form-group pt-0 mt-4">
                                 <label>PDF Brochure</label>
                                 <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
+                                <x-errors.display-validation-error property="brochure" />
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info"
                                         placeholder="Upload Borchur">
@@ -347,7 +350,7 @@
                 loop: false,
                 margin: 10,
                 slideBy: 2,
-                nav: true,
+                nav: false,
                 navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
                     "<i class='bi bi-arrow-right-circle-fill'></i>"
                 ],
@@ -392,15 +395,6 @@
                     $(this).attr('name', newName);
                 });
             });
-            // --------------------------------------- Select button
-            // $('.select-btn').click(function() {
-            //     // Get the ID of the selected image
-            //     var imageId = $(this).attr('value');
-
-            //     // Set the value of the main_img input to the ID of the selected image
-            //     $('input[name="main_img"]').val(imageId);
-            // });
-            // ---------------------------------------
         });
     </script>
 @endsection

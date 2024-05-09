@@ -1,7 +1,7 @@
 <nav class="sidebar">
     {{-- upper Section --}}
     <div class="sidebar-header">
-        <a href="#" class="sidebar-brand">
+        <a href="{{ route('manager-index') }}" class="sidebar-brand">
             GT-Manger
         </a>
         <div class="sidebar-toggler not-active">
@@ -93,10 +93,10 @@
                 <div class="collapse" id="ProductSystem">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/email/compose.html" class="nav-link">Storehouses</a>
+                            <a href="{{route('storehouses.index')}}" class="nav-link">Storehouses</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/email/compose.html" class="nav-link">in-House Products</a>
+                            <a href="{{route('stock-products.index')}}" class="nav-link">Stock Products</a>
                         </li>
                     </ul>
                 </div>
@@ -112,7 +112,6 @@
                     <ul class="nav sub-menu">
                         <li class="nav-item"><a href="{{ route('blog-categories.index') }}" class="nav-link">Categories</a></li>
                         <li class="nav-item"><a href="{{ route('blogs.index') }}" class="nav-link">Blog List</a></li>
-                        <li class="nav-item"><a href="{{ route('blogs.create') }}" class="nav-link">+ Add Blog</a></li>
                     </ul>
                 </div>
             </li>
@@ -128,18 +127,10 @@
                 </a>
                 <div class="collapse" id="CarsForSale">
                     <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="{{ route('sale-car.live') }}" class="nav-link">All Live</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/ui-components/badges.html" class="nav-link">Pending</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/ui-components/badges.html" class="nav-link">Declined</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('sale-car.create') }}" class="nav-link">+ Add</a>
-                        </li>
+                        <li class="nav-item"><a href="{{ route('sale-car.create') }}" class="nav-link">+ Add</a></li>
+                        <li class="nav-item"><a href="{{ route('sale-car.live') }}" class="nav-link">All Live</a></li>
+                        <li class="nav-item"><a href="{{ route('sale-car.pending') }}" class="nav-link">Pending</a></li>
+                        {{-- <li class="nav-item"><a href="{{ route('sale-car.declined') }}" class="nav-link">Declined</a></li> --}}
                     </ul>
                 </div>
             </li>
@@ -178,7 +169,7 @@
                 <div class="collapse" id="admins">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Admins List</a>
+                            <a href="{{route('admins.show')}}" class="nav-link">Admins List</a>
                         </li>
                     </ul>
                 </div>
@@ -193,7 +184,7 @@
                 <div class="collapse" id="customers">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/ui-components/alerts.html" class="nav-link">Customers List</a>
+                            <a href="{{route('customers.index')}}" class="nav-link">Customers List</a>
                         </li>
                     </ul>
                 </div>

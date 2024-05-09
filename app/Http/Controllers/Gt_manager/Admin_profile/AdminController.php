@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Gt_manager\Admin_profile;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\AdminLoginRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\GtManager\Auth\AdminLoginRequest;
 
 class AdminController extends Controller
 {
@@ -38,6 +39,14 @@ class AdminController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect()->route('admin-login');
+    }
+
+    // -------------------- New Method -------------------- //
+    public function show()
+    {
+        $admins = Admin::latest()->get();
+
+        return view('gt-manager.pages.admins.index', compact('admins'));
     }
 
 } // End Class

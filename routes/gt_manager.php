@@ -1,29 +1,40 @@
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Gt_manager\Blog\BlogController;
-use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
-use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
-use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
+use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+use App\Http\Controllers\Gt_manager\Blog\BlogController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Customers\CustomersController;
 use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductCategoryController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
+use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+use App\Http\Controllers\Gt_manager\Stock_products\StockProductController;
+use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
+use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->group(function () {
     // Dashboard Index//
     Route::get('manager', [AdminController::class, 'index'])->name('manager-index');
+
+    Route::controller(AdminController::class)->prefix('manage/admins')->name('admins.')->group(function () {
+        Route::get('/admins', 'show')->name('show');
+    });
     // Admin Profile //
     Route::controller(AdminProfileController::class)->prefix('manage/admin')->name('admin.')->group(function () {
         Route::get('/profile', 'AdminProfile')->name('profile');
         Route::post('/update-profile', 'AdminUpdateData')->name('update-profile');
         Route::get('/change-password', 'AdminChangePassword')->name('change-password');
         Route::post('/update-password', 'AdminPasswordUpdate')->name('update-password');
+    });
+    // Customers
+    Route::controller(CustomersController::class)->prefix('manage/customers')->name('customers.')->group(function () {
+        Route::get('/', 'index')->name('index');
     });
     // Customer Web
     Route::controller(ContactUsController::class)->prefix('manage/cst_web')->name('cst_web.')->group(function () {
@@ -44,7 +55,6 @@ Route::middleware('admin')->group(function () {
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('destroy/{slug}', 'destroy')->name('destroy');
         Route::get('/models/{brandId}', 'getModelsByBrand');
-
     });
     // Spec Categories //
     Route::prefix('manage/spec-categroies')->name('spec-categories.')->group(function () {
@@ -58,6 +68,11 @@ Route::middleware('admin')->group(function () {
         Route::view('/spec-colors', 'gt-manager.pages.car_assets.spec_categories.colors')->name('colors');
         Route::view('/spec-features', 'gt-manager.pages.car_assets.spec_categories.features')->name('features');
     });
+    // FilePond
+    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
+    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
+    Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
+    Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
     // Stock Cars //
     Route::controller(StockCarsController::class)->prefix('manage/stock-car')->name('stock-car.')->group(function () {
         // Route::get('/{brandSlug}/{modelSlug}/{stockYear}/update-model', 'create')->name('update');
@@ -84,9 +99,22 @@ Route::middleware('admin')->group(function () {
     });
     // Sale Cars //
     Route::controller(SaleCarsController::class)->prefix('manage/sale-car')->name('sale-car.')->group(function () {
-        Route::get('/live', 'live')->name('live');
         Route::get('/create', 'create')->name('create');
+        Route::get('{slug}/edit', 'edit')->name('edit');
+        Route::get('/live', 'live')->name('live');
+        Route::get('/pending', 'pending')->name('pending');
+        Route::get('/declined', 'declined')->name('declined');
+
+        // Approve and Decline routes
+        Route::post('/', 'store')->name('store');
+        Route::post('{slug}/approve', 'approve')->name('approve-car');
+        Route::post('{slug}/decline', 'decline')->name('decline-car');
     });
+    // Storehouses //
+    Route::controller(StorehousesController::class)->prefix('manage/storehouses')->name('storehouses.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
     // Product Manufacturers //
     Route::controller(ManufacturersController::class)->prefix('manage/manufacturers')->name('manufacturers.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -95,22 +123,6 @@ Route::middleware('admin')->group(function () {
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('destroy/{slug}', 'destroy')->name('destroy');
     });
-    // Product //
-    Route::controller(ProductController::class)->prefix('manage/products')->name('products.')->group(function () {
-        // Pages
-        Route::get('/', 'index')->name('index');
-        Route::get('/create-product', 'create')->name('create');
-        Route::get('{slug}/edit-product', 'edit')->name('edit');
-        // Actions
-        Route::post('/store', 'store')->name('store');
-        Route::post('/{slug}', 'update')->name('update');
-        Route::delete('{slug}/destroy', 'destroy')->name('destroy');
-    });
-
-    // FilePond
-    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
-    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
-
     // Product Categories //
     Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -130,6 +142,21 @@ Route::middleware('admin')->group(function () {
         Route::get('/categories/{categoryId}', 'getCategoriesByCategory');
 
     });
+    // Product //
+    Route::controller(ProductController::class)->prefix('manage/products')->name('products.')->group(function () {
+        // Pages
+        Route::get('/', 'index')->name('index');
+        Route::get('/create-product', 'create')->name('create');
+        Route::get('{slug}/edit-product', 'edit')->name('edit');
+        // Actions
+        Route::post('/store', 'store')->name('store');
+        Route::put('/{slug}', 'update')->name('update');
+        Route::delete('{slug}/destroy', 'destroy')->name('destroy');
+    });
+    // Stock Products //
+    Route::controller(StockProductController::class)->prefix('manage/stock-product')->name('stock-products.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -139,7 +166,6 @@ Route::middleware('admin')->group(function () {
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('/{slug}', 'destroy')->name('destroy');
     });
-
     // blogs
     Route::controller(BlogController::class)->prefix('blogs')->name('blogs.')->group(function () {
         Route::get('/', 'index')->name('index');

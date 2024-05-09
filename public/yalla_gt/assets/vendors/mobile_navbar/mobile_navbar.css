@@ -1,12 +1,3 @@
-/* @media screen and (min-width: 800px) {
-    .main_mobile_nav {
-        display: none;
-    }
-} */
-
-/* -------------------------------------------------------------------------------- */
-
-
 .main_mobile_nav  .nav-content {
     width: 100%;
     display: fixed;

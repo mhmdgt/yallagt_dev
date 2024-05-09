@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('blog_category_id')->references('id')->on('blog_categories')->cascadeOnDelete();
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->date('year')->nullable();
-            $table->longText('description')->nullable();
-            $table->enum('status', ['active', 'hidden'])->default('active');
-            $table->foreignId('blog_category_id')->references('id')->on('blog_categories')->cascadeOnDelete();
-            // $table->foreignId('car_brand_model_id')->references('id')->on('car_brand_models')->cascadeOnDelete();
-            // $table->foreignId('transmission_type_id')->nullable()->references('id')->on('transmission_types')->onDelete('set null');
-            // $table->foreignId('fuel_type_id')->nullable()->references('id')->on('fuel_types')->onDelete('set null');
-            // $table->foreignId('engine_aspiration_id')->nullable()->references('id')->on('engine_aspirations')->onDelete('set null');
-           
+            $table->longText('content');
+            $table->enum('status' , ['active' , 'hidden'] )->default('active');
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            // $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
         });
     }

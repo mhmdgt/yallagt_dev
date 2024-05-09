@@ -27,11 +27,10 @@
                                     <a href="#"><img src="yalla_gt/media/main_services/shop.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
-                                    <h4 class="h-service">PRODUCTS</h4>
-                                    <p class="p-service">FAST AND EASY</p>
+                                    <h4 class="h-service">{{ __('home_page.Products') }}</h4>
+                                    <p class="p-service">{{ __('home_page.FastandEasy') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="#">See
-                                        more</a>
+                                    <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -46,11 +45,10 @@
                                     <a href="#"><img src="yalla_gt/media/main_services/stock_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
-                                    <h4 class="h-service">Stock Cars</h4>
-                                    <p class="p-service">FAST AND EASY</p>
+                                    <h4 class="h-service">{{ __('home_page.StockCars') }}</h4>
+                                    <p class="p-service">{{ __('home_page.AllYouNeed') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="#">See
-                                        more</a>
+                                    <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -65,11 +63,10 @@
                                     <a href="#"><img src="yalla_gt/media/main_services/sale_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
-                                    <h4 class="h-service">Sale Cars</h4>
-                                    <p class="p-service">FAST AND EASY</p>
+                                    <h4 class="h-service">{{ __('home_page.SaleCars') }}</h4>
+                                    <p class="p-service">{{ __('home_page.BestDeals') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="">See
-                                        more</a>
+                                    <a class="btn btn-dark a-service" href="">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -84,11 +81,10 @@
                                     <a href="#"><img src="yalla_gt/media/main_services/sell_cars.png"></a>
                                 </div>
                                 <div class="col-md-5 col-12 text-center">
-                                    <h4 class="h-service">Sell Car</h4>
-                                    <p class="p-service">FAST AND EASY</p>
+                                    <h4 class="h-service">{{ __('home_page.sellYourCar') }}</h4>
+                                    <p class="p-service">{{ __('home_page.WithOneClick') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="">See
-                                        more</a>
+                                    <a class="btn btn-dark a-service" href="{{route('gt_car.create')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +99,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>{{__('home_page.SaleCars')}}</h2>
+                        <h2>{{ __('home_page.SaleCars') }}</h2>
                         <hr>
                     </div>
                 </div>
@@ -143,103 +139,7 @@
 
                         </div>
 
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/IMG_1408.JPG" alt="no_img">
-                                </div>
-                            </a>
-                            <div class="card-body container-fluid">
-                                <a href="#">
-                                    <h4 class="card-text">
-                                        <span>New</span>
-                                        Mercedes
-                                        C180
-                                        2023
-                                    </h4>
-                                </a>
-                                <h3 class="card-text-h3 mt-3">
-                                    <span class="text-dark">EGP:</span>23,000,000
-                                </h3>
-                                <div class="card-text-4 mt-2 mb-3">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span class="badge_icon mr-2 h6">Cairo</span>
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second mr-2 h6">5 moths ago</span>
-                                </div>
-                                <div class="detailedSearch__content--badge row no-gutters card-text-4"
-                                    style="display:flex; flex-direction:column">
-                                    <span class="badge badge_icon_5">300,000 Km </span>
-                                    <span class="badge" style="margin-top: 10px;">Automatic</span>
-                                </div>
-                            </div>
 
-                        </div>
-
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/IMG_1408.JPG" alt="no_img">
-                                </div>
-                            </a>
-                            <div class="card-body container-fluid">
-                                <a href="#">
-                                    <h4><span>جديد</span></h4>
-                                    <h4 class="card-text">
-                                        <span>مرسيدس</span>
-                                        C180 2023
-                                    </h4>
-                                </a>
-                                <h3 class="card-text-h3 mt-3">
-                                    <span class="text-dark">EGP:</span>23,000,000
-                                </h3>
-                                <div class="card-text-4 mt-2 mb-3">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span class="badge_icon mr-2 h6">Cairo</span>
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second mr-2 h6">5 moths ago</span>
-                                </div>
-                                <div class="detailedSearch__content--badge row no-gutters card-text-4"
-                                    style="display:flex; flex-direction:column">
-                                    <span class="badge badge_icon_5">300,000 Km </span>
-                                    <span class="badge" style="margin-top: 10px;">Automatic</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/IMG_1408.JPG" alt="no_img">
-                                </div>
-                            </a>
-                            <div class="card-body container-fluid">
-                                <a href="#">
-                                    <h4 class="card-text">
-                                        <span>New</span>
-                                        Mercedes
-                                        C180
-                                        2023
-                                    </h4>
-                                </a>
-                                <h3 class="card-text-h3 mt-3">
-                                    <span class="text-dark">EGP:</span>23,000,000
-                                </h3>
-                                <div class="card-text-4 mt-2 mb-3">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span class="badge_icon mr-2 h6">Cairo</span>
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second mr-2 h6">5 moths ago</span>
-                                </div>
-                                <div class="detailedSearch__content--badge row no-gutters card-text-4"
-                                    style="display:flex; flex-direction:column">
-                                    <span class="badge badge_icon_5">300,000 Km </span>
-                                    <span class="badge" style="margin-top: 10px;">Automatic</span>
-                                </div>
-                            </div>
-
-                        </div>
 
                     </div>
                 </div>
@@ -252,7 +152,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>{{__('home_page.CarBrands')}}</h2>
+                        <h2>{{ __('home_page.CarBrands') }}</h2>
                         <hr>
                     </div>
                 </div>
@@ -295,7 +195,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>{{__('home_page.FeaturedCategories')}}</h2>
+                        <h2>{{ __('home_page.FeaturedCategories') }}</h2>
                         <hr>
                     </div>
                 </div>
@@ -399,269 +299,50 @@
         <div class="container-fluid">
             <div class="col-12">
                 <div class="section_title section_title_border en-style">
-                    <h2>{{__('home_page.ProductShop')}}</h2>
+                    <h2>{{ __('home_page.ProductShop') }}</h2>
                     <hr>
                 </div>
             </div>
             <div class="product_container">
                 <div class="row product_carousel no-gutters">
+
                     <!-- Single Card -->
                     <div class="col-md-20 col-6 product_item">
                         <div class="single_product">
-
-                            <div>
+                            <div class="product_card">
                                 <div class="container-fluid product_thumb">
                                     <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
+                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt="">
+                                    </a>
                                 </div>
-
-                                <div class="container-fluid">
-
+                                <div class="product_card_content">
                                     <div class="mt-4">
-
                                         <h6 class="brand fw-700">Brand:
                                             <span>Liquid Moly</span>
                                         </h6>
                                         <a href="#">
                                             <h4 class="product_name">Fuel System Treatment 300ml </h4>
                                         </a>
-
                                     </div>
-
-                                    <div class="d-flex mt-4">
+                                    <div class="d-flex align-items-center mt-4">
                                         <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
+                                            <div>
+                                                <span>EGP</span>
+                                                <span class="product_card_price">9,999</span>
+                                            </div>
+                                            <div>
+                                                <span class="product_card_precentage">900,000</span>
+                                                <span> 25%</span>
+                                            </div>
                                         </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
+                                        <div class="p-0 product_card_cart">
+                                            <img src="yalla_gt/media/cart/cart_icon.png"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- End Card -->
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-
-                            <div>
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
-                                </div>
-
-                                <div class="container-fluid">
-
-                                    <div class="mt-4">
-
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-
-                                    </div>
-
-                                    <div class="d-flex mt-4">
-                                        <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
-                                        </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-
-                            <div>
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
-                                </div>
-
-                                <div class="container-fluid">
-
-                                    <div class="mt-4">
-
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-
-                                    </div>
-
-                                    <div class="d-flex mt-4">
-                                        <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
-                                        </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-
-                            <div>
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
-                                </div>
-
-                                <div class="container-fluid">
-
-                                    <div class="mt-4">
-
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-
-                                    </div>
-
-                                    <div class="d-flex mt-4">
-                                        <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
-                                        </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-
-                            <div>
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
-                                </div>
-
-                                <div class="container-fluid">
-
-                                    <div class="mt-4">
-
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-
-                                    </div>
-
-                                    <div class="d-flex mt-4">
-                                        <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
-                                        </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-
-                            <div>
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
-                                </div>
-
-                                <div class="container-fluid">
-
-                                    <div class="mt-4">
-
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-
-                                    </div>
-
-                                    <div class="d-flex mt-4">
-                                        <div class="p-0">
-                                            <span>EGP </span> <span class="fs-4"
-                                                style="font-size: 24px;
-                                                    font-weight: bold;">9,999</span>
-                                            <span class="GFG2 h6">900,000</span><span
-                                                class="GT-COLOR old_price old_price_percentage"> 25%</span>
-                                        </div>
-                                        <div class="ml-auto p-0">
-                                            <img width="80" height="80" src="yalla_gt/media/cart/cart_icon.png"
-                                                alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
 
                 </div>
             </div>
@@ -673,7 +354,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>{{__('home_page.FeaturedManufacturers')}}</h2>
+                        <h2>{{ __('home_page.FeaturedManufacturers') }}</h2>
                         <hr>
                     </div>
                 </div>
@@ -848,7 +529,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title section_title_border en-style">
-                        <h2>{{__('home_page.LatestBlogNews')}}</h2>
+                        <h2>{{ __('home_page.LatestBlogNews') }}</h2>
 
                         <hr>
                     </div>
@@ -884,90 +565,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -988,4 +585,8 @@
 
         </div>
     </section>
+@endsection
+@section('footer')
+    @include('yalla-gt.layout.upper-footer')
+    @include('yalla-gt.layout.footer')
 @endsection

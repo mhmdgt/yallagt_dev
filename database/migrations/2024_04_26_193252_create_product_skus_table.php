@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('part_number')->nullable();
             $table->decimal('main_price', 10, 2);
-            $table->enum('status', ['active', 'hidden'])->default('active');
             $table->timestamps();
         });
     }

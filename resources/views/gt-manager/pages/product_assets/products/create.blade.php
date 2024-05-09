@@ -99,15 +99,14 @@
                                             <button class="btn btn-outline-secondary" type="button"
                                                 onclick="generateUniqueId()">Generate Unique ID</button>
                                         </div>
-                                        <x-errors.display-validation-error property="sku" />
                                     </div>
+                                    <x-errors.display-validation-error property="sku" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Part Number / OEM</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="part_number"
-                                        value="">
+                                    <input type="text" class="form-control" autocomplete="off" name="part_number" value="">
                                     <x-errors.display-validation-error property="part_number" />
                                 </div>
                             </div>
@@ -175,11 +174,11 @@
                 </div>
             </div>
             {{-- releated to --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Compatible With</label>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Releated to</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <div>
@@ -269,9 +268,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Tags --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -287,7 +286,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">Submit form</button>
         </Form>
@@ -296,9 +295,14 @@
 @section('script')
     <script>
         // ---------------------------------------- Filepond
+        // Plugins
         FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginImageTransform);
+        FilePond.registerPlugin(FilePondPluginFileMetadata);
+        // Vars
         const inputElement = document.querySelector('input[type="file"]');
         const pond = FilePond.create(inputElement);
+        // Option
         pond.setOptions({
             allowMultiple: true,
             allowReorder: true,
@@ -309,7 +313,10 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             },
-
+            // Plugin Services
+            imageTransformOutputStripImageHead: true,
+            imageTransformCanvasMemoryLimit: 50000000,
+            imageTransformOutputQuality: 80,
         });
         // ---------------------------------------- SKU
         function generateUniqueId() {
@@ -368,7 +375,7 @@
             // Trigger change event on category select to load subcategories initially
             $('#categorySelect').trigger('change');
         });
-        // ---------------------------------------- Brands&Models
+        // ---------------------------------------- Brands_Models
         $(document).ready(function() {
             // Select the correct option based on the value of the "brand" input
             var selectedBrandId = $('#brandSelect').val();
@@ -418,3 +425,6 @@
         });
     </script>
 @endsection
+
+
+
