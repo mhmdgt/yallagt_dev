@@ -226,7 +226,7 @@ body {
     /* color: #495055; */
 
     width: 320px;
-    padding: 10px 18px;
+    padding: 14px 18px;
     border-radius: 1rem;
     border: 2px solid  #D9D9D9;
     outline:none;
@@ -235,7 +235,7 @@ body {
 
   div.input-block span.placeholder {
     position: absolute;
-    margin: 18px 0;
+    margin: 12px 0;
     padding: 0 4px;
     font-family: Roboto, sans-serif;
 

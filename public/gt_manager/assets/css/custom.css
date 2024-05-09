@@ -214,3 +214,10 @@
   margin: 1%;
 }
 
+.custom-width-call {
+    width: 80%;
+}
+
+.custom-width-decline {
+    width: 20%;
+}

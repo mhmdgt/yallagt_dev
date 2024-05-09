@@ -5,7 +5,8 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a>Add Car For Sale</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">All Live</a></li>
+                    <li class="breadcrumb-item"><a>Edit</a></li>
                 </ol>
             </div>
         </nav>
@@ -22,11 +23,9 @@
                                     <div>
                                         <label>Brand</label>
                                         <select id="brandSelect" class="js-example-basic-single w-100" name="brand">
-                                            <option value="">Select Brand</option>
+                                            <option>Select Brand</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    {{ old('brand') == $brand->id ? 'selected' : '' }}> {{ $brand->name }}
-                                                </option>
+                                            <option value="{{ $brand->id }}" {{ $car->brand == $brand->id ? 'selected' : '' }}> {{ $brand->name }}</option>
                                             @endforeach
                                         </select>
                                         <x-errors.display-validation-error property="brand" />
@@ -38,12 +37,11 @@
                                     <div>
                                         <label>Model</label>
                                         <select id="modelSelect" class="js-example-basic-single w-100" name="model">
-                                            <option value="">Select Brand First</option>
+                                            <option>Select Brand First</option>
                                             @foreach ($models as $model)
-                                                <option value="{{ $model->id }}"
-                                                    {{ old('model') == $model->id ? 'selected' : '' }}>
-                                                    {{ $model->name }}
-                                                </option>
+                                            <option value="{{ $model->id }}" {{ $car->model == $model->id ? 'selected' : '' }}>
+                                                {{ $model->name }}
+                                            </option>
                                             @endforeach
                                         </select>
                                         <x-errors.display-validation-error property="model" />
@@ -55,7 +53,7 @@
                                     <label>{{ __('gt_cars_create.bodyShape') }}</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="bodyShape">
-                                            <option value="">{{ __('gt_cars_create.select') }}</option>
+                                            <option>{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($shapes as $shape)
                                                 <option value="{{ $shape->id }}"
                                                     {{ old('shape') == $shape->id ? 'selected' : '' }}>{{ $shape->name }}
@@ -136,20 +134,6 @@
                     </div>
                 </div>
             </div>
-            {{-- Media --}}
-            {{-- <div class="row mt-3">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.media') }}</h4>
-                            <div>
-                                <input type="file" name="photos" class="file-upload-default" id="image">
-                                <x-errors.display-validation-error property="photos" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             {{-- Price --}}
             <div class="row mt-3">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -284,7 +268,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">{{ __('gt_cars_create.Description') }}</label>
-                                <textarea class="form-control" id="description" name="description" rows="8"
+                                <textarea class="form-control" id="description" name="description" rows="8" value="{{ $car->description }}"
                                 maxlength="4200" style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
                                 <x-errors.display-validation-error property="description" />
                             </div>
@@ -318,7 +302,7 @@
                                 <div class="col">
                                     <label for="exampleInputName1">{{ __('gt_cars_create.name') }}</label>
                                     <input type="text" class="form-control" name="user_name"
-                                        value="">
+                                        value="{{ $car->user_name}}">
                                         <x-errors.display-validation-error property="user_name" />
                                 </div>
                             </div>
@@ -326,7 +310,7 @@
                                 <div class="col">
                                     <label for="exampleInputNumber1">{{ __('gt_cars_create.PhoneNumber') }}</label>
                                     <input type="text" class="form-control"  name="phone"
-                                        value="">
+                                        value="{{ $car->phone}}">
                                         <x-errors.display-validation-error property="phone" />
                                 </div>
                             </div>

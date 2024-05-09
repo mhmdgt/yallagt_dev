@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('content');
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            // $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamps();
         });
     }

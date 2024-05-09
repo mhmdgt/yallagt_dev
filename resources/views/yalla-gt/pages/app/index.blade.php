@@ -312,8 +312,8 @@
                             <div class="product_card">
                                 <div class="container-fluid product_thumb">
                                     <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt=""></a>
-
+                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt="">
+                                    </a>
                                 </div>
                                 <div class="product_card_content">
                                     <div class="mt-4">
@@ -554,90 +554,6 @@
                                     By Mohamed Ahmed
                                 </h5>
                                 <div class=" card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class="card-text-4 mb-2">
                                     <i class="bi bi-stopwatch"></i>
                                     <span class="badge_icon_second">5 moths ago</span>
                                 </div>

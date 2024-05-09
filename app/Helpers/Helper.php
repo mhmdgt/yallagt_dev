@@ -9,10 +9,36 @@ use Illuminate\Support\Facades\Auth;
 // -------------------- Fetch Years -------------------- //
 function getYearsRange($startYear = null, $endYear = null)
 {
-    $startYear = $startYear ?? date('Y');
-    $endYear = $endYear ?? $startYear - 65;
+    // Get the current year
+    $currentYear = date('Y');
 
-    return range($startYear, $endYear);
+    // Calculate the start year 65 years back
+    $startYear = $startYear ?? $currentYear - 65;
+
+    // Calculate the next year
+    $nextYear = $currentYear + 1;
+
+    // Generate the range from the start year to the next year
+    $yearsRange = range($startYear, $nextYear);
+
+    // Reverse the array to make the next year first and the last 65 years last
+    $yearsRange = array_reverse($yearsRange);
+
+    return $yearsRange;
+}
+// -------------------- Helper function to generate a unique ID -------------------- //
+function generateUniqueId() {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $id = '';
+
+    // Generate a 10-character random ID
+    for ($i = 0; $i < 10; $i++) {
+        $randomIndex = rand(0, strlen($characters) - 1);
+        $character = strtoupper($characters[$randomIndex]); // Convert character to uppercase
+        $id .= $character;
+    }
+
+    return $id;
 }
 
 // -------------------- Display images -------------------- //

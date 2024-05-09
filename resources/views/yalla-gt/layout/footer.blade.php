@@ -145,7 +145,8 @@
 
                             <div class="col-lg-4 d-flex justify-content-center align-items-center">
                                 <img class="mr-2" width="140px"
-                                    src="{{ asset('yalla_gt') }}/media/social_media_icons/google_play.png" alt="">
+                                    src="{{ asset('yalla_gt') }}/media/social_media_icons/google_play.png"
+                                    alt="">
                                 <img class="mr-2" width="140px"
                                     src="{{ asset('yalla_gt') }}/media/social_media_icons/app_store.png"alt="">
                             </div>
@@ -182,18 +183,26 @@
                 </div>
 
                 <div class="col-lg-6 text-left text-lg-right">
-                    <div class="text-center language_switcher ">
-                        @php
-                            $currentLocale = LaravelLocalization::getCurrentLocale();
-                            $switchLocale = $currentLocale == 'ar' ? 'en' : 'ar';
-                        @endphp
-                            <span class="font-weight-bold">{{ __('footer.egypt') }} |</span>
-                        <a class="ml-2" href="{{ LaravelLocalization::getLocalizedURL($switchLocale) }}">
-                            <img width="120" height="120" src="{{ asset('yalla_gt') }}/media/icon/trans_lang.png"
-                                alt="">
-                        </a>
+                    <div class="text-center language_switcher">
+                        <?php $current_url = parse_url(LaravelLocalization::getNonLocalizedURL(Request::url())); ?>
+                        <ul id="languageSwitcher" class="language_bar_chooser">
+                            @php
+                                $currentLocale = LaravelLocalization::getCurrentLocale();
+                                $locales = LaravelLocalization::getSupportedLocales();
+                            @endphp
+                            @foreach($locales as $localeCode => $properties)
+                                @if($currentLocale != $localeCode)
+                                    <li>
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ url('/'.$localeCode . $current_url['path']) }}">
+                                            {{ $properties['native'] }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
+
 
             </div>
         </div>

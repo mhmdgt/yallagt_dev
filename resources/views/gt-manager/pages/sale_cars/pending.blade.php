@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item">Cars for sale</li>
+                    <li class="breadcrumb-item">Pending Ads</li>
                 </ol>
                 {{-- ====== Create button ====== --}}
                 <a href="{{ route('sale-car.create') }}" class="btn btn-success">
@@ -21,21 +21,9 @@
             @foreach ($cars as $car)
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        {{-- image --}}
-                        <div>
-                            <img src="{{ asset('gt_manager/media/test_car.jpg') }}" class="card-img-top"
-                                alt="Cat_img">
-                                <a href="{{route('sale-car.edit' , $car->slug)}}">
-                                <button class="btn btn-light btn-icon stockCarImageEdit">
-                                    <i data-feather="edit"></i>
-                                </button>
-                            </a>
-                        </div>
                         {{-- Detalis --}}
                         <div class="card-body">
                             <h4 class="card-text">
-                                <span>{{ strtoupper($car->condition) }}</span>
-                                {{-- <span>{{ ucwords($car->condition) }}</span> --}}
                                 {{ $brands[$car->brand] }}
                                 {{ $models[$car->model] }}
                                 {{ $car->year }}
@@ -47,9 +35,11 @@
 
                             <div class="card-text mt-4">
                                 <span class="badge bg-light p-2 h6">
+                                    {{ ucwords($car->condition) }}
+                                </span>
+                                <span class="badge bg-light p-2 h6">
                                     <i class="bi bi-speedometer2"></i>
-                                    {{ $kms[$car->km] }}
-
+                                    {{ number_format($car->km) }} Km
                                 </span>
                                 <span class="badge bg-light p-2 h6">
                                     <i class="bi bi-gear-wide-connected"></i>
@@ -67,64 +57,31 @@
                         {{-- Contorllers --}}
                         <div class="card-footer">
                             <div class="row">
-                                <div class="col-9">
-                                    <button type="button" class="btn btn-success btn-block call-btn">
-                                        <i class="mr-2 bi bi-telephone"></i>
-                                        <span class="call-text">Call</span>
-                                    </button>
+                                <div class="col">
+                                    <form action="{{ route('sale-car.approve-car', $car->slug) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            <i class="bi bi-bookmark-check"></i>
+                                            <span class="ml-2">Approve</span>
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="col-3">
+                                <div class="col">
                                     <form action="{{ route('sale-car.decline-car', $car->slug) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-secondary btn-block">
                                             <i class="bi bi-x-octagon"></i>
+                                            <span class="ml-2">Decline</span>
                                         </button>
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             @endforeach
             {{-- Loop End --}}
         </div>
+
     </div>
-@endsection
-
-
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const callButtons = document.querySelectorAll('.call-btn');
-
-            callButtons.forEach(function(button) {
-                let phoneNumberShown = false;
-
-                button.addEventListener('click', function() {
-                    // Check if the phone number span already exists
-                    const phoneNumber = button.querySelector('.phone-number');
-                    if (!phoneNumber) {
-                        // If not, create a new span element
-                        const span = document.createElement('span');
-                        span.classList.add('phone-number');
-                        span.textContent = "{{ $car->phone }}";
-                        button.appendChild(span);
-                        phoneNumberShown = true;
-
-                        // Hide the "Call" text
-                        const callText = button.querySelector('.call-text');
-                        if (callText) {
-                            callText.style.display = 'none';
-                        }
-                    } else {
-                        // If exists and it's the second click, trigger a phone call
-                        if (phoneNumberShown) {
-                            window.location.href = 'tel:' + "{{ $car->phone }}";
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

@@ -6,11 +6,11 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item">Products</li>
+                    <li class="breadcrumb-item">Storehouses</li>
                 </ol>
                 <a href="{{ route('products.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
-                    Create Product
+                    New Storehouse
                 </a>
             </div>
         </nav>
@@ -34,14 +34,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    {{-- @foreach($admins as $admin) --}}
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
                                         <td>img</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->phone }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at->diffForHumans() }}</td>
+                                        <td>img</td>
+                                        <td>img</td>
+                                        <td>img</td>
+                                        <td>img</td>
+                                        <td>img</td>
                                         <td>
                                             {{-- <div class="position-relative">
                                                 <!-- Dropdown button positioned at top-left corner -->
@@ -66,7 +66,7 @@
                                             </div> --}}
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    {{-- @endforeach --}}
                                 </tbody>
                             </table>
 

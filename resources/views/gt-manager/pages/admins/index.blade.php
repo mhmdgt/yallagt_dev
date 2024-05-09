@@ -34,14 +34,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($admins as $admin)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>img</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->phone }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at->diffForHumans() }}</td>
+                                        <td>{{ $admin->name }}</td>
+                                        <td>{{ $admin->phone }}</td>
+                                        <td>{{ $admin->email }}</td>
+                                        <td>{{ $admin->created_at->diffForHumans() }}</td>
                                         <td>
                                             {{-- <div class="position-relative">
                                                 <!-- Dropdown button positioned at top-left corner -->

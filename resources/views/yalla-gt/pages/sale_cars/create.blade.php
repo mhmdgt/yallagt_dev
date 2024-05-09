@@ -23,7 +23,7 @@
             </div>
         </div>
         {{-- ====== Content ====== --}}
-        <Form action="{{ route('gt_car.store') }}" id="carForSaleID" method="POST" enctype="multipart/form-data">
+        <Form action="{{route('sale-car.store')}}" id="carForSaleID" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- Brand , Model , Year , Color & Condition --}}
             <div class="row mt-3">
@@ -34,7 +34,7 @@
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.brand') }}</label>
                                     <div>
-                                        <select class="js-example-basic-single w-100 " name="brand">
+                                        <select id="brandSelect" class="js-example-basic-single w-100 " name="brand">
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}"
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row pt-0 mt-4">
+                            <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.bodyShape') }}</label>
                                     <div>
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row pt-0 mt-2">
+                            <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.transmission') }}</label>
                                     <div>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             {{-- Media --}}
-            <div class="row mt-3">
+            {{-- <div class="row mt-3">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Price --}}
             <div class="row mt-3">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -193,7 +193,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
-                                    <input type="text" class="form-control" name="price"
+                                    <input type="text" class="form-control" name="price" placeholder="100,000,000"
                                         oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
@@ -241,23 +241,23 @@
                                     <x-errors.display-validation-error property="cc" />
                                 </div>
                             </div>
-                            <div class="form-group row pt-0 mt-4">
+                            <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.ExtraFeatures') }}
                                         <span class="text-success">{{ __('gt_cars_create.Choose_additional_features_for_your_car') }}</span>
                                     </label>
                                     <div>
-                                        <select class="js-example-basic-single w-100" multiple name="cc">
+                                        <select class="js-example-basic-single w-100" multiple name="features[]">
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($features as $feature)
                                                 <option value="{{ $feature->id }}"
-                                                    {{ old('feature') == $feature->id ? 'selected' : '' }}>
+                                                    {{ in_array($feature->id, (array) old('features', [])) ? 'selected' : '' }}>
                                                     {{ $feature->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <x-errors.display-validation-error property="cc" />
+                                    <x-errors.display-validation-error property="features" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
@@ -439,7 +439,7 @@
 
                 // Perform AJAX request to fetch models
                 $.ajax({
-                    url: 'ar/manage/car-brand-models/models/' + brandId,
+                    url: '/manage/car-brand-models/models/' + brandId,
                     type: 'GET',
                     success: function(data) {
                         var options = '<option value="">Select Model</option>';

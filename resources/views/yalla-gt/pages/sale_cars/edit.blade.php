@@ -1,44 +1,55 @@
-@extends('gt-manager.layout.app')
+@extends('yalla-gt.layout.app')
 @section('content')
-    <div class="page-content">
-        <nav class="page-breadcrumb">
-            <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a>Add Car For Sale</a></li>
-                </ol>
+    <div class="page-div rtl-direction">
+        {{-- ====== NAV ====== --}}
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="profile-card">
+                        <div class=" align-items-center">
+                            <div class="col-12 col-md-9 row">
+                                <img class="image-in-box ml-4 mr-2" src="{{ asset('yalla_gt/media/no_image.jpg') }}"
+                                    alt="No Image">
+                                <div class="profile-info">
+                                    <span class="profile-name ">{{ __('profile.ahlan') }}
+                                        {{ getFirstName(user_data()->name) }}</span>
+                                    <span
+                                        class="profile-email font-weight-blod">{{ __('gt_cars_create.ApplyTheForm_SellYourCar') }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
+        </div>
         {{-- ====== Content ====== --}}
-        <Form action="{{route('sale-car.store')}}" id="carForSaleID" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('sale-car.store') }}" id="carForSaleID" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- Brand , Model , Year , Color , Body , Trans & Condition --}}
-            <div class="row">
+            {{-- Brand , Model , Year , Color & Condition --}}
+            <div class="row mt-3">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group row pt-0">
                                 <div class="col">
+                                    <label>{{ __('gt_cars_create.brand') }}</label>
                                     <div>
-                                        <label>Brand</label>
-                                        <select id="brandSelect" class="js-example-basic-single w-100" name="brand">
-                                            <option value="">Select Brand</option>
+                                        <select id="brandSelect" class="js-example-basic-single w-100 " name="brand">
+                                            <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($brands as $brand)
-                                                <option value="{{ $brand->id }}"
-                                                    {{ old('brand') == $brand->id ? 'selected' : '' }}> {{ $brand->name }}
-                                                </option>
+                                            <option value="{{ $brand->id }}" {{ $car->brand == $brand->id ? 'selected' : '' }}> {{ $brand->name }}</option>
                                             @endforeach
                                         </select>
                                         <x-errors.display-validation-error property="brand" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row pt-0">
+                            <div class="form-group row pt-0 ">
                                 <div class="col">
+                                    <label>{{ __('gt_cars_create.model') }}</label>
                                     <div>
-                                        <label>Model</label>
                                         <select id="modelSelect" class="js-example-basic-single w-100" name="model">
-                                            <option value="">Select Brand First</option>
+                                            <option value="">{{ __('gt_cars_create.select_brand_first') }}</option>
                                             @foreach ($models as $model)
                                                 <option value="{{ $model->id }}"
                                                     {{ old('model') == $model->id ? 'selected' : '' }}>
@@ -58,11 +69,12 @@
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($shapes as $shape)
                                                 <option value="{{ $shape->id }}"
-                                                    {{ old('shape') == $shape->id ? 'selected' : '' }}>{{ $shape->name }}
+                                                    {{ old('shape') == $shape->id ? 'selected' : '' }}>
+                                                    {{ $shape->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <x-errors.display-validation-error property="bodyShape" />
+                                        <x-errors.display-validation-error property="price" />
                                     </div>
                                 </div>
                             </div>
@@ -136,20 +148,6 @@
                     </div>
                 </div>
             </div>
-            {{-- Media --}}
-            {{-- <div class="row mt-3">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.media') }}</h4>
-                            <div>
-                                <input type="file" name="photos" class="file-upload-default" id="image">
-                                <x-errors.display-validation-error property="photos" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
             {{-- Price --}}
             <div class="row mt-3">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -168,7 +166,7 @@
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
                                             <input type="radio" class="form-check-input" name="payment"
-                                                id="optionsRadios8" value="downpayment">
+                                                id="optionsRadios8" value="down_payment">
                                             {{ __('gt_cars_create.downpayment') }}
                                             <i class="input-frame"></i></label>
                                     </div>
@@ -192,7 +190,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <div class="form-group row pt-0">
+                            <div class="form-group row pt-0 ">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.fuelType') }}</label>
                                     <div>
@@ -209,7 +207,7 @@
                                     <x-errors.display-validation-error property="fuelType" />
                                 </div>
                             </div>
-                            <div class="form-group row pt-0">
+                            <div class="form-group row pt-0 mt-4">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.EngineCapacity') }}</label>
                                     <div>
@@ -229,7 +227,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>{{ __('gt_cars_create.ExtraFeatures') }}
-                                        <span class="text-success">{{ __('gt_cars_create.Choose_additional_features_for_your_car') }}</span>
+                                        <span
+                                            class="text-success">{{ __('gt_cars_create.Choose_additional_features_for_your_car') }}</span>
                                     </label>
                                     <div>
                                         <select class="js-example-basic-single w-100" multiple name="features[]">
@@ -284,8 +283,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">{{ __('gt_cars_create.Description') }}</label>
-                                <textarea class="form-control" id="description" name="description" rows="8"
-                                maxlength="4200" style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="5" maxlength="4200"
+                                    style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
                                 <x-errors.display-validation-error property="description" />
                             </div>
                         </div>
@@ -317,113 +316,54 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputName1">{{ __('gt_cars_create.name') }}</label>
-                                    <input type="text" class="form-control" name="user_name"
-                                        value="">
-                                        <x-errors.display-validation-error property="user_name" />
+                                    <input type="text" class="form-control" readonly name="user_name"
+                                        value="{{ getFirstName(user_data()->name) }}">
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputNumber1">{{ __('gt_cars_create.PhoneNumber') }}</label>
-                                    <input type="text" class="form-control"  name="phone"
-                                        value="">
-                                        <x-errors.display-validation-error property="phone" />
+                                    <input type="text" class="form-control" readonly name="phone"
+                                        value="{{ user_data()->phone }}">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">Submit form</button>
+            {{-- Web Submit --}}
+            <div class="col-md-12 grid-margin stretch-card mt-4 sell_button">
+                <div class="card">
+                    <div class="profile-card gradient-green-bg"
+                        onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <button type="button" style="border: none; background: none;">
+                                <h4 class="align-items-center text-white">
+                                    <i class='ml-2 mr-2 bx bxs-add-to-queue' style='color:#ffffff'></i>
+                                    Update
+                                </h4>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Mobile Submit --}}
+            <div id="call_nav" class="d-flex align-items-center justify-content-center"
+                onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
+                <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-green-bg"
+                    style="border-radius: 5px;">
+                    <button type="button" style="border: none; background: none;">
+
+                        <span class="ml-2 mr-2 text-white sell-now-text">Update
+                        </span>
+                    </button>
+                </span>
+            </div>
         </Form>
     </div>
 @endsection
-
-@section('script')
-    <script>
-        // ---------------------------------------- Price ,123,
-        function formatNumber(input) {
-            // Remove any non-numeric characters
-            var value = input.value.replace(/\D/g, '');
-
-            // Format the number with commas every 3 digits from right to left
-            var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            // Update the input value
-            input.value = formattedValue;
-        }
-        // ---------------------------------------- Filepond
-        // Plugins
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        FilePond.registerPlugin(FilePondPluginImageTransform);
-        FilePond.registerPlugin(FilePondPluginFileMetadata);
-        // Vars
-        const inputElement = document.querySelector('input[type="file"]');
-        const pond = FilePond.create(inputElement);
-        // Option
-        pond.setOptions({
-            allowMultiple: true,
-            allowReorder: true,
-            server: {
-                process: '/manage/blogTmpUpload',
-                revert: '/manage/blogTmpDelete',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            },
-            // Plugin Services
-            imageTransformOutputStripImageHead: true,
-            imageTransformCanvasMemoryLimit: 50000000,
-            imageTransformOutputQuality: 80,
-        });
-        // ---------------------------------------- Brands_Models
-        $(document).ready(function() {
-            // Select the correct option based on the value of the "brand" input
-            var selectedBrandId = $('#brandSelect').val();
-            $('#brandSelect option[value="' + selectedBrandId + '"]').prop('selected', true);
-
-            // Select the correct option based on the value of the "model" input
-            var selectedModelId = $('#modelSelect').val();
-            $('#modelSelect option[value="' + selectedModelId + '"]').prop('selected', true);
-
-            // Handle change event on the brand select
-            $('#brandSelect').change(function() {
-                var brandId = $(this).val();
-                if (!brandId) {
-                    $('#modelSelect').html('<option value="">Select Brand First</option>');
-                    return;
-                }
-
-                // Perform AJAX request to fetch models
-                $.ajax({
-                    url: '/car-brand-models/models/' + brandId,
-                    type: 'GET',
-                    success: function(data) {
-                        var options = '<option value="">Select Model</option>';
-                        $.each(data, function(index, model) {
-                            // Get the translation based on the current locale
-                            var modelName = model.name["{{ App::getLocale() }}"];
-
-                            // Append the option to the select dropdown
-                            options += '<option value="' + model.id + '">' + modelName +
-                                '</option>';
-                        });
-                        $('#modelSelect').html(options);
-
-                        // Select the correct option based on the value of the "model" input
-                        var selectedModelId = $('#modelSelect').val();
-                        $('#modelSelect option[value="' + selectedModelId + '"]').prop(
-                            'selected', true);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Error fetching models:', error);
-                    }
-                });
-            });
-
-            // Trigger change event on brand select to load models initially
-            $('#brandSelect').trigger('change');
-        });
-    </script>
+@section('footer')
+    {{-- @include('yalla-gt.layout.upper-footer') --}}
+    @include('yalla-gt.layout.footer')
 @endsection

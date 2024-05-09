@@ -46,6 +46,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-6 col-sm-6 col-md-6 col-lg-3 grid-margin stretch-card mb-2">
                 <div class="card">
                     <div class="shortcut-card d-flex align-items-center">
@@ -57,17 +58,22 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-6 col-sm-6 col-md-6 col-lg-3 grid-margin stretch-card mb-2">
-                <div class="card">
-                    <div class="shortcut-card d-flex align-items-center">
-                        <i class="bi bi-star"></i>
-                        <div class="ml-2 mr-2">
-                            <h6 class="card-title mb-0 font-weight-bold">{{ __('profile.MyAds') }}</h6>
-                            <p class="sub-title mb-0">{{ __('profile.ActiveAds') }}</p>
+                <a href="{{ route('user.ads') }}" class="card-link">
+                    <div class="card">
+                        <div class="shortcut-card d-flex align-items-center text-dark">
+                            <i class="bi bi-star"></i>
+                            <div class="ml-2 mr-2">
+                                <h6 class="card-title mb-0 font-weight-bold">{{ __('profile.MyAds') }}</h6>
+                                <p class="sub-title mb-0">{{ __('profile.ActiveAds') }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
+
+
         </div>
         {{-- Account --}}
         <div class="row mt-4">
@@ -190,5 +196,6 @@
     </div>
 @endsection
 @section('footer')
-    @include('yalla-gt.layout.upper-footer')
+    {{-- @include('yalla-gt.layout.upper-footer') --}}
+    @include('yalla-gt.layout.footer')
 @endsection

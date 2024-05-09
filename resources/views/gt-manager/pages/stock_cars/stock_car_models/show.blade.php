@@ -66,10 +66,10 @@
                         </div>
                         {{-- categories --}}
                         <div>
+                            {{-- Extract the numerical part of the price and cast it to a float for sorting --}}
                             @foreach ($stockCar->stockCarCategories->sortBy(function ($category) {
-        // Extract the numerical part of the price and cast it to a float for sorting
-        return (float) preg_replace('/[^0-9.]/', '', $category->price);
-    }) as $category)
+                                return (float) preg_replace('/[^0-9.]/', '', $category->price);
+                            }) as $category)
                                 <div class="d-flex align-items-center ml-2 mr-2">
                                     <div class="mr-auto p-2">
                                         <a href="{{ route('model-category.edit', $category->id) }}"
