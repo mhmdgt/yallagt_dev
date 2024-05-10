@@ -1,11 +1,6 @@
 @extends('gt-manager.layout.app')
 @section('content')
-<<<<<<< HEAD
-<div class="page-content">
-
-=======
     <div class="page-content">
->>>>>>> 7328177af53978532a98bed1752bdd12337689aa
         <nav class="page-breadcrumb">
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
@@ -172,25 +167,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        {{-- Transmission --}}
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group row pt-0 mt-4">
-                            <div class="col">
-                                <label for="transmission">Transmission</label>
-                                <div>
-                                    <select class="js-example-basic-single w-100" name="transmission_type_id">
-                                        @foreach ($transmissionTypes as $transmissionType )
-                                        <option value="{{  $transmissionType->id }}"  @selected(old('transmission_type_id') == $transmissionType->id)>{{ $transmissionType->name }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                    @include('gt-manager.error.error', ['property' => 'transmission_type_id'])
-=======
             {{-- Transmission --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -216,7 +192,6 @@
                                     <input type="number" class="form-control" id="exampleInputNumber1"
                                         name="transmission_speed">
                                     <x-errors.display-validation-error property="transmission_speed" />
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
                                 </div>
                             </div>
                             <div class="col">
@@ -229,59 +204,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-
-        {{-- Fule --}}
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group row pt-0 mt-4">
-                            <div class="col">
-                                <label>Fule Type</label>
-                                <div>
-                                    <select class="js-example-basic-single w-100" name="fuel_type_id">
-                                        @foreach ($fuelTypes as $fuelType )
-                                        <option value="{{  $fuelType->id }}" @selected(old('fuel_type_id') == $fuelType->id)> {{ $fuelType->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @include('gt-manager.error.error', ['property' => 'fuel_type_id'])
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label for="exampleInputNumber1">Fuel Consumption</label>
-                                <input type="number" class="form-control" id="exampleInputNumber1"
-                                    name="fuel_consumption">
-                                @include('gt-manager.error.error', ['property' => 'fuel_consumption'])
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- Status --}}
-        {{-- Status --}}
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="form-group row pt-0">
-                            <div class="col">
-                                {{-- <h6 class="mt-3 mb-2 font-weight-bold">Payment</h6> --}}
-                                <h6 class="card-title">Status</h6>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" id="statusActive" value="active" name="status" @checked(old('active', 'active'))>
-                                    <label class="form-check-label" for="statusActive">Active</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input" id="statusHidden" value="hidden" name="status" @checked(old('active', 'hidden'))>
-                                    <label class="form-check-label" for="statusHidden">Hidden</label>
-                                </div>
-                                
-                                
-                                @include('gt-manager.error.error', ['property' => 'status'])
-=======
             {{-- Fule --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -306,25 +228,14 @@
                                         name="fuel_consumption">
                                     <x-errors.display-validation-error property="fuel_consumption" />
                                 </div>
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        {{-- Submit --}}
-        <button class="btn btn-primary float-right" type="submit">Submit</button>
-</div>
-</form>
-
-@endsection
-=======
 
             {{-- Submit --}}
             <button class="btn btn-primary float-right" type="submit">Submit</button>
     </div>
     </form>
 @endsection
->>>>>>> 42ce7fe162a0f4e2a565c5439ff0bf38cb896098

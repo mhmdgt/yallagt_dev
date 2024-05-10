@@ -18,9 +18,7 @@ use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
 use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('sale-car-store' , [SaleCarsController::class, 'store'])->name('sale-car.store');
-
-
+Route::post('sale-car-store', [SaleCarsController::class, 'store'])->name('sale-car.store')->middleware('check.user.or.admin.auth');
 Route::middleware('admin')->group(function () {
     // FilePond
     Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);

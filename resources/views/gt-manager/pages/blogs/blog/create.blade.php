@@ -24,22 +24,14 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(EN)</span></label>
-<<<<<<< HEAD
-                                    <input type="text" class="form-control" name="title_en" value="{{ old('title_en')??'' }}">
-=======
                                     <input type="text" class="form-control" name="title_en" value="">
->>>>>>> 48c7d7f4e94925780125eecc8d718ee7b503d946
                                     <x-errors.display-validation-error property="title_en" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(AR)</span></label>
-<<<<<<< HEAD
-                                    <input type="text" class="form-control" name="title_ar" value="{{ old('title_ar')??'' }}">
-=======
                                     <input type="text" class="form-control" name="title_ar" value="">
->>>>>>> 48c7d7f4e94925780125eecc8d718ee7b503d946
                                     <x-errors.display-validation-error property="title_ar" />
                                 </div>
                             </div>
@@ -64,27 +56,17 @@
                             {{-- Description --}}
                             <div class="form-group row pt-0">
                                 <div class="col">
-<<<<<<< HEAD
-                                    <label>Description<span class="text-danger">(EN)</span></label>
-                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10">{{ old('description_en')??'' }}</textarea>
-=======
                                     <label>Content<span class="text-danger">(EN)</span></label>
                                     <textarea class="form-control" name="content_en" id="tinymceExample" rows="10"></textarea>
                                     <x-errors.display-validation-error property="content_en" />
->>>>>>> 48c7d7f4e94925780125eecc8d718ee7b503d946
                                 </div>
                                 <x-errors.display-validation-error property="description_en" />
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-<<<<<<< HEAD
-                                    <label>Description<span class="text-danger">(AR)</span></label>
-                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10">{{ old('description_ar')??'' }}</textarea>
-=======
                                     <label>Content<span class="text-danger">(AR)</span></label>
                                     <textarea class="form-control" name="content_ar" id="tinymceExample2" rows="10"></textarea>
                                     <x-errors.display-validation-error property="content_ar" />
->>>>>>> 48c7d7f4e94925780125eecc8d718ee7b503d946
                                 </div>
                                 <x-errors.display-validation-error property="description_ar" />
                             </div>
