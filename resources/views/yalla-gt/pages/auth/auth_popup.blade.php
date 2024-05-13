@@ -162,6 +162,7 @@
         data: LoginFormData,
         success: function(response) {
             console.log(response);
+           
             if (response.success) {
                 // Display success message
                 alert(response.message);
@@ -174,7 +175,8 @@
             }
         },
         error: function(xhr, status, error) {
-            console.log(error);
+          
+            $('#login-username-error').removeClass('d-none').text(xhr.responseJSON.message);
             var errors = xhr.responseJSON.errors; // Get validation errors
             // Loop through each error
             $.each(errors, function(key, value) {
