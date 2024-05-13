@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-list">
-                <a href="#" class="link-item">
+                <a href="{{route('gt_car.create')}}" class="link-item">
                     <i class='bx bxs-message-square-add link-icon'></i>
                     <span class="link-text">{{ __('header.sell') }}</span>
                 </a>

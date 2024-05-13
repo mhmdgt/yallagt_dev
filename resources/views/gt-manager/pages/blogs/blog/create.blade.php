@@ -31,7 +31,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="title_ar" value="">
+                                    <input type="text" class="form-control" name="title_ar" dir="auto" value="">
                                     <x-errors.display-validation-error property="title_ar" />
                                 </div>
                             </div>

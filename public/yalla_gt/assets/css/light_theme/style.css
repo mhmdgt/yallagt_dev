@@ -70,7 +70,7 @@ h3 {
 
 h4 {
     font-size: 16px;
-    line-height: 19px;
+    line-height: 22px;
     font-weight: 700;
 }
 
@@ -16924,7 +16924,7 @@ footer .footer_bottom p {
 
 .cars_for_sale_home_layout .card-body .card-text-h3 span {
     font-size: 20px;
-    margin-right: 8px;
+    /* margin-right: 8px; */
 }
 
 .cars_for_sale_home_layout .card-body .card-text-4 .badge_icon {
@@ -17611,6 +17611,36 @@ li.selected {
     }
 }
 
+.image-in-circle-125 {
+    object-fit: cover;
+    /* display: block; */
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+}
+
+.image-in-circle-100 {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.image-in-circle-75 {
+    object-fit: cover;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.image-in-circle-50 {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
 
 .profile-card {
     padding-left: 6px;
@@ -17824,10 +17854,18 @@ li.selected {
     object-position: center;
 }
 
+/* gradient-colors */
 .gradient-green-bg {
     background: linear-gradient(to right, #4CAF50, #2E8B57);
 }
-
+.gradient-f25e3d {
+    background: linear-gradient(45deg, #F25E3D, #FFA320);
+    /* Add any additional styling you want */
+}
+.gradient-8790f6 {
+    background: linear-gradient(45deg, #8790f6, #5c61f2);
+    /* Add any additional styling you want */
+}
 
 .product-media {
     width: 60px;
@@ -17897,7 +17935,7 @@ li.selected {
     /* Add border */
     border-radius: 4px;
     /* Add border radius to round the corners */
-    padding: 4px 8px;
+    padding: 8px 8px;
     /* Add padding for better spacing */
     display: inline-block;
     /* Make it an inline-block element */
@@ -17927,23 +17965,153 @@ li.selected {
     position: absolute;
     top: 10px;
     right: 10px;
+    border-radius: 6px;
+    /* transform: translate(-50%, -50%); */
+}
+.stockCarImageStatus {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 6px;
     /* transform: translate(-50%, -50%); */
 }
 
-.img {
+/* .img {
     height: 160px;
     width: 160px;
     border-radius: 6px;
     overflow: hidden;
     position: relative;
     object-fit: cover;
+} */
+
+
+.max-height-image {
+    max-height: 240px; /* Adjust the value as per your requirement */
+    width: 100%;
+    object-fit: cover; /* This property ensures the image covers the entire container */
+}
+
+.img-container {
+    position: relative;
+    display: inline-block; /* Ensures the container size is based on its content */
+}
+
+.card-img-container {
+    overflow: hidden; /* Ensure that the image is contained within the card */
+    height: 220px; /* Set a fixed height for the image container */
+    position: relative; /* Position the image container relative to the card */
+}
+
+.card-img-container img {
+    object-fit: cover; /* Ensure that the image covers the entire container */
+    width: 100%; /* Ensure that the image fills the entire container width */
+    height: 100%; /* Ensure that the image fills the entire container height */
+    position: absolute; /* Position the image absolutely within the container */
+    top: 0; /* Position the image at the top of the container */
+    left: 0; /* Position the image at the left of the container */
+}
+
+
+.img-container {
+    width: 160px;
+    height: 160px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0; /* Remove any potential margin */
+    padding: 0; /* Remove any potential padding */
+}
+
+.img-container img {
+    display: block; /* Ensures no inline-block space */
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    margin: 0; /* Remove any potential margin */
+    padding: 0; /* Remove any potential padding */
 }
 
 .delete-btn {
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 4px 8px;
-    border-radius: 100px;
+    position: absolute;
+    top: 5px; /* Adjust this value to position the button vertically */
+    right: 5px; /* Adjust this value to position the button horizontally */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark circle background */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
     cursor: pointer;
-    z-index: 1;
-    /* Ensures it's above the image */
+    z-index: 1; /* Ensures the button is above the image */
+}
+
+.delete-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.select-btn {
+    position: absolute;
+    bottom: 5px; /* Adjust this value to position the button vertically */
+    right: 5px; /* Adjust this value to position the button horizontally */
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    color: transparent; /* Hide any text content */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Border for checkbox appearance */
+    border-radius: 50%;
+    width: 18px; /* Decreased width */
+    height: 18px; /* Decreased height */
+    cursor: pointer;
+    z-index: 1; /* Ensures the button is above the image */
+}
+
+.select-btn:hover {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.select-btn:focus {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.active_main_img {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.select-text {
+    position: absolute;
+    bottom: 8px; /* Adjust this value to position the text vertically */
+    right: 40px; /* Adjust this value to position the text horizontally */
+    font-size: 12px; /* Adjust the font size as needed */
+    color: rgba(0, 0, 0, 0.8); /* Text color */
+}
+
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+    color: #3b71ca !important;
+  }
+
+  .icon-hover:hover i {
+    color: #3b71ca !important;
+  }
+.similar-items-info{
+    margin-top: 6px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.product-title
+{
+ font-size: 24px;
+ font-weight: 600;
+ line-height: 1.2;
+}
+.card-img-top
+{
+border-top-left-radius: 15px;
+border-top-right-radius: 15px;
+
+
+}
+.product_price_section
+{
+    margin-bottom: 1px !important;
 }

@@ -25,9 +25,12 @@ return new class extends Migration
             $table->string('brochure')->nullable();
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
 
-
-            // Autoloaded Columns
-            $table->timestamps();
+           // Autoloaded Stamps
+           $table->string('created_user_type')->nullable();
+           $table->unsignedBigInteger('created_by')->nullable();
+           $table->string('updated_user_type')->nullable();
+           $table->unsignedBigInteger('updated_by')->nullable();
+           $table->timestamps();
         });
     }
 

@@ -41,7 +41,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="title_ar" value="{{ $blog->getTranslations('title')['ar'] }}">
+                                    <input type="text" class="form-control" name="title_ar" dir="auto" value="{{ $blog->getTranslations('title')['ar'] }}">
                                     <x-errors.display-validation-error property="title_ar" />
                                 </div>
                             </div>

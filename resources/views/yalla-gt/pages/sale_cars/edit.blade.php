@@ -446,7 +446,7 @@
                         slideBy: 2
                     },
                     600: {
-                        items: 3,
+                        items: 6,
                         slideBy: 3
                     },
                     1000: {

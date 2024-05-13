@@ -16,7 +16,13 @@ return new class extends Migration
             $table->foreignId('car_brand_model_id')->references('id')->on('car_brand_models')->cascadeOnDelete();
             $table->year('year');
             $table->string('brochure')->nullable();
-            $table->enum('status' , ['active' , 'hidden'] )->default('active');
+            $table->enum('status', ['active', 'hidden'])->default('active');
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -5,9 +5,18 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:history.back()">All Live</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('sale-car.live')}}">All Live</a></li>
                     <li class="breadcrumb-item"><a>Edit</a></li>
                 </ol>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-danger btn-icon-text mb-2 mb-md-0 ml-2" data-toggle="modal"
+                        data-target="#confirmDeleteModal{{ $car->id }}" title="Edit">
+                        <i class="bi bi-trash3"></i>
+                        Delete
+                    </button>
+                    <x-modal.confirm-delete-modal route="{{ route('sale-car.destroy', $car->slug) }}"
+                        id="{{ $car->id }}" />
+                </div>
             </div>
         </nav>
         {{-- ====== Content ====== --}}
@@ -365,17 +374,6 @@
 
 @section('script')
     <script>
-        // ---------------------------------------- Price ,123,
-        function formatNumber(input) {
-            // Remove any non-numeric characters
-            var value = input.value.replace(/\D/g, '');
-
-            // Format the number with commas every 3 digits from right to left
-            var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            // Update the input value
-            input.value = formattedValue;
-        }
         // ---------------------------------------- Filepond
         // Plugins
         FilePond.registerPlugin(FilePondPluginImagePreview);

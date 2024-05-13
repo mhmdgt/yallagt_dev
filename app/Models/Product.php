@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use App\Traits\UserStampWithTypeTrait;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations , UserStampWithTypeTrait;
 
     protected $fillable = [
         'manufacturer_id',
@@ -33,10 +34,6 @@ class Product extends Model
     public function manufacturer()
     {
         return $this->belongsTo(Manufacturer::class);
-    }
-    // -------------------- Method -------------------- //
-    function images(){
-        return $this->hasMany(ProductImage::class);
     }
     // -------------------- Method -------------------- //
     public function category()

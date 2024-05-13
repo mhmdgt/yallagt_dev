@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('slug');
             $table->string('logo')->nullable();
             $table->foreignId('product_category_id')->references('id')->on('product_categories')->cascadeOnDelete();
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

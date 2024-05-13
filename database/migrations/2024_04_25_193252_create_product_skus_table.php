@@ -16,8 +16,16 @@ return new class extends Migration
             $table->foreignId('product_id')->references('id')->on('products')->cascadeOnDelete();
 
             $table->string('sku')->unique();
+            $table->string('sku_name')->unique();
             $table->string('part_number')->nullable();
-            $table->decimal('main_price', 10, 2);
+            $table->string('main_price');
+            $table->enum('status', ['active', 'hidden'])->default('active');
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

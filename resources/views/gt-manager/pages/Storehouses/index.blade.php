@@ -8,7 +8,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
                     <li class="breadcrumb-item">Storehouses</li>
                 </ol>
-                <a href="{{ route('products.create') }}" class="btn btn-success">
+                <a href="{{ route('storehouses.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
                     New Storehouse
                 </a>
@@ -25,48 +25,24 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Manager Name</th>
                                         <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Created at</th>
-                                        <th>Actions</th>
+                                        <th>Government</th>
+                                        <th>Area</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach($admins as $admin) --}}
+                                    @foreach($storehouses as $storehouse)
                                     <tr>
-                                        <td>img</td>
-                                        <td>img</td>
-                                        <td>img</td>
-                                        <td>img</td>
-                                        <td>img</td>
-                                        <td>img</td>
-                                        <td>
-                                            {{-- <div class="position-relative">
-                                                <!-- Dropdown button positioned at top-left corner -->
-                                                <div class="dropdown">
-                                                    <button class="btn p-1" type="button" id="dropdownMenuButton"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="icon-lg text-muted pb-3px"
-                                                            data-feather="more-vertical"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item d-flex align-items-center"
-                                                            href="{{ route('products.edit', $product->slug) }}">
-                                                            <i data-feather="edit-2" class="icon-sm mr-2"></i>
-                                                            <span class="">Edit</span>
-                                                        </a>
-                                                        <a class="dropdown-item d-flex align-items-center" href="">
-                                                            <i data-feather="folder-plus" class="icon-sm mr-2"></i>
-                                                            <span>Download</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                        </td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$storehouse->name}}</td>
+                                        <td>{{$storehouse->manager_name}}</td>
+                                        <td>{{$storehouse->phone}}</td>
+                                        <td>{{ $governorates[$storehouse->governorate_id] }}</td>
+                                        <td>{{$storehouse->area}}</td>
                                     </tr>
-                                    {{-- @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
 

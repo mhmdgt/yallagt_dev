@@ -30,7 +30,11 @@
                                     <p class="ml-1">{{ __('header.login') }}</p>
                                 </a>
                             @endauth
-                            <a href="{{route('cart.index')}}"><img width="50" height="50"
+                            {{-- <a class="btn btn-primary" href="{{route('gt_car.create')}}">
+                                <i class="bi bi-plus-circle"></i>
+                                <p class="ml-2 mr-2"> Sell </p>
+                            </a> --}}
+                            <a href="{{route('cart.index')}}"><img width="60"
                                     src="{{ asset('yalla_gt') }}/media/icon/shopping-cart-header-solid.png"
                                     alt=""></a>
                         </div>

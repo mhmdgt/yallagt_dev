@@ -2,7 +2,7 @@
 
 return [
     'login' => 'Login',
-    'stock_car' => 'Stock Car',
+    'stock_cars' => 'Stock Cars',
     'sale_car' => 'Cars For Sale',
     'product_shop' => 'Product Shop',
     'oils' => 'Oils',

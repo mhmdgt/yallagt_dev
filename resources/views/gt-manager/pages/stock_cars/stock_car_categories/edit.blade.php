@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price"
+                                    <input type="number" class="form-control" id="price" name="price" oninput="formatNumber(this)"
                                         value="{{ old('price') ?? $stockCarCategory->price }}">
                                     <x-errors.display-validation-error property="price" />
                                 </div>

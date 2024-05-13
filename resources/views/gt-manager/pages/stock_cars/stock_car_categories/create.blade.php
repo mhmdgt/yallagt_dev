@@ -30,8 +30,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price"
-                                        value="{{ old('price') }}">
+                                    <input type="text" class="form-control" name="price" oninput="formatNumber(this)"
+                                    value="{{ old('price') }}">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>

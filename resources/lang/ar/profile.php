@@ -7,8 +7,8 @@ return [
     'manageAndTrack' => 'إدارة وتتبع',
     'Returns' => 'المرتجعات',
     'ActiveRequests' => 'الطلبات النشطة',
-    'Wishlist' => 'قائمة الرغبات',
-    'SavedItems' => 'العناصر المحفوظة',
+    'SellYourCar' => 'بيع سيارة',
+    'TotallyFree' => 'مجاناً تماماً',
     'MyAds' => 'إعلاناتي',
     'ActiveAds' => 'إعلانات نشطة',
 

@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:250',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'status' => 'required|in:hidden,active',
             'rims_size' => 'nullable|integer',
             'number_of_seat' => 'required|integer',

@@ -96,7 +96,7 @@
                             <a href="{{route('storehouses.index')}}" class="nav-link">Storehouses</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('stock-products.index')}}" class="nav-link">Stock Products</a>
+                            <a href="{{route('product-listings.index')}}" class="nav-link">Product Listings</a>
                         </li>
                     </ul>
                 </div>

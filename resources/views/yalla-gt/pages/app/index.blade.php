@@ -84,7 +84,8 @@
                                     <h4 class="h-service">{{ __('home_page.sellYourCar') }}</h4>
                                     <p class="p-service">{{ __('home_page.WithOneClick') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="{{route('gt_car.create')}}">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                        href="{{ route('gt_car.create') }}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -105,40 +106,52 @@
                 </div>
                 <div class="col-12 ">
                     <div class="carsforsaleContainer owl-carousel">
+                        @foreach ($cars as $car)
+                            <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
+                                <div class="card-img-container">
+                                    @foreach ($car->images as $image)
+                                        @if ($image->main_img)
+                                            <a href="#">
+                                                <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
+                                                    class="card-img-top" alt="No_IMG">
+                                            </a>
+                                            <button class="btn btn-light btn-icon stockCarImageEdit ar-style">
+                                                {{ ucwords($conditions[$car->condition]) }}
+                                                {{ $car->year }}
+                                            </button>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="card-body container-fluid">
+                                    <a href="#">
+                                        <h4 class="card-text" dir="auto">
+                                            {{ $brands[$car->brand] }}
+                                            {{ $models[$car->model] }}
+                                        </h4>
 
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 15px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/IMG_1408.JPG" alt="no_img">
+                                    </a>
+                                    <h3 class="card-text-h3 mt-3">
+                                        <span class="h5 text-dark">{{ __('home_page.EGP') }}
+                                        </span>{{ $car->price }}
+                                    </h3>
+                                    <div class="card-text-4 mt-2 mb-2" dir="auto">
+                                        <i class="bi bi-geo-alt"></i> <span
+                                            class="h6">{{ $governorates[$car->governorate] }}</span>
+                                    </div>
+                                    <div class="card-text-4 mt-2 mb-3" dir="auto">
+                                        <i class="ml-auto mr-2 bi bi-stopwatch"></i> <span
+                                            class="h6">{{ $car->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <div class="detailedSearch__content--badge row no-gutters card-text-4"
+                                        style="display:flex; flex-direction:column">
+                                        <span class="badge badge_icon_5">{{ $kms[$car->km] }}</span>
+                                        <span class="badge"
+                                            style="margin-top: 10px;">{{ $transmissions[$car->transmission] }}</span>
+                                    </div>
                                 </div>
-                            </a>
-                            <div class="card-body container-fluid">
-                                <a href="#">
-                                    <h4 class="card-text">
-                                        <span>New</span>
-                                        Mercedes
-                                        C180
-                                        2023
-                                    </h4>
-                                </a>
-                                <h3 class="card-text-h3 mt-3">
-                                    <span class="text-dark">EGP:</span>23,000,000
-                                </h3>
-                                <div class="card-text-4 mt-2 mb-3">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span class="badge_icon mr-2 h6">Cairo</span>
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second mr-2 h6">5 moths ago</span>
-                                </div>
-                                <div class="detailedSearch__content--badge row no-gutters card-text-4"
-                                    style="display:flex; flex-direction:column">
-                                    <span class="badge badge_icon_5">300,000 Km </span>
-                                    <span class="badge" style="margin-top: 10px;">Automatic</span>
-                                </div>
+
                             </div>
-
-                        </div>
-
+                        @endforeach
 
 
                     </div>
@@ -158,31 +171,17 @@
                 </div>
                 <div class="col-12">
                     <div class="brand_container BrandOWL owl-carousel">
-
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
+                        @foreach ($brandsWithStockCar as $brand)
+                            <div class="single_brand">
+                                <a href="#"><img src="{{ display_img($brand->logo) }}" alt="..."></a>
+                            </div>
+                        @endforeach
+                        {{-- <div class="single_brand">
                             <a href="#"><img src="yalla_gt/media/brand/motocraft.png" alt=""></a>
                         </div>
                         <div class="single_brand">
                             <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/motocraft.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/motocraft.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/mazda.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/motocraft.png" alt=""></a>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -190,7 +189,7 @@
         </div>
     </section>
     <!-- Categories -->
-    <section class="new-section category_section_1">
+    {{-- <section class="new-section category_section_1">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -293,58 +292,69 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Products Shop -->
     <section class="new-section product_area product_deals">
         <div class="container-fluid">
+
             <div class="col-12">
                 <div class="section_title section_title_border en-style">
                     <h2>{{ __('home_page.ProductShop') }}</h2>
                     <hr>
                 </div>
             </div>
+
             <div class="product_container">
                 <div class="row product_carousel no-gutters">
-
-                    <!-- Single Card -->
-                    <div class="col-md-20 col-6 product_item">
-                        <div class="single_product">
-                            <div class="product_card">
-                                <div class="container-fluid product_thumb">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <img src="yalla_gt/media/product_imgs/1688582470.webp" alt="">
-                                    </a>
-                                </div>
-                                <div class="product_card_content">
-                                    <div class="mt-4">
-                                        <h6 class="brand fw-700">Brand:
-                                            <span>Liquid Moly</span>
-                                        </h6>
-                                        <a href="#">
-                                            <h4 class="product_name">Fuel System Treatment 300ml </h4>
-                                        </a>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-4">
-                                        <div class="p-0">
-                                            <div>
-                                                <span>EGP</span>
-                                                <span class="product_card_price">9,999</span>
-                                            </div>
-                                            <div>
-                                                <span class="product_card_precentage">900,000</span>
-                                                <span> 25%</span>
-                                            </div>
+                    @foreach ($product_listings as $product_listing)
+                        @foreach ($product_listing->skus as $sku)
+                            <div class="col-md-20 col-6 product_item">
+                                <div class="single_product">
+                                    <div class="product_card">
+                                        <div class="container-fluid product_thumb">
+                                            @foreach ($sku->images as $image)
+                                                @if ($image->main_img)
+                                                    <img src="{{ display_img($image->name) }}" alt="Main Image">
+                                                @endif
+                                            @endforeach
                                         </div>
-                                        <div class="p-0 product_card_cart">
-                                            <img src="yalla_gt/media/cart/cart_icon.png"></a>
+                                        <div class="product_card_content">
+                                            <div class="mt-4">
+                                                <h6 class="brand fw-700">Brand:
+                                                    <span>{{ $sku->product->manufacturer->name }}</span>
+                                                </h6>
+                                                <a
+                                                    href="{{ route('product_item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                    <h4 class="product_name">{{ $sku->product->name }}</h4>
+                                                </a>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="p-0">
+                                                    <div>
+                                                        <span>EGP:</span>
+                                                        <span class="product_card_price" style="color: #F25E3D;">
+                                                            {{ $product_listing->selling_price }}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <i class="bi bi-bookmark-check"></i>
+                                                        <span class="product_card_precentage">HOT</span>
+                                                        <span> DEALS </span>
+                                                    </div>
+                                                </div>
+                                                <div class="p-0 product_card_cart">
+                                                    <img src="yalla_gt/media/cart/cart_icon.png">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
+                        @endforeach
+                    @endforeach
                 </div>
+
+
             </div>
         </div>
     </section>
@@ -537,34 +547,45 @@
                 <div class="col-12 ">
                     <div class="carsforsaleContainer owl-carousel">
 
-                        <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-                            <a href="#">
-                                <div class="card-image sale_car_img">
-                                    <img src="yalla_gt/media/sale_cars_img/honda.jpg" alt="NO_IMG">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <a href="#">
-                                    <h4 class="font-weight-bold">
-                                        <a href="#">BMW's M4 GT4 School Puts You In a Real-Deal Race Car</a>
-                                    </h4>
-                                </a>
-                                <h5 class="mt-3">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    By Mohamed Ahmed
-                                </h5>
-                                <div class=" card-text-4 mb-2">
-                                    <i class="bi bi-stopwatch"></i>
-                                    <span class="badge_icon_second">5 moths ago</span>
-                                </div>
-                                <div class="courses-info">
-                                    <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                        Read More
-                                        <i class="fa-regular fa-circle-right"></i>
-                                    </a>
+                        @foreach ($blogs as $blog)
+                            <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
+
+                                <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
+                                    <div class="card-img-container">
+                                        @foreach ($blog->images as $image)
+                                            @if ($image->main_img)
+                                                <a href="#">
+                                                    <img src="{{ asset('storage/media/blog_imgs/' . $image->path . '/' . $image->name) }}"
+                                                        class="card-img-top" alt="No_IMG">
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="#">
+                                            <h4 class="font-weight-bold" dir="auto" style="line-height: 1.6;">
+                                                <a href="#">{{ $blog->title }}
+                                            </h4>
+                                        </a>
+                                        {{-- <h5 class="mt-3" dir="auto">
+                                            <i class="bi bi-bookmark-check"></i>
+                                            {{ $blog->user }}
+                                        </h5>
+                                        <div class=" card-text-4 mb-2" dir="auto">
+                                            <i class="bi bi-stopwatch"></i>
+                                            <span
+                                                class="badge_icon_second">{{ $blog->created_at->diffForHumans() }}</span>
+                                        </div> --}}
+                                        <div class="courses-info">
+                                            <a href="#" class="section-btn btn btn-primary btn-block mt-2">
+                                                {{ __('home_page.SeeMore') }}
+                                                <i class="fa-regular fa-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
 
                     </div>
                 </div>

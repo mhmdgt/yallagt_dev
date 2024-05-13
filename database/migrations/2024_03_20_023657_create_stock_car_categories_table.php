@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->decimal('price');
+            $table->string('price');
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
             $table->integer('rims_size')->nullable();
             $table->integer('number_of_seat');
@@ -36,6 +36,11 @@ return new class extends Migration
             $table->foreignId('engine_km_id')->nullable()->references('id')->on('engine_kms')->onDelete('set null');
             $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
 
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

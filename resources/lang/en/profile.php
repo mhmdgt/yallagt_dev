@@ -7,8 +7,8 @@ return [
     'manageAndTrack' => 'Manage and Track',
     'Returns' => 'Returns',
     'ActiveRequests' => 'Active Requests',
-    'Wishlist' => 'Wishlist',
-    'SavedItems' => 'Saved Items',
+    'SellYourCar' => 'Sell Car',
+    'TotallyFree' => 'Totally Free',
     'MyAds' => 'My Ads',
     'ActiveAds' => 'Active Ads',
 

@@ -24,34 +24,33 @@
                             <table id="dataTableExample" class="table">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Product Name <span class="text-danger">(EN)</span></th>
-                                        <th>Price</th>
-                                        <th>SKU</th>
+                                        <th>SN</th>
                                         <th>Manufacturer</th>
+                                        <th>Product Name <span class="text-danger">(EN)</span></th>
+                                        <th>images</th>
                                         <th>status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $index => $product)
-                                        @foreach ($product->skus as $sku)
-                                            <tr>
-                                                <td>
-                                                    @foreach ($product->images as $image)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $product->manufacturer->name }}</td>
+                                            <td><a
+                                                    href="{{ route('product-skus.index', $product->slug) }}">{{ $product->name }}</a>
+                                            </td>
+                                            <td>
+                                                @foreach ($product->skus as $sku)
+                                                    @foreach ($sku->images as $image)
                                                         @if ($image->main_img)
-                                                            <img src="{{ asset('storage/media/product_imgs/' . $image->path . '/' . $image->name) }}"
-                                                                class="image-in-box" alt="No_IMG">
-                                                        @break
-                                                    @endif
+                                                            <img src="{{ asset('storage/media/product_sku_imgs/' . $image->path . '/' . $image->name) }}"
+                                                                class="image-in-box" alt="Main Image">
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
                                             </td>
-                                            <td><a href="{{ route('products.edit', $product->slug) }}">{{ $product->name }}</a></td>
-                                            <td>{{ $sku->main_price }}</td>
-                                            <td>{{ $sku->sku }}</td>
-                                            <td>{{ $product->manufacturer->name }}</td>
                                             <td>{{ $product->status }}</td>
-
                                             <td>
                                                 <div class="position-relative">
                                                     <!-- Dropdown button positioned at top-left corner -->
@@ -66,12 +65,12 @@
                                                             <a class="dropdown-item d-flex align-items-center"
                                                                 href="{{ route('products.edit', $product->slug) }}">
                                                                 <i data-feather="edit-2" class="icon-sm mr-2"></i>
-                                                                <span class="">Edit</span>
+                                                                <span class="">EDIT</span>
                                                             </a>
                                                             <a class="dropdown-item d-flex align-items-center"
-                                                                href="">
+                                                                href="{{route('product-skus.create', $product->slug)}}">
                                                                 <i data-feather="folder-plus" class="icon-sm mr-2"></i>
-                                                                <span>Download</span>
+                                                                <span>Add SKU</span>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -79,15 +78,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 @endsection

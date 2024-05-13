@@ -17,10 +17,13 @@ return new class extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->longText('content');
-            $table->enum('status' , ['active' , 'hidden'] )->default('active');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            // $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->enum('status', ['active', 'hidden'])->default('active');
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
