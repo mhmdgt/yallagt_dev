@@ -41,15 +41,12 @@ return new class extends Migration
 
             $table->enum('status' , ['approved' , 'pending' , 'declined'] )->default('pending');
 
-            // Created by and its type
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->string('created_type')->nullable();
-
-            // Updated by and its type
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->string('updated_type')->nullable();
-
-            $table->timestamps();
+           // Autoloaded Stamps
+           $table->string('created_user_type')->nullable();
+           $table->unsignedBigInteger('created_by')->nullable();
+           $table->string('updated_user_type')->nullable();
+           $table->unsignedBigInteger('updated_by')->nullable();
+           $table->timestamps();
         });
     }
 

@@ -68,7 +68,7 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="{{route('gt_car.create')}}">{{ __('footer.sellYourCar') }}</a></li>
+                                <li><a href="{{ route('gt_car.create') }}">{{ __('footer.sellYourCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.saleCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.CarPrices') }}</a></li>
                                 <li><a href="#">{{ __('footer.productsShop') }}</a></li>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="{{route('about_us')}}">{{ __('footer.AboutUS') }}</a></li>
+                                <li><a href="{{ route('about_us') }}">{{ __('footer.AboutUS') }}</a></li>
                                 <li><a href="#">{{ __('footer.ContactUs') }}</a></li>
                                 <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
                                 <li><a href="#">{{ __('footer.OrdersandRefunds') }}</a></li>
@@ -104,8 +104,12 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="#">{{ __('footer.home') }}</a></li>
-                                <li><a href="#">{{ __('footer.login') }}</a></li>
+                                <li><a href="{{ route('yalla-index') }}">{{ __('footer.home') }}</a></li>
+                                @auth
+                                    <a href="{{ route('user.profile') }}">
+                                        <li>{{ getFirstName(user_data()->name) }}</li>
+                                    </a>
+                                @endauth
                                 <li><a href="#">{{ __('footer.FQA') }}</a></li>
                                 <li><a href="#">{{ __('footer.ExploreNewDeals') }}</a></li>
                             </ul>
@@ -190,10 +194,11 @@
                                 $currentLocale = LaravelLocalization::getCurrentLocale();
                                 $locales = LaravelLocalization::getSupportedLocales();
                             @endphp
-                            @foreach($locales as $localeCode => $properties)
-                                @if($currentLocale != $localeCode)
+                            @foreach ($locales as $localeCode => $properties)
+                                @if ($currentLocale != $localeCode)
                                     <li>
-                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ url('/'.$localeCode . $current_url['path']) }}">
+                                        <a rel="alternate" hreflang="{{ $localeCode }}"
+                                            href="{{ url('/' . $localeCode . $current_url['path']) }}">
                                             {{ $properties['native'] }}
                                         </a>
                                     </li>

@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\UserStampTrait;
 use Illuminate\Support\Facades\App;
+use App\Traits\UserStampWithTypeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
-    use HasFactory, HasTranslations , UserStampTrait;
+    use HasFactory, HasTranslations , UserStampWithTypeTrait;
 
     protected $fillable = ['title', 'slug', 'content', 'blog_category_id' , 'status'];
     public $translatable = ['title', 'slug' , 'content'];

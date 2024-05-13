@@ -22,7 +22,7 @@ return [
     'productsShop' => 'products Shop',
     'CarNewsAndAdvice' => 'Car News and Advice',
 
-    'AboutUS' => 'About US',
+    'AboutUS' => 'About Us',
     'ContactUs' => 'Contact Us',
     'PrivacyPolicy' => 'Privacy Policy',
     'OrdersandRefunds' => 'Orders and Refunds',

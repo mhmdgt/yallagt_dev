@@ -86,83 +86,46 @@
                                     <label>Product Name <span class="text-danger">(EN)</span></label>
                                     <input type="text" class="form-control" name="name_en"
                                         value="{{ $product->getTranslations('name')['en'] }}">
-                                        <x-errors.display-validation-error property="name_en" />
+                                    <x-errors.display-validation-error property="name_en" />
                                 </div>
                                 <div class="col">
                                     <label>Product Name <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="name_ar"
+                                    <input type="text" class="form-control" name="name_ar" dir="auto"
                                         value="{{ $product->getTranslations('name')['ar'] }}">
-                                        <x-errors.display-validation-error property="name_ar" />
+                                    <x-errors.display-validation-error property="name_ar" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- SKU / Part number / Price  --}}
+            {{-- DES --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Details</label>
+                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Description</label>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>SKU</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="sukGenerator" name="sku" required
-                                            value="{{ $product->skus->first()->sku }}" readonly>
-                                    </div>
+                                    <label>Description<span class="text-danger">(EN)</span></label>
+                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10">
+                                        {{ $product->getTranslations('description')['en'] }}
+                                    </textarea>
+                                    <x-errors.display-validation-error property="description_en" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Part Number / OEM</label>
-                                    <input type="text" class="form-control" autocomplete="off" name="part_number"
-                                        value="{{ $product->skus->first()->part_number }}">
-                                    <x-errors.display-validation-error property="part_number" />
+                                    <label>Description<span class="text-danger">(AR)</span></label>
+                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10">
+                                        {{ $product->getTranslations('description')['ar'] }}
+                                    </textarea>
+                                    <x-errors.display-validation-error property="description_ar" />
                                 </div>
                             </div>
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label for="exampleInputNumber1">Main price</label>
-                                    <input type="main_price" class="form-control" name="main_price"
-                                        value="{{ $product->skus->first()->main_price }}">
-                                    <x-errors.display-validation-error property="main_price" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Media --}}
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Media</label>
-                            {{-- images --}}
-                            <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
-                                @foreach ($product->images as $index => $image)
-                                    <div class="img-container position-relative" id="image-container-{{ $index }}">
-                                        <img src="{{ display_img('media/product_imgs/' . $image->name) }}" alt="">
-                                        <button class="delete-btn" data-index="{{ $index }}">&times;</button>
-                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
-                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
-                                               {{ $image->main_img ? 'checked' : '' }}>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <x-errors.display-validation-error property="main_img" />
-                            <div class="form-group pt-0 mt-4">
-                                <label>Add More Images</label>
-                                <input type="file" class="filepond" name="image" multiple>
-                                <x-errors.display-validation-error property="image" />
-                            </div>
-                            {{-- Brochure --}}
                             <div class="form-group pt-0">
                                 <label>PDF Brochure</label>
                                 <input type="file" name="brochure" accept="application/pdf" class="file-upload-default">
-                                <x-errors.display-validation-error property="brochure" />
                                 <div class="input-group col-xs-12">
                                     <input type="text" class="form-control file-upload-info" disabled=""
                                         placeholder="Upload Borchur">
@@ -211,34 +174,6 @@
                     </div>
                 </div>
             </div>
-            {{-- DES --}}
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Description</label>
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>Description<span class="text-danger">(EN)</span></label>
-                                    <textarea class="form-control" name="description_en" id="tinymceExample" rows="10">
-                                        {{ $product->getTranslations('description')['en'] }}
-                                    </textarea>
-                                    <x-errors.display-validation-error property="description_en" />
-                                </div>
-                            </div>
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>Description<span class="text-danger">(AR)</span></label>
-                                    <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10">
-                                        {{ $product->getTranslations('description')['ar'] }}
-                                    </textarea>
-                                    <x-errors.display-validation-error property="description_ar" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {{-- Status --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -279,22 +214,6 @@
 @endsection
 @section('script')
     <script>
-        // ---------------------------------------- Filepond
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        const inputElement = document.querySelector('input[type="file"]');
-        const pond = FilePond.create(inputElement);
-        pond.setOptions({
-            allowMultiple: true,
-            allowReorder: true,
-            server: {
-                process: '/manage/tmpFilepondUpload',
-                revert: '/manage/tmpFilepondDelete',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            },
-
-        });
         // ---------------------------------------- SubCategories
         $(document).ready(function() {
             // Select the correct option based on the value of the "category" input
@@ -304,7 +223,7 @@
             // Select the correct option based on the value of the "subcategory" input
             var selectedSubcategoryId = '{{ $subCategory->id }}'; // Get the product's subcategory ID
             $('#subcategorySelect option[value="' + selectedSubcategoryId + '"]').prop('selected',
-            true); // Set the selected option for subcategory
+                true); // Set the selected option for subcategory
 
             // Handle change event on the category select
             $('#categorySelect').change(function() {
@@ -390,58 +309,6 @@
 
             // Trigger change event on brand select to load models initially
             $('#brandSelect').trigger('change');
-        });
-        // ---------------------------------------- Carousel & buttons
-        $(document).ready(function() {
-            var owl = $('#image-carousel').owlCarousel({
-                loop: false,
-                margin: 10,
-                slideBy: 2,
-                nav: false,
-                navText: ["<i class='bi bi-arrow-left-circle-fill'></i>",
-                    "<i class='bi bi-arrow-right-circle-fill'></i>"
-                ],
-                dots: false,
-                responsive: {
-                    0: {
-                        items: 2,
-                        slideBy: 2
-                    },
-                    600: {
-                        items: 3,
-                        slideBy: 3
-                    },
-                    1000: {
-                        items: 6,
-                        slideBy: 5
-                    }
-                }
-            });
-            // ---------------------------------------- Delete Button
-            $('.delete-btn').click(function(event) {
-                event.preventDefault();
-
-                var index = $(this).data('index');
-
-                // Remove the corresponding input fields
-                $('input[name="images[' + index + '][name]"]').remove();
-                $('input[name="images[' + index + '][url]"]').remove();
-
-                // Remove the item from the Owl Carousel's internal data structure
-                owl.trigger('remove.owl.carousel', [index]).trigger('refresh.owl.carousel');
-
-                // After removing the item, update the index values for remaining items
-                // Update the index data attribute for delete buttons
-                $('.delete-btn').each(function(i) {
-                    $(this).data('index', i);
-                });
-
-                // Update the name attribute for input fields
-                $('input[name^="images"]').each(function(i) {
-                    var newName = $(this).attr('name').replace(/\[\d+\]/, '[' + i + ']');
-                    $(this).attr('name', newName);
-                });
-            });
         });
     </script>
 @endsection

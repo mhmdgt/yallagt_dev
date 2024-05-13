@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\UserStampWithTypeTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ContactUs extends Model
 {
-        use HasFactory , HasTranslations;
+    use HasFactory, HasTranslations ;
 
-        protected $guarded = [];
+    protected $guarded = [];
 
-    public $translatable = [ 'site_name', 'headqurter_address' ];
+    public $translatable = ['site_name', 'headqurter_address'];
 
 }

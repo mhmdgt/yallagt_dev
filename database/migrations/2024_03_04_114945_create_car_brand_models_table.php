@@ -16,6 +16,12 @@ return new class extends Migration
             $table->foreignId('car_brand_id')->references('id')->on('car_brands')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

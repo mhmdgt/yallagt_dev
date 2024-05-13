@@ -48,7 +48,7 @@
                             </h4>
 
                             <h4 class="card-text text-primary mt-2">
-                                <span class="h5 text-dark">{{ __('EGP:') }} </span>{{ number_format($car->price) }}
+                                <span class="h5 text-dark">EGP: </span>{{ $car->price }}
                             </h4>
 
                             <div class="card-text mt-4">

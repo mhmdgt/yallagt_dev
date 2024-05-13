@@ -38,41 +38,6 @@ class StockCarsController extends Controller
 
         return view('gt-manager.pages.stock_cars.stock_car_models.show', compact('brandData', 'brandModels'));
     }
-    // -------------------- Maghrabi Brand Model -------------------- //
-    // public function create($brandSlug,$modelSlug, $stockYear)
-    // {
-    //     $brandData = CarBrand::where('slug', $brandSlug)->first();
-    //     $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
-
-    //     if($modelSlug != '-' && $stockYear != '-'){
-    //         $stockCar = StockCar::where('year', $stockYear)->with('images')->first();
-    //         $modelData = CarBrandModel::find($stockCar->car_brand_model_id);
-    //         $images = $stockCar->images;
-
-    //         // Brand name
-    //         // $imageParameter = $request->input('image');
-    //         // $imageData = json_decode($imageParameter, true);
-    //         // $brandData = $imageData['brandData'];
-
-    //         // dd( $brandData['slug']);
-    //         // $brandData = $brandData['slug'];
-    //         dd( $stockCar->id );
-
-    //         return view('gt-manager.pages.stock_cars.stock_car_models.edit',
-    //             compact('brandData',
-    //                 'brandSlug',
-    //                 'modelData',
-    //                 'modelSlug',
-    //                 'brandModels',
-    //                 'images',
-    //                 'stockCar'
-    //             ));
-    //     }else{
-
-    //         return view('gt-manager.pages.stock_cars.stock_car_models.create', compact('brandData', 'brandSlug', 'brandModels'));
-    //     }
-
-    // }
     // -------------------- Create Brand Model -------------------- //
     public function create($slug)
     {

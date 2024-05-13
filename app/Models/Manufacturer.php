@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use App\Traits\UserStampWithTypeTrait;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Manufacturer extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations ;
 
     protected $fillable = ['name', 'logo', 'slug'];
     public $translatable = ['name', 'slug'];
@@ -32,5 +33,5 @@ class Manufacturer extends Model
         return $this->products()->get();
     }
     // -------------------- Method -------------------- //
-    
+
 }

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\UserStampWithTypeTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StockCarCategory extends Model
 {
-    use HasFactory;
+    use HasFactory , UserStampWithTypeTrait;
 
     protected $fillable = [
         'name',

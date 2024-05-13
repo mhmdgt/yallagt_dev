@@ -27,6 +27,12 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('google_maps')->nullable();
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->string('updated_user_type')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
 

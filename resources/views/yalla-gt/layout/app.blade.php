@@ -90,6 +90,7 @@
     <script src="{{ asset('yalla_gt') }}/assets/js/slinky.menu.js"></script>
     <script src="{{ asset('yalla_gt') }}/assets/js/jquery.instagramFeed.min.js"></script>
     <script src="{{ asset('yalla_gt') }}/assets/js/tippy-bundle.umd.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/formatNumber.js"></script>
     <script src="{{ asset('yalla_gt') }}/assets/js/plugins.js"></script>
 
     <script src="{{ asset('yalla_gt') }}/assets/js/main.js"></script>
@@ -123,7 +124,7 @@
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
-    @include('gt-manager.partials.session_messages')
+    @include('yalla-gt.partials.session_messages')
     @yield('script')
 
 </body>

@@ -1,32 +1,38 @@
 <?php
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
-use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gt_manager\Blog\BlogController;
+use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
 use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
 use App\Http\Controllers\Gt_manager\Customers\CustomersController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
+use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
+use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
 use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductCategoryController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
+use App\Http\Controllers\Gt_manager\Product_Listings\ProductListingsController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
-use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use App\Http\Controllers\Gt_manager\Stock_products\StockProductController;
-use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
-use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
-use Illuminate\Support\Facades\Route;
 
-Route::post('sale-car-store', [SaleCarsController::class, 'store'])->name('sale-car.store')->middleware('check.user.or.admin.auth');
+// Store Sale Cars
+Route::post('sale-car-store' , [SaleCarsController::class, 'store'])->name('sale-car.store');
+
+// FilePond
+Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
+Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
+Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
+Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
+Route::post('/manage/SaleCarTmpUpload', [SaleCarsController::class, 'SaleCarTmpUpload']);
+Route::delete('/manage/SaleCarTmpDelete', [SaleCarsController::class, 'SaleCarTmpDelete']);
+
+// Admin Middleware
 Route::middleware('admin')->group(function () {
-    // FilePond
-    Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
-    Route::delete('/manage/tmpFilepondDelete', [ProductController::class, 'tmpFilepondDelete']);
-    Route::post('/manage/blogTmpUpload', [BlogController::class, 'blogTmpUpload']);
-    Route::delete('/manage/blogTmpDelete', [BlogController::class, 'blogTmpDelete']);
-    Route::post('/manage/SaleCarTmpUpload', [SaleCarsController::class, 'SaleCarTmpUpload']);
-    Route::delete('/manage/SaleCarTmpDelete', [SaleCarsController::class, 'SaleCarTmpDelete']);
     // Dashboard Index//
     Route::get('manager', [AdminController::class, 'index'])->name('manager-index');
     // All Admins
@@ -110,14 +116,17 @@ Route::middleware('admin')->group(function () {
 
         // Approve and Decline routes
         Route::post('/{slug}', 'update')->name('update');
+        Route::delete('{slug}/destroy', 'destroy')->name('destroy');
         Route::post('{slug}/approve', 'approve')->name('approve-car');
         Route::post('{slug}/decline', 'decline')->name('decline-car');
     });
     // Storehouses //
     Route::controller(StorehousesController::class)->prefix('manage/storehouses')->name('storehouses.')->group(function () {
         Route::get('/', 'index')->name('index');
-    });
+        Route::get('/create-storehouse', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
 
+    });
     // Product Manufacturers //
     Route::controller(ManufacturersController::class)->prefix('manage/manufacturers')->name('manufacturers.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -150,15 +159,28 @@ Route::middleware('admin')->group(function () {
         // Pages
         Route::get('/', 'index')->name('index');
         Route::get('/create-product', 'create')->name('create');
-        Route::get('{slug}/edit-product', 'edit')->name('edit');
+        Route::get('{slug}/edit', 'edit')->name('edit');
         // Actions
         Route::post('/store', 'store')->name('store');
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('{slug}/destroy', 'destroy')->name('destroy');
     });
-    // Stock Products //
-    Route::controller(StockProductController::class)->prefix('manage/stock-product')->name('stock-products.')->group(function () {
+    // SKUSSSSSSSSSS //
+    Route::controller(ProductSkusController::class)->prefix('manage/product-skus')->name('product-skus.')->group(function () {
+        Route::get('/{slug}', 'index')->name('index');
+        Route::get('{slug}/create-sku', 'create')->name('create');
+        Route::get('{sku}/edit', 'edit')->name('edit');
+
+        Route::post('{sku}/store-sku', 'store')->name('store');
+        Route::put('{sku}/update', 'update')->name('update');
+        Route::delete('{sku}/destroy', 'destroy')->name('destroy');
+
+    });
+    // Products Listings //
+    Route::controller(ProductListingsController::class)->prefix('manage/product-listings')->name('product-listings.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/add-product', 'add')->name('add');
+        Route::post('/store', 'store')->name('store');
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {

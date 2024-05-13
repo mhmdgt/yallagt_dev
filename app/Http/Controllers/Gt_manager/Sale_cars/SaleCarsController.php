@@ -28,12 +28,11 @@ use Intervention\Image\ImageManager;
 
 class SaleCarsController extends Controller
 {
+    // -------------------- Jquery Method Link -------------------- //
     public function getModelsByBrand($brandId)
     {
         $brand = CarBrand::findOrFail($brandId);
         $models = $brand->models()->select('id', 'name')->get();
-
-        // Return the models data as JSON
         return response()->json($models);
     }
     // -------------------- Method -------------------- //
@@ -462,7 +461,6 @@ class SaleCarsController extends Controller
         $transmissions = TransmissionType::whereIn('id', $cars->pluck('transmission'))->pluck('name', 'id');
         $kms = EngineKm::whereIn('id', $cars->pluck('km'))->pluck('name', 'id');
         $conditions = SaleCondition::whereIn('id', $cars->pluck('condition'))->pluck('name', 'id');
-
         $governorates = Governorate::whereIn('id', $cars->pluck('governorate'))->pluck('name', 'id');
 
         return view('gt-manager.pages.sale_cars.pending',
@@ -484,6 +482,14 @@ class SaleCarsController extends Controller
         $car->update(['status' => 'declined']);
         Session::flash('success', 'Declined Successfully');
         return redirect()->back();
+    }
+    // -------------------- Method -------------------- //
+    public function destroy($slug)
+    {
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+        $car->delete();
+        Session::flash('success', 'Deleted Successfully');
+        return redirect()->route('sale-car.live');
     }
 
 }

@@ -1,7 +1,7 @@
 // Default
-$(document).ready(function () {
-    $(".owl-carousel").owlCarousel();
-});
+// $(document).ready(function () {
+//     $(".owl-carousel").owlCarousel();
+// });
 
 // Home Slider
 jQuery("#carousel").owlCarousel({
@@ -42,9 +42,8 @@ if ($carsforsaleContainer.length > 0) {
         loop: false,
         nav: false,
         autoplay: false,
-        autoplayTimeout: 8000,
         items: 4,
-        margin: 15,
+        margin: 20,
         dots: false,
         responsiveClass: true,
         responsive: {
@@ -139,3 +138,40 @@ if ($ProductCatedoryOWL.length > 0) {
         }
     });
 }
+
+// // EditImgs
+// var $EditImgsOWL = $('.EditImgsOWL');
+// if ($EditImgsOWL.length > 0) {
+//     $('.EditImgsOWL').on('changed.owl.carousel initialized.owl.carousel', function (event) {
+//         $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')
+//     }).owlCarousel({
+//         // navText: ["<i class='bx bxs-left-arrow-circle'></i>","<i class='bx bxs-right-arrow-circle'></i>"],
+//         loop: false,
+//         nav: false,
+//         slideBy: 2,
+//         autoplay: false,
+//         autoplayTimeout: 8000,
+//         items: 6,
+//         margin: 12,
+//         dots: false,
+//         responsiveClass: true,
+//         responsive: {
+//             0: {
+//                 items: 2,
+//             },
+//             300: {
+//                 items: 2,
+//             },
+//             480: {
+//                 items: 2,
+//             },
+//             768: {
+//                 items: 3,
+//             },
+//             992: {
+//                 items: 6,
+//             },
+
+//         }
+//     });
+// }

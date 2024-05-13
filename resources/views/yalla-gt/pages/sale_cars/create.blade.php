@@ -343,14 +343,14 @@
             {{-- Web Submit --}}
             <div class="col-md-12 grid-margin stretch-card mt-4 sell_button">
                 <div class="card">
-                    <div class="profile-card gradient-green-bg"
-                        onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
+                    <div class="profile-card gradient-8790f6" onclick="document.getElementById('carForSaleID').submit();"
+                        style="cursor: pointer;">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <button type="button" style="border: none; background: none;">
-                                <h4 class="align-items-center text-white">
+                                <span class="align-items-center text-white font-weight-bold">
                                     <i class='ml-2 mr-2 bx bxs-add-to-queue' style='color:#ffffff'></i>
                                     {{ __('gt_cars_create.SellNow') }}
-                                </h4>
+                                </span>
 
                             </button>
                         </div>
@@ -360,11 +360,12 @@
             {{-- Mobile Submit --}}
             <div id="call_nav" class="d-flex align-items-center justify-content-center"
                 onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
-                <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-green-bg"
+                <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-8790f6"
                     style="border-radius: 5px;">
                     <button type="button" style="border: none; background: none;">
                         <i class='bx bxs-add-to-queue' style='color:#ffffff'></i>
-                        <span class="ml-2 mr-2 text-white sell-now-text">{{ __('gt_cars_create.SellNow') }}</span>
+                        <span
+                            class="ml-2 mr-2 font-weight-bold text-white sell-now-text">{{ __('gt_cars_create.SellNow') }}</span>
                     </button>
                 </span>
             </div>
@@ -378,17 +379,6 @@
 {{-- ====== script ====== --}}
 @section('script')
     <script>
-        // ---------------------------------------- Price ,123,
-        function formatNumber(input) {
-            // Remove any non-numeric characters
-            var value = input.value.replace(/\D/g, '');
-
-            // Format the number with commas every 3 digits from right to left
-            var formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-            // Update the input value
-            input.value = formattedValue;
-        }
         // ---------------------------------------- Filepond
         // Plugins
         FilePond.registerPlugin(FilePondPluginImagePreview);
@@ -433,7 +423,7 @@
 
                 // Perform AJAX request to fetch models
                 $.ajax({
-                    url: '/manage/car-brand-models/models/' + brandId,
+                    url: '/car-brand-models/models/' + brandId,
                     type: 'GET',
                     success: function(data) {
                         var options = '<option value="">Select Model</option>';
@@ -468,13 +458,11 @@
 @if (Session::has('success'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: true, // Set to true to show confirm button
-                confirmButtonText: 'Done', // Customize the button text
-                // timer: 1500
-            });
-        });
+                    Swal.fire({
+                        icon: 'success',
+                        title: '{{ Session::get('success') }}',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Done',
+                    });
     </script>
 @endif

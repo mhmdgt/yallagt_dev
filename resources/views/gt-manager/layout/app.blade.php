@@ -82,6 +82,7 @@
     <script src="{{ asset('gt_manager') }}/assets/js/dashboard.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/datepicker.js"></script>
     <script src="{{ asset('gt_manager') }}/assets/js/file-upload.js"></script>
+    <script src="{{ asset('gt_manager') }}/assets/js/formatNumber.js"></script>
 
     <!-- inject:js -->
     <script src="{{ asset('gt_manager') }}/assets/js/template.js"></script>

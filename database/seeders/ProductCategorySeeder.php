@@ -15,14 +15,7 @@ class ProductCategorySeeder extends Seeder
     public function run(): void
     {
         $ProductCategories = [
-            ['en' => "Breaks", 'ar' => "فرامل"],
-            ['en' => "Car Care", 'ar' => "العناية بالسيارات"],
-            ['en' => "Engine Parts", 'ar' => "اجزاء المحرك"],
-            ['en' => "Filters", 'ar' => "الفلاتر"],
-            ['en' => "Lights", 'ar' => "أضواء"],
             ['en' => "Oils & Liquids", 'ar' => "الزيوت والسوائل"],
-            ['en' => "Suspension", 'ar' => "نظام التعليق"],
-            ['en' => "Tyres & Wheels", 'ar' => "الإطارات والعجلات"],
         ];
 
         foreach ($ProductCategories as $ProductCategory) {

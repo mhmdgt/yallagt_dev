@@ -16,13 +16,12 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->softDeletes();
+
+            // Autoloaded Stamps
+            $table->string('created_user_type')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->string('created_type')->nullable();
+            $table->string('updated_user_type')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
-            $table->string('updated_type')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->string('deleted_type')->nullable();
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 
 return [
 
-    'SaleCars' => 'Buy car',
+    'SaleCars' => 'Cars For Sale',
     'CarBrands' => 'Car Brands',
     'FeaturedCategories' => 'Featured Categories',
     'ProductShop' => 'Products Shop',
@@ -17,7 +17,7 @@ return [
     'sellYourCar' => 'Sell Car',
     'WithOneClick' => 'By One Click',
     'SeeMore' => 'See More',
-    '' => '',
+    'EGP' => 'EGP',
     '' => '',
     '' => '',
     '' => '',

@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            {{-- SKU / Part number / Price  --}}
+            {{-- SKU  --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
@@ -106,6 +106,18 @@
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
+                                    <label>Sku Name <span class="text-danger">(EN)</span></label>
+                                    <input type="text" class="form-control" name="sku_name_en" value="">
+                                    <x-errors.display-validation-error property="sku_name_en" />
+                                </div>
+                                <div class="col">
+                                    <label>Sku Name <span class="text-danger">(AR)</span></label>
+                                    <input type="text" class="form-control" name="sku_name_ar" value="">
+                                    <x-errors.display-validation-error property="sku_name_ar" />
+                                </div>
+                            </div>
+                            <div class="form-group row pt-0">
+                                <div class="col">
                                     <label>Part Number / OEM</label>
                                     <input type="text" class="form-control" autocomplete="off" name="part_number" value="">
                                     <x-errors.display-validation-error property="part_number" />
@@ -114,10 +126,17 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputNumber1">Main price</label>
-                                    <input type="main_price" class="form-control" name="main_price" value="">
+                                    <input type="text" class="form-control" name="main_price" oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
+                            <div class="form-group pt-0">
+                                <label>Sku Images</label>
+                                <input type="file" class="filepond" name="image" multiple credits="false">
+                                <x-errors.display-validation-error property="image" />
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -141,21 +160,6 @@
                                     <textarea class="form-control" name="description_ar" id="tinymceExample2" rows="10"></textarea>
                                     <x-errors.display-validation-error property="description_ar" />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Media --}}
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <label class="card-title mt-2"><i class="bi bi-plus-circle"></i> Media</label>
-                            <div class="form-group pt-0">
-                                <label>Model Images</label>
-                                <input type="file" class="filepond" name="image" multiple credits="false">
-                                <x-errors.display-validation-error property="image" />
                             </div>
                             <div class="form-group pt-0">
                                 <label>PDF Brochure</label>
@@ -298,8 +302,8 @@
         // ---------------------------------------- Filepond
         // Plugins
         FilePond.registerPlugin(FilePondPluginImagePreview);
-        FilePond.registerPlugin(FilePondPluginImageTransform);
-        FilePond.registerPlugin(FilePondPluginFileMetadata);
+        // FilePond.registerPlugin(FilePondPluginImageTransform);
+        // FilePond.registerPlugin(FilePondPluginFileMetadata);
         // Vars
         const inputElement = document.querySelector('input[type="file"]');
         const pond = FilePond.create(inputElement);
@@ -315,9 +319,9 @@
                 }
             },
             // Plugin Services
-            imageTransformOutputStripImageHead: true,
-            imageTransformCanvasMemoryLimit: 50000000,
-            imageTransformOutputQuality: 80,
+            // imageTransformOutputStripImageHead: true,
+            // imageTransformCanvasMemoryLimit: 50000000,
+            // imageTransformOutputQuality: 100,
         });
         // ---------------------------------------- SubCategories
         $(document).ready(function() {
