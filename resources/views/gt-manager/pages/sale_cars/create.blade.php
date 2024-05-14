@@ -173,8 +173,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
-                                    <input type="text" class="form-control" name="price" placeholder="100,000,000"
-                                        oninput="formatNumber(this)">
+                                    <input type="number" class="form-control" name="price">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>

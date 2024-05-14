@@ -13,10 +13,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Admin::create([
-            'name' => 'Admin',
-            'username' => 'Admin',
-            'phone' => '0111',
-            'email' => 'admin@gt.com',
+            'name' => 'Yallagt',
+            'username' => 'yallagt',
+            'phone' => '01110120316',
+            'email' => 'support@yallagt.com',
             'password'=> Hash::make('0111')
         ]);
     }

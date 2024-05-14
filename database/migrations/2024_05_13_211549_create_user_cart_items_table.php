@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('user_cart_items', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_cart_id')->references('id')->on('user_carts')->cascadeOnDelete();
             $table->foreignId('product_sku_id')->references('id')->on('product_skus')->cascadeOnDelete();
             $table->string('sku');
+
+            // $table->integer('cart_price');
             $table->integer('qty')->defult(1);
+
             $table->timestamps();
         });
     }

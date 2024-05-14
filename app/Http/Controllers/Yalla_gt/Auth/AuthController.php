@@ -15,13 +15,23 @@ class AuthController extends Controller
     // -------------------- New Method -------------------- //
     function register(RegisterRequest $request){
 
-        $validatedData = $request->validated();
-        $validatedData['password'] =Hash::make($validatedData['password']);
-        $user = User::create($validatedData);
+        $randomNumbers = uniqueRandEight();
+        $username = implode('-', [$request->name , $randomNumbers]);
+        $username = strtolower($username);
+        $username = str_replace(' ', '-', $username);
+
+        $user = User::create([
+            "name" => $request->name,
+            "username" => $username,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "password" => $request['password'] =Hash::make($request['password']),
+        ]);
+
+
 
         // dd($user->id);
         Auth::loginUsingId($user->id);
-
         return redirect('/')->with('success', 'Registration successful! You can now login.');
     }
     // -------------------- New Method -------------------- //
@@ -31,7 +41,7 @@ class AuthController extends Controller
         // Attempt to authenticate with email or phone
         if (
             Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
-            // Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]) ||
+            Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]) ||
             Auth::attempt(['phone' => $credentials['username'], 'password' => $credentials['password']])
         ) {
             return back();

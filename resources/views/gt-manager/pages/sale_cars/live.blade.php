@@ -46,8 +46,9 @@
                                 {{ $car->year }}
                             </h4>
 
-                            <h4 class="card-text text-primary">
-                                <span class="h5 text-dark">EGP: </span>{{ $car->price }}
+                            <h4 class="card-text text-primary mt-1">
+                                <span class="h5 text-dark">EGP: </span>
+                                {{ number_format($car->price, 0, ',', ',') }}
                             </h4>
 
                             <div class="card-text mt-4">

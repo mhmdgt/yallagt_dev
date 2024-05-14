@@ -80,7 +80,7 @@
                                     <div class="p-2">
                                         <label>
                                             <span>EGP
-                                            </span>{{ number_format((float) preg_replace('/[^0-9.]/', '', $category->price), 2) }}
+                                            </span>{{ number_format($category->price, 0, ',', ',') }}
                                             </p>
                                         </label>
                                     </div>

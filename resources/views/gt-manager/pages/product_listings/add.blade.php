@@ -53,7 +53,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Selling Price</label>
-                                    <input type="text" class="form-control" name="selling_price" oninput="formatNumber(this)">
+                                    <input type="number" class="form-control" autocomplete="off" name="selling_price">
                                     <x-errors.display-validation-error property="selling_price" />
                                 </div>
                             </div>

@@ -107,11 +107,11 @@
                 <div class="col-12 ">
                     <div class="carsforsaleContainer owl-carousel">
                         @foreach ($cars as $car)
-                            <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
+                            <div class="card cars_for_sale_home_layout">
                                 <div class="card-img-container">
                                     @foreach ($car->images as $image)
                                         @if ($image->main_img)
-                                            <a href="#">
+                                            <a href="{{route('sale-car.show' , $car->slug)}}">
                                                 <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
                                                     class="card-img-top" alt="No_IMG">
                                             </a>
@@ -131,10 +131,10 @@
 
                                     </a>
                                     <h3 class="card-text-h3 mt-3">
-                                        <span class="h5 text-dark">{{ __('home_page.EGP') }}
-                                        </span>{{ $car->price }}
+                                        <span class="h5 text-dark">{{ __('home_page.EGP') }}</span>
+                                        {{ number_format($car->price, 0, ',', ',') }}
                                     </h3>
-                                    <div class="card-text-4 mt-2 mb-2" dir="auto">
+                                    <div class="card-text-4 mt-3 mb-2" dir="auto">
                                         <i class="bi bi-geo-alt"></i> <span
                                             class="h6">{{ $governorates[$car->governorate] }}</span>
                                     </div>
@@ -296,65 +296,74 @@
     <!-- Products Shop -->
     <section class="new-section product_area product_deals">
         <div class="container-fluid">
+            <div class="row">
 
-            <div class="col-12">
-                <div class="section_title section_title_border en-style">
-                    <h2>{{ __('home_page.ProductShop') }}</h2>
-                    <hr>
+                <div class="col-12">
+                    <div class="section_title section_title_border en-style">
+                        <h2>{{ __('home_page.ProductShop') }}</h2>
+                        <hr>
+                    </div>
                 </div>
-            </div>
 
-            <div class="product_container">
-                <div class="row product_carousel no-gutters">
-                    @foreach ($product_listings as $product_listing)
-                        @foreach ($product_listing->skus as $sku)
-                            <div class="col-md-20 col-6 product_item">
-                                <div class="single_product">
-                                    <div class="product_card">
-                                        <div class="container-fluid product_thumb">
-                                            @foreach ($sku->images as $image)
-                                                @if ($image->main_img)
-                                                    <img src="{{ display_img($image->name) }}" alt="Main Image">
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                        <div class="product_card_content">
-                                            <div class="mt-4">
-                                                <h6 class="brand fw-700">Brand:
-                                                    <span>{{ $sku->product->manufacturer->name }}</span>
-                                                </h6>
-                                                <a
-                                                    href="{{ route('product_item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
-                                                    <h4 class="product_name">{{ $sku->product->name }}</h4>
-                                                </a>
+                <div class="product_container">
+                    <div class="row product_carousel no-gutters">
+                        @foreach ($product_listings as $product_listing)
+                            @foreach ($product_listing->skus as $sku)
+                                <div class="col-md-20 col-6 product_item">
+                                    <div class="single_product">
+                                        <div class="product_card">
+                                            <div class="container-fluid product_thumb">
+                                                @foreach ($sku->images as $image)
+                                                    @if ($image->main_img)
+                                                        <img src="{{ display_img($image->name) }}" alt="Main Image">
+                                                    @endif
+                                                @endforeach
                                             </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="p-0">
-                                                    <div>
-                                                        <span>EGP:</span>
-                                                        <span class="product_card_price" style="color: #F25E3D;">
-                                                            {{ $product_listing->selling_price }}
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <i class="bi bi-bookmark-check"></i>
-                                                        <span class="product_card_precentage">HOT</span>
-                                                        <span> DEALS </span>
-                                                    </div>
+                                            <div class="product_card_content">
+                                                <div class="mt-4">
+                                                    <h6 class="brand fw-700">Brand:
+                                                        <span>{{ $sku->product->manufacturer->name }}</span>
+                                                    </h6>
+                                                    <a
+                                                        href="{{ route('product_item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                        <h4 class="product_name">{{ $sku->product->name }}</h4>
+                                                    </a>
                                                 </div>
-                                                <div class="p-0 product_card_cart">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="p-0">
+                                                        <div>
+                                                            <span>EGP:</span>
+                                                            <span class="product_card_price" style="color: #F25E3D;">
+                                                                {{ number_format($product_listing->selling_price, 0, ',', ',') }}
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <i class="bi bi-bookmark-check"></i>
+                                                            <span class="product_card_precentage">HOT</span>
+                                                            <span> DEALS </span>
+                                                        </div>
+                                                    </div>
+                                                    {{-- <div class="p-0 product_card_cart">
                                                     <img src="yalla_gt/media/cart/cart_icon.png">
+                                                </div> --}}
+                                                    <div class="p-0 product_card_cart">
+                                                        <a
+                                                            href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
+                                                            <img src="yalla_gt/media/cart/cart_icon.png">
+                                                        </a>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         @endforeach
-                    @endforeach
+                    </div>
+
+
                 </div>
-
-
             </div>
         </div>
     </section>

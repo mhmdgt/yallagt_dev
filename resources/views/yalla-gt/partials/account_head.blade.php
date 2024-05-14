@@ -1,27 +1,26 @@
 {{-- Main Profile --}}
 <div class="row ar-style">
     <div class="col-md-12 grid-margin stretch-card">
-        <a href="{{ route('user.profile') }}" class="card-link">
-            <div class="card">
-                <div class="profile-card">
-                    <div class=" align-items-center text-dark">
-                        <div class="col-12 col-md-9 row">
-                            <img class="image-in-box ml-4 mr-2" src="{{ asset('yalla_gt/media/no_image.jpg') }}"
-                                alt="No Image">
-                            {{-- <i class='bx bxs-user-account' style='color:#1db954; font-size: 40px;'></i> --}}
-                            <div class="profile-info">
+        <div class="card">
+            <div class="profile-card">
+                <div class=" align-items-center text-dark">
+                    <div class="col-12 col-md-9 row">
+                        <img class="image-in-box ml-4 mr-2" src="{{ asset('yalla_gt/media/no_image.jpg') }}"
+                            alt="No Image">
+                        <div class="d-flex profile-info">
+                            <a href="{{ route('user.profile') }}" class="card-link text-dark">
                                 <span class="profile-name">{{ __('profile.ahlan') }}
                                     {{ getFirstName(user_data()->name) }}</span>
                                 <span class="profile-email">{{ user_data()->email }}</span>
-                            </div>
-
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 </div>
+
 {{-- Shortcuts --}}
 <div class="row mt-2 ar-style">
     <div class="col-6 col-sm-6 col-md-6 col-lg-3 grid-margin stretch-card mb-2">

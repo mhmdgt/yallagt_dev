@@ -29,8 +29,8 @@
                                     <x-errors.display-validation-error property="name" />
                                 </div>
                                 <div class="col">
-                                    <label for="price">Price</label>
-                                    <input type="text" class="form-control" name="price" oninput="formatNumber(this)"
+                                    <label>Price</label>
+                                    <input type="number" class="form-control" name="price"
                                     value="{{ old('price') }}">
                                     <x-errors.display-validation-error property="price" />
                                 </div>

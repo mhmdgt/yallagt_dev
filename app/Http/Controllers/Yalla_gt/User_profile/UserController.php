@@ -10,13 +10,21 @@ use App\Models\CarBrandModel;
 use App\Models\SaleCondition;
 use App\Models\TransmissionType;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    // -------------------- Method -------------------- //
     public function index()
     {
         return view('yalla-gt.pages.profile.index');
+    }
+    // -------------------- Method -------------------- //
+    public function editProfile($username)
+    {
+        $userData = User::where('username', '=', $username)->get()->first();
+        return view('yalla-gt.pages.profile.edit', compact('userData'));
     }
     // -------------------- Method -------------------- //
     public function ads()
@@ -26,7 +34,7 @@ class UserController extends Controller
 
         // Retrieve the sale car ads related to the authenticated user
         $cars = SaleCar::where('created_by', $userId)
-            ->where('created_type', 'user')
+            ->where('created_user_type', 'user')
             ->latest()
             ->get();
 

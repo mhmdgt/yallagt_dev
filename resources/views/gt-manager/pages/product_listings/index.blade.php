@@ -6,7 +6,8 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item">Storehouses</li>
+                    <li class="breadcrumb-item"><a href="{{route('products.index')}}">Products</a></li>
+                    <li class="breadcrumb-item">Product Listings</li>
                 </ol>
                 <a href="{{ route('product-listings.add') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
