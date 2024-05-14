@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
+use App\Http\Controllers\Yalla_gt\Cart\UserCartController;
 
-
-
+Route::get('ppp/{product_sku}',[UserCartController::class,'store']
+)->name('user-carts.store');
 require __DIR__ . '/gt_manager.php';
 require __DIR__ . '/yalla_gt.php';
 

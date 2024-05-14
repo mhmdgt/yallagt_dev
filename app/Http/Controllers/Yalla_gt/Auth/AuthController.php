@@ -30,24 +30,38 @@ class AuthController extends Controller
     public function Login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        if (
-            Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
-            Auth::attempt(['phone' => $credentials['username'], 'password' => $credentials['password']])
-        ) {
-            // Authentication passed
-            return response()->json([
-                'success' => true,
-                'message' => 'Login successful!',
-                'redirect' =>route('yalla-index'), // Redirect URL upon successful login
-            ]);
-        } else {
-            // Authentication failed
+    
+        // Check if username (email or phone) exists
+        $user = User::where('email', $credentials['username'])
+                    ->orWhere('phone', $credentials['username'])
+                    ->first();
+    
+        if (!$user) {
             return response()->json([
                 'success' => false,
-                'message' => 'Wrong credentials',
-            ], 422); // Use appropriate HTTP status code for unprocessable entity
+                'username_error' => 'Username not found',
+            ], 422);
         }
+    
+        // Check if the password is correct
+        if (!Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'success' => false,
+              
+                'password_error' => 'Incorrect password', // Pass password error message
+            ], 422);
+        }
+    
+        // Authentication passed
+        Auth::login($user);
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful!',
+            'redirect' => route('yalla-index'),
+        ]);
     }
+    
     // -------------------- New Method -------------------- //
     public function logout(Request $request)
     {

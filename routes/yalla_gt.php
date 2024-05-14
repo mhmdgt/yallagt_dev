@@ -60,7 +60,7 @@ Route::group(
     });
 
 
-    Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
-        Route::get('/{product_sku }', 'store')->name('store');
+    // Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
+    //     Route::get('cc/{product_sku }', 'store')->name('store');
       
-    });
+    // });

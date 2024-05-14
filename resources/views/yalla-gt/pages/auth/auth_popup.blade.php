@@ -100,6 +100,7 @@
             // Hide all error messages
             $('.text-danger').addClass('d-none').text('');
         });
+
         $('.signup_form').submit(function(event) {
             event.preventDefault(); // Prevent default form submission
 
@@ -142,51 +143,49 @@
             });
         });
 
+// #############################login###########################################333
 
-        $('.login_form').submit(function(event) {
-    event.preventDefault(); // Prevent default form submission
 
-    var loginForm = $(this);
-    var LoginFormData = loginForm.serialize(); // Serialize form data
 
-    // Determine the action URL based on the form
-    var loginActionUrl = loginForm.attr('action');
+    $('.login_form').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-    // Reset error messages
-    loginForm.find('.text-danger').addClass('d-none').text('');
+        var loginForm = $(this);
+        var loginFormData = loginForm.serialize(); // Serialize form data
 
-    // Send AJAX request
-    $.ajax({
-        type: loginForm.attr('method'),
-        url: loginActionUrl,
-        data: LoginFormData,
-        success: function(response) {
-            console.log(response);
-           
-            if (response.success) {
-                // Display success message
-                alert(response.message);
-                // Redirect
-                window.location.href = response.redirect;
-            } else {
+        // Determine the action URL based on the form
+        var loginActionUrl = loginForm.attr('action');
+
+        // Reset error messages
+        loginForm.find('.text-danger').addClass('d-none').text('');
+
+        // Send AJAX request
+        $.ajax({
+            type: loginForm.attr('method'),
+            url: loginActionUrl,
+            data: loginFormData,
+            success: function(response) {
+                if (response.success) {
+                    // Redirect
+                    window.location.href = response.redirect;
+                } 
+            },
+            error: function(xhr, status, error) {
                 // Display error message
-                alert(response.message); // You can replace this with any UI element you prefer
-                $('#login-username-error').removeClass('d-none').text(response.message);
+                $('#login-username-error').removeClass('d-none').text(xhr.responseJSON.username_error);
+                $('#login-password-error').removeClass('d-none').text(xhr.responseJSON.password_error);
+                var errors = xhr.responseJSON.errors; // Get validation errors
+                // Loop through each error
+                $.each(errors, function(key, value) {
+                    // Find the corresponding error message element by ID and display the error message
+                    $('#login-' + key + '-error').removeClass('d-none').text(value[0]);
+                });
             }
-        },
-        error: function(xhr, status, error) {
-          
-            $('#login-username-error').removeClass('d-none').text(xhr.responseJSON.message);
-            var errors = xhr.responseJSON.errors; // Get validation errors
-            // Loop through each error
-            $.each(errors, function(key, value) {
-                console.log(key, value);
-                // Find the corresponding error message element by ID and display the error message
-                $('#login-' + key + '-error').removeClass('d-none').text(value[0]);
-            });
-        }
+        });
     });
-});
+
+  
+
 
     });
 </script>

@@ -16,7 +16,7 @@ class UserCartController extends Controller
     {
 
         dd($product_sku);
-        $sku = ProductSku::WhereSKu($product_sku)->first();
+        $sku = ProductSku::WhereSku($product_sku)->first();
 
         $userCart = UserCart::whereUserId(auth()->id())->first();
         if ($userCart) {
