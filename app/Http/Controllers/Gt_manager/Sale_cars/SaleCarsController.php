@@ -75,28 +75,6 @@ class SaleCarsController extends Controller
         }
     }
     // -------------------- Method -------------------- //
-    public function gtCreate()
-    {
-        $brands = CarBrand::orderBy('name')->get();
-        $carBrand = new CarBrand();
-        $models = $carBrand->getAllModels();
-        $shapes = BodyShape::orderBy('name')->get();
-        $colors = Color::orderBy('name')->get();
-        $trans_types = TransmissionType::orderBy('name')->get();
-        $FuelTypes = FuelType::orderBy('name')->get();
-        $EngineAspirations = EngineAspiration::orderBy('name')->get();
-        $EngineKMS = EngineKm::orderBy('name')->get();
-        $engineCCS = EngineCc::orderBy('name')->get();
-        $governorates = Governorate::orderBy('name')->get();
-        $features = Feature::orderBy('name')->get();
-        $conditions = SaleCondition::orderBy('name')->get();
-        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
-
-        return view('yalla-gt.pages.sale_cars.create',
-            compact('brands', 'models',
-                'conditions', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'paymentMethods', 'governorates'));
-    }
-    // -------------------- Method -------------------- //
     public function create()
     {
         $brands = CarBrand::orderBy('name')->get();
@@ -118,29 +96,6 @@ class SaleCarsController extends Controller
             compact('brands', 'models',
                 'conditions', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'paymentMethods', 'governorates'));
 
-    }
-    // -------------------- Method -------------------- //
-    public function gtEdit($slug)
-    {
-
-        $car = SaleCar::getByTranslatedSlug($slug)->first();
-
-        // dd($car);
-        $brands = CarBrand::orderBy('name')->get();
-        $carBrand = new CarBrand();
-        $models = $carBrand->getAllModels();
-        $shapes = BodyShape::orderBy('name')->get();
-        $colors = Color::orderBy('name')->get();
-        $trans_types = TransmissionType::orderBy('name')->get();
-        $FuelTypes = FuelType::orderBy('name')->get();
-        $EngineAspirations = EngineAspiration::orderBy('name')->get();
-        $EngineKMS = EngineKm::orderBy('name')->get();
-        $engineCCS = EngineCc::orderBy('name')->get();
-        $governorates = Governorate::orderBy('name')->get();
-        $features = Feature::orderBy('name')->get();
-
-        return view('yalla-gt.pages.sale_cars.edit',
-            compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function edit($slug)
@@ -491,5 +446,71 @@ class SaleCarsController extends Controller
         Session::flash('success', 'Deleted Successfully');
         return redirect()->route('sale-car.live');
     }
+
+
+
+    // -------------------- YALLA GT / Create -------------------- //
+    public function gtCreate()
+    {
+        $brands = CarBrand::orderBy('name')->get();
+        $carBrand = new CarBrand();
+        $models = $carBrand->getAllModels();
+        $shapes = BodyShape::orderBy('name')->get();
+        $colors = Color::orderBy('name')->get();
+        $trans_types = TransmissionType::orderBy('name')->get();
+        $FuelTypes = FuelType::orderBy('name')->get();
+        $EngineAspirations = EngineAspiration::orderBy('name')->get();
+        $EngineKMS = EngineKm::orderBy('name')->get();
+        $engineCCS = EngineCc::orderBy('name')->get();
+        $governorates = Governorate::orderBy('name')->get();
+        $features = Feature::orderBy('name')->get();
+        $conditions = SaleCondition::orderBy('name')->get();
+        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
+
+        return view('yalla-gt.pages.sale_cars.create',
+            compact('brands', 'models',
+                'conditions', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'paymentMethods', 'governorates'));
+    }
+    // -------------------- YALLA GT / Edit -------------------- //
+    public function gtEdit($slug)
+    {
+
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+
+        // dd($car);
+        $brands = CarBrand::orderBy('name')->get();
+        $carBrand = new CarBrand();
+        $models = $carBrand->getAllModels();
+        $shapes = BodyShape::orderBy('name')->get();
+        $colors = Color::orderBy('name')->get();
+        $trans_types = TransmissionType::orderBy('name')->get();
+        $FuelTypes = FuelType::orderBy('name')->get();
+        $EngineAspirations = EngineAspiration::orderBy('name')->get();
+        $EngineKMS = EngineKm::orderBy('name')->get();
+        $engineCCS = EngineCc::orderBy('name')->get();
+        $governorates = Governorate::orderBy('name')->get();
+        $features = Feature::orderBy('name')->get();
+
+        return view('yalla-gt.pages.sale_cars.edit',
+            compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+    }
+    // -------------------- YALLA GT / Show -------------------- //
+    public function gtShow($slug)
+    {
+        $car = SaleCar::getByTranslatedSlug($slug)->first();
+        // dd($car);
+
+        return view('yalla-gt.pages.sale_cars.show', compact('car'));
+
+    }
+
+
+
+
+
+
+
+
+
 
 }

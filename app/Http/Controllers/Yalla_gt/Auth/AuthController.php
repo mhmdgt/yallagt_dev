@@ -15,14 +15,38 @@ class AuthController extends Controller
     // -------------------- New Method -------------------- //
     function register(RegisterRequest $request){
 
-        $validatedData = $request->validated();
-        $validatedData['password'] =Hash::make($validatedData['password']);
-        $user = User::create($validatedData);
+
+        // $validatedData = $request->validated();
+        // $validatedData['password'] =Hash::make($validatedData['password']);
+        // $user = User::create($validatedData);
+        // dd($user->id);
+       
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Registration successful! You can now login.',
+        //     'redirect' => route('yalla-index'),
+        // ]);
+
+        $randomNumbers = uniqueRandEight();
+        $username = implode('-', [$request->name , $randomNumbers]);
+        $username = strtolower($username);
+        $username = str_replace(' ', '-', $username);
+
+        $user = User::create([
+            "name" => $request->name,
+            "username" => $username,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "password" => $request['password'] =Hash::make($request['password']),
+        ]);
+
+
+
         // dd($user->id);
         Auth::loginUsingId($user->id);
         return response()->json([
             'success' => true,
-            'message' => 'Registration successful! You can now login.',
+            'message' => 'Register successful!',
             'redirect' => route('yalla-index'),
         ]);
     }
@@ -34,6 +58,7 @@ class AuthController extends Controller
         // Check if username (email or phone) exists
         $user = User::where('email', $credentials['username'])
                     ->orWhere('phone', $credentials['username'])
+                    ->orWhere('username', $credentials['username'])
                     ->first();
     
         if (!$user) {
@@ -61,6 +86,7 @@ class AuthController extends Controller
             'redirect' => route('yalla-index'),
         ]);
     }
+    
     
     // -------------------- New Method -------------------- //
     public function logout(Request $request)

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->year('year');
 
             $table->string('payment');
-            $table->string('price');
+            $table->integer('price');
 
             $table->string('condition');
             $table->string('bodyShape');

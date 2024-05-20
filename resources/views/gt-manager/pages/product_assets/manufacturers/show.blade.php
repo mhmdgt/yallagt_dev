@@ -62,6 +62,7 @@
                             method="POST" enctype="multipart/form-data" id="car-brand">
                             @csrf
                             @method('PUT')
+                            <input type="text" name="id" value="{{ $manufacturer->id }}" hidden>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
                                 <input type="text" class="form-control" name="name_en" autocomplete="off"

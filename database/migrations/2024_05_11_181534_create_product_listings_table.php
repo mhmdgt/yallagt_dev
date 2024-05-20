@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
+
+            $table->string('storehouse_id');
             $table->string('manufacturer_id');
             $table->string('product_id');
             $table->string('sku');
-            $table->string('qty');
-            $table->string('selling_price');
-            $table->string('storehouse_id');
+
+            $table->integer('qty');
+            $table->integer('selling_price');
+
             $table->enum('status', ['active', 'hidden'])->default('active');
 
             // Autoloaded Stamps

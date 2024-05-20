@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('stock_car_categories', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
-            $table->string('price');
+            $table->integer('price');
+
             $table->enum('status' , ['active' , 'hidden'] )->default('active');
+
             $table->integer('rims_size')->nullable();
             $table->integer('number_of_seat');
             $table->integer('trunk_size')->nullable();
@@ -34,7 +38,6 @@ return new class extends Migration
             $table->foreignId('engine_aspiration_id')->nullable()->references('id')->on('engine_aspirations')->onDelete('set null');
             $table->foreignId('engine_cc_id')->nullable()->references('id')->on('engine_ccs')->onDelete('set null');
             $table->foreignId('engine_km_id')->nullable()->references('id')->on('engine_kms')->onDelete('set null');
-            $table->foreignId('stock_car_id')->references('id')->on('stock_cars')->cascadeOnDelete();
 
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminSeeder::class,
+            UserSeeder::class,
             CarBrandSeeder::class,
             CarBrandModelSeeder::class,
             BodyShapeSeeder::class,

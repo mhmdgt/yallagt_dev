@@ -41,6 +41,14 @@ function generateUniqueId() {
     return $id;
 }
 // -------------------- Display images -------------------- //
+function uniqueRandEight() {
+    $randomNumbers = '';
+    for ($i = 0; $i < 8; $i++) {
+        $randomNumbers .= random_int(0, 9); // Random number between 0 and 9
+    }
+    return $randomNumbers;
+}
+// -------------------- Display images -------------------- //
 if (!function_exists('callButton')) {
     function callButton($phoneNumber)
     {

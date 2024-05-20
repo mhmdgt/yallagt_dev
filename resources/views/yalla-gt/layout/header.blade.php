@@ -7,7 +7,7 @@
                         <a href="{{ route('yalla-index') }}"><img src="{{ asset('yalla_gt') }}/media/logo/logo.png"
                                 alt=""></a>
                     </div>
-                    <div class="search_container">
+                    {{-- <div class="search_container">
                         <form action="#">
                             <div class="search_box">
                                 <input placeholder="{{ __('header.search') }}..." type="text">
@@ -16,7 +16,7 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <div class="header_account_area">
                         <div class="header_account_list  mini_cart_wrapper d-flex align-items-center">
                             @auth

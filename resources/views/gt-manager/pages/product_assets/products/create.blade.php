@@ -125,8 +125,8 @@
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label for="exampleInputNumber1">Main price</label>
-                                    <input type="text" class="form-control" name="main_price" oninput="formatNumber(this)">
+                                    <label>Main price</label>
+                                    <input type="number" class="form-control" autocomplete="off" name="main_price">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>

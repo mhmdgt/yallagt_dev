@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('sku_name')->unique();
             $table->string('part_number')->nullable();
-            $table->string('main_price');
+            $table->integer('main_price');
             $table->enum('status', ['active', 'hidden'])->default('active');
 
             // Autoloaded Stamps

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('user_carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->integer('total_qty');
-            $table->string('total_price');
+             
+            $table->integer('total_qty')->default(1);
+            $table->integer('total_price');
+
             $table->timestamps();
         });
     }
