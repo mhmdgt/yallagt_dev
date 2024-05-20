@@ -221,3 +221,12 @@
 .custom-width-decline {
     width: 20%;
 }
+
+.car-title-line-space {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 1.6; /* Adjust line height as needed */
+    height: 3em; /* 2 * line-height */
+}

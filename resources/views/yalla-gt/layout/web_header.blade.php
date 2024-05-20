@@ -6,9 +6,9 @@
                     <nav>
                         <ul class="align-items-center">
                             <li><a href="{{ route('yalla-index') }}"><img src="{{ asset('yalla_gt') }}/media/icon/home.png" alt=""></a></li>
-                            <li><a href="#">{{ __('header.stock_cars') }}</a></li>
-                            <li><a href="#">{{ __('header.sale_car') }}</a></li>
-                            <li><a href="#">{{ __('header.product_shop') }}</a></li>
+                            <li><a href="{{route('stock-car.gtIndex')}}">{{ __('header.stock_cars') }}</a></li>
+                            <li><a href="{{route('sale-car.gtIndex')}}">{{ __('header.sale_car') }}</a></li>
+                            <li><a href="{{route('product.manufacturers-index')}}">{{ __('header.product_shop') }}</a></li>
                             {{-- <li><a class="" href="#">{{ __('header.oils') }}
                                     <i class='bx bxs-down-arrow' style='color:#ffffff'></i>
                                 </a>
@@ -31,9 +31,9 @@
                                     </ul>
                                 </ul>
                             </li> --}}
-                            <li><a href="#">{{ __('header.CarNews') }}</a></li>
+                            <li><a href="{{route('blog-gtIndex')}}">{{ __('header.CarNews') }}</a></li>
                             <li><a href="{{route('about_us')}}">{{ __('header.about_us') }}</a></li>
-                            <li><a href="#">{{ __('header.contact_us') }}</a></li>
+                            <li><a href="{{route('contact_us')}}">{{ __('header.contact_us') }}</a></li>
                         </ul>
                     </nav>
                 </div>

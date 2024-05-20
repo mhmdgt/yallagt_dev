@@ -2,52 +2,76 @@
 
 namespace App\Http\Controllers\Yalla_gt\Auth;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\YallaGT\Auth\LoginRequest;
 use App\Http\Requests\YallaGT\Auth\RegisterRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     // -------------------- New Method -------------------- //
-    function register(RegisterRequest $request){
-
+    public function register(RegisterRequest $request)
+    {
         $randomNumbers = uniqueRandEight();
-        $username = implode('-', [$request->name , $randomNumbers]);
+        $username = implode('_', [$request->name, $randomNumbers]);
         $username = strtolower($username);
-        $username = str_replace(' ', '-', $username);
+        $username = str_replace(' ', '_', $username);
 
         $user = User::create([
             "name" => $request->name,
             "username" => $username,
             "phone" => $request->phone,
             "email" => $request->email,
-            "password" => $request['password'] =Hash::make($request['password']),
+            "password" => Hash::make($request->password),
         ]);
 
-
-
-        // dd($user->id);
         Auth::loginUsingId($user->id);
-        return redirect('/')->with('success', 'Registration successful! You can now login.');
+
+        // Check if the request is an AJAX request
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'redirect' => url('/')]);
+        }
+
+        // return redirect('/')->with('success', 'Registration successful! You can now login.');
     }
     // -------------------- New Method -------------------- //
     public function Login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        // Attempt to authenticate with email or phone
-        if (
-            Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
-            Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]) ||
-            Auth::attempt(['phone' => $credentials['username'], 'password' => $credentials['password']])
-        ) {
-            return back();
+
+        // Check if username (email or phone) exists
+        $user = User::where('email', $credentials['username'])
+            ->orWhere('phone', $credentials['username'])
+            ->orWhere('username', $credentials['username'])
+            ->first();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'username_error' => 'Username not found',
+            ], 422);
         }
-        session()->flash('error', 'Wrong credentials');
-        return back();
+
+        // Check if the password is correct
+        if (!Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'success' => false,
+
+                'password_error' => 'Incorrect password', // Pass password error message
+            ], 422);
+        }
+
+        // Authentication passed
+        Auth::login($user);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful!',
+            'redirect' => route('yalla-index'),
+        ]);
     }
     // -------------------- New Method -------------------- //
     public function logout(Request $request)

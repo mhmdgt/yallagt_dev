@@ -175,7 +175,7 @@ class SaleCarsController extends Controller
         $condition_ar = $condition->getTranslation('name', 'ar');
         $selectedFeatures = $request->input('features', []);
         $featuresJson = json_encode($selectedFeatures);
-        $uniqueId = generateUniqueId();
+        $uniqueId = uniqueRandEight();
 
         // Replacing spaces with dashes
         $slug_en = implode('-', [$brand_en, $model_en, $trans_en, $year, $condition_en, $uniqueId]);
@@ -213,7 +213,7 @@ class SaleCarsController extends Controller
 
             SaleCarImages::create([
                 'car_id' => $car->id,
-                'name' => $temporaryImage->name,
+                'name' => 'media/sale_car_imgs/' . $temporaryImage->name,
                 'main_img' => $firstImage ? '1' : '0', // Set main_img to 1 for the first image, 0 for others
             ]);
 
@@ -224,7 +224,7 @@ class SaleCarsController extends Controller
         }
 
         Session::flash('success', 'Stored Successfully');
-        return redirect()->back();
+        return redirect()->route('yalla-index');
     }
     // -------------------- Method -------------------- //
     public function update(Request $request, $slug)
@@ -366,7 +366,7 @@ class SaleCarsController extends Controller
 
             SaleCarImages::create([
                 'car_id' => $car->id,
-                'name' => $temporaryImage->name,
+                'name' => 'media/sale_car_imgs/' . $temporaryImage->name,
                 'main_img' => "0",
             ]);
 
@@ -446,9 +446,6 @@ class SaleCarsController extends Controller
         Session::flash('success', 'Deleted Successfully');
         return redirect()->route('sale-car.live');
     }
-
-
-
     // -------------------- YALLA GT / Create -------------------- //
     public function gtCreate()
     {
@@ -495,22 +492,98 @@ class SaleCarsController extends Controller
             compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
     }
     // -------------------- YALLA GT / Show -------------------- //
-    public function gtShow($slug)
+    public function gtIndex()
     {
-        $car = SaleCar::getByTranslatedSlug($slug)->first();
-        // dd($car);
-
-        return view('yalla-gt.pages.sale_cars.show', compact('car'));
+        $brandsWithSaleCars = CarBrand::whereHas('models.saleCars')->get(['id', 'name', 'slug', 'logo']);
+        return view('yalla-gt.pages.sale_cars.index', compact('brandsWithSaleCars'));
 
     }
+    // -------------------- YALLA GT / Show -------------------- //
+    public function gtList($slug)
+    {
+        // Get brand data by translated slug
+        $brandData = CarBrand::getByTranslatedSlug($slug)->first();
 
+        // Get brand models with sale cars
+        $brandModels = CarBrandModel::whereHas('saleCars')
+            ->where('car_brand_id', $brandData->id)
+            ->with('saleCars')
+            ->get();
 
+        // Collect all transmission IDs from the sale cars
+        $transmissionIds = $brandModels->flatMap(function ($model) {
+            return $model->saleCars->pluck('transmission');
+        })->unique();
 
+        // Fetch transmission types based on collected IDs
+        $transmissions = TransmissionType::whereIn('id', $transmissionIds)
+            ->pluck('name', 'id');
 
+        // Collect all km IDs from the sale cars
+        $kmIds = $brandModels->flatMap(function ($model) {
+            return $model->saleCars->pluck('km');
+        })->unique();
 
+        // Fetch EngineKm values based on collected IDs
+        $engineKms = EngineKm::whereIn('id', $kmIds)->pluck('name', 'id');
 
+        // Collect all governorate IDs from the sale cars
+        $governorateIds = $brandModels->flatMap(function ($model) {
+            return $model->saleCars->pluck('governorate');
+        })->unique();
 
+        // Fetch governorate names based on collected IDs
+        $governorates = Governorate::whereIn('id', $governorateIds)->pluck('name', 'id');
 
+        // Collect all condition IDs from the sale cars
+        $conditionIds = $brandModels->flatMap(function ($model) {
+            return $model->saleCars->pluck('condition');
+        })->unique();
 
+        // Fetch SaleCondition names based on collected IDs
+        $conditions = SaleCondition::whereIn('id', $conditionIds)->pluck('name', 'id');
+
+        // Pass data to the view
+        return view('yalla-gt.pages.sale_cars.list',
+            compact('brandData', 'brandModels', 'transmissions', 'engineKms', 'governorates', 'conditions'
+            ));
+    }
+    // -------------------- YALLA GT / Show -------------------- //
+    public function gtShow($slug)
+    {
+        $car = SaleCar::getByTranslatedSlug($slug)->with('images')->first();
+        // dd($car->brand);
+        // $carImages = SaleCarImages::with('images')->get()->first();
+        $brand = CarBrand::Where('id', $car->brand)->get()->first();
+        $model = CarBrandModel::Where('id', $car->model)->get()->first();
+        $condition = SaleCondition::Where('id', $car->condition)->get()->first();
+        $BodyShape = BodyShape::Where('id', $car->bodyShape)->get()->first();
+        $color = Color::Where('id', $car->color)->get()->first();
+        $transmission = TransmissionType::Where('id', $car->transmission)->get()->first();
+        $fuelType = FuelType::Where('id', $car->fuelType)->get()->first();
+        $aspiration = EngineAspiration::Where('id', $car->aspiration)->get()->first();
+        $km = EngineKm::Where('id', $car->km)->get()->first();
+        $cc = EngineCc::Where('id', $car->cc)->get()->first();
+        $governorate = Governorate::Where('id', $car->governorate)->get()->first();
+
+        // Ensure $car->features is an array
+        $featureIds = is_string($car->features) ? json_decode($car->features, true) : $car->features;
+
+        // Validate that $featureIds is indeed an array and not null
+        if (!is_array($featureIds)) {
+            throw new \Exception('Invalid feature IDs format');
+        }
+
+        // Retrieve all feature records matching these IDs
+        $features = Feature::whereIn('id', $featureIds)->get();
+
+        // Debug output to check the retrieved features
+        // dd($features);
+
+        return view('yalla-gt.pages.sale_cars.show',
+            compact('car', 'brand', 'model', 'condition', 'BodyShape', 'color', 'transmission', 'fuelType', 'aspiration', 'cc',
+                'km', 'features', 'governorate'
+            ));
+    }
 
 }

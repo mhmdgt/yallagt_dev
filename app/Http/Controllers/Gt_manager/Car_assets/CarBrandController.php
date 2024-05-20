@@ -56,7 +56,8 @@ class CarBrandController extends Controller
         ]);
 
         Session::flash('success', 'Updated Successfully');
-        return redirect()->back();
+        return redirect()->route('car-brand.show', $carBrand->slug);
+
     }
     // -------------------- destroy -------------------- //
     public function destroy($slug)

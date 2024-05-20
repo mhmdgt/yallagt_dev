@@ -28,6 +28,11 @@ class User extends Authenticatable
         'type',
 
     ];
+    // -------------------- Method -------------------- //
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

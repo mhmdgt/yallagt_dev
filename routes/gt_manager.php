@@ -89,11 +89,11 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{slug}', 'show')->name('show');
         Route::get('/{slug}/create-model', 'create')->name('create');
-        Route::get('/{slug}/{modelSlug}/{stockYear}/{id}/edit-model', 'edit')->name('edit');
+        Route::get('/{slug}/edit-stock-car', 'edit')->name('edit');
         // Actions
         Route::post('/store', 'store')->name('store');
         Route::put('/{stockCar}', 'update')->name('update');
-        Route::delete('/{stockCar}/delete', 'delete')->name('delete');
+        Route::delete('/{slug}/destroy', 'destroy')->name('destroy');
         // FilePond
         Route::post('/tmp-upload', 'TmpUpload');
         Route::delete('/tmp-delete', 'TmpDelete');
@@ -102,7 +102,7 @@ Route::middleware('admin')->group(function () {
     Route::controller(StockCarCategoryController::class)->prefix('manage/stock-car')->name('model-category.')->group(function () {
         Route::get('/{stock_car_id}/create-category', 'create')->name('create');
         Route::post('/', 'store')->name('store');
-        Route::get('/{stockCarCategory}/edit-category', 'edit')->name('edit');
+        Route::get('/{carSlug}/{slug}/edit-category', 'edit')->name('edit');
         Route::put('/{stockCarCategory}/update', 'update')->name('update');
         Route::delete('/{stockCarCategory}', 'destroy')->name('destroy');
     });

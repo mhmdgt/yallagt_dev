@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class StorehousesController extends Controller
 {
+    // -------------------- Method -------------------- //
     public function index()
     {
         $storehouses = Storehouse::latest()->get();
@@ -18,12 +19,14 @@ class StorehousesController extends Controller
         return view('gt-manager.pages.storehouses.index',
             compact('storehouses' , 'governorates') );
     }
+    // -------------------- Method -------------------- //
     public function create()
     {
         $governorates = Governorate::orderBy('name')->get();
         return view('gt-manager.pages.storehouses.create',
         compact('governorates'));
     }
+    // -------------------- Method -------------------- //
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -42,7 +45,7 @@ class StorehousesController extends Controller
 
          // Create a new Storehouse instance with the validated data
          $storehouse = Storehouse::create([
-            'merchant' => 'Yallagt',
+            'seller_id' => 1,
             'name' => $validatedData['name'],
             'manager_name' => $validatedData['manager_name'],
             'phone' => $validatedData['phone'],

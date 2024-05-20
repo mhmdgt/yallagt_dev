@@ -46,9 +46,10 @@
     <link rel="stylesheet" href="{{ asset('yalla_gt') }}/assets/vendors/mobile_navbar/mobile_navbar.css" />
 
     <!-- owl carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> --}}
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/owl-carousel/owl-carousel.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"> --}}
+    <link rel="stylesheet" href="{{ asset('gt_manager') }}/assets/vendors/owl-carousel/owl-theme-default.min.css">
 
     <!-- icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -109,7 +110,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- owl carousel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> --}}
+    <script src="{{ asset('gt_manager') }}/assets/vendors/owl-carousel/owl-carousel.min.js"></script>
     <script src="{{ asset('yalla_gt') }}/assets/js/owl_carousel/custome.js"></script>
 
     <!-- Select2 -->
@@ -125,6 +127,7 @@
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
     @include('yalla-gt.partials.session_messages')
+
     @yield('script')
 
 </body>

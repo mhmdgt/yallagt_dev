@@ -121,8 +121,22 @@ class StockCarsController extends Controller
             $brochure = $brand['slug'] . '_' . $brandModelSlug . '_brochure' . '_' . $ModelYear . '.' . $request->brochure->extension();
             $request->brochure->storeAs('media/stock_car_brochures/' . $brochure);
         }
+        // Generate the slug
+        $brand_en = $brand->name;
+        $brand_ar = $brand->getTranslation('name', 'ar');
+        $model_en = $BrandModel->name;
+        $model_ar = $BrandModel->getTranslation('name', 'ar');
+        $year = $request->year;
+        $uniqueId = uniqueRandEight();
+        $slug_en = implode('-', [$brand_en, $model_en, $year, 'new', $uniqueId]);
+        $slug_en = str_replace(' ', '-', $slug_en);
+        $slug_ar = implode('-', ['جديد', $uniqueId, $brand_ar, $model_ar, $year]);
+        $slug_ar = str_replace(' ', '-', $slug_ar);
+        $slug = ["en" => $slug_en, "ar" => $slug_ar];
         // store stock car into the database
         $stock_car = StockCar::create([
+            'slug' => $slug,
+            'brand' => $brand->id,
             'car_brand_model_id' => $BrandModel->id,
             'year' => $request->year,
             'brochure' => $brochure,
@@ -135,7 +149,7 @@ class StockCarsController extends Controller
 
             StockCarImage::create([
                 'stock_car_id' => $stock_car->id,
-                'name' => $temporaryImage->name,
+                'name' => 'media/stock_cars_imgs/' . $temporaryImage->name,
                 'main_img' => $firstImage ? '1' : '0', // Set main_img to 1 for the first image, 0 for others
             ]);
 
@@ -149,16 +163,16 @@ class StockCarsController extends Controller
         return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- Edit Stock Car -------------------- //
-    public function edit($slug, $modelSlug, $stockYear, $id)
+    public function edit($slug)
     {
-
-        $brandData = CarBrand::getByTranslatedSlug($slug)->first();
-        $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
-        $stockCar = StockCar::with('images')->find($id);
-        $modelData = CarBrandModel::find($stockCar->car_brand_model_id);
+        $stockCar = StockCar::getByTranslatedSlug($slug)->with('images')->first();
         $images = $stockCar->images;
+        $brandData = CarBrand::Where('id', $stockCar->brand)->get()->first();
+        $brandModels = CarBrandModel::Where('car_brand_id', $brandData->id)->get();
+        $modelData = CarBrandModel::where('id', $stockCar->car_brand_model_id)->get()->first();
+
         return view('gt-manager.pages.stock_cars.stock_car_models.edit',
-            compact('brandData', 'modelData', 'modelSlug', 'brandModels', 'images', 'stockCar'));
+            compact('brandData', 'modelData', 'brandModels', 'images', 'stockCar'));
     }
     // -------------------- Update Stock Car -------------------- //
     public function update(Request $request, $stockCar)
@@ -276,7 +290,7 @@ class StockCarsController extends Controller
 
             StockCarImage::create([
                 'stock_car_id' => $request->stockCar,
-                'name' => $temporaryImage->name,
+                'name' => 'media/stock_cars_imgs/' . $temporaryImage->name,
                 'main_img' => "0",
             ]);
 
@@ -288,10 +302,67 @@ class StockCarsController extends Controller
         return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- Destroy Stock Car -------------------- //
-    public function delete(StockCar $stockCar)
+    public function destroy($slug)
     {
+        $stockCar = StockCar::getByTranslatedSlug($slug)->first();
+        $brandData = CarBrand::Where('id', $stockCar->brand)->get()->first();
         $stockCar->delete();
         Session::flash('success', 'Deleted Successfully');
-        return redirect()->back();
+        return redirect()->route('stock-car.show', $brandData->slug);
     }
+    // -------------------- GT-Functions -------------------- //
+    public function gtIndex()
+    {
+        $brandsWithStockCar = CarBrand::whereHas('models.stockCars')->get(['id', 'name', 'slug', 'logo']);
+        return view('yalla-gt.pages.stock_cars.index', compact('brandsWithStockCar'));
+
+    }
+    // -------------------- GT-Functions -------------------- //
+    public function gtList($slug)
+    {
+        // Fetch the brand data based on the slug
+        $brandData = CarBrand::getByTranslatedSlug($slug)->first();
+
+        // Fetch the brand models with stock cars that have categories
+        $brandModels = CarBrandModel::with([
+            'stockCars' => function ($query) {
+                $query->whereHas('stockCarCategories') // Ensure only stock cars with categories are retrieved
+                    ->with(['images', 'stockCarCategories' => function ($subQuery) {
+                        $subQuery->orderBy('price', 'asc');
+                    }]);
+            },
+        ])->where('car_brand_id', $brandData->id)->get();
+
+        // Filter out any models that have no stock cars
+        $brandModels = $brandModels->filter(function ($model) {
+            return $model->stockCars->isNotEmpty();
+        });
+
+        // Calculate min and max prices for each stock car
+        foreach ($brandModels as $brandModel) {
+            foreach ($brandModel->stockCars as $stockCar) {
+                $prices = $stockCar->stockCarCategories->pluck('price');
+                $stockCar->min_price = $prices->min();
+                $stockCar->max_price = $prices->max();
+                $stockCar->category_count = $stockCar->stockCarCategories->count();
+            }
+        }
+
+        // Uncomment to debug and see the output
+        // dd($brandModels);
+
+        // Return the view with the necessary data
+        return view('yalla-gt.pages.stock_cars.list', compact('brandData', 'brandModels'));
+    }
+    // -------------------- GT-Functions -------------------- //
+    public function gtShow($slug , $categorySlug)
+    {
+
+        $stockCar = StockCar::getByTranslatedSlug($slug)->with('images', 'stockCarCategories')->first();
+
+        dd($stockCar);
+
+        return view('yalla-gt.pages.stock_cars.show');
+    }
+
 }

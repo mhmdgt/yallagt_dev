@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Gt_manager\Stock_cars;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\GtManager\StockCarCategory\StoreRequest;
+use App\Http\Requests\GtManager\StockCarCategory\UpdateRequest;
+use App\Models\BodyShape;
+use App\Models\CarBrandModel;
+use App\Models\EngineAspiration;
 use App\Models\EngineCc;
 use App\Models\FuelType;
 use App\Models\StockCar;
-use App\Models\BodyShape;
-use Illuminate\Support\Str;
-use App\Models\CarBrandModel;
-use App\Traits\GetModelTrait;
-use App\Models\EngineAspiration;
 use App\Models\StockCarCategory;
 use App\Models\TransmissionType;
-use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\Controller;
+use App\Traits\GetModelTrait;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\GtManager\StockCarCategory\StoreRequest;
-use App\Http\Requests\GtManager\StockCarCategory\UpdateRequest;
+use Illuminate\Support\Str;
 
 class StockCarCategoryController extends Controller
 {
@@ -37,7 +36,7 @@ class StockCarCategoryController extends Controller
         $engineCapacities = $this->getModel(EngineCc::class, ['id', 'name']);
 
         return view('gt-manager.pages.stock_cars.stock_car_categories.create',
-            compact('stock_car_id', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities' , 'model' , 'brand'));
+            compact('stock_car_id', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'model', 'brand'));
     }
     // -------------------- store -------------------- //
     public function store(StoreRequest $request)
@@ -46,7 +45,7 @@ class StockCarCategoryController extends Controller
         $validatedData['slug'] = Str::slug($validatedData['name']);
         $validatedData['stock_car_id'] = ($request->stock_car_id);
 
-        // dd($validatedData);
+        $validatedData['price'] = str_replace(',', '', $validatedData['price']);
 
         StockCarCategory::create($validatedData);
 
@@ -58,11 +57,15 @@ class StockCarCategoryController extends Controller
         return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- edit -------------------- //
-    public function edit($stockCarCategory)
+    public function edit($carSlug, $slug)
     {
-        $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
-        $bodyShapes = $this->getModel(BodyShape::class, ['id', 'name']);
+        $stockcar = StockCar::getByTranslatedSlug($carSlug)->with('stockCarCategories')->first();
 
+        $stockCarCategory = StockCarCategory::where('slug', $slug)
+            ->where('stock_car_id', $stockcar->id)
+            ->first();
+
+        $bodyShapes = $this->getModel(BodyShape::class, ['id', 'name']);
         $stockCar = StockCar::find($stockCarCategory->stock_car_id);
         $brandModel = CarBrandModel::with('brand')->find($stockCar->car_brand_model_id);
         $brand = $brandModel->brand;
@@ -73,7 +76,7 @@ class StockCarCategoryController extends Controller
         $engineCapacities = $this->getModel(EngineCc::class, ['id', 'name']);
 
         return view('gt-manager.pages.stock_cars.stock_car_categories.edit',
-            compact('stockCarCategory', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities' , 'brandModel' , 'brand'));
+            compact('stockCarCategory', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'brandModel', 'brand'));
     }
     // -------------------- update -------------------- //
     public function update(UpdateRequest $request, $stockCarCategory)
@@ -81,6 +84,8 @@ class StockCarCategoryController extends Controller
         $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
         $validatedData = $request->validated();
         $validatedData['slug'] = Str::slug($validatedData['name']);
+        $validatedData['price'] = str_replace(',', '', $validatedData['price']);
+
         $stockCarCategory->update($validatedData);
 
         $stockCar = StockCar::find($stockCarCategory->stock_car_id);
@@ -88,10 +93,10 @@ class StockCarCategoryController extends Controller
         $brand = $brandModel->brand;
 
         Session::flash('success', 'Category Updated Successfully');
-        return redirect()->route('stock-car.show', $brand->slug );
+        return redirect()->route('stock-car.show', $brand->slug);
     }
     // -------------------- destroy -------------------- //
-    function destroy(StockCarCategory $stockCarCategory)
+    public function destroy(StockCarCategory $stockCarCategory)
     {
         $stockCar = StockCar::find($stockCarCategory->stock_car_id);
         $stockCarCategory->delete();
@@ -99,6 +104,6 @@ class StockCarCategoryController extends Controller
         $brand = $BrandModel->brand;
 
         Session::flash('success', 'Deleted Successfully');
-        return redirect()->route('stock-car.show', $brand->slug );
+        return redirect()->route('stock-car.show', $brand->slug);
     }
 }

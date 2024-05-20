@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Gt_manager\Blog\BlogController;
 use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
 use App\Http\Controllers\Yalla_gt\Auth\AuthController;
 use App\Http\Controllers\Yalla_gt\Cart\UserCartController;
 use App\Http\Controllers\Yalla_gt\Home\HomeContorller;
@@ -25,32 +27,60 @@ Route::controller(UserCartController::class)->prefix('user-carts')->name('user-c
 });
 
 Route::group(
-    ['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']],
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
     // ------------------------------------ Authorized
     function () {Route::middleware(['auth'])->group(function () {
 
         // USER PROFILE
         Route::controller(UserController::class)->prefix('user')->name('user.')->group(function () {
             Route::get('/profile', 'index')->name('profile');
-            Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
             Route::get('/ads', 'ads')->name('ads');
+
+            Route::get('/addresses', 'addressesIndex')->name('addressesIndex');
+            Route::post('/addresses-store', 'addressesStore')->name('addressesStore');
+
+            Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
+            Route::put('/update-profile', 'updateProfile')->name('update-profile');
         });
 
-        // GT CARS
+        // GT SALE CARS
         Route::controller(SaleCarsController::class)->name('gt_car.')->group(function () {
             Route::get('/gt-ads', 'gtAds')->name('ads');
             Route::get('{slug}/edit', 'gtEdit')->name('edit');
             Route::get('/sell', 'gtCreate')->name('create');
         });
 
-    }); // ------------------------------------ END OF Authorizedhttps://kimostore.net/ar/collections/vendors?https://kimostore.net/ar/products/devia-extreme-speed-series-mp32-s-power-bank-usb-type-c-22-5w-fast-charging-10000mah-built-in-4-cables-whiteq=DEVIA
+    }); // ------------------------------------ END OF Authorized
 
         // Guest
         Route::get('/', [HomeContorller::class, 'index'])->name('yalla-index');
         Route::view('/about-us', 'yalla-gt.pages.need_help.about_us')->name('about_us');
+        Route::view('/contact_us', 'yalla-gt.pages.need_help.contact_us')->name('contact_us');
+
+        // Stock Cars
+        Route::get('/brands', [StockCarsController::class, 'gtIndex'])->name('stock-car.gtIndex');
+        Route::get('/stock-cars/{slug}', [StockCarsController::class, 'gtList'])->name('stock-car.gtList');
+        Route::get('/stock-car/{slug}/{categorySlug}', [StockCarsController::class, 'gtShow'])->name('stock-car.gtShow');
+
+        // Sale Car
+        Route::get('/car-listings', [SaleCarsController::class, 'gtIndex'])->name('sale-car.gtIndex');
+        Route::get('/car-listings/brand/{slug}', [SaleCarsController::class, 'gtList'])->name('sale-car.gtList');
+        Route::get('/car-listing/{slug}', [SaleCarsController::class, 'gtShow'])->name('sale-car.show');
+
+        // Products
+        Route::get('/manufacturers', [ShowProductController::class, 'manufacturersIndex'])->name('product.manufacturers-index');
+        Route::get('/manufacturer/{slug}', [ShowProductController::class, 'productsByManufacturer'])->name('product.manufacturer-products');
+        Route::get('/all-products', [ShowProductController::class, 'allProducts'])->name('product.all-products');
+        Route::get('product-item/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
+
+        // CART
         Route::view('/cart', 'yalla-gt.pages.cart.index')->name('cart.index');
 
+        // Blogs
+        Route::get('/car-blogs', [BlogController::class, 'gtIndex'])->name('blog-gtIndex');
+        Route::get('/blog/{slug}', [BlogController::class, 'gtBlog'])->name('blog-post');
 
-        Route::get('{slug}', [SaleCarsController::class, 'gtShow'])->name('sale-car.show');
-
-        Route::get('/{slug}/{sku}/product-item', [ShowProductController::class, 'item'])->name('product_item');});
+    }); // ------------------------------------ END OF YALLAGT

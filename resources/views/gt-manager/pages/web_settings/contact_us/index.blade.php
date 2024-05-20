@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col">
                                     <label>Name <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="name_ar"
+                                    <input type="text" class="form-control" name="name_ar" dir="auto"
                                         value="{{ get_contact_us()->getTranslation('site_name', 'ar') }}">
                                     @error('name_ar')
                                         <small class="text-danger">{{ $message }}</small>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col">
                                     <label>Headqurter address <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="headqurter_address_ar"
+                                    <input type="text" class="form-control" name="headqurter_address_ar" dir="auto"
                                         value="{{ get_contact_us()->getTranslation('headqurter_address', 'ar') }}">
                                     @error('headqurter_address_ar')
                                         <small class="text-danger">{{ $message }}</small>

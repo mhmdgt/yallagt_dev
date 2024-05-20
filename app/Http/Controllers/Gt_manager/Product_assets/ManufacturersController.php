@@ -46,15 +46,16 @@ class ManufacturersController extends Controller
         $manufacturer = Manufacturer::getByTranslatedSlug($slug)->first();
         // Validate the request
         $validatedData = $request->validated();
+
         // Update other fields
         $manufacturer->update([
-            'name' => [ 'en' => $request->name_en, 'ar' => $request->name_ar ],
+            'name' => [ 'en' => $validatedData['name_en'], 'ar' => $validatedData['name_ar'] ],
             'slug' => Str::slug($validatedData['name_en']),
             'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/manufacturer_logos' ,$request->name_en):  null,
         ]);
 
         Session::flash('success', 'Updated Successfully');
-        return redirect()->back();
+        return redirect()->route('manufacturers.show' , $manufacturer->slug);
 
     }
     // -------------------- Method -------------------- //

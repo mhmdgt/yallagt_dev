@@ -27,70 +27,56 @@
                                 <div class="card-img-container">
                                     @foreach ($stockCar->images as $image)
                                         @if ($image->main_img)
-                                            <img src="{{ asset('storage/media/stock_cars_imgs/' . $image->path . '/' . $image->name) }}"
-                                                class="card-img-top" alt="No_IMG">
-                                        @break
-                                    @endif
+                                            <img src="{{ display_img($image->name) }}" class="card-img-top" alt="No_IMG">
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                <a href="{{ route('stock-car.edit', $stockCar->slug) }}">
+                                    <button class="btn btn-light btn-icon stockCarImageEdit">
+                                        <i data-feather="edit"></i>
+                                    </button>
+                                </a>
+
+                            </div>
+                            {{-- add categories --}}
+                            <div class="card-body">
+                                <h4 class="mb-4 ">
+                                    {{-- <span>{{ $brandData->name }}</span> --}}
+                                    <span>{{ $model->name }}</span>
+                                    <span>{{ $stockCar->year }}</span>
+
+                                </h4>
+                                <a href="{{ route('model-category.create', $stockCar->id) }}"
+                                    class="btn btn-outline-primary">add</a>
+                                <a href="#" class="btn btn-primary">Import .xlsx</a>
+                                <a href="#" class="btn btn-secondary">Export .xlsx</a>
+                            </div>
+                            {{-- categories --}}
+                            <div>
+                                {{-- Extract the numerical part of the price and cast it to a float for sorting --}}
+                                @foreach (sortStockCarCategoriesByPrice($stockCar->stockCarCategories) as $category)
+                                    <div class="d-flex align-items-center ml-2 mr-2">
+                                        <div class="mr-auto p-2">
+                                            <a href="{{ route('model-category.edit', ['carSlug' => $stockCar->slug , 'slug' => $category->slug] ) }}"
+                                                class="text-primary">
+                                                <label>{{ $category->name }}</label>
+                                            </a>
+                                        </div>
+                                        <div class="p-2">
+                                            <label>
+                                                <span>EGP
+                                                </span>{{ number_format($category->price, 0, ',', ',') }}
+                                                </p>
+                                            </label>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
-
-                            <a
-                                href="{{ route('stock-car.edit', ['slug' => $brandData->slug, 'modelSlug' => $model->slug, 'stockYear' => $stockCar->year, 'id' => $stockCar->id]) }}">
-
-                                <button class="btn btn-light btn-icon stockCarImageEdit">
-                                    <i data-feather="edit"></i>
-                                </button>
-                            </a>
-
-                            <button class="btn btn-light btn-icon stockCarImageDel" data-toggle="modal"
-                                data-target="#confirmDeleteModal{{ $stockCar->id }}" title="Edit">
-                                <i data-feather="trash"></i>
-                            </button>
-                            <x-modal.confirm-delete-modal route="{{ route('stock-car.delete', $stockCar->id) }}"
-                                id="{{ $stockCar->id }}" />
-
-
-                        </div>
-                        {{-- add categories --}}
-                        <div class="card-body">
-                            <h4 class="mb-4 ">
-                                {{-- <span>{{ $brandData->name }}</span> --}}
-                                <span>{{ $model->name }}</span>
-                                <span>{{ $stockCar->year }}</span>
-
-                            </h4>
-                            <a href="{{ route('model-category.create', $stockCar->id) }}"
-                                class="btn btn-outline-primary">add</a>
-                            <a href="#" class="btn btn-primary">Import .xlsx</a>
-                            <a href="#" class="btn btn-secondary">Export .xlsx</a>
-                        </div>
-                        {{-- categories --}}
-                        <div>
-                            {{-- Extract the numerical part of the price and cast it to a float for sorting --}}
-                            @foreach ($stockCar->stockCarCategories->sortBy(function ($category) {
-                                return (float) preg_replace('/[^0-9.]/', '', $category->price);
-                            }) as $category)
-                                <div class="d-flex align-items-center ml-2 mr-2">
-                                    <div class="mr-auto p-2">
-                                        <a href="{{ route('model-category.edit', $category->id) }}"
-                                            class="text-primary">
-                                            <label>{{ $category->name }}</label>
-                                        </a>
-                                    </div>
-                                    <div class="p-2">
-                                        <label>
-                                            <span>EGP
-                                            </span>{{ number_format($category->price, 0, ',', ',') }}
-                                            </p>
-                                        </label>
-                                    </div>
-                                </div>
-                            @endforeach
                         </div>
                     </div>
-                </div>
+                @endforeach
             @endforeach
-        @endforeach
+        </div>
     </div>
-</div>
 @endsection

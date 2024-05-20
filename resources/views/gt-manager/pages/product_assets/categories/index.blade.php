@@ -38,7 +38,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">(AR)</span></label>
-                                        <input type="text" class="form-control" name="name_ar" placeholder="English Name"
+                                        <input type="text" class="form-control" name="name_ar" dir="auto"
+                                        placeholder="English Name"
                                             value="{{ old('name_ar') }}">
                                         <x-errors.display-validation-error property="name_ar" />
                                     </div>

@@ -12,7 +12,7 @@
                             @foreach ($car->images as $image)
                                 @if ($image->main_img)
                                     <a href="{{ route('gt_car.edit', $car->slug) }}">
-                                        <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
+                                        <img src="{{ display_img($image->name) }}"
                                             class="card-img-top max-height-image" alt="No_IMG">
                                     </a>
                                     <a href="{{ route('gt_car.edit', $car->slug) }}">
@@ -81,12 +81,6 @@
         @endif
     </div>
 @endsection
-
-
-
-
-
-
 
 @section('footer')
     {{-- @include('yalla-gt.layout.upper-footer') --}}

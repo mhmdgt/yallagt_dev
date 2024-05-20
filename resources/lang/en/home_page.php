@@ -2,7 +2,7 @@
 
 return [
 
-    'SaleCars' => 'Cars For Sale',
+    'SaleCars' => 'Car Listing',
     'CarBrands' => 'Car Brands',
     'FeaturedCategories' => 'Featured Categories',
     'ProductShop' => 'Products Shop',

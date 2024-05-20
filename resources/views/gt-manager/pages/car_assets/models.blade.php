@@ -71,7 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-                                <input type="text" class="form-control" name="name_ar" autocomplete="off"
+                                <input type="text" class="form-control" name="name_ar" dir="auto"
                                     value="{{ $carBrand->getTranslations('name')['ar'] }}">
                                 <small class="text-danger" id='ar_name-error'></small>
                             </div>
@@ -224,7 +224,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-                                <input type="text" class="form-control" name="name_ar" placeholder="Arabic Name">
+                                <input type="text" class="form-control" name="name_ar" dir="auto"
+                                placeholder="Arabic Name">
                                 <small class="text-danger" id='ar_name-error'></small>
                             </div>
                             <div class="modal-footer">

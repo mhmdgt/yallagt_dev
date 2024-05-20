@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Shop Service-->
+                <!--Car Prices Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Shop Service-->
+                <!--Cars For Sale Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Shop Service-->
+                <!--Sell Car Service-->
                 <div class="col-xl-3 col-6">
                     <div class="card card_banner">
                         <div class="card-body">
@@ -108,52 +108,46 @@
                     <div class="carsforsaleContainer owl-carousel">
                         @foreach ($cars as $car)
                             <div class="card cars_for_sale_home_layout">
-                                <div class="card-img-container">
-                                    @foreach ($car->images as $image)
-                                        @if ($image->main_img)
-                                            <a href="{{route('sale-car.show' , $car->slug)}}">
-                                                <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
-                                                    class="card-img-top" alt="No_IMG">
-                                            </a>
-                                            <button class="btn btn-light btn-icon stockCarImageEdit ar-style">
-                                                {{ ucwords($conditions[$car->condition]) }}
-                                                {{ $car->year }}
-                                            </button>
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="card-body container-fluid">
-                                    <a href="#">
+                                <a class="text-dark" href="{{ route('sale-car.show', $car->slug) }}">
+                                    <div class="card-img-container">
+                                        @foreach ($car->images as $image)
+                                            @if ($image->main_img)
+                                                <img src="{{ display_img($image->name) }}" class="card-img-top"
+                                                    alt="No_IMG">
+                                                <button class="btn btn-light btn-icon stockCarImageEdit ar-style">
+                                                    {{ ucwords($conditions[$car->condition]) }}
+                                                    {{ $car->year }}
+                                                </button>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="card-body container-fluid">
                                         <h4 class="card-text" dir="auto">
                                             {{ $brands[$car->brand] }}
                                             {{ $models[$car->model] }}
                                         </h4>
 
-                                    </a>
-                                    <h3 class="card-text-h3 mt-3">
-                                        <span class="h5 text-dark">{{ __('home_page.EGP') }}</span>
-                                        {{ number_format($car->price, 0, ',', ',') }}
-                                    </h3>
-                                    <div class="card-text-4 mt-3 mb-2" dir="auto">
-                                        <i class="bi bi-geo-alt"></i> <span
-                                            class="h6">{{ $governorates[$car->governorate] }}</span>
+                                        <h3 class="card-text-h3 mt-3">
+                                            <span class="h5 text-dark">{{ __('home_page.EGP') }}</span>
+                                            {{ number_format($car->price, 0, ',', ',') }}
+                                        </h3>
+                                        <div class="card-text-4 mt-3 mb-2" dir="auto">
+                                            <i class="bi bi-geo-alt"></i> <span
+                                                class="h6">{{ $governorates[$car->governorate] }}</span>
+                                        </div>
+                                        <div class="card-text-4 mt-2 mb-3" dir="auto">
+                                            <i class="bi bi-stopwatch"></i> <span
+                                                class="h6">{{ $car->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <div class="detailedSearch__content--badge row no-gutters card-text-4"
+                                            style="display:flex; flex-direction:column">
+                                            <span class="badge badge_icon_5">{{ $kms[$car->km] }}</span>
+                                            <span class="badge mt-2">{{ $transmissions[$car->transmission] }}</span>
+                                        </div>
                                     </div>
-                                    <div class="card-text-4 mt-2 mb-3" dir="auto">
-                                        <i class="ml-auto mr-2 bi bi-stopwatch"></i> <span
-                                            class="h6">{{ $car->created_at->diffForHumans() }}</span>
-                                    </div>
-                                    <div class="detailedSearch__content--badge row no-gutters card-text-4"
-                                        style="display:flex; flex-direction:column">
-                                        <span class="badge badge_icon_5">{{ $kms[$car->km] }}</span>
-                                        <span class="badge"
-                                            style="margin-top: 10px;">{{ $transmissions[$car->transmission] }}</span>
-                                    </div>
-                                </div>
-
+                                </a>
                             </div>
                         @endforeach
-
-
                     </div>
                 </div>
             </div>
@@ -173,7 +167,8 @@
                     <div class="brand_container BrandOWL owl-carousel">
                         @foreach ($brandsWithStockCar as $brand)
                             <div class="single_brand">
-                                <a href="#"><img src="{{ display_img($brand->logo) }}" alt="..."></a>
+                                <a href="{{ route('stock-car.gtList', $brand->slug) }}"><img
+                                        src="{{ display_img($brand->logo) }}" alt="..."></a>
                             </div>
                         @endforeach
                         {{-- <div class="single_brand">
@@ -305,65 +300,66 @@
                     </div>
                 </div>
 
-                <div class="product_container">
-                    <div class="row product_carousel no-gutters">
-                        @foreach ($product_listings as $product_listing)
-                            @foreach ($product_listing->skus as $sku)
-                                <div class="col-md-20 col-6 product_item">
-                                    <div class="single_product">
-                                        <div class="product_card">
-                                            <div class="container-fluid product_thumb">
-                                                @foreach ($sku->images as $image)
-                                                    @if ($image->main_img)
-                                                        <img src="{{ display_img($image->name) }}" alt="Main Image">
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <div class="product_card_content">
-                                                <div class="mt-4">
-                                                    <h6 class="brand fw-700">Brand:
-                                                        <span>{{ $sku->product->manufacturer->name }}</span>
-                                                    </h6>
-                                                    <a
-                                                        href="{{ route('product_item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
-                                                        <h4 class="product_name">{{ $sku->product->name }}</h4>
-                                                    </a>
-                                                </div>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="p-0">
-                                                        <div>
-                                                            <span>EGP:</span>
-                                                            <span class="product_card_price" style="color: #F25E3D;">
-                                                                {{ number_format($product_listing->selling_price, 0, ',', ',') }}
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <i class="bi bi-bookmark-check"></i>
-                                                            <span class="product_card_precentage">HOT</span>
-                                                            <span> DEALS </span>
-                                                        </div>
-                                                    </div>
-                                                    {{-- <div class="p-0 product_card_cart">
-                                                    <img src="yalla_gt/media/cart/cart_icon.png">
-                                                </div> --}}
-                                                    <div class="p-0 product_card_cart">
-                                                        <a
-                                                            href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
-                                                            <img src="yalla_gt/media/cart/cart_icon.png">
-                                                        </a>
+                <div class="col-12">
+                    <div class="product_container">
+                        <div class="row product_carousel no-gutters" id="shop_filter">
 
+                            @foreach ($product_listings as $product_listing)
+                                @foreach ($product_listing->skus as $sku)
+                                    <div class="col-md-20 col-6 product_item">
+                                        <article class="single_product">
+                                            <figure>
+                                                <a class="text-dark"
+                                                    href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                    <div class="container-fluid product_thumb">
+                                                        @foreach ($sku->images as $image)
+                                                            @if ($image->main_img)
+                                                                <img src="{{ display_img($image->name) }}">
+                                                            @endif
+                                                        @endforeach
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    <div class="product_card_content">
+                                                        <div class="mt-4 mb-4">
+                                                            <h6 class="brand fw-700">Brand:
+                                                                <span>{{ $sku->product->manufacturer->name }}</span>
+                                                            </h6>
+                                                            <h4 class="product_name home-blog-title">
+                                                                {{ $sku->sku_name }}</h4>
+                                                        </div>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="p-0">
+                                                                <div>
+                                                                    <span>EGP:</span>
+                                                                    <span class="product_card_price"
+                                                                        style="color: #F25E3D;">
+                                                                        {{ number_format($product_listing->selling_price, 0, ',', ',') }}
+                                                                    </span>
+                                                                </div>
+                                                                <div>
+                                                                    <i class="bi bi-bookmark-check"></i>
+                                                                    <span class="product_card_precentage">HOT</span>
+                                                                    <span> DEALS </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="p-0 product_card_cart">
+                                                                <a
+                                                                    href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
+                                                                    <img src="yalla_gt/media/cart/cart_icon.png">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </figure>
+                                        </article>
                                     </div>
-                                </div>
+                                @endforeach
                             @endforeach
-                        @endforeach
+
+                        </div>
                     </div>
-
-
                 </div>
+
             </div>
         </div>
     </section>
@@ -379,39 +375,18 @@
                 </div>
                 <div class="col-12">
                     <div class="brand_container BrandOWL owl-carousel">
-
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/BOSCH.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/Bilstein.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/BOSCH.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/Bilstein.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/BOSCH.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/Bilstein.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/BOSCH.png" alt=""></a>
-                        </div>
-                        <div class="single_brand">
-                            <a href="#"><img src="yalla_gt/media/brand/Bilstein.png" alt=""></a>
-                        </div>
-
+                        @foreach ($manufacturerWithSkus as $manufacturer)
+                            <div class="single_manufacturer">
+                                <a href="#"><img src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Vertical Shop -->
-    <section class="new-section vertical_shop">
+    {{-- <section class="new-section vertical_shop">
         <div class="container-fluid">
             <div class="row">
                 <!-- Single Column -->
@@ -541,7 +516,7 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Blog -->
     <section class="new-section car_brand_area brand_area">
         <div class="container-fluid">
@@ -555,47 +530,27 @@
                 </div>
                 <div class="col-12 ">
                     <div class="carsforsaleContainer owl-carousel">
-
                         @foreach ($blogs as $blog)
-                            <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
-
-                                <div class="card cars_for_sale_home_layout" style="border-radius: 16px;">
+                            <div class="card cars_for_sale_home_layout">
+                                <a class="text-dark" href="{{ route('blog-post', $blog->slug) }}">
                                     <div class="card-img-container">
                                         @foreach ($blog->images as $image)
                                             @if ($image->main_img)
-                                                <a href="#">
-                                                    <img src="{{ asset('storage/media/blog_imgs/' . $image->path . '/' . $image->name) }}"
-                                                        class="card-img-top" alt="No_IMG">
-                                                </a>
+                                                <img src="{{ display_img($image->name) }}" class="card-img-top">
                                             @endif
                                         @endforeach
                                     </div>
                                     <div class="card-body">
-                                        <a href="#">
-                                            <h4 class="font-weight-bold" dir="auto" style="line-height: 1.6;">
-                                                <a href="#">{{ $blog->title }}
-                                            </h4>
-                                        </a>
-                                        {{-- <h5 class="mt-3" dir="auto">
-                                            <i class="bi bi-bookmark-check"></i>
-                                            {{ $blog->user }}
-                                        </h5>
-                                        <div class=" card-text-4 mb-2" dir="auto">
-                                            <i class="bi bi-stopwatch"></i>
-                                            <span
-                                                class="badge_icon_second">{{ $blog->created_at->diffForHumans() }}</span>
-                                        </div> --}}
-                                        <div class="courses-info">
-                                            <a href="#" class="section-btn btn btn-primary btn-block mt-2">
-                                                {{ __('home_page.SeeMore') }}
-                                                <i class="fa-regular fa-circle-right"></i>
-                                            </a>
-                                        </div>
+                                        <h4 class="font-weight-bold home-blog-title" dir="auto">
+                                            {{ $blog->title }}
+                                        </h4>
+                                        <hr>
+                                        <div class="btn btn-primary rounded gradient-green-bg text-white">
+                                            {{ __('home_page.SeeMore') }}</div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>

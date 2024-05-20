@@ -24,8 +24,8 @@ class UpdateRequest extends FormRequest
     {
 
         return [
-            'name_ar' => ['required','string','max:200', Rule::unique('manufacturers', 'name->ar')->ignore($this->manufacturer->id)],
-            'name_en' => ['required','string','max:200', Rule::unique('manufacturers', 'name->en')->ignore($this->manufacturer->id)],
+            'name_ar' => ['required', 'string' , 'max:200', Rule::unique('manufacturers', 'name->ar')->ignore($this->id)],
+            'name_en' => ['required', 'string' , 'max:200', Rule::unique('manufacturers', 'name->en')->ignore($this->id)],
             'logo' => 'nullable|image|mimes:png',
         ];
     }

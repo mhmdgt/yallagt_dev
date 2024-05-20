@@ -85,7 +85,7 @@
                                 @endphp
                                 @foreach ($images as $index => $image)
                                     <div class="img-container position-relative" >
-                                        <img src="{{ asset('storage/media/product_sku_imgs/' . $image->name) }}"
+                                        <img src="{{ display_img($image->name) }}"
                                             alt="">
                                     </div>
                                 @endforeach

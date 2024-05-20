@@ -9,8 +9,16 @@ trait SlugTrait
     {
         $slugArray = [];
         foreach ($nameArray as $key => $value) {
-            $slugArray[$key] = str_replace(' ', '-', strtolower($value)); // Replace spaces with underscores and convert to lowercase
+            // Convert to lowercase
+            $value = strtolower($value);
+            // Remove special characters
+            $value = preg_replace('/[,.=\-_\+\'"\\\}\{\:\?\/\!@#\$%\^&\*\(\)\<\>]/', '', $value);
+            // Replace spaces with hyphens
+            $value = str_replace(' ', '-', $value);
+            // Assign the modified value to the array
+            $slugArray[$key] = $value;
         }
         return $slugArray;
     }
 }
+

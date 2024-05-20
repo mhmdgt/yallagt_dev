@@ -6,17 +6,18 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="profile-card">
-                        <div class=" align-items-center">
-                            <div class="col-12 col-md-9 row">
-                                <img class="image-in-box ml-4 mr-2" src="{{ asset('yalla_gt/media/no_image.jpg') }}"
-                                    alt="No Image">
-                                <div class="profile-info">
-                                    <span class="profile-name ">{{ __('profile.ahlan') }}
-                                        {{ getFirstName(user_data()->name) }}</span>
-                                    <span
-                                        class="profile-email font-weight-blod">{{ __('gt_cars_create.ApplyTheForm_SellYourCar') }}</span>
+                        <div class="align-items-center">
+                            <a class="text-dark" href="{{ route('user.profile') }}" class="card-link text-dark">
+                                <div class="col-12 col-md-9 row">
+                                    <img class="image-in-box ml-4 mr-2" src="{{ asset('yalla_gt/media/no_image.jpg') }}"
+                                        alt="No Image">
+                                    <div class=" profile-info">
+                                        <span class="profile-name">{{ __('profile.ahlan') }}
+                                            {{ getFirstName(user_data()->name) }}</span>
+                                        <span class="profile-email">{{ user_data()->email }}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -453,15 +454,15 @@
     </script>
 @endsection
 
-
 @if (Session::has('success'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '{{ Session::get('success') }}',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Done',
-                    });
+            Swal.fire({
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: true,
+                confirmButtonText: 'Done',
+            });
+        });
     </script>
 @endif

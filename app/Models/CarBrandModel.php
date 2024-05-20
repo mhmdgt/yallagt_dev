@@ -30,5 +30,9 @@ class CarBrandModel extends Model
     {
         return $this->hasMany(StockCar::class);
     }
-
+    // -------------------- Method -------------------- //
+    public function saleCars()
+    {
+        return $this->hasMany(SaleCar::class , 'model');
+    }
 }

@@ -1,12 +1,10 @@
 <?php
 
-
 use App\Models\User;
-use App\Models\TransmissionType;
+use App\Models\ContactUs;
 use Illuminate\Support\Facades\Auth;
 
-
-// -------------------- Fetch Years -------------------- //
+// -------------------- getYearsRange -------------------- //
 function getYearsRange($startYear = null, $endYear = null)
 {
     // Get the current year
@@ -26,8 +24,9 @@ function getYearsRange($startYear = null, $endYear = null)
 
     return $yearsRange;
 }
-// -------------------- Helper function to generate a unique ID -------------------- //
-function generateUniqueId() {
+// -------------------- generateUniqueId -------------------- //
+function generateUniqueId()
+{
     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $id = '';
 
@@ -40,15 +39,16 @@ function generateUniqueId() {
 
     return $id;
 }
-// -------------------- Display images -------------------- //
-function uniqueRandEight() {
+// -------------------- uniqueRandEight -------------------- //
+function uniqueRandEight()
+{
     $randomNumbers = '';
     for ($i = 0; $i < 8; $i++) {
         $randomNumbers .= random_int(0, 9); // Random number between 0 and 9
     }
     return $randomNumbers;
 }
-// -------------------- Display images -------------------- //
+// -------------------- callButton -------------------- //
 if (!function_exists('callButton')) {
     function callButton($phoneNumber)
     {
@@ -62,7 +62,7 @@ if (!function_exists('callButton')) {
         HTML;
     }
 }
-// -------------------- Display images -------------------- //
+// -------------------- getFirstName -------------------- //
 if (!function_exists('getFirstName')) {
     function getFirstName($fullName)
     {
@@ -73,12 +73,12 @@ if (!function_exists('getFirstName')) {
         return $parts[0];
     }
 }
-// -------------------- Get User Data -------------------- //
+// -------------------- display_img -------------------- //
 function display_img($image)
 {
     return $image ? asset('storage/' . $image) : asset('gt_manager/media/no_image.jpg');
 }
-// -------------------- Get User Data -------------------- //
+// -------------------- user_data -------------------- //
 if (!function_exists('user_data')) {
     function user_data()
     {
@@ -89,3 +89,66 @@ if (!function_exists('user_data')) {
         return $user;
     }
 }
+// -------------------- get_contact_us -------------------- //
+function get_contact_us()
+{
+    return ContactUs::first();
+}
+// -------------------- Sorting By price -------------------- //
+if (!function_exists('sortStockCarCategoriesByPrice')) {
+    function sortStockCarCategoriesByPrice($categories)
+    {
+        return $categories->sortBy(function ($category) {
+            return (float) preg_replace('/[^0-9.]/', '', $category->price);
+        });
+    }
+}
+// -------------------- getCurrentLocale -------------------- //
+if (!function_exists('getCurrentLocale')) {
+    /**
+     * Get the current application locale.
+     *
+     * @return string
+     */
+    function getCurrentLocale()
+    {
+        return app()->getLocale();
+    }
+}
+// -------------------- generate_slug -------------------- //
+if (!function_exists('generate_slug')) {
+    /**
+     * Generate a URL-friendly slug from a given string.
+     *
+     * @param string $value
+     * @return string
+     */
+    function generate_slug($value)
+    {
+        // Convert to lowercase
+        $value = strtolower($value);
+        // Remove special characters
+        $value = preg_replace('/[,.=\-_\+\'"\\\}\{\:\?\/\!@#\$%\^&\*\(\)\<\>]/', '', $value);
+        // Replace spaces with hyphens
+        $value = str_replace(' ', '-', $value);
+
+        return $value;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

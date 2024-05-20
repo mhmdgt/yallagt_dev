@@ -10,6 +10,15 @@
                             href="{{ route('stock-car.show', $brandData->slug) }}">{{ $brandData->name }}</a></li>
                     <li class="breadcrumb-item" aria-current="page">{{ $modelData->name }}</a></li>
                 </ol>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-danger btn-icon-text mb-2 mb-md-0 ml-2" data-toggle="modal"
+                        data-target="#confirmDeleteModal{{ $stockCar->id }}" title="Edit">
+                        <i class="bi bi-trash3"></i>
+                        Delete
+                    </button>
+                    <x-modal.confirm-delete-modal route="{{ route('stock-car.destroy', $stockCar->slug) }}"
+                        id="{{ $stockCar->id }}" />
+                </div>
             </div>
         </nav>
         {{-- Form --}}
@@ -63,7 +72,7 @@
                             <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
                                 @foreach ($stockCar->images as $index => $image)
                                     <div class="img-container position-relative" id="image-container-{{ $index }}">
-                                        <img src="{{ display_img('media/stock_cars_imgs/' . $image->name) }}" alt="">
+                                        <img src="{{ display_img($image->name) }}" alt="">
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
                                         <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
                                         <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"

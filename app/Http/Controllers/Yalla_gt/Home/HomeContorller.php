@@ -8,6 +8,7 @@ use App\Models\CarBrand;
 use App\Models\CarBrandModel;
 use App\Models\EngineKm;
 use App\Models\Governorate;
+use App\Models\Manufacturer;
 use App\Models\ProductListing;
 use App\Models\SaleCar;
 use App\Models\SaleCondition;
@@ -27,8 +28,11 @@ class HomeContorller extends Controller
         $governorates = Governorate::whereIn('id', $cars->pluck('governorate'))->pluck('name', 'id');
         $conditions = SaleCondition::whereIn('id', $cars->pluck('condition'))->pluck('name', 'id');
 
-        // CAR BRANDS Which has stock cars
+        // CAR BRANDS WHICH HAS STOCK_CARS ONLY
         $brandsWithStockCar = CarBrand::whereHas('models.stockCars')->get(['id', 'name', 'slug', 'logo']);
+
+        // Manufacturer WHICH HAS SKUS ONLY
+        $manufacturerWithSkus = Manufacturer::WhereHas('products.skus')->get();
 
         // BLOGS
         $blogs = Blog::where('status', 'active')->latest()->get();
@@ -67,10 +71,10 @@ class HomeContorller extends Controller
                 $storehouses[$product_listing->id] = $storehouse;
             }
         }
-
+        // dd($product_listings);
         return view('yalla-gt.pages.app.index',
             compact('cars', 'conditions', 'brands', 'models', 'transmissions', 'kms', 'governorates',
-                'brandsWithStockCar', 'blogs', 'products', 'manufacturers', 'storehouses', 'product_listings'
+                'brandsWithStockCar', 'blogs', 'products', 'manufacturers', 'storehouses', 'product_listings' , 'manufacturerWithSkus'
             ));
 
     }

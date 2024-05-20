@@ -62,17 +62,17 @@
     }
 
 
-    var $product_details_slider_area = $('.product_details_slider_area');
-    if ($product_details_slider_area.length > 0) {
-        $product_details_slider_area.owlCarousel({
-            loop: false,
-            nav: false,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 1,
-            dots: true
-        });
-    }
+    // var $product_details_slider_area = $('.product_details_slider_area');
+    // if ($product_details_slider_area.length > 0) {
+    //     $product_details_slider_area.owlCarousel({
+    //         loop: false,
+    //         nav: false,
+    //         autoplay: false,
+    //         autoplayTimeout: 8000,
+    //         items: 1,
+    //         dots: true
+    //     });
+    // }
 
     /*--- ==================================== product column5 activation ====================================  ---*/
 

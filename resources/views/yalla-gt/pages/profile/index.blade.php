@@ -15,7 +15,18 @@
                         <div class="col-12">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="#">
+                                    <a href="{{route('user.edit-profile' , user_data()->username )}}" class="text-dark">
+                                        <i class="bi bi-pencil-square"></i>
+                                        <span class="ml-1 mr-1">Edit Profile</span>
+                                    </a>
+                                    @if (App::getLocale() == 'en')
+                                        <i class="bi bi-caret-right ml-auto"></i>
+                                    @else
+                                        <i class="bi bi-caret-left ml-auto"></i>
+                                    @endif
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-2">
+                                    <a href="{{route('user.addressesIndex')}}" class="text-dark">
                                         <i class="bi bi-geo-alt"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.MyAddresses') }}</span>
                                     </a>
@@ -67,17 +78,7 @@
                     <div class="profile-card">
                         <div class="col-12">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="{{route('user.edit-profile' , user_data()->username )}}" class="text-dark">
-                                        <i class="bi bi-pencil-square"></i>
-                                        <span class="ml-1 mr-1">Edit Profile</span>
-                                    </a>
-                                    @if (App::getLocale() == 'en')
-                                        <i class="bi bi-caret-right ml-auto"></i>
-                                    @else
-                                        <i class="bi bi-caret-left ml-auto"></i>
-                                    @endif
-                                </li>
+
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
                                     <a href="#">
                                         <i class="bi bi-geo-alt"></i>

@@ -125,11 +125,13 @@ class ProductController extends Controller
         $name_en = $request->name_en;
         $name_ar = $request->name_ar;
         $sku = generateUniqueId();
-        // Replacing spaces with dashes
+
         $slug_en = implode('-', [$manufacturer_en, $name_en]);
-        $slug_en = str_replace(' ', '-', $slug_en);
         $slug_ar = implode('-', [$manufacturer_ar, $name_ar]);
-        $slug_ar = str_replace(' ', '-', $slug_ar);
+        // Generate slugs using the helper function
+        $slug_en = generate_slug($slug_en);
+        $slug_ar = generate_slug($slug_ar);
+        // Saving the valuses of each slug langauage
         $slug = ["en" => $slug_en, "ar" => $slug_ar];
 
         // Create the product
@@ -201,6 +203,22 @@ class ProductController extends Controller
         $manufacturer = Manufacturer::find($request->manufacturer_id);
         $category = ProductCategory::find($request->category_id);
         $subcategory = ProductSubCategory::find($request->subcategory_id);
+
+        $manufacturer_en = $manufacturer->name;
+        $manufacturer_ar = $manufacturer->getTranslation('name', 'ar');
+        $name_en = $request->name_en;
+        $name_ar = $request->name_ar;
+
+        // Prepare the data first
+        $slug_en = implode('-', [$manufacturer_en, $name_en]);
+        $slug_ar = implode('-', [$manufacturer_ar, $name_ar]);
+        // Generate slugs using the helper function
+        $slug_en = generate_slug($slug_en);
+        $slug_ar = generate_slug($slug_ar);
+
+        $slug = ["en" => $slug_en, "ar" => $slug_ar];
+
+
         // Handle case where product is not found
         if (!$product) {
             return redirect()->back()->withErrors(['Product not found.']);
@@ -225,7 +243,7 @@ class ProductController extends Controller
             'product_category_id' => $category->id,
             'product_sub_category_id' => $subcategory->id,
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
-            'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
+            'slug' => $slug,
             'description' => ['en' => $request->description_en, 'ar' => $request->description_ar],
             'status' => $request->status,
         ]);

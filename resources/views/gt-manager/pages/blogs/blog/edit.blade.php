@@ -34,14 +34,16 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(EN)</span></label>
-                                    <input type="text" class="form-control" name="title_en" value="{{ $blog->getTranslations('title')['en'] }}">
+                                    <input type="text" class="form-control" name="title_en"
+                                        value="{{ $blog->getTranslations('title')['en'] }}">
                                     <x-errors.display-validation-error property="title_en" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Title <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="title_ar" dir="auto" value="{{ $blog->getTranslations('title')['ar'] }}">
+                                    <input type="text" class="form-control" name="title_ar" dir="auto"
+                                        value="{{ $blog->getTranslations('title')['ar'] }}">
                                     <x-errors.display-validation-error property="title_ar" />
                                 </div>
                             </div>
@@ -52,27 +54,29 @@
                                     <div>
                                         <select class="js-example-basic-single w-100" name="blog_category_id">
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == $blog->blog_category_id ? 'selected' : '' }}>
+                                                <option value="{{ $category->id }}"
+                                                    {{ $category->id == $blog->blog_category_id ? 'selected' : '' }}>
                                                     {{ $category->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                    <x-errors.display-validation-error property="blog_category_id" />
+                                        <x-errors.display-validation-error property="blog_category_id" />
                                     </div>
 
                                 </div>
                             </div>
-                              {{-- Media --}}
+                            {{-- Media --}}
 
                             {{-- images --}}
                             <div class="rounded mt-3 p-2 owl-carousel" id="image-carousel">
                                 @foreach ($blog->images as $index => $image)
                                     <div class="img-container position-relative" id="image-container-{{ $index }}">
-                                        <img src="{{ display_img('media/blog_imgs/' . $image->name) }}" alt="">
+                                        <img src="{{ display_img($image->name) }}" alt="">
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
-                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
-                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
-                                               {{ $image->main_img ? 'checked' : '' }}>
+                                        <input type="hidden" name="images[{{ $index }}][name]"
+                                            value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img"
+                                            value="{{ $image->id }}" {{ $image->main_img ? 'checked' : '' }}>
                                     </div>
                                 @endforeach
                             </div>
@@ -97,8 +101,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Content<span class="text-danger">(AR)</span></label>
-                                    <textarea class="form-control" name="content_ar" id="tinymceExample2" rows="10">
-                                        {{ $blog->getTranslations('content')['en'] }}
+                                    <textarea class="form-control" name="content_ar" id="tinymceExample2" rows="10" dir="right">
+                                        {{ $blog->getTranslations('content')['ar'] }}
                                     </textarea>
                                     <x-errors.display-validation-error property="content_ar" />
                                 </div>
@@ -269,4 +273,3 @@
         });
     </script>
 @endsection
-
