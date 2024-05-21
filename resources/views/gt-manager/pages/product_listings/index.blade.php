@@ -20,7 +20,7 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-title">All Brands</h6>
+                        <h6 class="card-title">All Listings</h6>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>
@@ -30,7 +30,7 @@
                                         <th>Brand</th>
                                         <th>Product</th>
                                         <th>SKU</th>
-                                        <th>Merchant</th>
+                                        <th>Seller</th>
                                         <th>Where</th>
                                         <th>QTY</th>
                                         <th>Price</th>

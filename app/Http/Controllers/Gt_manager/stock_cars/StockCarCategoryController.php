@@ -42,9 +42,8 @@ class StockCarCategoryController extends Controller
     public function store(StoreRequest $request)
     {
         $validatedData = $request->validated();
-        $validatedData['slug'] = Str::slug($validatedData['name']);
+        $validatedData['slug'] = str_replace([' ', '/', '\\'], '-', $validatedData['name']);
         $validatedData['stock_car_id'] = ($request->stock_car_id);
-
         $validatedData['price'] = str_replace(',', '', $validatedData['price']);
 
         StockCarCategory::create($validatedData);
@@ -83,7 +82,7 @@ class StockCarCategoryController extends Controller
     {
         $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
         $validatedData = $request->validated();
-        $validatedData['slug'] = Str::slug($validatedData['name']);
+        $validatedData['slug'] = str_replace([' ', '/', '\\'], '-', $validatedData['name']);
         $validatedData['price'] = str_replace(',', '', $validatedData['price']);
 
         $stockCarCategory->update($validatedData);

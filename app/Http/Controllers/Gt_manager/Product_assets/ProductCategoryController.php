@@ -8,6 +8,7 @@ use App\Traits\ImageTrait;
 use App\Models\ProductCategory;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\GtManager\Product\ProductCategory\StoreProductCategoryRequest;
 use App\Http\Requests\GtManager\Product\ProductCategory\updateProductCategoryRequest;
 
@@ -46,7 +47,9 @@ class ProductCategoryController extends Controller
             'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
             'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/product_categories' ,$request->name_en, $productCategory->logo) : $productCategory->logo,
         ]);
-        return back()->with('success', 'Updated Successfully');
+
+        Session::flash('success', 'Updated Successfully');
+        return redirect()->route('product-categories.show' , $productCategory->slug);
     }
     // -------------------- Method -------------------- //
     function destroy($slug)

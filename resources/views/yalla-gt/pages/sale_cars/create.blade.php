@@ -78,7 +78,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <x-errors.display-validation-error property="price" />
+                                        <x-errors.display-validation-error property="bodyShape" />
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +186,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
-                                    <input type="number" class="form-control" name="price" placeholder="100,000,000">
+                                    <input type="text" class="form-control" name="price"
+                                    value="{{ old('price') }}" oninput="formatNumber(this)" placeholder="100,000,000">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>
@@ -351,7 +352,6 @@
                                     <i class='ml-2 mr-2 bx bxs-add-to-queue' style='color:#ffffff'></i>
                                     {{ __('gt_cars_create.SellNow') }}
                                 </span>
-
                             </button>
                         </div>
                     </div>

@@ -29,7 +29,7 @@
                 <i class="bi bi-bag-check"></i>
                 <div class="ml-3 mr-3">
                     <h6 class="card-title font-weight-bold mb-1">{{ __('profile.Orders') }}</h6>
-                    <p class="sub-title">{{ __('profile.manageAndTrack') }}</p>
+                    <p class="sub-title gt-gray">{{ __('profile.manageAndTrack') }}</p>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <i class="bi bi-bootstrap-reboot"></i>
                 <div class="ml-3 mr-3">
                     <h6 class="card-title font-weight-bold mb-1">{{ __('profile.Returns') }}</h6>
-                    <p class="sub-title">{{ __('profile.ActiveRequests') }}</p>
+                    <p class="sub-title gt-gray">{{ __('profile.ActiveRequests') }}</p>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                     <i class="bi bi-card-checklist"></i>
                     <div class="ml-3 mr-3">
                         <h6 class="card-title font-weight-bold mb-1">{{ __('profile.SellYourCar') }}</h6>
-                        <p class="sub-title">{{ __('profile.TotallyFree') }}</p>
+                        <p class="sub-title gt-gray">{{ __('profile.TotallyFree') }}</p>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     <i class="bi bi-star"></i>
                     <div class="ml-3 mr-3">
                         <h6 class="card-title font-weight-bold mb-1">{{ __('profile.MyAds') }}</h6>
-                        <p class="sub-title">{{ __('profile.ActiveAds') }}</p>
+                        <p class="sub-title gt-gray">{{ __('profile.ActiveAds') }}</p>
                     </div>
                 </div>
             </div>

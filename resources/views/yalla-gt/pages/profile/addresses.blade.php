@@ -3,50 +3,53 @@
     <div class="page-div">
         @include('yalla-gt.partials.account_head')
         {{-- Addresses --}}
-        <div class="row">
-            <div class="col-md-12 grid-margin">
-                <div class="card">
-                    <div class="card-body">
-                        {{-- Title --}}
-                        <div class="p-2 mb-4 text-dark ar-style">
-                            <button class="rounded btn gradient-8790f6 text-white" type="submit">Add New Address</button>
-                            <i class="bi bi-geo-alt ml-1 mr-1"></i>
-                            <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
-                            <p class="mt-2 gt-gray">Manage your saved addresses</p>
-                        </div>
-                        {{-- Stored Address --}}
-                        @foreach ($addresses as $address)
-                            <div class="card mb-3 ar-style">
-                                <div class="card-body">
-                                    <a href="#" class="edit-link">Edit</a>
+        @if (!$addresses->isEmpty())
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            {{-- Title --}}
+                            <div class="p-2 mb-4 text-dark ar-style">
+                                <button class="rounded btn gradient-8790f6 text-white" type="submit">Add New Address</button>
+                                <i class="bi bi-geo-alt ml-1 mr-1"></i>
+                                <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
+                                <p class="mt-2 gt-gray">Manage your saved addresses</p>
+                            </div>
+                            {{-- Stored Address --}}
+                            @foreach ($addresses as $address)
+                                <div class="card mb-3 ar-style">
+                                    <div class="card-body">
+                                        <a href="#" class="edit-link">Edit</a>
 
 
-                                    <div class="row mt-3">
-                                        <dt class="col-4">Name:</dt>
-                                        <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
+                                        <div class="row mt-3">
+                                            <dt class="col-4">Name:</dt>
+                                            <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
 
-                                        <dt class="col-4">Phone:</dt>
-                                        <dd class="col-8"><span>{{ $address->phone }}</span></dd>
+                                            <dt class="col-4">Phone:</dt>
+                                            <dd class="col-8"><span>{{ $address->phone }}</span></dd>
 
-                                        <dt class="col-4">Governorate:</dt>
-                                        <dd class="col-8"><span>{{ $address->governorate->name ?? 'N/A' }}</span></dd>
+                                            <dt class="col-4">Governorate:</dt>
+                                            <dd class="col-8"><span>{{ $address->governorate->name ?? 'N/A' }}</span></dd>
 
-                                        <dt class="col-4">Full Address:</dt>
-                                        <dd class="col-8" dir="auto"><span>{{ $address->full_address }}</span></dd>
+                                            <dt class="col-4">Full Address:</dt>
+                                            <dd class="col-8" dir="auto"><span>{{ $address->full_address }}</span></dd>
 
-                                        @if ($address->gps_link)
-                                            <dt class="col-4">GPS Link:</dt>
-                                            <dd class="col-8"><span><a href="{{ $address->gps_link }}"
-                                                        target="_blank">{{ $address->gps_link }}</a></span></dd>
-                                        @endif
+                                            @if ($address->gps_link)
+                                                <dt class="col-4">GPS Link:</dt>
+                                                <dd class="col-8"><span><a href="{{ $address->gps_link }}"
+                                                            target="_blank">{{ $address->gps_link }}</a></span></dd>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
+
         {{-- When No Addresses --}}
         @if ($addresses->isEmpty())
             <div class="row">

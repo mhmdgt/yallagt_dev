@@ -208,7 +208,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
-                                    <input type="number" class="form-control" name="price" value="{{ $car->price }}">
+                                    <input type="text" class="form-control" name="price" value="{{ number_format($car->price, 0, '.', ',') }}" oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>

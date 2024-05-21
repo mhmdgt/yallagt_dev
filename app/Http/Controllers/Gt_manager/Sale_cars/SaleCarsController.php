@@ -193,7 +193,7 @@ class SaleCarsController extends Controller
             'color' => $request->input('color'),
             'condition' => $request->input('condition'),
             'payment' => $request->input('payment'),
-            'price' => $request->input('price'),
+            'price' => str_replace(',', '', $request->input('price')),
             'description' => $request->input('description'),
             'bodyShape' => $request->input('bodyShape'),
             'transmission' => $request->input('transmission'),
@@ -275,7 +275,7 @@ class SaleCarsController extends Controller
             'color' => $request->input('color'),
             'condition' => $request->input('condition'),
             'payment' => $request->input('payment'),
-            'price' => $request->input('price'),
+            'price' => str_replace(',', '', $request->input('price')),
             'description' => $request->input('description'),
             'bodyShape' => $request->input('bodyShape'),
             'transmission' => $request->input('transmission'),
@@ -375,7 +375,7 @@ class SaleCarsController extends Controller
         }
 
         Session::flash('success', 'Updated Successfully');
-        return redirect()->route('sale-car.pending');
+        return redirect()->route('yalla-index');
 
     }
     // -------------------- Method -------------------- //
@@ -487,9 +487,14 @@ class SaleCarsController extends Controller
         $engineCCS = EngineCc::orderBy('name')->get();
         $governorates = Governorate::orderBy('name')->get();
         $features = Feature::orderBy('name')->get();
+        $conditions = SaleCondition::orderBy('name')->get();
+        $paymentMethods = PaymentMethods::orderBy('name')->whereIn('id', [1, 4])->get();
+
 
         return view('yalla-gt.pages.sale_cars.edit',
-            compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates'));
+            compact('car', 'brands', 'models', 'trans_types', 'shapes', 'EngineAspirations', 'FuelTypes', 'colors', 'engineCCS', 'EngineKMS', 'features', 'governorates',
+            'conditions', 'paymentMethods'
+        ));
     }
     // -------------------- YALLA GT / Show -------------------- //
     public function gtIndex()

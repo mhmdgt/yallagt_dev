@@ -34,7 +34,7 @@
                                 <i class="bi bi-plus-circle"></i>
                                 <p class="ml-2 mr-2"> Sell </p>
                             </a> --}}
-                            <a href="{{route('cart.index')}}"><img width="60"
+                            <a href="{{route('user-carts.index')}}"><img width="60"
                                     src="{{ asset('yalla_gt') }}/media/icon/shopping-cart-header-solid.png"
                                     alt=""></a>
                         </div>

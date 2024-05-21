@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers\Gt_manager\Stock_cars;
 
-use App\Http\Controllers\Controller;
 use App\Models\CarBrand;
-use App\Models\CarBrandModel;
+use App\Models\EngineCc;
+use App\Models\FuelType;
 use App\Models\StockCar;
+use App\Models\BodyShape;
+use Illuminate\Http\Request;
+use App\Models\CarBrandModel;
 use App\Models\StockCarImage;
 use App\Models\TemporaryFile;
-use Illuminate\Http\Request;
+use App\Models\EngineAspiration;
+use App\Models\StockCarCategory;
+use App\Models\TransmissionType;
+use App\Http\Controllers\Controller;
+use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Drivers\Imagick\Driver;
-use Intervention\Image\ImageManager;
 
 class StockCarsController extends Controller
 {
@@ -341,28 +347,44 @@ class StockCarsController extends Controller
         // Calculate min and max prices for each stock car
         foreach ($brandModels as $brandModel) {
             foreach ($brandModel->stockCars as $stockCar) {
+                $categories = $stockCar->stockCarCategories;
+
                 $prices = $stockCar->stockCarCategories->pluck('price');
                 $stockCar->min_price = $prices->min();
                 $stockCar->max_price = $prices->max();
                 $stockCar->category_count = $stockCar->stockCarCategories->count();
+
+                // Get the slug of the category with the lowest price
+                $lowestPriceCategory = $categories->sortBy('price')->first();
+                $stockCar->lowest_price_category_slug = $lowestPriceCategory ? $lowestPriceCategory->slug : null;
             }
         }
 
         // Uncomment to debug and see the output
-        // dd($brandModels);
+        // dd($stockCar->lowest_price_category_slug);
 
         // Return the view with the necessary data
         return view('yalla-gt.pages.stock_cars.list', compact('brandData', 'brandModels'));
     }
     // -------------------- GT-Functions -------------------- //
-    public function gtShow($slug , $categorySlug)
+    public function gtShow($slug, $categorySlug)
     {
 
         $stockCar = StockCar::getByTranslatedSlug($slug)->with('images', 'stockCarCategories')->first();
+        $lowest_category = StockCarCategory::Where('slug', $categorySlug)->get()->first();
 
-        dd($stockCar);
+        $brandData = CarBrand::Where('id', $stockCar->brand)->get()->first();
+        $brandModel = CarBrandModel::Where('car_brand_id', $brandData->id)->get()->first();
+        $bodyShape = BodyShape::Where('id', $lowest_category->body_shape_id)->get()->first();;
+        $fuelType = FuelType::Where('id', $lowest_category->fuel_type_id)->get()->first();;
+        $enginAspiration = EngineAspiration::Where('id', $lowest_category->engine_aspiration_id)->get()->first();;
+        $transmissionType = TransmissionType::Where('id', $lowest_category->transmission_type_id)->get()->first();;
+        $engineCapacitie = EngineCc::Where('id', $lowest_category->engine_cc_id)->get()->first();;
 
-        return view('yalla-gt.pages.stock_cars.show');
+        return view('yalla-gt.pages.stock_cars.show',
+            compact('stockCar', 'lowest_category', 'brandData', 'brandModel',
+            'bodyShape', 'fuelType', 'enginAspiration', 'transmissionType', 'engineCapacitie',
+            ));
     }
 
 }

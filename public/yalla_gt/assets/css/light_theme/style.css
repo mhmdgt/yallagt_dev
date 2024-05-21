@@ -17948,28 +17948,13 @@ color: #818181;
     /* Hide overflow */
     flex-shrink: 0;
     /* Prevent the image from shrinking */
-    margin-right: 10px;
+    margin-right: 18px;
     /* Add space between the image and the title */
     position: relative;
     /* Add positioning context for absolutely positioned content */
 }
 
-.product-image {
-    position: absolute;
-    /* Position the image absolutely within its container */
-    top: 50%;
-    /* Align the top of the image to the middle of the container */
-    left: 50%;
-    /* Align the left side of the image to the center of the container */
-    transform: translate(-50%, -50%);
-    /* Center the image horizontally and vertically */
-    max-width: 100%;
-    /* Ensure the image fits within the container */
-    max-height: 100%;
-    /* Ensure the image fits within the container */
-    object-fit: contain;
-    /* Scale the image to maintain its aspect ratio and fit within the container */
-}
+
 
 .product {
     display: flex;
@@ -18226,12 +18211,26 @@ color: #818181;
 
 
 }
-
-
+.product-image {
+    position: absolute;
+    /* Position the image absolutely within its container */
+    top: 50%;
+    /* Align the top of the image to the middle of the container */
+    left: 50%;
+    /* Align the left side of the image to the center of the container */
+    transform: translate(-50%, -50%);
+    /* Center the image horizontally and vertically */
+    max-width: 100%;
+    /* Ensure the image fits within the container */
+    max-height: 100%;
+    /* Ensure the image fits within the container */
+    object-fit: contain;
+    /* Scale the image to maintain its aspect ratio and fit within the container */
+}
 .product-image-container {
     width: 100%;
     /* Adjust as necessary */
-    height: 60vh;
+    height:60vh;
     /* Adjust as necessary */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Optional: add some shadow for better appearance */
@@ -18242,6 +18241,10 @@ color: #818181;
     /* Center vertically */
     overflow: hidden;
     /* Ensure content does not overflow */
+}
+.product-image img
+{
+    width: 50px;
 }
 
 .product-main-img {
@@ -18456,4 +18459,25 @@ color: #818181;
     padding: 0; /* Remove padding */
     font: inherit; /* Inherit font styles from the parent */
     cursor: pointer; /* Change cursor to pointer */
+}
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between items */
+}
+
+.category-item {
+    margin-top: 6px;
+
+}
+
+.category-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-price {
+    font-size: 1rem;
+    color: #555;
 }

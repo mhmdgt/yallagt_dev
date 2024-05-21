@@ -72,12 +72,12 @@
                         <div class="card mt-2">
                             <div class="card-body">
                                 <h4>Your safety matters to us!</h4>
-                                <ul>
-                                    <li class="mt-1">- Only meet in public / crowded places for example metro stations and
+                                <ul class="text-dark">
+                                    <li class="mt-1">❖ Only meet in public, crowded places for example metro stations and
                                         malls.</li>
-                                    <li class="mt-1">- Never go alone to meet a buyer / seller, always take someone with
+                                    <li class="mt-1">❖ Never go alone to meet a buyer, seller, always take someone with
                                         you.</li>
-                                    <li class="mt-1">- Check and inspect the product properly before purchasing it.</li>
+                                    <li class="mt-1">❖ Check and inspect the product properly before purchasing it.</li>
                                 </ul>
                             </div>
                         </div>

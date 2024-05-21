@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:250',
+            'name' => 'required|max:250|unique:stock_car_categories,name',
             'price' => 'required',
             'status' => 'in:hidden,active',
             'rims_size' => 'nullable|integer',
