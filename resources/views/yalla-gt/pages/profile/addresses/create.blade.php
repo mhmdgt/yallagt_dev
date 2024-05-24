@@ -2,63 +2,7 @@
 @section('content')
     <div class="page-div">
         @include('yalla-gt.partials.account_head')
-        {{-- Addresses --}}
-        @if (!$addresses->isEmpty())
-            <div class="row">
-                <div class="col-md-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            {{-- Title --}}
-                            <div class="p-2 mb-2 text-dark ar-style">
-                                <div class="d-flex align-items-center">
-                                    <a href="{{ route('user.addressCreate') }}">
-                                        <button class="rounded btn gradient-8790f6 text-white" type="submit">Add New</button>
-                                    </a>
-                                    <i class="bi bi-geo-alt ml-1 mr-1"></i>
-                                    <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
-                                </div>
-                                <p class="mt-2 mb-2 gt-gray">Manage your saved addresses</p>
-                            </div>
-                            {{-- Stored Address --}}
-                            @foreach ($addresses as $address)
-                                <div class="card mb-3 ar-style">
-                                    <div class="card-body">
-                                        <a href="{{ route('user.addressEdit' , $address->id )}}" class="edit-link">Edit</a>
-
-
-                                        <div class="row mt-3">
-                                            <dt class="col-4">Name:</dt>
-                                            <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
-
-                                            <dt class="col-4">Phone:</dt>
-                                            <dd class="col-8"><span>{{ $address->phone }}</span></dd>
-
-                                            <dt class="col-4">City:</dt>
-                                            <dd class="col-8"><span>{{ $address->governorate->name ?? 'N/A' }}</span></dd>
-
-                                            <dt class="col-4">Address:</dt>
-                                            <dd class="col-8" dir="auto"><span>{{ $address->full_address }}</span></dd>
-
-                                            <dt class="col-4">Type:</dt>
-                                            <dd class="col-8" dir="auto"><span>{{ $address->type }}</span></dd>
-
-                                            {{-- @if ($address->gps_link)
-                                                <dt class="col-4">GPS Link:</dt>
-                                                <dd class="col-8"><span><a href="{{ $address->gps_link }}"
-                                                            target="_blank">{{ $address->gps_link }}</a></span></dd>
-                                            @endif --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-
         {{-- When No Addresses --}}
-        @if ($addresses->isEmpty())
             <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="card">
@@ -66,7 +10,7 @@
                             {{-- Title --}}
                             <div class="p-2 mb-4 text-dark ar-style">
                                 <i class="bi bi-geo-alt ml-1 mr-1"></i>
-                                <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
+                                <span style="font-size: 22px; font-weight: 500;">Add New Address</span>
                                 <p class="mt-2 gt-gray">Manage your saved addresses for fast and easy checkout across our
                                     marketplaces</p>
                             </div>
@@ -173,7 +117,6 @@
                     </div>
                 </div>
             </div>
-        @endif
     </div>
 @endsection
 

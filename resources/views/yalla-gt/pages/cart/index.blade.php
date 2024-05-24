@@ -1,31 +1,30 @@
 @extends('yalla-gt.layout.app')
 @section('content')
     <div class="page-div rtl-direction">
+        @if ($cart == null )
+            <div class="row align-items-center mt-4 mb-5">
+                <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                    <h2 class="font-weight-light">Looking For Spare Parts?</h2>
+                    <p class="font-italic text-muted mb-4">"Look no further! At Yallagt,
+                        we've got you covered. Explore our online store for a wide range of spare parts, all
+                        conveniently
+                        available for purchase directly from us. With our same-day delivery service, you can get the
+                        parts
+                        you need delivered to your doorstep as quickly as possible. Trust us to provide high-quality
+                        parts
+                        and fast service, so you can get back on the road in no time."
+                    </p>
+                    <a href="{{route('product.manufacturers-index')}}" class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">Shop Now</a>
+                </div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
+                        src="{{ asset('yalla_gt/media/cart/empty_cart.png') }}" alt=""
+                        class="img-fluid mb-4 mb-lg-0"></div>
+            </div>
+        @else
         <div class="card">
             <div class="card-body p-4">
                 <div class="row">
                     {{-- If nooooooo Items --}}
-                    @if ($cart == null )
-                        <div class="row align-items-center mt-5 mb-5">
-                            <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-                                <h2 class="font-weight-light">Your ad is free now</h2>
-                                <p class="font-italic text-muted mb-4">"Win With Us at Yallagt, Sell your car, hassle-free
-                                    and
-                                    commission-free. Our platform offers you the opportunity to list your vehicle without
-                                    any fees,
-                                    ensuring a seamless selling experience. Take advantage of our commitment to providing a
-                                    transparent
-                                    and cost-effective solution for selling your car. Join our community today and let's win
-                                    together."
-                                </p>
-                                <a href="{{ route('gt_car.create') }}" class="btn btn-light px-5 rounded-pill shadow-sm">Sell
-                                    You Car</a>
-                            </div>
-                            <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
-                                    src="{{ asset('yalla_gt/media/about_us/4136944.png') }}" alt=""
-                                    class="img-fluid mb-4 mb-lg-0"></div>
-                        </div>
-                    @else
                     {{-- Items --}}
                     <div class="col-lg-7">
                         {{-- NAV --}}

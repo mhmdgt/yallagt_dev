@@ -17761,7 +17761,7 @@ li.selected {
 
 @media (max-width: 620px) {
     .product_card_cart {
-        width: 50px;
+        width: 40px;
         margin-right: auto;
         margin-left: auto;
     }
@@ -18259,7 +18259,7 @@ li.selected {
 }
 
 .product_show_box {
-    max-height: 360px; /* Adjust this value as needed */
+    max-height: 380px; /* Adjust this value as needed */
     overflow: hidden; /* Ensures no overflow beyond max-height */
 }
 
@@ -18268,8 +18268,6 @@ li.selected {
     max-width: 100%;
     object-fit: contain;
 }
-
-
 
 
 .other-images-box {
@@ -18463,6 +18461,22 @@ li.selected {
 
 .edit-link {
     color: #1db954;
+    /* Use the same color as your button */
+    text-decoration: underline;
+    /* Add underline to the text */
+    background: none;
+    /* Remove background */
+    border: none;
+    /* Remove border */
+    padding: 0;
+    /* Remove padding */
+    font: inherit;
+    /* Inherit font styles from the parent */
+    cursor: pointer;
+    /* Change cursor to pointer */
+}
+.del-link {
+    color: #FF0000;
     /* Use the same color as your button */
     text-decoration: underline;
     /* Add underline to the text */

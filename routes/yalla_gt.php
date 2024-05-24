@@ -34,9 +34,12 @@ Route::group(
         Route::controller(UserController::class)->prefix('user')->name('user.')->group(function () {
             Route::get('/profile', 'index')->name('profile');
             Route::get('/ads', 'ads')->name('ads');
-
+            // Adresses
             Route::get('/addresses', 'addressesIndex')->name('addressesIndex');
-            Route::post('/addresses-store', 'addressesStore')->name('addressesStore');
+            Route::get('/addresses-create', 'addressCreate')->name('addressCreate');
+            Route::post('/addresses-store', 'addressStore')->name('addressStore');
+            Route::get('{id}/addresses-edit', 'addressEdit')->name('addressEdit');
+            Route::put('{id}/addresses-update', 'addressUpdate')->name('addressUpdate');
 
             Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
             Route::put('/update-profile', 'updateProfile')->name('update-profile');

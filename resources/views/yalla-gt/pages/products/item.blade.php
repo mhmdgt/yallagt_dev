@@ -8,14 +8,14 @@
                         {{-- @foreach ($product_listing->skus as $sku) --}}
                         {{-- Image Section --}}
                         <div class="col-md-4">
-                            <div class="border rounded mb-3 d-flex justify-content-center owl-carousel product_show_box product-main-img img-fluid"
+                            <div class="border rounded mb-3 owl-carousel product_show_box product-main-img img-fluid"
                                 id="image-carousel">
                                 @php
                                     $images = $sku->images->sortByDesc('main_img')->values();
                                 @endphp
                                 @foreach ($images as $index => $image)
                                     <div>
-                                        <img src="{{ display_img($image->name) }}" alt="Product Image">
+                                        <img src="{{ display_img($image->name) }}" alt="Product_Image">
                                     </div>
                                 @endforeach
                             </div>

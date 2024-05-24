@@ -100,7 +100,13 @@ class UserController extends Controller
 
     }
     // -------------------- Method -------------------- //
-    public function addressesStore(Request $request)
+    public function addressCreate()
+    {
+        $governorates = Governorate::orderBy('name')->get();
+        return view('yalla-gt.pages.profile.addresses.create',  compact('governorates'));
+    }
+    // -------------------- Method -------------------- //
+    public function addressStore(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([
@@ -112,6 +118,7 @@ class UserController extends Controller
             'street' => 'required|string|max:255',
             'full_address' => 'required|string|max:255',
             'gps_link' => 'nullable|url', // Ensure GPS link is a valid URL
+            'type' => 'required|in:home,work',
         ]);
 
         // dd($validatedData);
@@ -123,7 +130,41 @@ class UserController extends Controller
         UserAddress::create($validatedData);
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Address saved successfully.');
+        return redirect()->route('user.addressesIndex')->with('success', 'Address saved successfully.');
     }
+    // -------------------- Method -------------------- //
+    public function addressEdit($id)
+    {
+        $user_address = UserAddress::Where('id' , $id)->get()->first();
+        $governorates = Governorate::get();
+// dd($user_address);
+        return view('yalla-gt.pages.profile.addresses.edit',  compact('user_address', 'governorates'));
+    }
+    // -------------------- Method -------------------- //
+    public function addressUpdate(Request $request, $id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'governorate_id' => 'required|exists:governorates,id',
+            'area' => 'required|string|max:255',
+            'building_number' => 'required',
+            'street' => 'required|string|max:255',
+            'full_address' => 'required|string|max:255',
+            'gps_link' => 'nullable|url', // Ensure GPS link is a valid URL
+            'type' => 'required|in:home,work',
+        ]);
+
+        // Find the existing address by ID
+        $user_address = UserAddress::findOrFail($id);
+
+        // Update the address with the validated data
+        $user_address->update($validatedData);
+
+        // Redirect back with a success message
+        return redirect()->route('user.addressesIndex')->with('success', 'Address updated successfully.');
+    }
+
 
 }

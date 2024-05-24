@@ -139,7 +139,7 @@
                                             <i class="bi bi-stopwatch"></i> <span
                                                 class="h6">{{ $car->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <div class="detailedSearch__content--badge row no-gutters card-text-4"
+                                        <div class="mt-2 detailedSearch__content--badge row no-gutters card-text-4"
                                             style="display:flex; flex-direction:column">
                                             <span class="badge badge_icon_5">{{ $kms[$car->km] }}</span>
                                             <span class="badge mt-2">{{ $transmissions[$car->transmission] }}</span>
@@ -342,7 +342,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="p-0 product_card_cart">
-                                                                <a href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" class="addToCartButton">
+                                                                <a href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}"
+                                                                    class="addToCartButton">
                                                                     <img src="yalla_gt/media/cart/cart_icon.png">
                                                                 </a>
                                                             </div>
@@ -376,7 +377,7 @@
                     <div class="brand_container BrandOWL owl-carousel">
                         @foreach ($manufacturerWithSkus as $manufacturer)
                             <div class="single_manufacturer">
-                                <a href="#"><img src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
+                                <a href="{{route('product.manufacturer-products' , $manufacturer->slug )}}"><img src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
                             </div>
                         @endforeach
                     </div>
@@ -575,27 +576,28 @@
     @include('yalla-gt.layout.footer')
 @endsection
 
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all buttons with the class 'addToCartButton'
+            const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Select all buttons with the class 'addToCartButton'
-        const addToCartButtons = document.querySelectorAll('.addToCartButton');
-
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                @if(Auth::check())
-                    // Allow default behavior, which is navigating to the add-to-cart action
-                    return true;
-                @else
-                    event.preventDefault(); // Prevent default navigation
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'You must be logged in to add items to the cart',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Login',
-                    });
-                @endif
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    @if (Auth::check())
+                        // Allow default behavior, which is navigating to the add-to-cart action
+                        return true;
+                    @else
+                        event.preventDefault(); // Prevent default navigation
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'You must be logged in to add items to the cart',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Login',
+                        });
+                    @endif
+                });
             });
         });
-    });
-</script>
+    </script>
+@endsection
