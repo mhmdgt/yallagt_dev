@@ -30,6 +30,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
+                            <input hidden type="text" class="form-control" name="id" value="{{ $stockCarCategory->id }}">
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="name">Name</label>

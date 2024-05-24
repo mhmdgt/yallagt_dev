@@ -25,7 +25,7 @@ Route::controller(AuthController::class)->prefix('users')->name('yalla-gt.')->gr
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     // ------------------------------------ Authorized
     function () {Route::middleware(['auth'])->group(function () {
@@ -40,6 +40,7 @@ Route::group(
 
             Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
             Route::put('/update-profile', 'updateProfile')->name('update-profile');
+
         });
 
         // GT SALE CARS
@@ -72,9 +73,6 @@ Route::group(
         Route::get('/all-products', [ShowProductController::class, 'allProducts'])->name('product.all-products');
         Route::get('product-item/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
 
-        // CART
-        Route::view('/cart', 'yalla-gt.pages.cart.index')->name('cart.index');
-
         // Blogs
         Route::get('/car-blogs', [BlogController::class, 'gtIndex'])->name('blog-gtIndex');
         Route::get('/blog/{slug}', [BlogController::class, 'gtBlog'])->name('blog-post');
@@ -88,3 +86,9 @@ Route::group(
         });
 
     }); // ------------------------------------ END OF YALLAGT
+
+
+
+
+    
+        Route::get('/blog/{slug}', [BlogController::class, 'gtBlog'])->name('blog-post'); // ------------------------------------ END OF YALLAGT

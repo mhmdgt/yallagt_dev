@@ -13,11 +13,7 @@ use App\Models\FuelType;
 use App\Models\StockCar;
 use App\Models\StockCarCategory;
 use App\Models\TransmissionType;
-<<<<<<< HEAD
-use App\Http\Controllers\Controller;
-=======
 use App\Traits\GetModelTrait;
->>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -39,23 +35,15 @@ class StockCarCategoryController extends Controller
         $transmissionTypes = $this->getModel(TransmissionType::class, ['id', 'name']);
         $engineCapacities = $this->getModel(EngineCc::class, ['id', 'name']);
 
-<<<<<<< HEAD
-        return view(
-            'gt-manager.pages.stock_cars.stock_car_categories.create',
-            compact('stock_car_id', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'model', 'brand')
-        );
-=======
         return view('gt-manager.pages.stock_cars.stock_car_categories.create',
             compact('stock_car_id', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'model', 'brand'));
->>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
     }
     // -------------------- store -------------------- //
     public function store(StoreRequest $request)
     {
         $validatedData = $request->validated();
-        $validatedData['slug'] = Str::slug($validatedData['name']);
+        $validatedData['slug'] = str_replace([' ', '/', '\\'], '-', $validatedData['name']);
         $validatedData['stock_car_id'] = ($request->stock_car_id);
-
         $validatedData['price'] = str_replace(',', '', $validatedData['price']);
 
         StockCarCategory::create($validatedData);
@@ -86,22 +74,15 @@ class StockCarCategoryController extends Controller
         $transmissionTypes = $this->getModel(TransmissionType::class, ['id', 'name']);
         $engineCapacities = $this->getModel(EngineCc::class, ['id', 'name']);
 
-<<<<<<< HEAD
-        return view(
-            'gt-manager.pages.stock_cars.stock_car_categories.edit',
-            compact('stockCarCategory', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'brandModel', 'brand')
-        );
-=======
         return view('gt-manager.pages.stock_cars.stock_car_categories.edit',
             compact('stockCarCategory', 'bodyShapes', 'fuelTypes', 'enginAspirations', 'transmissionTypes', 'engineCapacities', 'brandModel', 'brand'));
->>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
     }
     // -------------------- update -------------------- //
     public function update(UpdateRequest $request, $stockCarCategory)
     {
         $stockCarCategory = StockCarCategory::findOrFail($stockCarCategory);
         $validatedData = $request->validated();
-        $validatedData['slug'] = Str::slug($validatedData['name']);
+        $validatedData['slug'] = str_replace([' ', '/', '\\'], '-', $validatedData['name']);
         $validatedData['price'] = str_replace(',', '', $validatedData['price']);
 
         $stockCarCategory->update($validatedData);

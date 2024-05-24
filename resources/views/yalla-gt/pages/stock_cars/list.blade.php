@@ -18,7 +18,7 @@
                                 <div class="col-md-4 mb-4">
                                     <div class="card">
                                         <a class="text-dark" href="{{ route('stock-car.gtShow',
-                                        ['slug' => $stockCar->slug , 'categorySlug' => $stockCar->ca] ) }}">
+                                        ['slug' => $stockCar->slug , 'categorySlug' => $stockCar->lowest_price_category_slug] ) }}">
                                             {{-- image --}}
                                             <div>
                                                 <div class="card-img-container">

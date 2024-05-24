@@ -23,7 +23,7 @@
             </div>
         </div>
         {{-- ====== Content ====== --}}
-        <Form action="{{ route('sale-car.store') }}" id="carForSaleID" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('sale-car.update', $car->slug) }}" id="carForSaleID" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- Brand , Model , Year , Color & Condition --}}
             <div class="row mt-3">
@@ -68,15 +68,15 @@
                                     <label>{{ __('gt_cars_create.bodyShape') }}</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="bodyShape">
-                                            <option value="">{{ __('gt_cars_create.select') }}</option>
+                                            <option>{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($shapes as $shape)
                                                 <option value="{{ $shape->id }}"
-                                                    {{ old('shape') == $shape->id ? 'selected' : '' }}>
+                                                    {{ $car->bodyShape == $shape->id ? 'selected' : '' }}>
                                                     {{ $shape->name }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <x-errors.display-validation-error property="price" />
+                                        <x-errors.display-validation-error property="bodyShape" />
                                     </div>
                                 </div>
                             </div>
@@ -85,11 +85,11 @@
                                     <label>{{ __('gt_cars_create.transmission') }}</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="transmission">
-                                            <option value="">{{ __('gt_cars_create.select') }}</option>
-                                            @foreach ($trans_types as $trans_type)
-                                                <option value="{{ $trans_type->id }}"
-                                                    {{ old('trans_type') == $trans_type->id ? 'selected' : '' }}>
-                                                    {{ $trans_type->name }}
+                                            <option>{{ __('gt_cars_create.select') }}</option>
+                                            @foreach ($trans_types as $type)
+                                                <option value="{{ $type->id }}"
+                                                    {{ $car->transmission == $type->id ? 'selected' : '' }}>
+                                                    {{ $type->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -102,7 +102,7 @@
                                     <label for="year">{{ __('gt_cars_create.year') }}</label>
                                     <div>
                                         <select class="js-example-basic-single w-100" name="year">
-                                            <option value="">{{ __('gt_cars_create.select') }}</option>
+                                            <option value="{{ $car->year }}">{{ $car->year }}</option>
                                             @foreach (getYearsRange() as $year)
                                                 <option value="{{ $year }}">{{ $year }}</option>
                                             @endforeach
@@ -115,10 +115,10 @@
                                     <div>
                                         <select class="js-example-basic-single w-100" name="color">
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
-                                            @foreach ($colors as $color)
-                                                <option value="{{ $color->id }}"
-                                                    {{ old('brand') == $color->id ? 'selected' : '' }}>
-                                                    {{ $color->name }}
+                                            @foreach ($colors as $type)
+                                                <option value="{{ $type->id }}"
+                                                    {{ $car->color == $type->id ? 'selected' : '' }}>
+                                                    {{ $type->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -129,20 +129,17 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.condition') }}</h4>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="condition"
-                                                id="optionsRadios5" value="new">
-                                            {{ __('gt_cars_create.new') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="condition"
-                                                id="optionsRadios6" value="used">
-                                            {{ __('gt_cars_create.used') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
+                                    @foreach ($conditions as $condition)
+                                        <div class="form-check form-check-inline border rounded p-2 h6 text-dark">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="condition"
+                                                    id="optionsRadios{{ $condition->id }}" value="{{ $condition->id }}"
+                                                    {{ $car->condition == $condition->id ? 'checked' : '' }}>
+                                                {{ ucwords($condition->name) }}
+                                                <i class="input-frame"></i>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                     <x-errors.display-validation-error property="condition" />
                                 </div>
                             </div>
@@ -164,11 +161,12 @@
                                 @endphp
                                 @foreach ($images as $index => $image)
                                     <div class="img-container position-relative" id="image-container-{{ $index }}">
-                                        <img src="{{ display_img('media/sale_car_imgs/' . $image->name) }}" alt="">
+                                        <img src="{{ display_img($image->name) }}" alt="">
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
-                                        <input type="hidden" name="images[{{ $index }}][name]" value="{{ $image->name }}">
-                                        <input type="radio" class="select-btn" name="main_img" value="{{ $image->id }}"
-                                            {{ $image->main_img ? 'checked' : '' }}>
+                                        <input type="hidden" name="images[{{ $index }}][name]"
+                                            value="{{ $image->name }}">
+                                        <input type="radio" class="select-btn" name="main_img"
+                                            value="{{ $image->id }}" {{ $image->main_img ? 'checked' : '' }}>
                                     </div>
                                 @endforeach
                             </div>
@@ -190,27 +188,27 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.payment_method') }}</h4>
-                                    <div class="form-check form-check-inline">
+                                    @foreach ($paymentMethods as $paymentMethod)
+                                    <div class="form-check form-check-inline border rounded p-2 h6 text-dark">
                                         <label class="form-check-label">
                                             <input type="radio" class="form-check-input" name="payment"
-                                                id="optionsRadios7" value="cash">
-                                            {{ __('gt_cars_create.cash') }}
-                                            <i class="input-frame"></i></label>
+                                                id="optionsRadios{{ $paymentMethod->id }}"
+                                                value="{{ $paymentMethod->id }}"
+                                                {{ $car->payment == $paymentMethod->id ? 'checked' : '' }}>
+                                            {{ ucwords($paymentMethod->name) }}
+                                            <i class="input-frame"></i>
+                                        </label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="payment"
-                                                id="optionsRadios8" value="down_payment">
-                                            {{ __('gt_cars_create.downpayment') }}
-                                            <i class="input-frame"></i></label>
-                                    </div>
+                                @endforeach
                                     <x-errors.display-validation-error property="payment" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
-                                    <input type="number" class="form-control" name="price" placeholder="100,000,000">
+                                    <h4 class="mt-2 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
+                                    <input type="text" class="form-control" name="price"
+                                        value="{{ number_format($car->price, 0, '.', ',') }}"
+                                        oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>
@@ -231,7 +229,7 @@
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($FuelTypes as $type)
                                                 <option value="{{ $type->id }}"
-                                                    {{ old('type') == $type->id ? 'selected' : '' }}>
+                                                    {{ $car->fuelType == $type->id ? 'selected' : '' }}>
                                                     {{ $type->name }}
                                                 </option>
                                             @endforeach
@@ -248,7 +246,7 @@
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($engineCCS as $type)
                                                 <option value="{{ $type->id }}"
-                                                    {{ old('type') == $type->id ? 'selected' : '' }}>
+                                                    {{ $car->cc == $type->id ? 'selected' : '' }}>
                                                     {{ $type->name }}
                                                 </option>
                                             @endforeach
@@ -268,7 +266,7 @@
                                             <option value="">{{ __('gt_cars_create.select') }}</option>
                                             @foreach ($features as $feature)
                                                 <option value="{{ $feature->id }}"
-                                                    {{ in_array($feature->id, (array) old('features', [])) ? 'selected' : '' }}>
+                                                    {{ in_array($feature->id, json_decode($car->features)) ? 'selected' : '' }}>
                                                     {{ $feature->name }}
                                                 </option>
                                             @endforeach
@@ -284,7 +282,7 @@
                                         <option value="">{{ __('gt_cars_create.select') }}</option>
                                         @foreach ($EngineAspirations as $type)
                                             <option value="{{ $type->id }}"
-                                                {{ old('type') == $type->id ? 'selected' : '' }}>
+                                                {{ $car->aspiration == $type->id ? 'selected' : '' }}>
                                                 {{ $type->name }}
                                             </option>
                                         @endforeach
@@ -297,7 +295,7 @@
                                         <option value="">{{ __('gt_cars_create.select') }}</option>
                                         @foreach ($EngineKMS as $type)
                                             <option value="{{ $type->id }}"
-                                                {{ old('type') == $type->id ? 'selected' : '' }}>
+                                                {{ $car->km == $type->id ? 'selected' : '' }}>
                                                 {{ $type->name }}
                                             </option>
                                         @endforeach
@@ -316,8 +314,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">{{ __('gt_cars_create.Description') }}</label>
-                                <textarea class="form-control" id="description" name="description" rows="5" maxlength="4200"
-                                    style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="8" maxlength="4200"
+                                style="max-height: 200px;" placeholder="{{ __('gt_cars_create.EnterDescription') }}">{{ $car->description ?? '' }}</textarea>
                                 <x-errors.display-validation-error property="description" />
                             </div>
                         </div>
@@ -336,10 +334,10 @@
                                     <label>{{ __('gt_cars_create.Governorate') }}</label>
                                     <select class="js-example-basic-single w-100" name="governorate">
                                         <option value="">{{ __('gt_cars_create.select') }}</option>
-                                        @foreach ($governorates as $governorate)
-                                            <option value="{{ $governorate->id }}"
-                                                {{ old('governorate') == $governorate->id ? 'selected' : '' }}>
-                                                {{ $governorate->name }}
+                                        @foreach ($governorates as $type)
+                                            <option value="{{ $type->id }}"
+                                                {{ $car->governorate == $type->id ? 'selected' : '' }}>
+                                                {{ $type->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -370,13 +368,14 @@
                     <div class="profile-card gradient-green-bg"
                         onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
                         <div class="col-12 d-flex align-items-center justify-content-center">
-                            <button type="button" style="border: none; background: none;">
-                                <h4 class="align-items-center text-white">
-                                    <i class='ml-2 mr-2 bx bxs-add-to-queue' style='color:#ffffff'></i>
-                                    Update
-                                </h4>
-
-                            </button>
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <button type="button" style="border: none; background: none;">
+                                    <span class="align-items-center text-white font-weight-bold">
+                                        <i class="bi bi-bookmark-star" style='color:#ffffff'></i>
+                                        Update
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -387,8 +386,8 @@
                 <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-green-bg"
                     style="border-radius: 5px;">
                     <button type="button" style="border: none; background: none;">
-
-                        <span class="ml-2 mr-2 text-white sell-now-text">Update
+                        <i class="bi bi-bookmark-star" style='color:#ffffff'></i>
+                        <span class="text-white sell-now-text">Update
                         </span>
                     </button>
                 </span>

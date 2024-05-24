@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\GtManager\StockCarCategory;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -22,7 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:250',
+            'name' => ['required', 'string' , 'max:200', Rule::unique('stock_car_categories', 'name')->ignore($this->id)],
             'price' => 'required',
             'status' => 'required|in:hidden,active',
             'rims_size' => 'nullable|integer',

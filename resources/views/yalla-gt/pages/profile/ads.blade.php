@@ -50,9 +50,10 @@
                             <div class="card-text mt-2">
                                 <i class="bi bi-geo-alt"></i>
                                 <span class="badge_icon mr-2 h6">{{ $governorates[$car->governorate] }}</span>
+                            </div>
+                            <div class="card-text mt-2">
                                 <i class="bi bi-calendar-check"></i>
-                                <span
-                                    class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
+                                <span class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
                             </div>
                         </div>
 

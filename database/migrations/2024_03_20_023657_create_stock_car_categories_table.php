@@ -37,7 +37,6 @@ return new class extends Migration
             $table->foreignId('transmission_type_id')->nullable()->references('id')->on('transmission_types')->onDelete('set null');
             $table->foreignId('engine_aspiration_id')->nullable()->references('id')->on('engine_aspirations')->onDelete('set null');
             $table->foreignId('engine_cc_id')->nullable()->references('id')->on('engine_ccs')->onDelete('set null');
-            $table->foreignId('engine_km_id')->nullable()->references('id')->on('engine_kms')->onDelete('set null');
 
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();

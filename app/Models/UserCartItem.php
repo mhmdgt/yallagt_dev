@@ -17,10 +17,8 @@ class UserCartItem extends Model
         return $this->belongsTo(UserCart::class);
     }
     // -------------------- Method -------------------- //
-
     public function productSku()
     {
-        return $this->belongsTo(ProductSku::class);
+        return $this->belongsTo(ProductSku::class, 'product_sku_id');
     }
-
 }
