@@ -287,7 +287,7 @@
             </div>
             {{-- Submit --}}
             <div class="form-group float-right">
-                <button class="btn btn-primary mr-2" type="submit">
+                <button class="btn btn-success mr-2" type="submit">
                     <i class="bi bi-bookmark-check"></i>
                     Update
                 </button>

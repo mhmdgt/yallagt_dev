@@ -96,7 +96,7 @@
                 </div>
             </div> --}}
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">Submit</button>
+            <button class="btn btn-success float-right" type="submit">Submit</button>
         </form>
     </div>
 @endsection

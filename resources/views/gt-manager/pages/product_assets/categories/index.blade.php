@@ -118,7 +118,7 @@
                                             src="{{ asset('gt_manager/media/no_image.jpg') }}" alt="...">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                        <button type="submit" id="add_employee_btn" class="btn btn-success">Save
                                             changes</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>

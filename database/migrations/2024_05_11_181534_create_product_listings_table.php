@@ -14,24 +14,25 @@ return new class extends Migration
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('storehouse_id');
-            $table->string('manufacturer_id');
-            $table->string('product_id');
+            $table->unsignedBigInteger('storehouse_id')->references('id')->on('storehouses')->cascadeOnDelete();
+            $table->unsignedBigInteger('manufacturer_id')->references('id')->on('manufacturers')->cascadeOnDelete();
+            $table->unsignedBigInteger('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->string('sku');
-
+            $table->unsignedBigInteger('product_sku_id')->references('id')->on('product_skus')->cascadeOnDelete();
             $table->integer('qty');
             $table->integer('selling_price');
-
             $table->enum('status', ['active', 'hidden'])->default('active');
-
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->string('updated_user_type')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            // Add composite unique index to ensure a SKU can only be added once per storehouse
+            $table->unique(['storehouse_id', 'sku']);
         });
     }
+
 
     /**
      * Reverse the migrations.

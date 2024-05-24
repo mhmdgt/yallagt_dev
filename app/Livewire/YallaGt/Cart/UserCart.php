@@ -3,47 +3,62 @@
 namespace App\Livewire\YallaGt\Cart;
 
 use Livewire\Component;
+use App\Models\UserCartItem;
 use App\Models\UserCart as Cart;
+
 
 class UserCart extends Component
 {
 
     public $cart;
-    public $total;
-    public function mount(){
-        $this->cart = Cart::all();
-        $this->total = Cart::count();
-    }
-    public function increment($id)
+    public $cartItems = [];
+
+    public function mount()
     {
-        $cart = Cart::find($id);
-        $cart->increment('quantity');
-        $this->emit('refreshCart');
+        $this->loadCart();
     }
 
-    public function decrement($id)
+    public function loadCart()
     {
-        $cart = Cart::find($id);
-        $cart->decrement('quantity');
-        $this->emit('refreshCart');
+        $this->cart = Cart::with([
+            'userCartItems.productSku.images' => function ($query) {
+                $query->where('main_img', true);
+            },
+            'userCartItems.productSku.listings',
+            'userCartItems'
+        ])->whereUserId(auth()->id())->first();
+
+        if ($this->cart) {
+            $this->cartItems = $this->cart->userCartItems->toArray();
+        } else {
+            $this->cartItems = [];
+        }
     }
-    public function destroy($id)
+
+    public function findCartItem($id)
     {
-        Cart::destroy($id);
-        $this->emit('refreshCart');
+        dd($id);
+        return UserCartItem::find($id);
+    }
+
+    public function change()
+    {
+        dd('gg');
+       ;
+      
     }
 
     public function remove($id)
     {
-        Cart::findOrFail($id)->delete();
+        $cartItem = $this->findCartItem($id);
+        if ($cartItem) {
+            $cartItem->delete();
+            $this->loadCart();
+        }
     }
-
-
-
-
 
     public function render()
     {
-        return view('livewire.yalla-gt.cart.user-cart');
+        return view('livewire.yalla-gt.cart.user-cart', ['cart' => $this->cart]);
     }
 }

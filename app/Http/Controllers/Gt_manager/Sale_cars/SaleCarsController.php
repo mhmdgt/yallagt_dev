@@ -499,7 +499,9 @@ class SaleCarsController extends Controller
     // -------------------- YALLA GT / Show -------------------- //
     public function gtIndex()
     {
-        $brandsWithSaleCars = CarBrand::whereHas('models.saleCars')->get(['id', 'name', 'slug', 'logo']);
+        $brandsWithSaleCars = CarBrand::whereHas('models.saleCars', function ($query) {
+            $query->where('status', 'approved');
+        })->get(['id', 'name', 'slug', 'logo']);
         return view('yalla-gt.pages.sale_cars.index', compact('brandsWithSaleCars'));
 
     }
@@ -510,10 +512,14 @@ class SaleCarsController extends Controller
         $brandData = CarBrand::getByTranslatedSlug($slug)->first();
 
         // Get brand models with sale cars
-        $brandModels = CarBrandModel::whereHas('saleCars')
-            ->where('car_brand_id', $brandData->id)
-            ->with('saleCars')
-            ->get();
+        $brandModels = CarBrandModel::where('car_brand_id', $brandData->id)
+        ->whereHas('saleCars', function ($query) {
+            $query->where('status', 'approved');
+        })
+        ->with(['saleCars' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+        ->get();
 
         // Collect all transmission IDs from the sale cars
         $transmissionIds = $brandModels->flatMap(function ($model) {

@@ -118,6 +118,7 @@ class ProductController extends Controller
         $category = ProductCategory::find($request->category_id);
         $subcategory = ProductSubCategory::find($request->subcategory_id);
         $firstImage = 1;
+
         // Creating the slug
         $manufacturer = Manufacturer::find($request->manufacturer_id);
         $manufacturer_en = $manufacturer->name;
@@ -128,9 +129,12 @@ class ProductController extends Controller
 
         $slug_en = implode('-', [$manufacturer_en, $name_en]);
         $slug_ar = implode('-', [$manufacturer_ar, $name_ar]);
+
         // Generate slugs using the helper function
-        $slug_en = generate_slug($slug_en);
-        $slug_ar = generate_slug($slug_ar);
+        // $slug_en = generate_slug($slug_en);
+        $slug_en = str_replace(' ', '-', $slug_en);
+        // $slug_ar = generate_slug($slug_ar);
+        $slug_ar = str_replace(' ', '-', $slug_ar);
         // Saving the valuses of each slug langauage
         $slug = ["en" => $slug_en, "ar" => $slug_ar];
 
@@ -149,7 +153,7 @@ class ProductController extends Controller
             'sku' => $sku,
             'sku_name' => ['en' => $request->sku_name_en, 'ar' => $request->sku_name_ar],
             'part_number' => $request->part_number,
-            'main_price' => $request->main_price,
+            'main_price' => str_replace(',', '', $request->input('main_price')),
         ]);
         // store images into stock car images table
         foreach ($temporaryImages as $temporaryImage) {

@@ -37,8 +37,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $product->manufacturer->name }}</td>
-                                            <td><a
-                                                    href="{{ route('product-skus.index', $product->slug) }}">{{ $product->name }}</a>
+                                            <td><a href="{{ route('product-skus.index', $product->slug) }}">{{ $product->name }}</a>
                                             </td>
                                             <td>
                                                 @foreach ($product->skus as $sku)

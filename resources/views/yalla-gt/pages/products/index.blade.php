@@ -6,8 +6,10 @@
                 {{-- Title --}}
                 <div class="d-flex align-items-center mb-4">
                     <h3 class="detailedSearch__header--h3">Detailed Search</h3>
-                    <div class=" mr-2 btn btn-primary rounded gradient-green-bg">
+                    <div class=" mr-2 btn text-white rounded gradient-green-bg">
+                        <a href="{{route('product.manufacturers-index')}}" class="text-white">
                         Products
+                    </a>
                     </div>
                 </div>
                 {{-- All Products --}}

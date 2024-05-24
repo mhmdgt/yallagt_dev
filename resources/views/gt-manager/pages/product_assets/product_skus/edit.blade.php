@@ -77,8 +77,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Main price</label>
-                                    <input type="number" class="form-control" name="main_price"
-                                    value="{{ $skuData->main_price }}">
+                                    <input type="main_price" class="form-control" name="main_price"
+                                    value="{{ number_format($skuData->main_price, 0, ',', ',') }}" oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                 </div>
             </div>
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">
+            <button class="btn btn-success float-right" type="submit">
                 <i class="bi bi-bookmark-check"></i>
                 Update
             </button>

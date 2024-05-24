@@ -300,4 +300,5 @@ class BlogController extends Controller
         return view('yalla-gt.pages.blog.show', compact('blog'));
     }
 
+
 }

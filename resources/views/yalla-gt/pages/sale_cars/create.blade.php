@@ -132,7 +132,7 @@
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.condition') }}</h4>
                                     @foreach ($conditions as $condition)
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline border rounded p-2 h6 text-dark">
                                             <label class="form-check-label">
                                                 <input type="radio" class="form-check-input" name="condition"
                                                     id="optionsRadios{{ $condition->id }}" value="{{ $condition->id }}">
@@ -171,7 +171,7 @@
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.payment_method') }}</h4>
                                     @foreach ($paymentMethods as $payment)
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline border rounded p-2 h6 text-dark">
                                             <label class="form-check-label">
                                                 <input type="radio" class="form-check-input" name="payment"
                                                     id="optionsRadios{{ $payment->id }}" value="{{ $payment->id }}">
@@ -187,7 +187,7 @@
                                 <div class="col">
                                     <h4 class="mt-3 mb-3 font-weight-blod">{{ __('gt_cars_create.price') }}</h4>
                                     <input type="text" class="form-control" name="price"
-                                    value="{{ old('price') }}" oninput="formatNumber(this)" placeholder="100,000,000">
+                                    value="{{ old('price') }}" oninput="formatNumber(this)" placeholder="000,000,000">
                                     <x-errors.display-validation-error property="price" />
                                 </div>
                             </div>
@@ -344,7 +344,7 @@
             {{-- Web Submit --}}
             <div class="col-md-12 grid-margin stretch-card mt-4 sell_button">
                 <div class="card">
-                    <div class="profile-card gradient-8790f6" onclick="document.getElementById('carForSaleID').submit();"
+                    <div class="profile-card gradient-green-bg" onclick="document.getElementById('carForSaleID').submit();"
                         style="cursor: pointer;">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <button type="button" style="border: none; background: none;">
@@ -360,7 +360,7 @@
             {{-- Mobile Submit --}}
             <div id="call_nav" class="d-flex align-items-center justify-content-center"
                 onclick="document.getElementById('carForSaleID').submit();" style="cursor: pointer;">
-                <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-8790f6"
+                <span class="col-10 d-flex align-items-center justify-content-center p-2 gradient-green-bg"
                     style="border-radius: 5px;">
                     <button type="button" style="border: none; background: none;">
                         <i class='bx bxs-add-to-queue' style='color:#ffffff'></i>

@@ -18,7 +18,14 @@
                         <span class="placeholder">
                             {{ __('loginPopup.PhoneNumberorEmail') }}
                         </span>
+
+                    </div>
+
+                    <div class="input_box">
+                        <input type="text" name="username" value="{{ old('username') ??''}}">
+                        <label>Name</label>
                         <small class="text-danger d-none" id="login-username-error"></small>
+
                     </div>
                     <div class="input-block">
                         <input type="password" name="password" id="input-text" spellcheck="false">
@@ -39,7 +46,7 @@
                     @csrf
                     <div class="input_field_box">
 
-          <div class="input_box">
+                        <div class="input_box">
                             <input type="text" name="name" value="{{ old('name') ??''}}">
                             <label>Name</label>
                             <small class="text-danger d-none" id="name-error"></small>
@@ -49,27 +56,16 @@
                             <input type="text" name="phone" value="{{ old('phone') ??''}}">
                             <label>Phone Number</label>
                             <small class="text-danger d-none" id="phone-error"></small>
-                                {{ __('loginPopup.phone') }}
-                            </span>
-                            <small class="text-danger d-none" id="phone-error"></small>
-
                         </div>
-                        <div class="input-block">
-                            <input type="text" name="email" id="input-text" required spellcheck="false">
-                            <span class="placeholder">
-                                {{ __('loginPopup.email') }}
-                            </span>
+                        <div class="input_box">
+                            <input type="text" name="email" value="{{ old('email') ??''}}">
+                            <label>Email</label>
                             <small class="text-danger d-none" id="email-error"></small>
-
                         </div>
-                        <div class="input-block">
-                            <input type="password" name="password" id="input-text" required spellcheck="false">
-                            <span class="placeholder">
-                                {{ __('loginPopup.password') }}
-                            </span>
+                        <div class="input_box">
+                            <input type="text" value="{{ old('password') ??''}}" name="password">
+                            <label>Password</label>
                             <small class="text-danger d-none" id="password-error"></small>
-
-
                         </div>
 
 
@@ -80,6 +76,7 @@
                         <a href="#" class="">{{ __('loginPopup.TermsAndConditions') }}</a>
                     </div> --}}
 
+                    <button type="submit">{{ __('loginPopup.CreateAccount') }}</button>
 
                     <div class="contact_link">{{ __('loginPopup.NeedHelp') }}
                         <a href="#" class="ml-1 mr-1">{{ __('loginPopup.ContactUs') }}</a>
@@ -92,6 +89,7 @@
     </div>
 
 </div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -127,69 +125,23 @@
                         
 
                         // Redirect
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                        console.error(xhr.responseText);
-                        var errors = xhr.responseJSON
-                            .errors; // Get validation errors
-                        // Loop through each error
-                        $.each(errors, function(key, value) {
-                            // Find the corresponding error message element by ID and display the error message
-                            $('#' + key + '-error').removeClass('d-none')
-                                .text(value[0]);
-                        });
-                    }
-                });
-            });
-        });
-
-        // #############################login###########################################333
-
-
-
-        $('.login_form').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            var loginForm = $(this);
-            var loginFormData = loginForm.serialize(); // Serialize form data
-
-            // Determine the action URL based on the form
-            var loginActionUrl = loginForm.attr('action');
-
-            // Reset error messages
-            loginForm.find('.text-danger').addClass('d-none').text('');
-
-            // Send AJAX request
-            $.ajax({
-                type: loginForm.attr('method'),
-                url: loginActionUrl,
-                data: loginFormData,
-                success: function(response) {
-                    if (response.success) {
-                        // Redirect
-                        window.location.href = response.redirect;
+                      window.location.href = response.redirect;
+                    } else {
+                        // Handle other cases (if needed)
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Display error message
-                    $('#login-username-error').removeClass('d-none').text(xhr.responseJSON
-                        .username_error);
-                    $('#login-password-error').removeClass('d-none').text(xhr.responseJSON
-                        .password_error);
-
+                    // Handle error response
+                    console.error(xhr.responseText);
                     var errors = xhr.responseJSON.errors; // Get validation errors
                     // Loop through each error
                     $.each(errors, function(key, value) {
                         // Find the corresponding error message element by ID and display the error message
-
                         $('#' + key + '-error').removeClass('d-none').text(value[0]);
-
                     });
+                }
             });
         });
-
 
 // #############################login###########################################333
 
@@ -209,6 +161,7 @@
 
         // Send AJAX request
         $.ajax({
+            type: loginForm.attr('method'),
             url: loginActionUrl,
             data: loginFormData,
             success: function(response) {
@@ -236,8 +189,3 @@
 
     });
 </script>
-
-
-
-
- 

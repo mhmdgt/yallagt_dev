@@ -19,8 +19,8 @@ class ProductListing extends Model
         'selling_price',
         'storehouse_id',
         'status',
+        'product_sku_id'
     ];
-
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {

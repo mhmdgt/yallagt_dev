@@ -58,7 +58,7 @@ class ProductSkusController extends Controller
             'sku' => $sku,
             'sku_name' => ['en' => $request->sku_name_en, 'ar' => $request->sku_name_ar],
             'part_number' => $request->part_number,
-            'main_price' => $request->main_price,
+            'main_price' => str_replace(',', '', $request->input('main_price')),
         ]);
         // store images into stock car images table
         foreach ($temporaryImages as $temporaryImage) {
@@ -118,7 +118,7 @@ class ProductSkusController extends Controller
         $skuData->update([
             'sku_name' => ['en' => $request->sku_name_en, 'ar' => $request->sku_name_ar],
             'part_number' => $request->part_number,
-            'main_price' => $request->main_price,
+            'main_price' => str_replace(',', '', $request->input('main_price')),
             'status' => $request->status,
         ]);
 

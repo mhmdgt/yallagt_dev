@@ -10,7 +10,7 @@
                     <li class="breadcrumb-item"><a>{{ $carBrand->name }}</a></li>
                 </ol>
                 {{-- ====== Modal button ====== --}}
-                <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0" data-toggle="modal"
+                <button type="button" class="btn btn-success btn-icon-text mb-2 mb-md-0" data-toggle="modal"
                     data-target="#addNewCarModal">
                     <i class="bi bi-plus-lg mr-2"></i>
                     Add Model
@@ -95,7 +95,7 @@
                                     alt="No_IMG">
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                <button type="submit" id="add_employee_btn" class="btn btn-success">Save
                                     changes</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
@@ -181,7 +181,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" id="add_employee_btn"
-                                                                class="btn btn-primary">Save
+                                                                class="btn btn-success">Save
                                                                 changes</button>
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
@@ -229,7 +229,7 @@
                                 <small class="text-danger" id='ar_name-error'></small>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                <button type="submit" id="add_employee_btn" class="btn btn-success">Save
                                     changes</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>

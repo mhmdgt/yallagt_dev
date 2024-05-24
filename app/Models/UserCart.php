@@ -16,7 +16,7 @@ class UserCart extends Model
         return $this->belongsTo(User::class);
     }
     // -------------------- Method -------------------- //
-    public function UserCartItems()
+    public function userCartItems()
     {
         return $this->hasMany(UserCartItem::class);
     }

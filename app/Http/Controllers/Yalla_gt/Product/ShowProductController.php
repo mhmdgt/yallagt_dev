@@ -55,7 +55,7 @@ class ShowProductController extends Controller
     // -------------------- Method -------------------- //
     public function manufacturersIndex()
     {
-        $manufacturerWithSkus = Manufacturer::WhereHas('products.skus')->get();
+        $manufacturerWithSkus = Manufacturer::WhereHas('products.skus.listings')->get();
         return view('yalla-gt.pages.products.manufacturers_index', compact('manufacturerWithSkus'));
     }
     // -------------------- Method -------------------- //

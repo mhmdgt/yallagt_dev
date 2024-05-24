@@ -96,7 +96,7 @@ class UserController extends Controller
 
         // dd($addresses);
 
-        return view('yalla-gt.pages.profile.addresses',  compact('governorates', 'addresses'));
+        return view('yalla-gt.pages.profile.addresses.index',  compact('governorates', 'addresses'));
 
     }
     // -------------------- Method -------------------- //
@@ -108,7 +108,7 @@ class UserController extends Controller
             'phone' => 'required|string|max:255',
             'governorate_id' => 'required|exists:governorates,id',
             'area' => 'required|string|max:255',
-            'building_number' => 'required|integer',
+            'building_number' => 'required',
             'street' => 'required|string|max:255',
             'full_address' => 'required|string|max:255',
             'gps_link' => 'nullable|url', // Ensure GPS link is a valid URL
@@ -125,7 +125,5 @@ class UserController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Address saved successfully.');
     }
-
-    // $governorates = Governorate::orderBy('name')->get();
 
 }

@@ -73,8 +73,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label for="exampleInputNumber1">Main price</label>
-                                    <input type="main_price" class="form-control" name="main_price" readonly
-                                        value="{{ $sku->main_price }}">
+                                    <input type="main_price" class="form-control" name="main_price" readonly value="{{ number_format($sku->main_price, 0, ',', ',') }}">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
@@ -91,7 +90,7 @@
                                 @endforeach
                             </div>
                             <a href="{{ route('product-skus.edit', $sku->sku) }}" class="text-white">
-                                <button class="btn btn-primary float-right" type="submit">Edit</button>
+                                <button class="btn btn-success float-right" type="submit">Edit</button>
                             </a>
                         </div>
                     </div>

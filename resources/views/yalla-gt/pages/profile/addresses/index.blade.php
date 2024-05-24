@@ -9,11 +9,14 @@
                     <div class="card">
                         <div class="card-body">
                             {{-- Title --}}
-                            <div class="p-2 mb-4 text-dark ar-style">
-                                <button class="rounded btn gradient-8790f6 text-white" type="submit">Add New Address</button>
-                                <i class="bi bi-geo-alt ml-1 mr-1"></i>
-                                <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
-                                <p class="mt-2 gt-gray">Manage your saved addresses</p>
+                            <div class="p-2 mb-2 text-dark ar-style">
+                                <div class="d-flex align-items-center">
+                                    <button class="rounded btn gradient-8790f6 text-white" type="submit">Add New
+                                        Address</button>
+                                    <i class="bi bi-geo-alt ml-1 mr-1"></i>
+                                    <span style="font-size: 22px; font-weight: 500;">{{ __('profile.MyAddresses') }}</span>
+                                </div>
+                                <p class="mt-2 mb-2 gt-gray">Manage your saved addresses</p>
                             </div>
                             {{-- Stored Address --}}
                             @foreach ($addresses as $address)
@@ -55,7 +58,7 @@
             <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ar-style">
                             {{-- Title --}}
                             <div class="p-2 mb-4 text-dark ar-style">
                                 <i class="bi bi-geo-alt ml-1 mr-1"></i>
@@ -109,7 +112,7 @@
                                 <div class="form-group row pt-0">
                                     <div class="col">
                                         <label>Building number</label>
-                                        <input type="number" class="form-control" name="building_number" value="">
+                                        <input type="text" class="form-control" name="building_number">
                                         <x-errors.display-validation-error property="building_number" />
                                     </div>
 
@@ -137,7 +140,7 @@
                                 </div>
 
                                 <button type="submit"
-                                    class="btn btn-light mt-2 rounded gradient-8790f6 text-white float-right">
+                                    class="btn btn-light mt-2 rounded gradient-green-bg text-white float-right">
                                     <i class="bi bi-bookmark-check"></i>
                                     Save
                                 </button>

@@ -8,12 +8,14 @@
                         {{-- @foreach ($product_listing->skus as $sku) --}}
                         {{-- Image Section --}}
                         <div class="col-md-4">
-                            <div class="border rounded mb-3 d-flex justify-content-center p-3 owl-carousel"
+                            <div class="border rounded mb-3 d-flex justify-content-center owl-carousel product_show_box product-main-img img-fluid"
                                 id="image-carousel">
-                                @foreach ($sku->images as $image)
+                                @php
+                                    $images = $sku->images->sortByDesc('main_img')->values();
+                                @endphp
+                                @foreach ($images as $index => $image)
                                     <div>
-                                        <img class="product-main-img img-fluid" src="{{ display_img($image->name) }}"
-                                            alt="Product Image">
+                                        <img src="{{ display_img($image->name) }}" alt="Product Image">
                                     </div>
                                 @endforeach
                             </div>
@@ -50,21 +52,30 @@
                                     <dd class="col-8"><span>{{ $sku->product->subCategory->name }}</span></dd>
                                 </div>
                                 <hr />
-                                {{-- Cart --}}
+                                {{-- Add To Cart  --}}
                                 <div class="row mb-4">
                                     <div class="col-md-12 d-flex justify-content-between">
-
                                         <div class="btn btn-outline-secondary rounded mr-1 ml-1">
                                             <i class="bi bi-caret-down"></i>
                                             <span class="cart-qty">Quantity</span>
                                         </div>
-
-
+                                        {{-- Buy now Web --}}
                                         <a href="#"
                                             class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block">
                                             Add To Cart
                                         </a>
-
+                                        {{-- Buy now Mobile --}}
+                                        <div id="call_nav" class="d-flex align-items-center"
+                                            onclick="document.getElementById('carForSaleID').submit();">
+                                            <span
+                                                class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
+                                                <button type="button" style="border: none; background: none;">
+                                                    <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
+                                                    <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy
+                                                        Now</span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="ml-4 mr-4 cart-qty-counts">
                                         <div class="cart-btn">
@@ -88,7 +99,7 @@
                         </div>
                         <!-- Description -->
                         <div class="col-lg-8 mb-4">
-                            <div class="border rounded px-3 py-2 bg-white">
+                            <div class="mb-4 border rounded px-3 py-2 bg-white">
                                 <label class="mt-4 p-2 h4 rounded bg-light">
                                     <i class='bx bx-bookmarks'></i>
                                     {{ __('gt_cars_create.Description') }}</label>
@@ -126,6 +137,7 @@
                                 </div>
 
                             </div>
+                            @include('yalla-gt.partials.choose_sale_car')
                         </div>
                         <!-- Samilier Items -->
                         <div class="col-lg-4 mb-4">
@@ -193,28 +205,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- But now Mobile --}}
-                        <div id="call_nav" class="d-flex align-items-center"
-                            onclick="document.getElementById('carForSaleID').submit();">
-                            {{-- <span
-                                    class="col-6 d-flex rounded align-items-center justify-content-center p-2 pro-gradient-grey gt-orange">
-                                    <div style="border: none; background: none; font-size: 24px; font-weight:700;">
-                                        <span class="h6">EGP:</span>
-                                        {{ number_format($single_listing->selling_price, 0, ',', ',') }}
-                                    </div>
-                                </span> --}}
-                            <span
-                                class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
-                                <button type="button" style="border: none; background: none;">
-                                    <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
-                                    <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy Now</span>
-                                </button>
-                            </span>
-                        </div>
-                        {{-- @endforeach --}}
                     @endforeach
-                    @include('yalla-gt.partials.choose_sale_car')
-
                 </div>
             </div>
         </div>

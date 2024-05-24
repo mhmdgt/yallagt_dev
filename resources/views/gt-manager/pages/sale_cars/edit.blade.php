@@ -366,7 +366,7 @@
                 </div>
             </div>
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">Submit form</button>
+            <button class="btn btn-success float-right" type="submit">Submit form</button>
         </Form>
     </div>
 @endsection

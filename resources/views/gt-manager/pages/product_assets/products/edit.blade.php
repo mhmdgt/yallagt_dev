@@ -205,7 +205,7 @@
                 </div>
             </div>
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">
+            <button class="btn btn-success float-right" type="submit">
                 <i class="bi bi-bookmark-check"></i>
                 Update
             </button>
@@ -235,7 +235,7 @@
 
                 // Perform AJAX request to fetch subcategories
                 $.ajax({
-                    url: '/product-subcategories/categories/' + categoryId,
+                    url: '/manage/product-subcategories/categories/' + categoryId,
                     type: 'GET',
                     success: function(data) {
                         var options = '<option value="">Select Subcategory</option>';
