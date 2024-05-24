@@ -7,7 +7,7 @@
                 {{-- Title --}}
                 <div class="d-flex align-items-center mb-4">
                     <h3 class="detailedSearch__header--h3">Detailed Search</h3>
-                    <button class=" mr-2 btn btn-primary rounded gradient-green-bg">
+                    <button class=" mr-2 btn text-white rounded gradient-green-bg">
                         Car Blogs
                     </button>
                 </div>
@@ -27,7 +27,7 @@
                                 <h4 class="card-title text-dark home-blog-title" style="font-size: 20px; font-weight: 600;">
                                     {{ $featuredBlog->title }}
                                 </h4>
-                                <div class="btn btn-primary rounded mt-2">Read more →</div>
+
                             </div>
                         </a>
                     </div>
@@ -57,7 +57,6 @@
                                                     <span>Posted on {{ $blog->created_at->diffForHumans() }}</span>
                                                 </div>
                                             </h4>
-                                            <div class="btn btn-primary rounded mt-2">Read more →</div>
                                         </div>
                                     </div>
                                 </a>

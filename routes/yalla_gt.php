@@ -4,6 +4,7 @@ use App\Http\Controllers\Gt_manager\Blog\BlogController;
 use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
 use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
 use App\Http\Controllers\Yalla_gt\Auth\AuthController;
+use App\Http\Controllers\Yalla_gt\Cart\CheckoutController;
 use App\Http\Controllers\Yalla_gt\Cart\UserCartController;
 use App\Http\Controllers\Yalla_gt\Home\HomeContorller;
 use App\Http\Controllers\Yalla_gt\Product\ShowProductController;
@@ -19,11 +20,6 @@ Route::controller(AuthController::class)->prefix('users')->name('yalla-gt.')->gr
     Route::post('register', 'register')->name('register');
     Route::post('login', 'login')->name('login');
     Route::get('logout', 'logout')->name('logout');
-});
-
-Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{ProductSku}/store', 'store')->name('store');
 });
 
 Route::group(
@@ -54,9 +50,18 @@ Route::group(
             Route::get('/sell', 'gtCreate')->name('create');
         });
 
+        Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
+            Route::view('/', 'yalla-gt.pages.cart.checkout')->name('index');
+        });
+
     }); // ------------------------------------ END OF Authorized
 
-        // Guest
+        Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{ProductSku}/store', 'store')->name('store');
+        });
+
+        // Home
         Route::get('/', [HomeContorller::class, 'index'])->name('yalla-index');
         Route::view('/about-us', 'yalla-gt.pages.need_help.about_us')->name('about_us');
         Route::view('/contact_us', 'yalla-gt.pages.need_help.contact_us')->name('contact_us');

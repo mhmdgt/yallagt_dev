@@ -7,7 +7,7 @@
 html,
 body {
     height: 100%;
-    padding-top: 38px;
+    padding-top: 32px;
 
 }
 
@@ -25,7 +25,7 @@ body {
 
     html,
     body {
-        padding-top: 32px;
+        padding-top: 28px;
     }
 }
 
@@ -882,23 +882,20 @@ textarea:-ms-input-placeholder {
 }
 
 .main_header {
-    padding: 16px 0 16px 0;
+    padding: 10px 0 10px 0;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .main_header {
         margin-bottom: 18px;
-        padding: 18px;
+        padding: 10px 0 10px 0;
     }
 }
 
 @media only screen and (max-width: 767px) {
     .main_header {
         margin-bottom: 18px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 18px;
-        padding-top: 18px;
+        padding: 10px 0 10px 0;
     }
 }
 
@@ -6138,6 +6135,7 @@ textarea:-ms-input-placeholder {
     height: 80px;
     margin: 0 auto;
 }
+
 .brand_container .single_manufacturer img {
     height: 80px;
     margin: 0 auto;
@@ -17904,9 +17902,10 @@ li.selected {
 }
 
 /* gradient-colors */
-.gt-gray{
-color: #818181;
+.gt-gray {
+    color: #818181;
 }
+
 .pro-gradient-grey {
     background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
 }
@@ -17988,9 +17987,9 @@ color: #818181;
 
 .cart-btn {
     margin-top: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid;
     /* Add border */
-    border-radius: 4px;
+    border-radius: 6px;
     /* Add border radius to round the corners */
     padding: 8px 8px;
     /* Add padding for better spacing */
@@ -18211,6 +18210,7 @@ color: #818181;
 
 
 }
+
 .product-image {
     position: absolute;
     /* Position the image absolutely within its container */
@@ -18227,10 +18227,11 @@ color: #818181;
     object-fit: contain;
     /* Scale the image to maintain its aspect ratio and fit within the container */
 }
+
 .product-image-container {
     width: 100%;
     /* Adjust as necessary */
-    height:60vh;
+    height: 60vh;
     /* Adjust as necessary */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Optional: add some shadow for better appearance */
@@ -18242,25 +18243,33 @@ color: #818181;
     overflow: hidden;
     /* Ensure content does not overflow */
 }
-.product-image img
-{
+
+.product-image img {
     width: 50px;
 }
 
 .product-main-img {
-    max-width: 80%;
-    /* Ensure the image does not exceed the container width */
-    max-height: 80%;
-    /* Ensure the image does not exceed the container height */
-    padding: 40px;
-    /* Ensure the image does not exceed the container height */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the image is fully visible */
+    padding: 20px; /* Adjust padding if needed */
     display: block;
-    /* Ensure proper alignment */
     margin: auto;
-    /* Center the image horizontally */
-    border-radius: 10px;
-    /* Optional: rounded corners for the image */
+    border-radius: 10px; /* Optional: rounded corners for the image */
 }
+
+.product_show_box {
+    max-height: 360px; /* Adjust this value as needed */
+    overflow: hidden; /* Ensures no overflow beyond max-height */
+}
+
+.product_show_box img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+
 
 
 .other-images-box {
@@ -18401,6 +18410,7 @@ color: #818181;
 .courses-info {
     margin-top: auto;
 }
+
 /* Contact Us */
 
 .info-wrap {
@@ -18452,18 +18462,27 @@ color: #818181;
 }
 
 .edit-link {
-    color: #1db954; /* Use the same color as your button */
-    text-decoration: underline; /* Add underline to the text */
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    padding: 0; /* Remove padding */
-    font: inherit; /* Inherit font styles from the parent */
-    cursor: pointer; /* Change cursor to pointer */
+    color: #1db954;
+    /* Use the same color as your button */
+    text-decoration: underline;
+    /* Add underline to the text */
+    background: none;
+    /* Remove background */
+    border: none;
+    /* Remove border */
+    padding: 0;
+    /* Remove padding */
+    font: inherit;
+    /* Inherit font styles from the parent */
+    cursor: pointer;
+    /* Change cursor to pointer */
 }
+
 .categories-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Space between items */
+    gap: 1rem;
+    /* Space between items */
 }
 
 .category-item {

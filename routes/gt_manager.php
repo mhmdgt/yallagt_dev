@@ -22,6 +22,7 @@ use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
 
 // Store Sale Cars
 Route::post('sale-car-store' , [SaleCarsController::class, 'store'])->name('sale-car.store');
+Route::post('/{slug}' , [SaleCarsController::class, 'update'])->name('sale-car.update');
 
 // FilePond
 Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
@@ -115,7 +116,6 @@ Route::middleware('admin')->group(function () {
         Route::get('/declined', 'declined')->name('declined');
 
         // Approve and Decline routes
-        Route::post('/{slug}', 'update')->name('update');
         Route::delete('{slug}/destroy', 'destroy')->name('destroy');
         Route::post('{slug}/approve', 'approve')->name('approve-car');
         Route::post('{slug}/decline', 'decline')->name('decline-car');
@@ -125,6 +125,8 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create-storehouse', 'create')->name('create');
         Route::post('/', 'store')->name('store');
+        Route::get('{storehouse}/edit-storehouse', 'edit')->name('edit');
+        Route::put('{storehouse}/update-storehouse', 'update')->name('update');
 
     });
     // Product Manufacturers //
@@ -136,7 +138,7 @@ Route::middleware('admin')->group(function () {
         Route::delete('destroy/{slug}', 'destroy')->name('destroy');
     });
     // Product Categories //
-    Route::controller(ProductCategoryController::class)->prefix('product-categories')->name('product-categories.')->group(function () {
+    Route::controller(ProductCategoryController::class)->prefix('manage/product-categories')->name('product-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{slug}/sub-categories', 'show')->name('show');
         Route::get('/create', 'create')->name('create');
@@ -146,7 +148,7 @@ Route::middleware('admin')->group(function () {
         Route::delete('/{slug}', 'destroy')->name('destroy');
     });
     // Sub Product Categories //
-    Route::controller(ProductSubCategoryController::class)->prefix('product-subcategories')->name('product-subcategories.')->group(function () {
+    Route::controller(ProductSubCategoryController::class)->prefix('manage/product-subcategories')->name('product-subcategories.')->group(function () {
         Route::post('/', 'store')->name('store');
         Route::get('/{slug}/edit', 'edit')->name('edit');
         Route::put('/{slug}', 'update')->name('update');
@@ -183,7 +185,7 @@ Route::middleware('admin')->group(function () {
         Route::post('/store', 'store')->name('store');
     });
     // blog categories
-    Route::controller(BlogCategoryController::class)->prefix('blog-categories')->name('blog-categories.')->group(function () {
+    Route::controller(BlogCategoryController::class)->prefix('manage/blog-categories')->name('blog-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
@@ -192,7 +194,7 @@ Route::middleware('admin')->group(function () {
         Route::delete('/{slug}', 'destroy')->name('destroy');
     });
     // blogs
-    Route::controller(BlogController::class)->prefix('blogs')->name('blogs.')->group(function () {
+    Route::controller(BlogController::class)->prefix('manage/blogs')->name('blogs.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create-blog', 'create')->name('create');
         Route::post('/', 'store')->name('store');

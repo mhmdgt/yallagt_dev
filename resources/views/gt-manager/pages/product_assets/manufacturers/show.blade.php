@@ -95,7 +95,7 @@
                                     alt="No_IMG">
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                <button type="submit" id="add_employee_btn" class="btn btn-success">Save
                                     changes</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>

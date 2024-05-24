@@ -11,7 +11,7 @@ return [
     'my_account' => 'My Account',
     'find_more' => 'Find More',
     'coming_soon_on' => 'Coming Soon on',
-    'allServiceInOnePlance' => 'All Service In One Plance',
+    'allServiceInOnePlance' => 'All Services In One Place',
 
 
 

@@ -15,9 +15,9 @@
                         <div class="col-12">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="{{route('user.edit-profile' , user_data()->username )}}" class="text-dark">
+                                    <a href="{{ route('user.edit-profile', user_data()->username) }}" class="text-dark">
                                         <i class="bi bi-pencil-square"></i>
-                                        <span class="ml-1 mr-1">Edit Profile</span>
+                                        <span class="ml-1 mr-1">{{ __('profile.EditProfile') }}</span>
                                     </a>
                                     @if (App::getLocale() == 'en')
                                         <i class="bi bi-caret-right ml-auto"></i>
@@ -26,7 +26,7 @@
                                     @endif
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="{{route('user.addressesIndex')}}" class="text-dark">
+                                    <a href="{{ route('user.addressesIndex') }}" class="text-dark">
                                         <i class="bi bi-geo-alt"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.MyAddresses') }}</span>
                                     </a>
@@ -38,6 +38,17 @@
 
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
+                                    <a href="#">
+                                        <i class="bi bi-phone"></i>
+                                        <span class="ml-1 mr-1">{{ __('profile.Security') }}</span>
+                                    </a>
+                                    @if (App::getLocale() == 'en')
+                                        <i class="bi bi-caret-right ml-auto"></i>
+                                    @else
+                                        <i class="bi bi-caret-left ml-auto"></i>
+                                    @endif
+                                </li>
+                                {{-- <li class="list-group-item d-flex justify-content-between align-items-center px-2">
                                     <a href="#">
                                         <i class="bi bi-telephone"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.PhoneNumbers') }}</span>
@@ -58,7 +69,7 @@
                                     @else
                                         <i class="bi bi-caret-left ml-auto"></i>
                                     @endif
-                                </li>
+                                </li> --}}
                                 <!-- Add more list items as needed -->
                             </ul>
                         </div>
@@ -78,12 +89,12 @@
                     <div class="profile-card">
                         <div class="col-12">
                             <ul class="list-group list-group-flush">
-
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="#">
+                                    <div>
                                         <i class="bi bi-geo-alt"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.Country') }}</span>
-                                    </a>
+                                        <span> : {{ __('profile.EGYPT') }}</span>
+                                    </div>
                                     @if (App::getLocale() == 'en')
                                         <i class="bi bi-caret-right ml-auto"></i>
                                     @else
@@ -91,21 +102,29 @@
                                     @endif
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="#">
+                                    <div>
                                         <i class="bi bi-translate"></i>
-                                        <span class="ml-1 mr-1">{{ __('profile.Language') }}</span>
-                                    </a>
-                                    @if (App::getLocale() == 'en')
-                                        <i class="bi bi-caret-right ml-auto"></i>
-                                    @else
-                                        <i class="bi bi-caret-left ml-auto"></i>
-                                    @endif
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="#">
-                                        <i class="bi bi-phone"></i>
-                                        <span class="ml-1 mr-1">{{ __('profile.Security') }}</span>
-                                    </a>
+                                        <span class="ml-1 mr-1">{{ __('profile.Language') }} : </span>
+                                    </div>
+                                    <div class="language_switcher text-center">
+                                        <?php $current_url = parse_url(LaravelLocalization::getNonLocalizedURL(Request::url())); ?>
+                                        <ul id="languageSwitcher" class="language_bar_chooser">
+                                            @php
+                                                $currentLocale = LaravelLocalization::getCurrentLocale();
+                                                $locales = LaravelLocalization::getSupportedLocales();
+                                            @endphp
+                                            @foreach ($locales as $localeCode => $properties)
+                                                @if ($currentLocale != $localeCode)
+                                                    <li>
+                                                        <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                            href="{{ url('/' . $localeCode . $current_url['path']) }}">
+                                                            {{ $properties['native'] }}
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @if (App::getLocale() == 'en')
                                         <i class="bi bi-caret-right ml-auto"></i>
                                     @else

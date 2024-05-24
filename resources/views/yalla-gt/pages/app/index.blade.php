@@ -122,20 +122,20 @@
                                         @endforeach
                                     </div>
                                     <div class="card-body container-fluid">
-                                        <h4 class="card-text" dir="auto">
+                                        <h4 class="card-text home-blog-title" dir="auto">
                                             {{ $brands[$car->brand] }}
                                             {{ $models[$car->model] }}
                                         </h4>
 
-                                        <h3 class="card-text-h3 mt-3">
+                                        <h3 class="card-text-h3 mt-1">
                                             <span class="h5 text-dark">{{ __('home_page.EGP') }}</span>
                                             {{ number_format($car->price, 0, ',', ',') }}
                                         </h3>
-                                        <div class="card-text-4 mt-3 mb-2" dir="auto">
+                                        <div class="card-text-4 mb-2" dir="auto">
                                             <i class="bi bi-geo-alt"></i> <span
                                                 class="h6">{{ $governorates[$car->governorate] }}</span>
                                         </div>
-                                        <div class="card-text-4 mt-2 mb-3" dir="auto">
+                                        <div class="card-text-4 mb-2" dir="auto">
                                             <i class="bi bi-stopwatch"></i> <span
                                                 class="h6">{{ $car->created_at->diffForHumans() }}</span>
                                         </div>
@@ -342,8 +342,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="p-0 product_card_cart">
-                                                                <a
-                                                                    href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
+                                                                <a href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" class="addToCartButton">
                                                                     <img src="yalla_gt/media/cart/cart_icon.png">
                                                                 </a>
                                                             </div>
@@ -544,9 +543,9 @@
                                         <h4 class="font-weight-bold home-blog-title" dir="auto">
                                             {{ $blog->title }}
                                         </h4>
-                                        <hr>
-                                        <div class="btn btn-primary rounded gradient-green-bg text-white">
-                                            {{ __('home_page.SeeMore') }}</div>
+                                        {{-- <hr>
+                                        <div class="btn rounded gradient-green-bg text-white">
+                                            {{ __('home_page.SeeMore') }}</div> --}}
                                     </div>
                                 </a>
                             </div>
@@ -575,3 +574,28 @@
     @include('yalla-gt.layout.upper-footer')
     @include('yalla-gt.layout.footer')
 @endsection
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all buttons with the class 'addToCartButton'
+        const addToCartButtons = document.querySelectorAll('.addToCartButton');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                @if(Auth::check())
+                    // Allow default behavior, which is navigating to the add-to-cart action
+                    return true;
+                @else
+                    event.preventDefault(); // Prevent default navigation
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'You must be logged in to add items to the cart',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Login',
+                    });
+                @endif
+            });
+        });
+    });
+</script>

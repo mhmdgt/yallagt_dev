@@ -68,7 +68,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Main price</label>
-                                    <input type="number" class="form-control" name="main_price">
+                                    <input type="text" class="form-control" name="main_price" value="{{ old('main_price') }}" oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">Submit form</button>
+            <button class="btn btn-success float-right" type="submit">Submit form</button>
         </Form>
     </div>ÍÍ
 @endsection

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body ar-style">
                         <div class="p-2 mb-4 text-dark ar-style">
                             <i class="bi bi-pencil-square ml-1 mr-1"></i>
                             <span style="font-size: 22px; font-weight: 500;" >Update Profile</span>
@@ -54,7 +54,7 @@
                                     alt="No Image">
                             </div> --}}
 
-                            <button type="submit" class="btn btn-light mt-2 rounded gradient-8790f6 text-white float-right">
+                            <button type="submit" class="btn btn-light mt-2 rounded gradient-green-bg text-white float-right">
                                 <i class="bi bi-bookmark-check"></i>
                                 Save Updates
                             </button>

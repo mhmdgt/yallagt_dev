@@ -120,7 +120,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" id="add_employee_btn"
-                                                                class="btn btn-primary">Save
+                                                                class="btn btn-success">Save
                                                                 changes</button>
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
@@ -185,7 +185,7 @@
                                     src="{{ asset('gt_manager/media/no_image.jpg') }}" alt="...">
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" id="add_employee_btn" class="btn btn-primary">Save
+                                <button type="submit" id="add_employee_btn" class="btn btn-success">Save
                                     changes</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
@@ -196,45 +196,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    @if ($errors->any() || Session::has('success') || Session::has('fail'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
-
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        Toast.fire({
-                            icon: 'error',
-                            title: '{{ $error }}'
-                        });
-                    @endforeach
-                @endif
-
-                @if (Session::has('success'))
-                    Toast.fire({
-                        icon: 'success',
-                        title: '{{ Session::get('success') }}'
-                    });
-                @elseif (Session::has('fail'))
-                    Toast.fire({
-                        icon: 'error',
-                        title: '{{ Session::get('fail') }}'
-                    });
-                @endif
-            });
-        </script>
-    @endif
 @endsection

@@ -94,7 +94,7 @@
                                 <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
                                     aria-labelledby="ex1-tab-1">
                                     {{-- CONTECT --}}
-                                    <h5 class="mt-4">
+                                    <h5 class="mt-4" dir="auto">
                                         <span>{!! $car->description !!}</span>
                                     </h5>
                                     {{-- SPECS --}}
@@ -178,6 +178,8 @@
     @include('yalla-gt.layout.upper-footer')
     @include('yalla-gt.layout.footer')
 @endsection
+
+
 @section('script')
     <script>
         //---------------------- Image carousel

@@ -20,7 +20,6 @@ class ProductListing extends Model
         'storehouse_id',
         'status',
     ];
-
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {

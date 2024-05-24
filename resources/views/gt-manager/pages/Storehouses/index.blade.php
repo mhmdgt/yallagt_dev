@@ -25,6 +25,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Seller</th>
                                         <th>Name</th>
                                         <th>Manager Name</th>
                                         <th>Phone</th>
@@ -36,7 +37,8 @@
                                     @foreach($storehouses as $storehouse)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$storehouse->name}}</td>
+                                        <td>{{ $storehouse->seller->name }}</td>
+                                        <td><a href="{{ route('storehouses.edit' , $storehouse->id )}}">{{ $storehouse->name }}</a>
                                         <td>{{$storehouse->manager_name}}</td>
                                         <td>{{$storehouse->phone}}</td>
                                         <td>{{ $governorates[$storehouse->governorate_id] }}</td>

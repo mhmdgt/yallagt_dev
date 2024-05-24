@@ -126,7 +126,7 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Main price</label>
-                                    <input type="number" class="form-control" autocomplete="off" name="main_price">
+                                    <input type="text" class="form-control" name="main_price" value="{{ old('main_price') }}" oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="main_price" />
                                 </div>
                             </div>
@@ -293,7 +293,7 @@
                 </div>
             </div> --}}
             {{-- Submit --}}
-            <button class="btn btn-primary float-right" type="submit">Submit form</button>
+            <button class="btn btn-success float-right" type="submit">Submit form</button>
         </Form>
     </div>
 @endsection
@@ -343,7 +343,7 @@
 
                 // Perform AJAX request to fetch subcategories
                 $.ajax({
-                    url: '/product-subcategories/categories/' + categoryId,
+                    url: '/manage/product-subcategories/categories/' + categoryId,
                     type: 'GET',
                     success: function(data) {
                         var options = '<option value="">Select Subcategory</option>';
@@ -415,8 +415,6 @@
             // Trigger change event on brand select to load models initially
             $('#brandSelect').trigger('change');
         });
+        
     </script>
 @endsection
-
-
-

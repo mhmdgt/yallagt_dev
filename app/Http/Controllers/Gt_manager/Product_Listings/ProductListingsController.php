@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Gt_manager\Product_Listings;
 
+use App\Http\Controllers\Controller;
+use App\Models\Manufacturer;
 use App\Models\Product;
+use App\Models\ProductListing;
 use App\Models\ProductSku;
 use App\Models\Storehouse;
-use App\Models\Manufacturer;
 use Illuminate\Http\Request;
-use App\Models\ProductListing;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class ProductListingsController extends Controller
@@ -51,6 +51,7 @@ class ProductListingsController extends Controller
         return view('gt-manager.pages.product_listings.add', compact('storehouses'));
     }
     // -------------------------- Method -------------------------- //
+
     public function store(Request $request)
     {
         // Validate incoming request data
@@ -60,12 +61,23 @@ class ProductListingsController extends Controller
             'qty' => 'required|integer|min:1',
             'selling_price' => 'required|min:0',
         ]);
-        // properties
+
+        // Check for the duplicate entry
+        $existingListing = ProductListing::where('storehouse_id', $request->storehouse)
+            ->where('sku', $request->sku)
+            ->first();
+
+        if ($existingListing) {
+            // Flash an error message to the session
+            return redirect()->back()->with('fail', 'The SKU already exists in the selected storehouse.')->withInput();
+        }
+
+        // Properties
         $skuData = ProductSku::where('sku', $validatedData['sku'])->first();
         $productID = $skuData->product_id;
-        $product = Product::where('id', '=', $productID)->get()->first();
-        $manufacturer = Manufacturer::where('id', '=', $product->manufacturer_id)->get()->first();
-        $skuId = ProductSku::where('sku', $validatedData['sku'])->value('id');
+        $product = Product::where('id', '=', $productID)->first();
+        $manufacturer = Manufacturer::where('id', '=', $product->manufacturer_id)->first();
+
         // Store the listing
         $product_listing = ProductListing::create([
             'manufacturer_id' => $manufacturer->id,

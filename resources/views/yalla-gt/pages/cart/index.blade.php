@@ -1,10 +1,32 @@
 @extends('yalla-gt.layout.app')
 @section('content')
     <div class="page-div rtl-direction">
-        {{-- START --}}
         <div class="card">
             <div class="card-body p-4">
                 <div class="row">
+                    {{-- If nooooooo Items --}}
+                    @if ($cart == null )
+                        <div class="row align-items-center mt-5 mb-5">
+                            <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                                <h2 class="font-weight-light">Your ad is free now</h2>
+                                <p class="font-italic text-muted mb-4">"Win With Us at Yallagt, Sell your car, hassle-free
+                                    and
+                                    commission-free. Our platform offers you the opportunity to list your vehicle without
+                                    any fees,
+                                    ensuring a seamless selling experience. Take advantage of our commitment to providing a
+                                    transparent
+                                    and cost-effective solution for selling your car. Join our community today and let's win
+                                    together."
+                                </p>
+                                <a href="{{ route('gt_car.create') }}" class="btn btn-light px-5 rounded-pill shadow-sm">Sell
+                                    You Car</a>
+                            </div>
+                            <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
+                                    src="{{ asset('yalla_gt/media/about_us/4136944.png') }}" alt=""
+                                    class="img-fluid mb-4 mb-lg-0"></div>
+                        </div>
+                    @else
+                    {{-- Items --}}
                     <div class="col-lg-7">
                         {{-- NAV --}}
                         <div class="cart-nav">
@@ -85,14 +107,14 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
-
+                    {{-- Order Summary --}}
                     <div class="col-lg-5">
                         <div class="summary summary-cart">
                             <h4 class="summary-title mt-4 h5 text-dark">
                                 <i class='bx bx-check-circle'></i>
                                 Order Summary
+                                <span class="gt-gray" style="font-size: 12px">(Inclusive of VAT)</span>
                             </h4>
 
                             <table class="table table-summary">
@@ -108,11 +130,7 @@
                                     </tr>
 
                                     <tr class="summary-shipping-row">
-                                        <td>
-                                            <div>
-                                                <label>Standard:</label>
-                                            </div>
-                                        </td>
+                                        <td>Standard:</td>
                                         <td class="gt-green font-weight-bold">FREE</td>
                                     </tr>
 
@@ -130,21 +148,32 @@
 
                                     <tr class="summary-total">
                                         <td class="h4 text-dark">Total:</td>
-                                        <td class="h4 text-dark">EGP: 160.00</td>
+                                        <td class="h5 text-dark">EGP: 160.00</td>
                                     </tr>
                                 </tbody>
                             </table>
-
-                            <a href="checkout.html" class="gradient-8790f6 cart-btn btn btn-order btn-block text-white">
+                            {{-- Buy now Web --}}
+                            <a href="{{ route('checkout.index') }}" class="btn gradient-8790f6 rounded text-white w-100">
+                                {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
                                 PROCEED TO CHECKOUT
                             </a>
+                            {{-- Buy now Mobile --}}
+                            {{-- <div id="call_nav" class="d-flex align-items-center"
+                                onclick="document.getElementById('carForSaleID').submit();">
+                                <span
+                                    class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
+                                    <button type="button" style="border: none; background: none;">
+                                        <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">PROCEED TO CHECKOUT</span>
+                                    </button>
+                                </span>
+                            </div> --}}
                         </div>
                     </div>
-
+                    @endif
                 </div>
             </div>
         </div>
-        {{-- END --}}
+
     </div>
 @endsection
 @section('footer')

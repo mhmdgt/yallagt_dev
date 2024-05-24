@@ -30,8 +30,12 @@ return new class extends Migration
             $table->string('updated_user_type')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+
+            // Add composite unique index to ensure a SKU can only be added once per storehouse
+            $table->unique(['storehouse_id', 'sku']);
         });
     }
+
 
     /**
      * Reverse the migrations.

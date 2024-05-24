@@ -1,4 +1,5 @@
 @if ($errors->any() || Session::has('success') || Session::has('fail'))
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const Toast = Swal.mixin({
@@ -36,6 +37,7 @@
     });
 </script>
 @endif
+
 
 
 @if (Session::has('success'))

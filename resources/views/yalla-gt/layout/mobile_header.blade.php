@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-list">
-                <a href="#" class="link-item">
+                <a href="{{route('product.manufacturers-index')}}" class="link-item">
                     <i class='bx bxs-shopping-bags link-icon'></i>
                     <span class="link-text">{{ __('header.shop') }}</span>
                 </a>
@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-list">
-                <a href="#" class="link-item">
+                <a href="{{route('user-carts.index')}}" class="link-item">
                     <i class="bi bi-basket-fill link-icon"></i>
                     <span class="link-text">{{ __('header.cart') }}</span>
                 </a>

@@ -24,8 +24,8 @@ return [
     'Security' => 'Security',
     'SignOut' => 'Sign Out',
 
-    '' => '',
-    '' => '',
+    'EGYPT' => 'EGYPT',
+    'EditProfile' => 'Edit Profile',
     '' => '',
     '' => '',
     '' => '',

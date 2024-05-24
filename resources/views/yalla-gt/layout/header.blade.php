@@ -25,18 +25,19 @@
                                     <p class="ml-1">{{ getFirstName(user_data()->name) }}</p>
                                 </a>
                             @else
-                                <a class="loginPopUpForm btn btn-light text-dark ml-2">
+                                <a class="loginPopUpForm btn btn-light text-dark ml-2" >
                                     <i class="bi bi-box-arrow-in-left ml-2"></i>
                                     <p class="ml-1">{{ __('header.login') }}</p>
                                 </a>
                             @endauth
+                            <a href="{{ route('user-carts.index') }}">
+                                <img width="60" src="{{ asset('yalla_gt') }}/media/icon/shopping-cart-header-solid.png"
+                                    alt="">
+                            </a>
                             {{-- <a class="btn btn-primary" href="{{route('gt_car.create')}}">
-                                <i class="bi bi-plus-circle"></i>
-                                <p class="ml-2 mr-2"> Sell </p>
-                            </a> --}}
-                            <a href="{{route('user-carts.index')}}"><img width="60"
-                                    src="{{ asset('yalla_gt') }}/media/icon/shopping-cart-header-solid.png"
-                                    alt=""></a>
+                                    <i class="bi bi-plus-circle"></i>
+                                    <p class="ml-2 mr-2"> Sell </p>
+                                </a> --}}
                         </div>
                     </div>
                 </div>
@@ -44,3 +45,19 @@
         </div>
     </div>
 </header>
+
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if (Auth::check())
+            document.getElementById('cartButton').addEventListener('click', function(event) {
+                // Allow default behavior, which is navigating to the cart page
+            });
+        @else
+            document.getElementById('cartButton').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default navigation
+                document.getElementById('loginPopupButton').click(); // Trigger the login popup
+            });
+        @endif
+    });
+</script> --}}
