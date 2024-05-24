@@ -6135,7 +6135,11 @@ textarea:-ms-input-placeholder {
 }
 
 .brand_container .single_brand img {
-    width: inherit;
+    height: 80px;
+    margin: 0 auto;
+}
+.brand_container .single_manufacturer img {
+    height: 80px;
     margin: 0 auto;
 }
 
@@ -13629,7 +13633,7 @@ p {
     position: relative;
     text-transform: uppercase;
     font-weight: 700;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
 }
 
 @media screen and (min-width: 1024px) {
@@ -13741,17 +13745,6 @@ p {
     background-color: #1DB954 !important;
 }
 
-.btn-primary {
-    background-color: #1DB954 !important;
-    color: #fff !important;
-    border: 1px solid #1DB954 !important;
-}
-
-.btn-primary:hover {
-    background-color: #fff;
-    color: #1DB954;
-    border: 1px solid #1DB954;
-}
 
 .btn-third {
     background-color: #F25E3D !important;
@@ -14190,7 +14183,7 @@ header .header_bottom .arrow {
 
 @media screen and (max-width: 660px) {
     .banner_area .card .card-body h4 {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -14405,7 +14398,7 @@ header .header_bottom .arrow {
 
 @media screen and (min-width: 661px) {
     .product_deals .product_item:nth-child(5n) {
-        padding-right: 0 !important;
+        padding-right: 6px !important;
     }
 }
 
@@ -14417,16 +14410,18 @@ header .header_bottom .arrow {
 
 @media screen and (max-width: 660px) {
     .product_deals .product_item:nth-child(2n) {
-        padding-right: 0px !important;
+        padding-right: 6px !important;
     }
 }
 
 .product_deals .product_carousel .single_product {
-    border: 2px solid #cac5c5;
+    border: 2px solid #eaeaea;
     padding: 15px;
-    border-radius: 16px;
+    border-radius: 10px;
     height: 440px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
+
 
 .product_deals .product_carousel .single_product .label_new {
     width: 48px !important;
@@ -14441,7 +14436,7 @@ header .header_bottom .arrow {
 @media screen and (max-width: 660px) {
     .product_deals .product_carousel .single_product {
         padding: 7px;
-        height: 365px;
+        height: 380px;
     }
 
 }
@@ -14800,22 +14795,64 @@ footer .widget_list.widget_categories>ul>li {
     border-bottom: 1px solid #040404;
 }
 
-
-
-.product_details_slider_area {
-    margin-bottom: 14px;
-    background-color: #FFFFFF;
-    border: 1px solid #BBB9B9;
-    border-radius: 8px;
+.cover-image {
+    width: 100%;
+    height: 460px;
+    /* Set your desired height */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    position: relative;
+    background-color: #000000;
 }
 
-.product_details_slider_area_item img {
-    height: 450px;
-    -o-object-fit: contain;
-    object-fit: contain;
-    padding-bottom: 16px;
-    padding-top: 16px;
+.cover-image img {
+    width: auto;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    /* Cover the entire container */
 }
+
+/* Position and style navigation arrows */
+.owl-prev,
+.owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.owl-prev:hover,
+.owl-next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.owl-prev {
+    left: 20px;
+}
+
+.owl-next {
+    right: 20px;
+}
+
+/* ---------- */
+
+
+
 
 .product_details_slider_area .owl-dots {
     text-align: center;
@@ -15998,7 +16035,7 @@ footer .footer_bottom p {
 }
 
 .detailedSearch__header {
-    padding: 53px 0 30px 0;
+    padding: 20px 0 20px 20px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -16201,16 +16238,15 @@ footer .footer_bottom p {
 
 .detailedSearch__content--card-price {
     padding: 16px 24px;
-    width: 92%;
-    margin-top: 24px;
-    background: #F5F5F5;
-    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 @media screen and (max-width: 450px) {
     .detailedSearch__content--card-price {
         width: 100%;
-        margin: 15px 0;
+        /* margin: 15px 0; */
     }
 }
 
@@ -16271,7 +16307,7 @@ footer .footer_bottom p {
 }
 
 .choose__card {
-    box-shadow: 4px 3px 16px -7px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 3px 16px -7px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     border: none;
 }
@@ -16281,7 +16317,7 @@ footer .footer_bottom p {
 }
 
 .choose__card .card-body {
-    padding: 36px;
+    padding: 28px;
     border: 1px solid #ccc;
 }
 
@@ -16292,26 +16328,25 @@ footer .footer_bottom p {
 }
 
 .choose__card--brands {
-    box-shadow: 4px 3px 14px -7px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
-    border: none;
+    border: 1px solid #dddddd;
     text-align: center;
-    margin-bottom: 24px;
-    min-height: 140px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
 
-@media screen and (max-width: 660px) {
+/* @media screen and (max-width: 660px) {
     .choose__card--brands {
         margin-bottom: 8px;
     }
-}
+} */
 
 .choose__card--brands img {
     -o-object-fit: contain;
     object-fit: contain;
-    height: 50px;
+    height: 60px;
     width: 60px;
     margin: 0 auto;
 }
@@ -16328,6 +16363,7 @@ footer .footer_bottom p {
 .chooseCarSection {
     background-color: #F5F5F7;
     padding: 47px 41px;
+    border-radius: 6px;
 }
 
 .chooseCarSection__content--h5 {
@@ -16336,7 +16372,9 @@ footer .footer_bottom p {
     font-size: 32px;
     line-height: 38px;
     text-transform: capitalize;
+    margin-bottom: 24px;
     color: #23272A;
+
 }
 
 @media screen and (max-width: 450px) {
@@ -16347,11 +16385,11 @@ footer .footer_bottom p {
 
 .chooseCarSection__content--p {
     font-weight: 500;
-    font-size: 22px;
-    line-height: 26px;
+    font-size: 18px;
+    line-height: 1.5;
     text-transform: capitalize;
     color: #23272A;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 .section__header {
@@ -16365,7 +16403,6 @@ footer .footer_bottom p {
 }
 
 .section__header--h2 {
-    /*padding-top: 44px;*/
     font-weight: 400;
     font-size: 32px;
     line-height: 48px;
@@ -16488,12 +16525,12 @@ footer .footer_bottom p {
     color: #000000;
 }
 
-.specifications__sidebar--card {
+/* .specifications__sidebar--card {
     background: #FFFFFF;
     border: 1px solid rgba(221, 220, 220, 0.5);
     box-shadow: 4px 3px 16px -6px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
-}
+} */
 
 .specifications__sidebar--card.seller h5 {
     font-weight: 600;
@@ -16522,8 +16559,6 @@ footer .footer_bottom p {
     font-weight: 700;
     font-size: 40px;
     line-height: 48px;
-    /* identical to box height */
-    margin-top: 24px;
     text-transform: uppercase;
     color: #F25E3D;
     margin-bottom: 16px;
@@ -16912,8 +16947,7 @@ footer .footer_bottom p {
 }
 
 .cars_for_sale_home_layout .card-body .card-text {
-    font-size: 18px;
-    margin-bottom: 12px;
+    font-size: 22px;
 }
 
 .cars_for_sale_home_layout .card-body .card-text-h3 {
@@ -17493,8 +17527,9 @@ li.selected {
     top: auto;
     background-color: #fff;
     padding: 0px 22px 0px 22px;
-    box-shadow: 0px -5px 6px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px -1px 6px 0px rgba(0, 0, 0, 0);
     border-bottom: 2px solid #f5f5f5;
+    border-top: 2px solid #f5f5f5;
 }
 
 @media screen and (max-width: 991px) {
@@ -17604,9 +17639,22 @@ li.selected {
     /* background-color: #f9fafb; */
 }
 
+.page-div-shop {
+    padding: 30px 40px;
+    /* Default padding for larger screens */
+    /* background-color: #f9fafb; */
+}
+
 @media (max-width: 620px) {
     .page-div {
         padding: 30px 15px;
+        /* Adjusted padding for screens under 520px */
+    }
+}
+
+@media (max-width: 620px) {
+    .page-div-shop {
+        padding: 30px 25px;
         /* Adjusted padding for screens under 520px */
     }
 }
@@ -17686,6 +17734,7 @@ li.selected {
 
 .sub-title {
     font-size: 10px;
+    font-weight: 600;
 }
 
 
@@ -17707,7 +17756,7 @@ li.selected {
 }
 
 .product_card_cart {
-    width: 65px;
+    width: 60px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -17855,17 +17904,40 @@ li.selected {
 }
 
 /* gradient-colors */
+.gt-gray{
+color: #818181;
+}
+.pro-gradient-grey {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+}
+
+.gt-green {
+    color: #1db954;
+}
+
 .gradient-green-bg {
     background: linear-gradient(to right, #4CAF50, #2E8B57);
 }
-.gradient-f25e3d {
-    background: linear-gradient(45deg, #F25E3D, #FFA320);
-    /* Add any additional styling you want */
+
+.gt-move {
+    color: #8790f6;
 }
+
 .gradient-8790f6 {
     background: linear-gradient(45deg, #8790f6, #5c61f2);
     /* Add any additional styling you want */
 }
+
+.gt-orange {
+    color: #F25E3D;
+}
+
+.gradient-f25e3d {
+    background: linear-gradient(45deg, #F25E3D, #FFA320);
+    /* Add any additional styling you want */
+}
+
+
 
 .product-media {
     width: 60px;
@@ -17968,6 +18040,7 @@ li.selected {
     border-radius: 6px;
     /* transform: translate(-50%, -50%); */
 }
+
 .stockCarImageStatus {
     position: absolute;
     top: 10px;
@@ -17987,30 +18060,49 @@ li.selected {
 
 
 .max-height-image {
-    max-height: 240px; /* Adjust the value as per your requirement */
+    max-height: 240px;
+    /* Adjust the value as per your requirement */
     width: 100%;
-    object-fit: cover; /* This property ensures the image covers the entire container */
+    object-fit: cover;
+    /* This property ensures the image covers the entire container */
 }
 
 .img-container {
     position: relative;
-    display: inline-block; /* Ensures the container size is based on its content */
+    display: inline-block;
+    /* Ensures the container size is based on its content */
 }
 
 .card-img-container {
-    overflow: hidden; /* Ensure that the image is contained within the card */
-    height: 220px; /* Set a fixed height for the image container */
-    position: relative; /* Position the image container relative to the card */
+    overflow: hidden;
+    height: 220px;
+    position: relative;
 }
 
 .card-img-container img {
-    object-fit: cover; /* Ensure that the image covers the entire container */
-    width: 100%; /* Ensure that the image fills the entire container width */
-    height: 100%; /* Ensure that the image fills the entire container height */
-    position: absolute; /* Position the image absolutely within the container */
-    top: 0; /* Position the image at the top of the container */
-    left: 0; /* Position the image at the left of the container */
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+.card-img-container-blog-header {
+    overflow: hidden;
+    height: 320px;
+    position: relative;
+}
+
+.card-img-container-blog-header img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 
 
 .img-container {
@@ -18018,24 +18110,32 @@ li.selected {
     height: 160px;
     border-radius: 6px;
     overflow: hidden;
-    margin: 0; /* Remove any potential margin */
-    padding: 0; /* Remove any potential padding */
+    margin: 0;
+    /* Remove any potential margin */
+    padding: 0;
+    /* Remove any potential padding */
 }
 
 .img-container img {
-    display: block; /* Ensures no inline-block space */
+    display: block;
+    /* Ensures no inline-block space */
     height: 100%;
     width: 100%;
     object-fit: cover;
-    margin: 0; /* Remove any potential margin */
-    padding: 0; /* Remove any potential padding */
+    margin: 0;
+    /* Remove any potential margin */
+    padding: 0;
+    /* Remove any potential padding */
 }
 
 .delete-btn {
     position: absolute;
-    top: 5px; /* Adjust this value to position the button vertically */
-    right: 5px; /* Adjust this value to position the button horizontally */
-    background-color: rgba(0, 0, 0, 0.5); /* Dark circle background */
+    top: 5px;
+    /* Adjust this value to position the button vertically */
+    right: 5px;
+    /* Adjust this value to position the button horizontally */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Dark circle background */
     color: white;
     border: none;
     border-radius: 50%;
@@ -18043,25 +18143,35 @@ li.selected {
     height: 30px;
     font-size: 20px;
     cursor: pointer;
-    z-index: 1; /* Ensures the button is above the image */
+    z-index: 1;
+    /* Ensures the button is above the image */
 }
 
 .delete-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Darker background on hover */
 }
 
 .select-btn {
     position: absolute;
-    bottom: 5px; /* Adjust this value to position the button vertically */
-    right: 5px; /* Adjust this value to position the button horizontally */
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
-    color: transparent; /* Hide any text content */
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Border for checkbox appearance */
+    bottom: 5px;
+    /* Adjust this value to position the button vertically */
+    right: 5px;
+    /* Adjust this value to position the button horizontally */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Transparent background */
+    color: transparent;
+    /* Hide any text content */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* Border for checkbox appearance */
     border-radius: 50%;
-    width: 18px; /* Decreased width */
-    height: 18px; /* Decreased height */
+    width: 18px;
+    /* Decreased width */
+    height: 18px;
+    /* Decreased height */
     cursor: pointer;
-    z-index: 1; /* Ensures the button is above the image */
+    z-index: 1;
+    /* Ensures the button is above the image */
 }
 
 .select-btn:hover {
@@ -18078,40 +18188,272 @@ li.selected {
 
 .select-text {
     position: absolute;
-    bottom: 8px; /* Adjust this value to position the text vertically */
-    right: 40px; /* Adjust this value to position the text horizontally */
-    font-size: 12px; /* Adjust the font size as needed */
-    color: rgba(0, 0, 0, 0.8); /* Text color */
+    bottom: 8px;
+    /* Adjust this value to position the text vertically */
+    right: 40px;
+    /* Adjust this value to position the text horizontally */
+    font-size: 12px;
+    /* Adjust the font size as needed */
+    color: rgba(0, 0, 0, 0.8);
+    /* Text color */
 }
 
 .icon-hover:hover {
     border-color: #3b71ca !important;
     background-color: white !important;
     color: #3b71ca !important;
-  }
+}
 
-  .icon-hover:hover i {
+.icon-hover:hover i {
     color: #3b71ca !important;
-  }
-.similar-items-info{
+}
+
+.similar-items-info {
     margin-top: 6px;
     margin-left: 16px;
     margin-right: 16px;
 }
-.product-title
-{
- font-size: 24px;
- font-weight: 600;
- line-height: 1.2;
+
+.product-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
 }
-.card-img-top
-{
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
+
+.card-img-top {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 
 
 }
-.product_price_section
-{
-    margin-bottom: 1px !important;
+
+
+.product-image-container {
+    width: 100%;
+    /* Adjust as necessary */
+    height: 60vh;
+    /* Adjust as necessary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: add some shadow for better appearance */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    overflow: hidden;
+    /* Ensure content does not overflow */
+}
+
+.product-main-img {
+    max-width: 80%;
+    /* Ensure the image does not exceed the container width */
+    max-height: 80%;
+    /* Ensure the image does not exceed the container height */
+    padding: 40px;
+    /* Ensure the image does not exceed the container height */
+    display: block;
+    /* Ensure proper alignment */
+    margin: auto;
+    /* Center the image horizontally */
+    border-radius: 10px;
+    /* Optional: rounded corners for the image */
+}
+
+
+.other-images-box {
+    max-width: 100px;
+    /* Adjust as necessary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: add some shadow for better appearance */
+    background-color: #f9f9f9;
+    /* Optional: change background color */
+    padding: 10px;
+}
+
+.product-other-img {
+    max-width: 80px;
+    /* Adjust as necessary */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 5px;
+    /* Optional: rounded corners for the image */
+    margin-bottom: 10px;
+    /* Space between images */
+}
+
+.other-images-box {
+    max-width: 80%;
+    /* Adjust as necessary */
+    margin-top: 20px;
+    /* Space between main image and other images */
+
+}
+
+.other-images-container {
+    gap: 10px;
+    /* Space between images */
+    flex-wrap: wrap;
+    /* Wrap images to the next line if necessary */
+}
+
+.product-other-img {
+    max-width: 100px;
+    /* Adjust as necessary */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 5px;
+    /* Optional: rounded corners for the image */
+    margin: 5px;
+}
+
+@media (max-width: 900px) {
+    .sale_car_contact_details {
+        margin-top: 1.5rem;
+        /* Equivalent to mt-4 */
+    }
+}
+
+.blog_title_name {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+    .blog_title_name {
+        font-size: 22px;
+    }
+}
+
+.SaleCarBoxCondition {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    border-radius: 6px;
+    /* transform: translate(-50%, -50%); */
+}
+
+.StockCarBrand {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    border-radius: 6px;
+    /* transform: translate(-50%, -50%); */
+}
+
+.features-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Adjust the gap between tags */
+    border: 1px solid #ddd;
+    /* Border around the box */
+    padding: 10px;
+    /* Padding inside the box */
+    background-color: #f9f9f9;
+    /* Background color of the box */
+    border-radius: 5px;
+    /* Rounded corners for the box */
+}
+
+.feature-tag {
+    padding: 8px;
+    background-color: #e9ecef;
+    /* Light background color for tags */
+    border: 1px solid #ccc;
+    /* Border for each tag */
+    border-radius: 5px;
+    /* Rounded corners for tags */
+}
+
+.blog-content {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .blog-content {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+}
+
+.home-blog-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 1.6;
+    /* Adjust line height as needed */
+    height: 3em;
+    /* 2 * line-height */
+}
+
+.cars_for_sale_home_layout .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.courses-info {
+    margin-top: auto;
+}
+/* Contact Us */
+
+.info-wrap {
+    color: #000;
+}
+
+.info-wrap h3 {
+    color: #000;
+}
+
+.info-wrap .dbox {
+    width: 100%;
+    color: #000;
+    margin-bottom: 25px;
+}
+
+.info-wrap .dbox:last-child {
+    margin-bottom: 0;
+}
+
+.info-wrap .dbox p {
+    margin-bottom: 0;
+}
+
+.info-wrap .dbox p span {
+    font-weight: 500;
+    color: #000;
+}
+
+.info-wrap .dbox p a {
+    color: #000;
+}
+
+.info-wrap .dbox .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    border: 2px solid rgb(210, 210, 210, 0.5);
+}
+
+.info-wrap .dbox .icon span {
+    font-size: 20px;
+    color: #000;
+}
+
+.info-wrap .dbox .text {
+    width: calc(100% - 50px);
+}
+
+.edit-link {
+    color: #1db954; /* Use the same color as your button */
+    text-decoration: underline; /* Add underline to the text */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    font: inherit; /* Inherit font styles from the parent */
+    cursor: pointer; /* Change cursor to pointer */
 }

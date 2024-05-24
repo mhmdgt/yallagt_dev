@@ -44,7 +44,7 @@
                                                 @foreach ($product->skus as $sku)
                                                     @foreach ($sku->images as $image)
                                                         @if ($image->main_img)
-                                                            <img src="{{ asset('storage/media/product_sku_imgs/' . $image->path . '/' . $image->name) }}"
+                                                            <img src="{{ display_img($image->name) }}"
                                                                 class="image-in-box" alt="Main Image">
                                                         @endif
                                                     @endforeach

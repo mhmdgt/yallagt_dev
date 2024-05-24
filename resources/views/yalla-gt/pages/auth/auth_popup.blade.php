@@ -18,6 +18,7 @@
                         <span class="placeholder">
                             {{ __('loginPopup.PhoneNumberorEmail') }}
                         </span>
+<<<<<<< HEAD
 
                     </div>
 
@@ -26,6 +27,9 @@
                         <label>Name</label>
                         <small class="text-danger d-none" id="login-username-error"></small>
 
+=======
+                        <small class="text-danger d-none" id="login-username-error"></small>
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
                     </div>
                     <div class="input-block">
                         <input type="password" name="password" id="input-text" spellcheck="false">
@@ -46,6 +50,7 @@
                     @csrf
                     <div class="input_field_box">
 
+<<<<<<< HEAD
                         <div class="input_box">
                             <input type="text" name="name" value="{{ old('name') ??''}}">
                             <label>Name</label>
@@ -66,6 +71,39 @@
                             <input type="text" value="{{ old('password') ??''}}" name="password">
                             <label>Password</label>
                             <small class="text-danger d-none" id="password-error"></small>
+=======
+                        <div class="input-block">
+                            <input type="text" name="name" id="input-text" required spellcheck="false">
+                            <span class="placeholder">
+                                {{ __('loginPopup.name') }}
+                            </span>
+                            <small class="text-danger d-none" id="name-error"></small>
+
+                        </div>
+                        <div class="input-block">
+                            <input type="text" name="phone" id="input-text" required spellcheck="false">
+                            <span class="placeholder">
+                                {{ __('loginPopup.phone') }}
+                            </span>
+                            <small class="text-danger d-none" id="phone-error"></small>
+
+                        </div>
+                        <div class="input-block">
+                            <input type="text" name="email" id="input-text" required spellcheck="false">
+                            <span class="placeholder">
+                                {{ __('loginPopup.email') }}
+                            </span>
+                            <small class="text-danger d-none" id="email-error"></small>
+
+                        </div>
+                        <div class="input-block">
+                            <input type="password" name="password" id="input-text" required spellcheck="false">
+                            <span class="placeholder">
+                                {{ __('loginPopup.password') }}
+                            </span>
+                            <small class="text-danger d-none" id="password-error"></small>
+
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
                         </div>
 
 
@@ -91,6 +129,7 @@
 </div>
 
 
+<<<<<<< HEAD
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -133,16 +172,110 @@
                 error: function(xhr, status, error) {
                     // Handle error response
                     console.error(xhr.responseText);
+=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $(function() {
+            // Focus event handler for all input fields within the specific form
+            $('.signup_form input').focus(function() {
+                // Hide all error messages
+                $('.text-danger').addClass('d-none').text('');
+            });
+
+            $('.signup_form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var form = $(this);
+                var formData = form.serialize(); // Serialize form data
+
+                // Determine the action URL based on the form
+                var actionUrl = form.attr('action');
+
+                // Reset error messages
+                form.find('.text-danger').addClass('d-none').text('');
+
+                // Send AJAX request
+                $.ajax({
+                    type: form.attr('method'),
+                    url: actionUrl,
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success) {
+                            // Redirect to the provided URL and refresh the previous page
+                            window.location.href = response.redirect;
+                        } else {
+                            // Handle other cases (if needed)
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                        var errors = xhr.responseJSON
+                            .errors; // Get validation errors
+                        // Loop through each error
+                        $.each(errors, function(key, value) {
+                            // Find the corresponding error message element by ID and display the error message
+                            $('#' + key + '-error').removeClass('d-none')
+                                .text(value[0]);
+                        });
+                    }
+                });
+            });
+        });
+
+        // #############################login###########################################333
+
+
+
+        $('.login_form').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var loginForm = $(this);
+            var loginFormData = loginForm.serialize(); // Serialize form data
+
+            // Determine the action URL based on the form
+            var loginActionUrl = loginForm.attr('action');
+
+            // Reset error messages
+            loginForm.find('.text-danger').addClass('d-none').text('');
+
+            // Send AJAX request
+            $.ajax({
+                type: loginForm.attr('method'),
+                url: loginActionUrl,
+                data: loginFormData,
+                success: function(response) {
+                    if (response.success) {
+                        // Redirect
+                        window.location.href = response.redirect;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Display error message
+                    $('#login-username-error').removeClass('d-none').text(xhr.responseJSON
+                        .username_error);
+                    $('#login-password-error').removeClass('d-none').text(xhr.responseJSON
+                        .password_error);
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
                     var errors = xhr.responseJSON.errors; // Get validation errors
                     // Loop through each error
                     $.each(errors, function(key, value) {
                         // Find the corresponding error message element by ID and display the error message
+<<<<<<< HEAD
                         $('#' + key + '-error').removeClass('d-none').text(value[0]);
+=======
+                        $('#login-' + key + '-error').removeClass('d-none').text(
+                            value[0]);
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
                     });
                 }
             });
         });
 
+<<<<<<< HEAD
 // #############################login###########################################333
 
 
@@ -189,3 +322,10 @@
 
     });
 </script>
+=======
+
+
+
+    });
+</script>
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8

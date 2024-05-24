@@ -92,6 +92,7 @@ class BlogController extends Controller
             'title_ar' => 'required|string|max:255',
             'content_en' => 'required|string',
             'content_ar' => 'required|string',
+            'image' => 'required',
         ]);
         // Check the Validation
         if ($validator->fails()) {
@@ -115,8 +116,8 @@ class BlogController extends Controller
 
             BlogImage::create([
                 'blog_id' => $blog->id,
-                'name' => $temporaryImage->name,
-                'main_img' => $firstImage ? '1' : '0', // Set main_img to 1 for the first image, 0 for others
+                'name' => 'media/blog_imgs/' . $temporaryImage->name,
+                'main_img' => 'media/blog_imgs/' . $firstImage ? '1' : '0', // Set main_img to 1 for the first image, 0 for others
             ]);
 
             $firstImage = false; // Set the flag to false after the first iteration
@@ -256,7 +257,7 @@ class BlogController extends Controller
 
             BlogImage::create([
                 'blog_id' => $blog->id,
-                'name' => $temporaryImage->name,
+                'name' => 'media/blog_imgs/' . $temporaryImage->name,
                 'main_img' => "0",
             ]);
 
@@ -275,4 +276,28 @@ class BlogController extends Controller
         Session::flash('success', 'Deleted Successfully');
         return redirect()->route('blogs.index');
     }
+
+    // -------------------- Method -------------------- //
+    public function gtIndex()
+    {
+        $blogs = Blog::with('category', 'images')->latest()->get();
+        $categories = BlogCategory::latest()->get();
+
+        // Ensure there are blogs to display
+        $featuredBlog = $blogs->first();
+        $remainingBlogs = $blogs->slice(1);
+
+        // Extract the main image from the featured blog
+        $featuredBlogImage = $featuredBlog->images->firstWhere('main_img', '1');
+
+        return view('yalla-gt.pages.blog.index', compact('blogs', 'featuredBlog', 'remainingBlogs', 'categories', 'featuredBlogImage'));
+    }
+
+    // -------------------- Method -------------------- //
+    public function gtBlog($slug)
+    {
+        $blog = Blog::getByTranslatedSlug($slug)->first();
+        return view('yalla-gt.pages.blog.show', compact('blog'));
+    }
+
 }

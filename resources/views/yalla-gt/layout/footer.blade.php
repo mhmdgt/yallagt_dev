@@ -43,14 +43,17 @@
                         <li class="widget_sub_categories sub_categories4">
                             <a href="javascript:void(0)">{{ __('footer.find_more') }}</a>
                             <ul class="widget_dropdown_categories dropdown_categories4">
-                                <li><span class="font-weight-bold">{{ __('footer.headquarters') }}:</span><a
-                                        href="tel:{{ get_contact_us()->google_maps }}">{{ get_contact_us()->headqurter_address }}</a>
+                                <li><span class="font-weight-bold">{{ __('footer.headquarters') }}:</span>
+                                    <a href="tel:{{ get_contact_us()->google_maps }}">{{ get_contact_us()->headqurter_address }}
+                                    </a>
                                 </li>
-                                <li><span class="font-weight-bold">{{ __('footer.email') }}:</span><a
-                                        href="{{ get_contact_us()->support_email }}">{{ get_contact_us()->support_email }}</a>
+                                <li><span class="font-weight-bold">{{ __('footer.email') }}:</span>
+                                    <a href="{{ get_contact_us()->support_email }}">{{ get_contact_us()->support_email }}
+                                    </a>
                                 </li>
-                                <li><span class="font-weight-bold">{{ __('footer.phone') }}:</span><a
-                                        href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a>
+                                <li><span class="font-weight-bold">{{ __('footer.phone') }}:</span>
+                                    <a href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -69,10 +72,10 @@
                         <div class="footer_menu">
                             <ul>
                                 <li><a href="{{ route('gt_car.create') }}">{{ __('footer.sellYourCar') }}</a></li>
-                                <li><a href="#">{{ __('footer.saleCar') }}</a></li>
-                                <li><a href="#">{{ __('footer.CarPrices') }}</a></li>
-                                <li><a href="#">{{ __('footer.productsShop') }}</a></li>
-                                <li><a href="#">{{ __('footer.CarNewsAndAdvice') }}</a></li>
+                                <li><a href="{{route('sale-car.gtIndex')}}">{{ __('footer.saleCar') }}</a></li>
+                                <li><a href="{{route('stock-car.gtIndex')}}">{{ __('footer.CarPrices') }}</a></li>
+                                <li><a href="{{route('product.manufacturers-index')}}">{{ __('footer.productsShop') }}</a></li>
+                                <li><a href="{{route('blog-gtIndex')}}">{{ __('footer.CarNewsAndAdvice') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -87,10 +90,10 @@
                         <div class="footer_menu">
                             <ul>
                                 <li><a href="{{ route('about_us') }}">{{ __('footer.AboutUS') }}</a></li>
-                                <li><a href="#">{{ __('footer.ContactUs') }}</a></li>
+                                <li><a href="{{route('contact_us')}}">{{ __('footer.ContactUs') }}</a></li>
+                                <li><a href="#">{{ __('footer.TermsofUse') }}</a></li>
                                 <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
                                 <li><a href="#">{{ __('footer.OrdersandRefunds') }}</a></li>
-                                <li><a href="#">{{ __('footer.TermsofUse') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -111,7 +114,7 @@
                                     </a>
                                 @endauth
                                 <li><a href="#">{{ __('footer.FQA') }}</a></li>
-                                <li><a href="#">{{ __('footer.ExploreNewDeals') }}</a></li>
+                                <li><a href="{{route('product.all-products')}}">{{ __('footer.ExploreNewDeals') }}</a></li>
                             </ul>
                         </div>
                     </div>

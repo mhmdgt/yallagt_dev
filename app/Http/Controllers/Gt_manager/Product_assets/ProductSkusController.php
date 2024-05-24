@@ -195,7 +195,7 @@ class ProductSkusController extends Controller
 
             ProductSkuImage::create([
                 'sku_id' => $skuData->id,
-                'name' => $temporaryImage->name,
+                'name' => 'media/product_sku_imgs/' . $temporaryImage->name,
                 'main_img' => "0",
             ]);
 

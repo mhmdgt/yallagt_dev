@@ -41,10 +41,11 @@ class SaleCar extends Model
     public static function getByTranslatedSlug($slug)
     {
         $locale = App::getLocale();
-        return self::where("slug->{$locale}", $slug);
+        return self::where("slug->en", $slug)->orWhere("slug->ar", $slug);
     }
     // -------------------- Method -------------------- //
     function images(){
         return $this->hasMany(SaleCarImages::class, 'car_id', 'id');
     }
+
 }

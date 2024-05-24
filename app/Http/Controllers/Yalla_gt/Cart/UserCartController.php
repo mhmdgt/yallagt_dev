@@ -16,7 +16,7 @@ class UserCartController extends Controller
 
 
         $carts=UserCart::with('UserCartItems')->whereUserId(auth()->id())->first();
-        return view('Yalla_gt.pages.cart.index',compact('carts'));
+        return view('yalla-gt.pages.cart.index',compact('carts'));
     }
 
 

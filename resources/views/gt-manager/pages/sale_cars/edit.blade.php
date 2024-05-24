@@ -161,7 +161,7 @@
                                 @endphp
                                 @foreach ($images as $index => $image)
                                     <div class="img-container position-relative" id="image-container-{{ $index }}">
-                                        <img src="{{ display_img('media/sale_car_imgs/' . $image->name) }}" alt="">
+                                        <img src="{{ display_img($image->name) }}" >
                                         <button class="delete-btn" data-index="{{ $index }}">&times;</button>
                                         <input type="hidden" name="images[{{ $index }}][name]"
                                             value="{{ $image->name }}">
@@ -386,8 +386,8 @@
             allowMultiple: true,
             allowReorder: true,
             server: {
-                process: '/manage/blogTmpUpload',
-                revert: '/manage/blogTmpDelete',
+                process: '/manage/SaleCarTmpUpload',
+                revert: '/manage/SaleCarTmpDelete',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }

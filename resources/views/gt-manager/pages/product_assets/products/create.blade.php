@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col">
                                     <label>Product Name <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="name_ar" value="">
+                                    <input type="text" class="form-control" name="name_ar" dir="auto" value="">
                                     <x-errors.display-validation-error property="name_ar" />
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col">
                                     <label>Sku Name <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="sku_name_ar" value="">
+                                    <input type="text" class="form-control" name="sku_name_ar" dir="auto" value="">
                                     <x-errors.display-validation-error property="sku_name_ar" />
                                 </div>
                             </div>

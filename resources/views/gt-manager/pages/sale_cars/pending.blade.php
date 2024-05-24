@@ -26,7 +26,7 @@
                             <div class="card-img-container">
                                 @foreach ($car->images as $image)
                                     @if ($image->main_img)
-                                        <img src="{{ asset('storage/media/sale_car_imgs/' . $image->path . '/' . $image->name) }}"
+                                        <img src="{{ display_img($image->name) }}"
                                             class="card-img-top" alt="No_IMG">
                                             <a href="{{route('sale-car.edit' , $car->slug)}}">
                                                 <button class="btn btn-light btn-icon stockCarImageEdit">
@@ -40,7 +40,7 @@
                         </div>
                         {{-- Detalis --}}
                         <div class="card-body">
-                            <h4 class="card-text">
+                            <h4 class="card-text car-title-line-space">
                                 {{ ucwords($conditions[$car->condition]) }}
                                 {{ $brands[$car->brand] }}
                                 {{ $models[$car->model] }}

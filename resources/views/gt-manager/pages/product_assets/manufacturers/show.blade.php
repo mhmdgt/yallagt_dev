@@ -62,7 +62,11 @@
                             method="POST" enctype="multipart/form-data" id="car-brand">
                             @csrf
                             @method('PUT')
+<<<<<<< HEAD
                             <input type="text" name="id" value="{{ $manufacturer->id }}" hidden>
+=======
+                            <input hidden type="text" class="form-control" name="id" value="{{ $manufacturer->id }}">
+>>>>>>> 0b87006dac0387138e958fa42d1f6286df23e1a8
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(EN)</span></label>
                                 <input type="text" class="form-control" name="name_en" autocomplete="off"
@@ -71,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Name <span class="text-danger">(AR)</span></label>
-                                <input type="text" class="form-control" name="name_ar" autocomplete="off"
+                                <input type="text" class="form-control" name="name_ar" dir="auto"
                                     value="{{ $manufacturer->getTranslations('name')['ar'] }}">
                                 <small class="text-danger" id='ar_name-error'></small>
                             </div>

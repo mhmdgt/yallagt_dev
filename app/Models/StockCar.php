@@ -13,8 +13,10 @@ class StockCar extends Model
 {
     use HasFactory, HasTranslations, UserStampWithTypeTrait;
 
-    protected $fillable = ['car_brand_model_id', 'year', 'brochure', 'status'];
-    public $translatable = ['name'];
+    protected $fillable = ['slug', 'brand', 'car_brand_model_id', 'year', 'brochure', 'status'];
+
+    public $translatable = ['slug'];
+
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
     {

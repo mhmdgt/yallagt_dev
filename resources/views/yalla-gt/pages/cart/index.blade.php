@@ -82,7 +82,7 @@
 
                     <div class="col-lg-5">
                         <div class="summary summary-cart">
-                            <h4 class="summary-title mt-2">
+                            <h4 class="summary-title mt-4 h5 text-dark">
                                 <i class='bx bx-check-circle'></i>
                                 Order Summary
                             </h4>
@@ -90,63 +90,41 @@
                             <table class="table table-summary">
                                 <tbody>
                                     <tr class="summary-subtotal">
-                                        <td>Subtotal:</td>
-                                        <td>$160.00</td>
+                                        <td class="h6 text-dark">Subtotal: (2 items)</td>
+                                        <td>EGP: 160.00</td>
                                     </tr>
                                     <tr class="summary-shipping">
-                                        <td>Shipping:</td>
+                                        <td class="h6 text-dark">Shipping Fee:</td>
                                         <td>&nbsp;</td>
                                     </tr>
 
                                     <tr class="summary-shipping-row">
                                         <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="free-shipping" name="shipping"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label" for="free-shipping">Free
-                                                    Shipping</label>
+                                            <div>
+                                                <label>Standard:</label>
                                             </div>
                                         </td>
-                                        <td>$0.00</td>
+                                        <td class="gt-green font-weight-bold">FREE</td>
                                     </tr>
 
                                     <tr class="summary-shipping-row">
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="standart-shipping" name="shipping"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="standart-shipping">Standart:</label>
+                                                <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input">
+                                                <label class="custom-control-label" for="standart-shipping">Couriers:</label>
                                             </div>
                                         </td>
-                                        <td>$10.00</td>
-                                    </tr>
-
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="express-shipping" name="shipping"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label" for="express-shipping">Express:</label>
-                                            </div>
-                                        </td>
-                                        <td>$20.00</td>
-                                    </tr>
-
-                                    <tr class="summary-shipping-estimate">
-                                        <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a>
-                                        </td>
-                                        <td>&nbsp;</td>
+                                        <td>EGP: 50.00</td>
                                     </tr>
 
                                     <tr class="summary-total">
-                                        <td>Total:</td>
-                                        <td>$160.00</td>
+                                        <td class="h4 text-dark">Total:</td>
+                                        <td class="h4 text-dark">EGP: 160.00</td>
                                     </tr>
                                 </tbody>
                             </table>
 
-                            <a href="checkout.html" class="gradient-green-bg cart-btn btn btn-order btn-block text-white">
+                            <a href="checkout.html" class="gradient-8790f6 cart-btn btn btn-order btn-block text-white">
                                 PROCEED TO CHECKOUT
                             </a>
                         </div>
@@ -158,13 +136,10 @@
     {{-- END --}}
     </div>
 @endsection
-{{-- ====== include ====== --}}
 @section('footer')
     @include('yalla-gt.layout.upper-footer')
     @include('yalla-gt.layout.footer')
 @endsection
-
-
 @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {

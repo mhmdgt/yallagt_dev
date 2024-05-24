@@ -11,7 +11,7 @@ class Storehouse extends Model
     use HasFactory  , UserStampWithTypeTrait;
 
     protected $fillable = [
-        'merchant',
+        'seller_id',
         'name',
         'manager_name',
         'phone',
@@ -24,5 +24,10 @@ class Storehouse extends Model
         'full_address',
         'gps_link',
     ];
+    // -------------------- Method -------------------- //
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
 
 }

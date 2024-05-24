@@ -143,16 +143,16 @@
                 </a>
                 <div class="collapse" id="ProductOrders">
                     <ul class="nav sub-menu">
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">All New Orders</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">In-House Orders</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Third-party Orders</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Approved Orders</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Processed Orders</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Courier Orders</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">All New Orders</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Approved</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Couriers</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Processed</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Returnes</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Customer received</a></li>
+                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Refunded Orders</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Order Placed</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Full Orders List</a></li>
-
                     </ul>
                 </div>
             </li>

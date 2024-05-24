@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('stock_cars', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
+            $table->string('brand');
             $table->foreignId('car_brand_model_id')->references('id')->on('car_brand_models')->cascadeOnDelete();
             $table->year('year');
+
             $table->string('brochure')->nullable();
             $table->enum('status', ['active', 'hidden'])->default('active');
 
