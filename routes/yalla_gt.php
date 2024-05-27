@@ -53,16 +53,19 @@ Route::group(
             Route::get('/sell', 'gtCreate')->name('create');
         });
 
+        // CART
+        Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/{ProductSku}/store', 'store')->name('store');
+            Route::post('/cart/item/{id}/update', 'updateQuantity')->name('update');
+            Route::delete('/{itemID}/remove', 'remove')->name('remove');
+        });
+
         Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
-            Route::view('/', 'yalla-gt.pages.cart.checkout')->name('index');
+            Route::get('/order', 'index')->name('index');
         });
 
     }); // ------------------------------------ END OF Authorized
-
-        Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/{ProductSku}/store', 'store')->name('store');
-        });
 
         // Home
         Route::get('/', [HomeContorller::class, 'index'])->name('yalla-index');

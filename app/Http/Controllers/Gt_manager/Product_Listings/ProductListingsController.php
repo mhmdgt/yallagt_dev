@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Gt_manager\Product_Listings;
 
-use App\Http\Controllers\Controller;
-use App\Models\Manufacturer;
+use App\Models\Seller;
 use App\Models\Product;
-use App\Models\ProductListing;
 use App\Models\ProductSku;
 use App\Models\Storehouse;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use App\Models\ProductListing;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class ProductListingsController extends Controller
@@ -16,32 +17,35 @@ class ProductListingsController extends Controller
     // -------------------------- Method -------------------------- //
     public function index()
     {
-        // Fetch the latest product listings with associated skus
-        $product_listings = ProductListing::with('skus')->latest()->get();
+        // // Fetch the latest product listings with associated skus
+        // $product_listings = ProductListing::with('skus')->latest()->get();
 
-        // Prepare arrays to store associated data
-        $products = [];
-        $manufacturers = [];
-        $storehouses = [];
+        // // Prepare arrays to store associated data
+        // $products = [];
+        // $manufacturers = [];
+        // $storehouses = [];
 
-        // Iterate over each product listing to gather associated data
-        foreach ($product_listings as $product_listing) {
-            foreach ($product_listing->skus as $sku) {
-                // Retrieve product and manufacturer
-                $product = $sku->product;
-                $manufacturer = optional($product->manufacturer);
-                // Retrieve storehouse
-                $storehouse = $product_listing->storehouse;
+        // // Iterate over each product listing to gather associated data
+        // foreach ($product_listings as $product_listing) {
+        //     foreach ($product_listing->skus as $sku) {
+        //         // Retrieve product and manufacturer
+        //         $product = $sku->product;
+        //         $manufacturer = optional($product->manufacturer);
+        //         // Retrieve storehouse
+        //         $storehouse = $product_listing->storehouse;
 
-                // Add product, manufacturer, and storehouse to arrays
-                $products[$product_listing->id] = $product;
-                $manufacturers[$product_listing->id] = $manufacturer;
-                $storehouses[$product_listing->id] = $storehouse;
-            }
-        }
+        //         // Add product, manufacturer, and storehouse to arrays
+        //         $products[$product_listing->id] = $product;
+        //         $manufacturers[$product_listing->id] = $manufacturer;
+        //         $storehouses[$product_listing->id] = $storehouse;
+        //     }
+        // }
+
+        $sellersStock = Seller::with('storehouses.productListings.skus.images')->get();
 
         // Pass the data to the view
-        return view('gt-manager.pages.product_listings.index', compact('product_listings', 'products', 'manufacturers', 'storehouses'));
+        return view('gt-manager.pages.product_listings.index',
+        compact('sellersStock'));
     }
     // -------------------------- Method -------------------------- //
     public function add()
@@ -56,6 +60,7 @@ class ProductListingsController extends Controller
     {
         // Validate incoming request data
         $validatedData = $request->validate([
+            'seller_id' => 'exists:sellers,id',
             'storehouse' => 'required|exists:storehouses,id',
             'sku' => 'required|exists:product_skus,sku',
             'qty' => 'required|integer|min:1',
@@ -77,15 +82,18 @@ class ProductListingsController extends Controller
         $productID = $skuData->product_id;
         $product = Product::where('id', '=', $productID)->first();
         $manufacturer = Manufacturer::where('id', '=', $product->manufacturer_id)->first();
+        $seller_id = Manufacturer::where('id', '=', $product->manufacturer_id)->first();
 
         // Store the listing
         $product_listing = ProductListing::create([
+            'seller_id' => 1,
+            'storehouse_id' => $request->storehouse,
             'manufacturer_id' => $manufacturer->id,
             'product_id' => $product->id,
+            'product_sku_id' => $skuData->id,
             'sku' => $request->sku,
             'qty' => $request->qty,
             'selling_price' => $request->selling_price,
-            'storehouse_id' => $request->storehouse,
         ]);
 
         // Now you can continue with your logic

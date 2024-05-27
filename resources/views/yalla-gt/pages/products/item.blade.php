@@ -6,17 +6,13 @@
                 <div class="row">
                     @foreach ($single_listing->skus as $sku)
                         {{-- @foreach ($product_listing->skus as $sku) --}}
-                        {{-- Image Section --}}
-                        <div class="col-md-4">
-                            <div class="border rounded mb-3 owl-carousel product_show_box product-main-img img-fluid"
-                                id="image-carousel">
+                        <div class="col-md-4 mb-3">
+                            <div class="border rounded product_show_box product-main-img owl-carousel" id="image-carousel">
                                 @php
                                     $images = $sku->images->sortByDesc('main_img')->values();
                                 @endphp
                                 @foreach ($images as $index => $image)
-                                    <div>
                                         <img src="{{ display_img($image->name) }}" alt="Product_Image">
-                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -32,8 +28,10 @@
                                             4.5
                                         </span>
                                     </div>
-                                    <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>HOT
-                                        DEALS</span>
+                                    <span class="text-muted">
+                                        <i class="fas fa-shopping-basket fa-sm mx-1"></i>
+                                        HOT DEALS
+                                    </span>
                                     <span class="text-success ml-2">In stock</span>
                                 </div>
                                 <div class="mb-3">
@@ -52,47 +50,55 @@
                                     <dd class="col-8"><span>{{ $sku->product->subCategory->name }}</span></dd>
                                 </div>
                                 <hr />
-                                {{-- Add To Cart  --}}
                                 <div class="row mb-4">
-                                    <div class="col-md-12 d-flex justify-content-between">
-                                        <div class="btn btn-outline-secondary rounded mr-1 ml-1">
-                                            <i class="bi bi-caret-down"></i>
-                                            <span class="cart-qty">Quantity</span>
-                                        </div>
-                                        {{-- Buy now Web --}}
-                                        <a href="#"
-                                            class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block">
-                                            Add To Cart
-                                        </a>
-                                        {{-- Buy now Mobile --}}
-                                        <div id="call_nav" class="d-flex align-items-center"
-                                            onclick="document.getElementById('carForSaleID').submit();">
-                                            <span
-                                                class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
-                                                <button type="button" style="border: none; background: none;">
-                                                    <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
-                                                    <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy
-                                                        Now</span>
+                                        <form id="add-to-cart-form" class="col-md-12 d-flex justify-content-between"
+                                            action="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <input type="hidden" name="quantity" id="selected-quantity" value="1">
+                                            <!-- Default quantity is 1 -->
+                                            <input type="hidden" name="product_sku" value="{{ $sku->sku }}">
+                                            <!-- Assuming you have the SKU available -->
+
+                                            <div class="cart-qty btn gradient-f25e3d text-white rounded mr-1 ml-1 d-flex justify-content-between">
+                                                <span class="quantity">1</span> <!-- Display default quantity -->
+                                                <span class="ml-1 ">QTY</span>
+                                                <div class="ml-3 mr-4 cart-qty-counts">
+                                                    <div class="cart-btn"><span class="p-1">1</span></div>
+                                                    <div class="cart-btn"><span class="p-1">2</span></div>
+                                                    <div class="cart-btn"><span class="p-1">3</span></div>
+                                                    <div class="cart-btn"><span class="p-1">4</span></div>
+                                                    <div class="cart-btn"><span class="p-1">5</span></div>
+                                                </div>
+                                            </div>
+
+                                            {{-- Add to Cart Button --}}
+                                            <button type="submit"
+                                                class="btn gradient-8790f6 rounded text-white mr-1 ml-1 w-100 dissable-cart-button-sm">
+                                                Add To Cart
+                                            </button>
+
+                                            {{-- Buy now Mobile --}}
+                                            {{-- <div id="call_nav" class="d-flex align-items-center"
+                                                onclick="document.getElementById('carForSaleID').submit();">
+                                                <button type="submit" style="border: none; background: none;" class="w-100">
+                                                    <span
+                                                        class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
+                                                        <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
+                                                        <span
+                                                            class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy
+                                                            Now</span>
+                                                    </span>
                                                 </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="ml-4 mr-4 cart-qty-counts">
-                                        <div class="cart-btn">
-                                            <span>1</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>2</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>3</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>4</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>5</span>
-                                        </div>
+                                            </div> --}}
+                                        </form>
+
+                                    <div class="ml-3 mr-4 cart-qty-counts">
+                                        <div class="cart-btn"><span class="p-1">1</span></div>
+                                        <div class="cart-btn"><span class="p-1">2</span></div>
+                                        <div class="cart-btn"><span class="p-1">3</span></div>
+                                        <div class="cart-btn"><span class="p-1">4</span></div>
+                                        <div class="cart-btn"><span class="p-1">5</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -112,24 +118,20 @@
 
                                         <table class="table border mt-4 mb-2">
                                             <tr>
-                                                <th class="py-2">Display:</th>
-                                                <td class="py-2">13.3-inch LED-backlit display with IPS</td>
+                                                <th class="py-2">Manufacturer:</th>
+                                                <td class="py-2">{{ $sku->product->manufacturer->name }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="py-2">Processor capacity:</th>
-                                                <td class="py-2">2.3GHz dual-core Intel Core i5</td>
+                                                <th class="py-2">Name:</th>
+                                                <td class="py-2">{{ $sku->sku_name }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="py-2">Camera quality:</th>
-                                                <td class="py-2">720p FaceTime HD camera</td>
+                                                <th class="py-2">Category:</th>
+                                                <td class="py-2">{{ $sku->product->category->name }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="py-2">Memory</th>
-                                                <td class="py-2">8 GB RAM or 16 GB RAM</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="py-2">Graphics</th>
-                                                <td class="py-2">Intel Iris Plus Graphics 640</td>
+                                                <th class="py-2">SubCategory:</th>
+                                                <td class="py-2">{{ $sku->product->subCategory->name }}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -137,70 +139,42 @@
                                 </div>
 
                             </div>
-                            @include('yalla-gt.partials.choose_sale_car')
                         </div>
-                        <!-- Samilier Items -->
+                        <!-- Other Items -->
                         <div class="col-lg-4 mb-4">
-                            <div class="px-0  rounded">
+                            <div class="px-0 rounded">
                                 <div class="card">
                                     <div class="card-body">
-
                                         <h4 class="card-title">Similar items</h4>
-
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/8.webp"
-                                                    style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="similar-items-info">
-                                                <a href="#" class="mb-1">
-                                                    Rucksack Backpack Large <br />
-                                                    Line Mounts
-                                                </a>
-                                                <p class="text-dark font-weight-bold"> $38.90</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/8.webp"
-                                                    style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="similar-items-info">
-                                                <a href="#" class="mb-1">
-                                                    Rucksack Backpack Large <br />
-                                                    Line Mounts
-                                                </a>
-                                                <p class="text-dark font-weight-bold"> $38.90</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/8.webp"
-                                                    style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="similar-items-info">
-                                                <a href="#" class="mb-1">
-                                                    Rucksack Backpack Large <br />
-                                                    Line Mounts
-                                                </a>
-                                                <p class="text-dark font-weight-bold"> $38.90</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex mb-3">
-                                            <a href="#" class="me-3">
-                                                <img src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/8.webp"
-                                                    style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                            </a>
-                                            <div class="similar-items-info">
-                                                <a href="#" class="mb-1">
-                                                    Rucksack Backpack Large <br />
-                                                    Line Mounts
-                                                </a>
-                                                <p class="text-dark font-weight-bold"> $38.90</p>
-                                            </div>
-                                        </div>
-
-
+                                        @foreach ($related_products as $related_product)
+                                            @foreach ($related_product->skus as $related_sku)
+                                                <!-- Check to ensure the related SKU is not the current SKU -->
+                                                @if ($related_sku->sku !== $sku->sku)
+                                                    <div class="d-flex mb-2">
+                                                        <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
+                                                            class="me-3">
+                                                            @foreach ($related_sku->images as $image)
+                                                                @if ($image->main_img)
+                                                                    <img src="{{ display_img($image->name) }}"
+                                                                        style="min-width: 96px; height: 96px;"
+                                                                        class="img-md img-thumbnail"
+                                                                        alt="Similar Item Image">
+                                                                @endif
+                                                            @endforeach
+                                                        </a>
+                                                        <div class="similar-items-info">
+                                                            <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
+                                                                class="mb-1">
+                                                                {{ $related_sku->sku_name }}
+                                                            </a>
+                                                            <p class="text-dark font-weight-bold">
+                                                                EGP:
+                                                                {{ number_format($related_product->selling_price, 2) }}</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -220,10 +194,29 @@
         // ----------------- QTY
         document.addEventListener('DOMContentLoaded', function() {
             const qtyButton = document.querySelector('.cart-qty');
+            const qtyCounts = document.querySelector('.cart-qty-counts');
+            const quantity = document.querySelector('.quantity');
+            const selectedQuantity = document.getElementById('selected-quantity');
 
             qtyButton.addEventListener('click', function() {
-                const qtyCounts = document.querySelector('.cart-qty-counts');
                 qtyCounts.classList.toggle('show');
+            });
+
+            qtyCounts.addEventListener('click', function(event) {
+                const target = event.target.closest('.cart-btn');
+                if (target) {
+                    const selectedQty = target.textContent.trim();
+                    quantity.textContent = selectedQty;
+                    selectedQuantity.value = selectedQty; // Update hidden input value
+                    qtyCounts.classList.remove('show');
+                }
+            });
+
+            // Optional: Close the qty counts if clicking outside
+            document.addEventListener('click', function(event) {
+                if (!qtyButton.contains(event.target) && !qtyCounts.contains(event.target)) {
+                    qtyCounts.classList.remove('show');
+                }
             });
         });
         // ----------------- Image Carousel

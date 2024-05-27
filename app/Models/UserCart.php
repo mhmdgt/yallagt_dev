@@ -20,4 +20,10 @@ class UserCart extends Model
     {
         return $this->hasMany(UserCartItem::class);
     }
+
+
+
+
+
+
 }

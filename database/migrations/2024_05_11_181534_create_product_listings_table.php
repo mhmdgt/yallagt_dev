@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
-
-            $table->string('storehouse_id');
-            $table->string('manufacturer_id');
-            $table->string('product_id');
+            $table->unsignedBigInteger('seller_id')->references('id')->on('sellers')->cascadeOnDelete();
+            $table->unsignedBigInteger('storehouse_id')->references('id')->on('storehouses')->cascadeOnDelete();
+            $table->unsignedBigInteger('manufacturer_id')->references('id')->on('manufacturers')->cascadeOnDelete();
+            $table->unsignedBigInteger('product_id')->references('id')->on('products')->cascadeOnDelete();
+            $table->unsignedBigInteger('product_sku_id')->references('id')->on('product_skus')->cascadeOnDelete();
             $table->string('sku');
-
             $table->integer('qty');
             $table->integer('selling_price');
 

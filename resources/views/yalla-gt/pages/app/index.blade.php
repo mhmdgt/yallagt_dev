@@ -304,57 +304,66 @@
                     <div class="product_container">
                         <div class="row product_carousel no-gutters" id="shop_filter">
 
-                            @foreach ($product_listings as $product_listing)
-                                @foreach ($product_listing->skus as $sku)
-                                    <div class="col-md-20 col-6 product_item">
-                                        <article class="single_product">
-                                            <figure>
-                                                <a class="text-dark"
-                                                    href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
-                                                    <div class="container-fluid product_thumb">
-                                                        @foreach ($sku->images as $image)
-                                                            @if ($image->main_img)
-                                                                <img src="{{ display_img($image->name) }}">
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="product_card_content">
-                                                        <div class="mt-4 mb-4">
-                                                            <h6 class="brand fw-700">Brand:
-                                                                <span>{{ $sku->product->manufacturer->name }}</span>
-                                                            </h6>
-                                                            <h4 class="product_name home-blog-title">
-                                                                {{ $sku->sku_name }}</h4>
-                                                        </div>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="p-0">
-                                                                <div>
-                                                                    <span>EGP:</span>
-                                                                    <span class="product_card_price"
-                                                                        style="color: #F25E3D;">
-                                                                        {{ number_format($product_listing->selling_price, 0, ',', ',') }}
-                                                                    </span>
+                            @foreach ($sellersStock as $seller)
+                                @foreach ($seller->storehouses as $storehouse)
+                                    @foreach ($storehouse->productListings as $productListing)
+                                        @foreach ($productListing->skus as $sku)
+                                            <div class="col-md-20 col-6 product_item">
+                                                <article class="single_product">
+                                                    <figure>
+                                                        <a class="text-dark"
+                                                            href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                            <div class="container-fluid product_thumb">
+                                                                @foreach ($sku->images as $image)
+                                                                    @if ($image->main_img)
+                                                                        <img src="{{ display_img($image->name) }}">
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="product_card_content">
+                                                                <div class="mt-4 mb-4">
+                                                                    <h6 class="brand fw-700">{{ __('home_page.Brand') }}:
+                                                                        <span>{{ $sku->product->manufacturer->name }}</span>
+                                                                    </h6>
+                                                                    <h4 class="product_name home-blog-title">
+                                                                        {{ $sku->sku_name }}</h4>
                                                                 </div>
-                                                                <div>
-                                                                    <i class="bi bi-bookmark-check"></i>
-                                                                    <span class="product_card_precentage">HOT</span>
-                                                                    <span> DEALS </span>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="p-0">
+                                                                        <div>
+                                                                            <span>{{ __('home_page.EGP') }}:</span>
+                                                                            <span class="product_card_price"
+                                                                                style="color: #F25E3D;">
+                                                                                {{ number_format($productListing->selling_price, 0, ',', ',') }}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="ar-style">
+                                                                            <i class="bi bi-bookmark-check"></i>
+                                                                            <span
+                                                                                class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                                            <span>{{ $seller->name }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-0 product_card_cart">
+                                                                        <form action="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" method="POST">
+                                                                            @csrf
+                                                                            <button type="submit" class="addToCartButton">
+                                                                                <img src="yalla_gt/media/cart/cart_icon.png" alt="Cart Icon">
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="p-0 product_card_cart">
-                                                                <a href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}"
-                                                                    class="addToCartButton">
-                                                                    <img src="yalla_gt/media/cart/cart_icon.png">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </figure>
-                                        </article>
-                                    </div>
+                                                        </a>
+                                                    </figure>
+                                                </article>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
                                 @endforeach
                             @endforeach
+
 
                         </div>
                     </div>
@@ -377,7 +386,8 @@
                     <div class="brand_container BrandOWL owl-carousel">
                         @foreach ($manufacturerWithSkus as $manufacturer)
                             <div class="single_manufacturer">
-                                <a href="{{route('product.manufacturer-products' , $manufacturer->slug )}}"><img src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
+                                <a href="{{ route('product.manufacturer-products', $manufacturer->slug) }}"><img
+                                        src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
                             </div>
                         @endforeach
                     </div>

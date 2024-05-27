@@ -1,177 +1,179 @@
 @extends('yalla-gt.layout.app')
 @section('content')
     <div class="page-div rtl-direction">
-        @if ($cart == null )
-            <div class="row align-items-center mt-4 mb-5">
+        @if(!$cart)
+            <div class="row align-items-center mb-4" style="margin-top: 10px">
                 <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-                    <h2 class="font-weight-light">Looking For Spare Parts?</h2>
-                    <p class="font-italic text-muted mb-4">"Look no further! At Yallagt,
-                        we've got you covered. Explore our online store for a wide range of spare parts, all
-                        conveniently
-                        available for purchase directly from us. With our same-day delivery service, you can get the
-                        parts
-                        you need delivered to your doorstep as quickly as possible. Trust us to provide high-quality
-                        parts
-                        and fast service, so you can get back on the road in no time."
-                    </p>
-                    <a href="{{route('product.manufacturers-index')}}" class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">Shop Now</a>
+                    <h3 class="font-weight-light mt-3 mb-2">{{ __('aboutus.Looking_For_Spare_Parts') }}</h3>
+                    <p class="text-muted mt-2 mb-4">{{ __('aboutus.Looking_For_Spare_Parts_Content') }}</p>
+                    <a href="{{ route('product.manufacturers-index') }}"
+                        class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">{{ __('aboutus.Shop_Now') }}</a>
                 </div>
                 <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
                         src="{{ asset('yalla_gt/media/cart/empty_cart.png') }}" alt=""
                         class="img-fluid mb-4 mb-lg-0"></div>
             </div>
         @else
-        <div class="card">
-            <div class="card-body p-4">
-                <div class="row">
-                    {{-- If nooooooo Items --}}
-                    {{-- Items --}}
-                    <div class="col-lg-7">
-                        {{-- NAV --}}
-                        <div class="cart-nav">
-                            <h5 class=""><a href="" class="text-body">
-                                    <i class="bi bi-arrow-left-short"></i>
-                                    Continue Shopping</a>
-                            </h5>
-                            <hr>
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div>
-                                    <p class="mb-1">Shopping cart</p>
-                                    <p class="mb-0">You have {{ $cart->total_qty }} items in your cart</p>
+            <div class="card">
+                <div class="card-body p-4">
+                    <div class="row">
+                        {{-- Items --}}
+                        <div class="col-lg-7">
+                            {{-- NAV --}}
+                            <div class="cart-nav">
+                                <h5 class=""><a href="" class="text-body">
+                                        <i class="bi bi-arrow-left-short"></i>
+                                        Continue Shopping</a>
+                                </h5>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <p class="mb-0">You have {{ $cart->total_qty }} items in your cart</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- Items --}}
-                        @foreach ($cartItems as $cartItem)
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div class="product-media">
-                                                <a class="primary_img d-flex justify-content-center" href="#">
-                                                    @foreach ($cartItem->productSku->images as $image)
-                                                        @if ($image->main_img)
-                                                            <div style="width: 100px;">
-                                                                <img src="{{ display_img($image->name) }}" alt="">
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </a>
-                                            </div>
-                                            <div class="prod-details">
-                                                <div class="cart-prod-brand">{{ $cartItem->productSku->brand }}
-                                                    <span>{{ $cartItem->productSku->attributes }}</span>
+                            {{-- Items --}}
+                            @foreach ($cart->UserCartItems as $cartItem)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div class="product-media">
+                                                    <a class="primary_img d-flex justify-content-center" href="#">
+                                                        @foreach ($cartItem->productSku->images as $image)
+                                                            @if ($image->main_img)
+                                                                <div style="width: 100px;">
+                                                                    <img src="{{ display_img($image->name) }}"
+                                                                        alt="">
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </a>
                                                 </div>
-                                                <div class="cart-prod-title">{{ $cartItem->productSku->sku_name }}</div>
-                                                <div class="cart-prod-attributes">
-                                                    <div class="mt-2">
-                                                        <span>EGP:</span>
-                                                        <span class="product_card_price" style="color: #F25E3D;">
-                                                            {{ number_format($listing->selling_price, 0, ',', ',') }}
-                                                        </span>
+                                                <div class="prod-details">
+                                                    <div class="cart-prod-brand">{{ $cartItem->productSku->brand }}
+                                                        <span>{{ $cartItem->productSku->attributes }}</span>
+                                                    </div>
+                                                    <div class="cart-prod-title">
+                                                        <a class="text-dark"
+                                                            href="{{ route('product-item', ['slug' => $cartItem->productSku->product->slug, 'sku' => $cartItem->productSku->sku]) }}">
+                                                            {{ $cartItem->productSku->sku_name }}
+                                                        </a>
+                                                    </div>
+                                                    <div class="cart-prod-attributes">
+                                                        <div class="mt-2">
+                                                            <span>EGP:</span>
+                                                            <span class="product_card_price" style="color: #F25E3D;">
+                                                                <td>{{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
+                                                                </td>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="prod-ctrl">
-                                        <div class="cart-btn">
-                                            <i class="bi bi-trash"></i>
-                                            <span>Remove</span>
+                                        {{-- CONTROLLER --}}
+                                        <div class="prod-ctrl d-flex align-items-center">
+                                            {{-- Remove --}}
+                                            <div type="button" class="cart-remove-btn" data-toggle="modal"
+                                                data-target="#confirmDeleteModal{{ $cartItem->id }}" title="Edit">
+                                                <i class="bi bi-trash"></i>
+                                                Remove
+                                            </div>
+                                            <x-modal.confirm-delete-modal
+                                                route="{{ route('user-carts.remove', $cartItem->id) }}"
+                                                id="{{ $cartItem->id }}" />
+                                            {{-- QTY --}}
+                                            <div class="ml-2 mr-2 cart-item">
+                                                <div class="cart-btn cart-qty">
+                                                    <span>{{ $cartItem->qty }} Quantity</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="cart-btn cart-qty">
-                                            <span>{{ $cartItem->qty }} QTY</span>
-                                            <i class="bi bi-caret-down"></i>
-                                        </div>
-                                    </div>
-                                    <div class="cart-qty-counts">
-                                        <div class="cart-btn">
-                                            <span>1</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>2</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>3</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>4</span>
-                                        </div>
-                                        <div class="cart-btn">
-                                            <span>5</span>
+                                        <div class="cart-qty-counts">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <div class="cart-btn" data-cart-item-id="{{ $cartItem->id }}"
+                                                    data-quantity="{{ $i }}"><span
+                                                        class="p-1">{{ $i }}</span></div>
+                                            @endfor
                                         </div>
                                     </div>
                                 </div>
+                            @endforeach
+                        </div>
+                        {{-- Order Summary --}}
+                        <div class="col-lg-5">
+                            <div class="summary summary-cart">
+                                <h4 class="summary-title mt-4 h5 text-dark">
+                                    <i class='bx bx-check-circle'></i>
+                                    Order Summary
+                                    <span class="gt-gray" style="font-size: 12px">(Inclusive of VAT)</span>
+                                </h4>
+
+                                <table class="table table-summary">
+                                    <tbody>
+                                        <tr class="summary-subtotal">
+                                            <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
+                                            <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
+
+                                        </tr>
+                                        <tr class="summary-shipping">
+                                            <td class="h6 text-dark">Shipping Fee:</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+
+                                        <tr class="summary-shipping-row">
+                                            <td>Standard:</td>
+                                            <td class="gt-green font-weight-bold">FREE</td>
+                                        </tr>
+
+
+                                        <tr class="summary-shipping-row">
+                                            <td>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="toggleShipping">
+                                                    <label class="custom-control-label"
+                                                        for="toggleShipping">Couriers</label>
+                                                </div>
+                                            </td>
+                                            <td>EGP: 50.00</td>
+                                        </tr>
+
+                                        <tr class="summary-total">
+                                            <td class="h4 text-dark">Total:</td>
+                                            <td class="h5 text-dark" id="totalAmount">EGP:
+                                                <span>{{ number_format($cart->sub_total, 0, '', ',') }}</span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                {{-- Buy now Web --}}
+                                <a href="{{ route('checkout.index') }}"
+                                    class="btn gradient-8790f6 rounded text-white w-100">
+                                    {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
+                                    PROCEED TO CHECKOUT
+                                </a>
+                                {{-- Buy now Mobile --}}
+                                {{-- <div id="call_nav" class="d-flex align-items-center"
+                                    onclick="document.getElementById('carForSaleID').submit();">
+                                    <span
+                                        class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
+                                        <button type="button" style="border: none; background: none;">
+                                            <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">PROCEED TO
+                                                CHECKOUT</span>
+                                        </button>
+                                    </span>
+                                </div> --}}
                             </div>
-                        @endforeach
-                    </div>
-                    {{-- Order Summary --}}
-                    <div class="col-lg-5">
-                        <div class="summary summary-cart">
-                            <h4 class="summary-title mt-4 h5 text-dark">
-                                <i class='bx bx-check-circle'></i>
-                                Order Summary
-                                <span class="gt-gray" style="font-size: 12px">(Inclusive of VAT)</span>
-                            </h4>
-
-                            <table class="table table-summary">
-                                <tbody>
-                                    <tr class="summary-subtotal">
-                                        <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
-                                        <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
-
-                                    </tr>
-                                    <tr class="summary-shipping">
-                                        <td class="h6 text-dark">Shipping Fee:</td>
-                                        <td>&nbsp;</td>
-                                    </tr>
-
-                                    <tr class="summary-shipping-row">
-                                        <td>Standard:</td>
-                                        <td class="gt-green font-weight-bold">FREE</td>
-                                    </tr>
-
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="standart-shipping" name="shipping"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label"
-                                                    for="standart-shipping">Couriers:</label>
-                                            </div>
-                                        </td>
-                                        <td>EGP: 50.00</td>
-                                    </tr>
-
-                                    <tr class="summary-total">
-                                        <td class="h4 text-dark">Total:</td>
-                                        <td class="h5 text-dark">EGP: 160.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {{-- Buy now Web --}}
-                            <a href="{{ route('checkout.index') }}" class="btn gradient-8790f6 rounded text-white w-100">
-                                {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                PROCEED TO CHECKOUT
-                            </a>
-                            {{-- Buy now Mobile --}}
-                            {{-- <div id="call_nav" class="d-flex align-items-center"
-                                onclick="document.getElementById('carForSaleID').submit();">
-                                <span
-                                    class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
-                                    <button type="button" style="border: none; background: none;">
-                                        <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">PROCEED TO CHECKOUT</span>
-                                    </button>
-                                </span>
-                            </div> --}}
                         </div>
                     </div>
-                    @endif
                 </div>
             </div>
-        </div>
+        @endif
+    </div>
+    </div>
+    </div>
 
     </div>
 @endsection
@@ -181,13 +183,118 @@
 @endsection
 @section('script')
     <script>
+        // ----------------- QTY
         document.addEventListener('DOMContentLoaded', function() {
-            const qtyButton = document.querySelector('.cart-qty');
+            const qtyButtons = document.querySelectorAll('.cart-qty');
+            const qtyCounts = document.querySelectorAll('.cart-qty-counts');
 
-            qtyButton.addEventListener('click', function() {
-                const qtyCounts = document.querySelector('.cart-qty-counts');
-                qtyCounts.classList.toggle('show');
+            // Check if CSRF token exists
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
+            if (!csrfToken) {
+                console.error('CSRF token not found!');
+                return;
+            }
+            const csrfTokenValue = csrfToken.getAttribute('content');
+
+            qtyButtons.forEach((qtyButton, index) => {
+                const qtyCount = qtyCounts[index];
+                const quantitySpan = qtyButton.querySelector('span');
+                const currentQty = parseInt(quantitySpan.textContent.trim());
+
+                function updateQtyButtons(currentQty) {
+                    const buttons = qtyCount.querySelectorAll('.cart-btn');
+                    buttons.forEach(button => {
+                        const qty = parseInt(button.textContent.trim());
+                        if (qty > 5 || qty === currentQty) {
+                            button.classList.add('disabled');
+                            button.style.pointerEvents = 'none';
+                            button.style.opacity = '0.5';
+                        } else {
+                            button.classList.remove('disabled');
+                            button.style.pointerEvents = 'auto';
+                            button.style.opacity = '1';
+                        }
+                    });
+                }
+
+                updateQtyButtons(currentQty);
+
+                qtyButton.addEventListener('click', function() {
+                    qtyCount.classList.toggle('show');
+                });
+
+                qtyCount.addEventListener('click', function(event) {
+                    const target = event.target.closest('.cart-btn');
+                    if (target && !target.classList.contains('disabled')) {
+                        const selectedQty = parseInt(target.textContent.trim());
+                        const cartItemId = target.getAttribute('data-cart-item-id');
+                        quantitySpan.textContent = `${selectedQty} Quantity`;
+                        qtyCount.classList.remove('show');
+                        updateQtyButtons(selectedQty);
+
+                        // Send AJAX request to update quantity in the database
+                        fetch(`/user-carts/cart/item/${cartItemId}/update`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': csrfTokenValue
+                                },
+                                body: JSON.stringify({
+                                    quantity: selectedQty
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Update the cart totals on success
+                                    document.querySelector('.cart-total-qty').textContent = data
+                                        .total_qty;
+                                    document.querySelector('.cart-sub-total').textContent = data
+                                        .sub_total;
+                                } else {
+                                    alert('Error updating quantity.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                });
             });
+
+            document.addEventListener('click', function(event) {
+                qtyButtons.forEach((qtyButton, index) => {
+                    const qtyCount = qtyCounts[index];
+                    if (!qtyButton.contains(event.target) && !qtyCount.contains(event.target)) {
+                        qtyCount.classList.remove('show');
+                    }
+                });
+            });
+        });
+        // --------------------------- Total
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const shippingCheckbox = document.getElementById('toggleShipping');
+            const totalAmountElement = document.getElementById('totalAmount');
+            const shippingCost = 50;
+            let subTotal = parseFloat(totalAmountElement.textContent.replace(/[^\d.-]/g, ''));
+
+            function formatNumber(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+
+            function updateTotal() {
+                let total = subTotal;
+                if (shippingCheckbox.checked) {
+                    total += shippingCost;
+                }
+                totalAmountElement.textContent = `EGP: ${formatNumber(total.toFixed(0))}`;
+            }
+
+            // Update total on checkbox change
+            shippingCheckbox.addEventListener('change', updateTotal);
+
+            // Initial total update
+            updateTotal();
         });
     </script>
 @endsection

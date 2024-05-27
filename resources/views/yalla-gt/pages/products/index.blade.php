@@ -56,11 +56,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="p-0 product_card_cart">
-                                                                <a
-                                                                    href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
-                                                                    <img
-                                                                        src="{{ asset('yalla_gt/media/cart/cart_icon.png') }}">
-                                                                </a>
+                                                                <form action="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" method="POST">
+                                                                    @csrf
+                                                                    <button type="submit" class="addToCartButton">
+                                                                        <img src="{{asset('yalla_gt/media/cart/cart_icon.png')}}" alt="Cart Icon">
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>

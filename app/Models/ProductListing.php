@@ -12,12 +12,14 @@ class ProductListing extends Model
     use HasFactory, UserStampWithTypeTrait;
 
     protected $fillable = [
+        'seller_id',
+        'storehouse_id',
         'manufacturer_id',
         'product_id',
+        'product_sku_id',
         'sku',
         'qty',
         'selling_price',
-        'storehouse_id',
         'status',
     ];
     // -------------------- Method -------------------- //

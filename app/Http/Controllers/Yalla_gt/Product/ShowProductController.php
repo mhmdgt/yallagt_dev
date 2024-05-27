@@ -109,10 +109,10 @@ class ShowProductController extends Controller
     // -------------------- Method -------------------- //
     public function item($slug, $sku)
     {
-        $skuData = ProductSku::where('sku', '=', $sku)->get()->first();
+        $skuData = ProductSku::where('sku', '=', $sku)->first();
         $product = Product::getByTranslatedSlug($slug)->first();
 
-        // Fetch the latest product listings with associated skus
+        // Fetch the main product listing
         $product_listings = ProductListing::with('skus', 'skus.images')->where('sku', '=', $sku)->get();
 
         // Prepare arrays to store associated data
@@ -138,9 +138,14 @@ class ShowProductController extends Controller
 
         $single_listing = $product_listings->first();
 
-        return view('yalla-gt.pages.products.item',
-            compact('product_listings', 'single_listing', 'products', 'manufacturers', 'storehouses'
-            ));
+        // Fetch related products from the same seller, limit to 5 items, excluding the current product
+        $related_products = ProductListing::with('skus.images')
+            ->where('storehouse_id', $single_listing->storehouse_id)
+            ->where('sku', '!=', $sku) // Exclude the current product
+            ->limit(5)
+            ->get();
+
+        return view('yalla-gt.pages.products.item', compact('product_listings', 'single_listing', 'products', 'manufacturers', 'storehouses', 'related_products'));
     }
 
 }

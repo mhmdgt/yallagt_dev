@@ -12,8 +12,8 @@
                             @foreach ($car->images as $image)
                                 @if ($image->main_img)
                                     <a href="{{ route('gt_car.edit', $car->slug) }}">
-                                        <img src="{{ display_img($image->name) }}"
-                                            class="card-img-top max-height-image" alt="No_IMG">
+                                        <img src="{{ display_img($image->name) }}" class="card-img-top max-height-image"
+                                            alt="No_IMG">
                                     </a>
                                     <a href="{{ route('gt_car.edit', $car->slug) }}">
                                         <button class="btn btn-light btn-icon stockCarImageEdit">
@@ -21,7 +21,7 @@
                                         </button>
                                     </a>
                                     <button class="btn btn-light btn-icon stockCarImageStatus">
-                                        {{$car->status}}
+                                        {{ $car->status }}
                                     </button>
                                 @endif
                             @endforeach
@@ -53,7 +53,8 @@
                             </div>
                             <div class="card-text mt-2">
                                 <i class="bi bi-calendar-check"></i>
-                                <span class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
+                                <span
+                                    class="badge_icon_second mr-2 h6">{{ \Carbon\Carbon::parse($car->created_at)->diffForHumans() }}</span>
                             </div>
                         </div>
 
@@ -63,17 +64,12 @@
         </div>
         {{-- When no Ads --}}
         @if ($cars->isEmpty())
-            <div class="row align-items-center mt-5 mb-5">
+            <div class="row align-items-center mt-5 mb-5 ar-style">
                 <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-                    <h2 class="font-weight-light">Your ad is free now</h2>
-                    <p class="font-italic text-muted mb-4">"Win With Us at Yallagt, Sell your car, hassle-free and
-                        commission-free. Our platform offers you the opportunity to list your vehicle without any fees,
-                        ensuring a seamless selling experience. Take advantage of our commitment to providing a
-                        transparent
-                        and cost-effective solution for selling your car. Join our community today and let's win
-                        together."
-                    </p>
-                    <a href="{{route('gt_car.create')}}" class="btn btn-light px-5 rounded-pill shadow-sm">Sell You Car</a>
+                    <h2 class="font-weight-light mb-4">{{ __('aboutus.Your_ad_is_now_free') }}</h2>
+                    <p class="font-italic text-muted mb-4">{{ __('aboutus.Win_With_Us_Content') }}</p>
+                    <a href="{{ route('gt_car.create') }}"
+                        class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">{{ __('aboutus.Sell_Your_Car') }}</a>
                 </div>
                 <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
                         src="{{ asset('yalla_gt/media/about_us/4136944.png') }}" alt=""

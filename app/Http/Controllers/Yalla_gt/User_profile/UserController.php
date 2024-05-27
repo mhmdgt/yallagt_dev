@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $user_address = UserAddress::Where('id' , $id)->get()->first();
         $governorates = Governorate::get();
-// dd($user_address);
+
         return view('yalla-gt.pages.profile.addresses.edit',  compact('user_address', 'governorates'));
     }
     // -------------------- Method -------------------- //
@@ -165,6 +165,4 @@ class UserController extends Controller
         // Redirect back with a success message
         return redirect()->route('user.addressesIndex')->with('success', 'Address updated successfully.');
     }
-
-
 }
