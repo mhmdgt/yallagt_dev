@@ -1,17 +1,35 @@
 @extends('yalla-gt.layout.app')
 @section('content')
     <div class="page-div rtl-direction">
-        @if(!$cart)
+        @if (!$cart)
+            <!-- Case: No Cart -->
             <div class="row align-items-center mb-4" style="margin-top: 10px">
-                <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
                     <h3 class="font-weight-light mt-3 mb-2">{{ __('aboutus.Looking_For_Spare_Parts') }}</h3>
                     <p class="text-muted mt-2 mb-4">{{ __('aboutus.Looking_For_Spare_Parts_Content') }}</p>
                     <a href="{{ route('product.manufacturers-index') }}"
                         class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">{{ __('aboutus.Shop_Now') }}</a>
                 </div>
-                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
-                        src="{{ asset('yalla_gt/media/cart/empty_cart.png') }}" alt=""
-                        class="img-fluid mb-4 mb-lg-0"></div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2">
+                    <img src="{{ asset('yalla_gt/media/cart/empty_cart.png') }}" alt=""
+                        class="img-fluid mb-4 mb-lg-0">
+                </div>
+            </div>
+        @elseif ($cart && $cart->UserCartItems->isEmpty())
+            <!-- Case: Cart Exists but No Items in the Cart -->
+            <div class="row align-items-center mb-4" style="margin-top: 10px">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                    <h3 class="font-weight-light mt-3 mb-2">{{ __('aboutus.Looking_For_Spare_Parts') }}</h3>
+                    <p class="text-muted mt-2 mb-4">{{ __('aboutus.Looking_For_Spare_Parts_Content') }}</p>
+                    <a href="{{ route('product.manufacturers-index') }}"
+                        class="btn gradient-8790f6 text-white px-5 rounded-pill shadow-sm">{{ __('aboutus.Shop_Now') }}</a>
+                </div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2">
+                    <img src="{{ asset('yalla_gt/media/cart/empty_cart.png') }}" alt=""
+                        class="img-fluid mb-4 mb-lg-0">
+                </div>
             </div>
         @else
             <div class="card">
@@ -51,8 +69,9 @@
                                                     </a>
                                                 </div>
                                                 <div class="prod-details">
-                                                    <div class="cart-prod-brand">{{ $cartItem->productSku->brand }}
-                                                        <span>{{ $cartItem->productSku->attributes }}</span>
+                                                    <div>
+                                                        <span>Brand:</span>
+                                                        <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                                     </div>
                                                     <div class="cart-prod-title">
                                                         <a class="text-dark"
@@ -115,7 +134,6 @@
                                         <tr class="summary-subtotal">
                                             <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
                                             <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
-
                                         </tr>
                                         <tr class="summary-shipping">
                                             <td class="h6 text-dark">Shipping Fee:</td>
@@ -125,18 +143,6 @@
                                         <tr class="summary-shipping-row">
                                             <td>Standard:</td>
                                             <td class="gt-green font-weight-bold">FREE</td>
-                                        </tr>
-
-
-                                        <tr class="summary-shipping-row">
-                                            <td>
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="toggleShipping">
-                                                    <label class="custom-control-label"
-                                                        for="toggleShipping">Couriers</label>
-                                                </div>
-                                            </td>
-                                            <td>EGP: 50.00</td>
                                         </tr>
 
                                         <tr class="summary-total">
@@ -171,10 +177,6 @@
                 </div>
             </div>
         @endif
-    </div>
-    </div>
-    </div>
-
     </div>
 @endsection
 @section('footer')
@@ -270,31 +272,6 @@
                     }
                 });
             });
-        });
-        // --------------------------- Total
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const shippingCheckbox = document.getElementById('toggleShipping');
-            const totalAmountElement = document.getElementById('totalAmount');
-            const shippingCost = 50;
-            let subTotal = parseFloat(totalAmountElement.textContent.replace(/[^\d.-]/g, ''));
-
-            function formatNumber(number) {
-                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            }
-
-            function updateTotal() {
-                let total = subTotal;
-                if (shippingCheckbox.checked) {
-                    total += shippingCost;
-                }
-                totalAmountElement.textContent = `EGP: ${formatNumber(total.toFixed(0))}`;
-            }
-
-            // Update total on checkbox change
-            shippingCheckbox.addEventListener('change', updateTotal);
-
-            // Initial total update
-            updateTotal();
         });
     </script>
 @endsection

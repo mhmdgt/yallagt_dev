@@ -55,17 +55,21 @@ Route::group(
 
         // CART
         Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
-            Route::get('/', 'index')->name('index');
             Route::post('/{ProductSku}/store', 'store')->name('store');
             Route::post('/cart/item/{id}/update', 'updateQuantity')->name('update');
             Route::delete('/{itemID}/remove', 'remove')->name('remove');
         });
 
         Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
-            Route::get('/order', 'index')->name('index');
+            Route::get('/', 'index')->name('index');
+            Route::get('/order-store', 'store')->name('store');
         });
 
     }); // ------------------------------------ END OF Authorized
+
+        Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
 
         // Home
         Route::get('/', [HomeContorller::class, 'index'])->name('yalla-index');

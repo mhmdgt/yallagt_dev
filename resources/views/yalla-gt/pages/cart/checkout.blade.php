@@ -37,111 +37,98 @@
                     </div>
                 @else
                     <div class="card mb-4 ar-style">
-                        <div class="card-body mb-4 ar-style">
+                        <div class="card-body ar-style">
                             {{-- Title --}}
                             <div class="p-2 mb-4 text-dark ar-style">
                                 <span style="font-size: 22px; font-weight: 500;">New Address</span>
                                 <p class="mt-2 gt-gray">Add your shipping address for fast and easy checkout across
                                     our marketplaces</p>
                             </div>
-                            {{-- Form --}}
-                            {{-- <form action="{{ route('user.addressStore') }}" method="POST" enctype="multipart/form-data">
-                                @csrf --}}
-                            {{-- Contact Data --}}
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <h6 class="card-title">Type</h6>
-                                    <div class="form-check form-check-inline border rounded p-2">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="type"
-                                                id="optionsRadios5" value="home">
-                                            Home
-                                            <i class="input-frame"></i></label>
+                            <form action="{{ route('checkout.store') }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label for="exampleInputName1">Name</label>
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ user_data()->name }}">
+                                        <x-errors.display-validation-error property="name" />
                                     </div>
-                                    <div class="form-check form-check-inline border rounded p-2">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="type"
-                                                id="optionsRadios6" value="work">
-                                            Work
-                                            <i class="input-frame"></i></label>
+                                    <div class="col">
+                                        <label for="exampleInputPhone1">Phone number</label>
+                                        <input type="text" class="form-control" name="phone"
+                                            value="{{ user_data()->phone }}">
+                                        <x-errors.display-validation-error property="phone" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label for="exampleInputName1">Name</label>
-                                    <input type="text" class="form-control" name="name"
-                                        value="{{ user_data()->name }}">
-                                    <x-errors.display-validation-error property="name" />
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label>{{ __('gt_cars_create.Governorate') }}</label>
+                                        <select class="js-example-basic-single w-100" name="governorate_id">
+                                            <option value="">{{ __('gt_cars_create.select') }}</option>
+                                            @foreach ($governorates as $governorate)
+                                                <option value="{{ $governorate->id }}"
+                                                    {{ old('governorate') == $governorate->id ? 'selected' : '' }}>
+                                                    {{ $governorate->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <x-errors.display-validation-error property="governorate" />
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <label for="exampleInputPhone1">Phone number</label>
-                                    <input type="text" class="form-control" name="phone"
-                                        value="{{ user_data()->phone }}">
-                                    <x-errors.display-validation-error property="phone" />
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label>Area</label>
+                                        <input type="text" class="form-control" name="area" value="">
+                                        <x-errors.display-validation-error property="area" />
+                                    </div>
                                 </div>
-                            </div>
-                            {{-- Address Data --}}
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>{{ __('gt_cars_create.Governorate') }}</label>
-                                    <select class="js-example-basic-single w-100" name="governorate_id">
-                                        <option value="">{{ __('gt_cars_create.select') }}</option>
-                                        @foreach ($governorates as $governorate)
-                                            <option value="{{ $governorate->id }}"
-                                                {{ old('governorate') == $governorate->id ? 'selected' : '' }}>
-                                                {{ $governorate->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <x-errors.display-validation-error property="governorate" />
-                                </div>
-                            </div>
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label>Building number</label>
+                                        <input type="text" class="form-control" name="building_number">
+                                        <x-errors.display-validation-error property="building_number" />
+                                    </div>
 
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>Area</label>
-                                    <input type="text" class="form-control" name="area" value="">
-                                    <x-errors.display-validation-error property="area" />
+                                    <div class="col">
+                                        <label>Street</label>
+                                        <input type="text" class="form-control" name="street" value="">
+                                        <x-errors.display-validation-error property="street" />
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>Building number</label>
-                                    <input type="text" class="form-control" name="building_number">
-                                    <x-errors.display-validation-error property="building_number" />
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label>Full Address</label>
+                                        <input type="text" class="form-control" name="full_address" value="">
+                                        <x-errors.display-validation-error property="full_address" />
+                                    </div>
                                 </div>
-
-                                <div class="col">
-                                    <label>Street</label>
-                                    <input type="text" class="form-control" name="street" value="">
-                                    <x-errors.display-validation-error property="street" />
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <label>GPS Link <span>( Location )</span></label>
+                                        <input type="url" class="form-control" name="gps_link" value="">
+                                        <x-errors.display-validation-error property="gps_link" />
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>Full Address</label>
-                                    <input type="text" class="form-control" name="full_address" value="">
-                                    <x-errors.display-validation-error property="full_address" />
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <h6 class="card-title">Type</h6>
+                                        <div class="form-check form-check-inline border rounded p-2">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="type"
+                                                    id="optionsRadios5" value="home">
+                                                Home
+                                                <i class="input-frame"></i></label>
+                                        </div>
+                                        <div class="form-check form-check-inline border rounded p-2">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="type"
+                                                    id="optionsRadios6" value="work">
+                                                Work
+                                                <i class="input-frame"></i></label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>GPS Link <span>( Location )</span></label>
-                                    <input type="url" class="form-control" name="gps_link" value="">
-                                    <x-errors.display-validation-error property="gps_link" />
-                                </div>
-                            </div>
-
-                            {{-- <button type="submit"
-                                    class="btn btn-light mt-2 rounded gradient-green-bg text-white float-right">
-                                    <i class="bi bi-bookmark-check"></i>
-                                    Save
-                                </button> --}}
-                            {{-- </form> --}}
                         </div>
                     </div>
                 @endif
@@ -150,33 +137,55 @@
                     <i class="bi bi-bag-check ml-1 mr-1"></i>
                     <span style="font-size: 24px; font-weight: 500;">Your order</span>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <div class="product-media">
-                                    <a class="primary_img d-flex justify-content-center" href="#">
-                                        <div style="width: 100px;">
-                                            <img src="#" alt="">
+                @foreach ($cart->UserCartItems as $cartItem)
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="product-media">
+                                        <a class="primary_img d-flex justify-content-center" href="#">
+                                            @foreach ($cartItem->productSku->images as $image)
+                                                @if ($image->main_img)
+                                                    <div style="width: 100px;">
+                                                        <img src="{{ display_img($image->name) }}" alt="">
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </a>
+                                    </div>
+                                    <div class="prod-details">
+                                        <div>
+                                            <span>Brand:</span>
+                                            <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                         </div>
-                                    </a>
+                                        <div class="cart-prod-title">
+                                            <a class="text-dark"
+                                                href="{{ route('product-item', ['slug' => $cartItem->productSku->product->slug, 'sku' => $cartItem->productSku->sku]) }}">
+                                                {{ $cartItem->productSku->sku_name }}
+                                            </a>
+                                        </div>
+                                        <div class="cart-prod-attributes">
+                                            <div class="mt-2">
+                                                <span>EGP:</span>
+                                                <span class="product_card_price" style="color: #F25E3D;">
+                                                    <td>{{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
+                                                    </td>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="prod-details">
-                                    <div class="cart-prod-brand">Amsoil</div>
-                                    <div class="cart-prod-title">Shell 5W40 Ultra 4L (SKU_NAME)</div>
-                                    <div class="cart-prod-attributes">
-                                        <div class="mt-2">
-                                            <span>EGP:</span>
-                                            <span class="product_card_price" style="color: #F25E3D;">
-                                                {{ number_format(9000, 0, ',', ',') }}
-                                            </span>
+                                <div class="prod-ctrl d-flex">
+                                    <div class="cart-item">
+                                        <div class="cart-btn cart-qty">
+                                            <span>{{ $cartItem->qty }} Quantity</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
                 <hr>
             </div>
             {{-- Order Summary --}}
@@ -193,44 +202,65 @@
 
                             <table class="table table-summary">
                                 <tbody>
+
                                     <tr class="summary-subtotal">
-                                        <td class="h6 text-dark">Subtotal: (2items)</td>
-                                        <td>EGP: {{ number_format(10000, 0, ',', ',') }}</td>
+                                        <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
+                                        <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
                                     </tr>
+
                                     <tr class="summary-shipping">
                                         <td class="h6 text-dark">Shipping Fee:</td>
-                                        <td class="gt-green font-weight-bold">FREE</td>
+                                        <td> </td>
                                     </tr>
+
+                                    @foreach ($shippingServices as $service)
+                                        @php
+                                            $serviceName = $service->getTranslations('name')['en'];
+                                            $checked = $serviceName == 'Basic' ? 'checked' : '';
+                                        @endphp
+                                        <tr class="summary-shipping-row">
+                                            <td>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="radio" name="shippingService"
+                                                        class="custom-control-input"
+                                                        id="toggleShipping{{ $service->id }}"
+                                                        value="{{ $service->fee }}" {{ $checked }}>
+                                                    <label class="custom-control-label"
+                                                        for="toggleShipping{{ $service->id }}">{{ $serviceName }}</label>
+                                                </div>
+                                            </td>
+                                            <td>EGP: {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }} </td>
+                                        </tr>
+                                    @endforeach
+
                                     <tr class="summary-shipping">
                                         <td class="h6 text-dark">Payment:</td>
-                                        <td class="tex-tdark">
-                                            <i class='bx bx-wallet'></i>
-                                            Cash On Delivery
+                                        <td class="tex-tdark"><i class='bx bx-wallet'></i>
+                                            {{ ucwords($paymentMethods->name) }}</td>
+                                    </tr>
+
+                                    <tr class="summary-total">
+                                        <td class="h4 text-dark">Total:</td>
+                                        <td class="h5 text-dark" id="totalAmount">EGP:
+                                            <span>{{ number_format($cart->sub_total, 0, '', ',') }}</span>
                                         </td>
                                     </tr>
 
-
-                                    <tr class="summary-total">
-                                        <td class="h4 text-dark">Total</td>
-                                        <td class="h5">EGP: 160.00</td>
-                                    </tr>
                                 </tbody>
                             </table>
                             {{-- Buy now Web --}}
-                            <a href="checkout.html" class="btn gradient-8790f6 rounded text-white w-100">
-                                {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                PLACE ORDER
-                            </a>
-                            {{-- Buy now Mobile --}}
-                            {{-- <div id="call_nav" class="d-flex align-items-center"
-                                onclick="document.getElementById('carForSaleID').submit();">
-                                <span
-                                    class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
-                                    <button type="button" style="border: none; background: none;">
-                                        <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">PLACE ORDER</span>
-                                    </button>
-                                </span>
-                            </div> --}}
+                            @if (!$address)
+                                <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">
+                                    PLACE ORDER
+                                </button>
+                            @endif
+                            </form>
+                            @if ($address)
+                                <a href="{{ route('checkout.store') }}"
+                                    class="btn gradient-8790f6 rounded text-white w-100">
+                                    PLACE ORDER
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -242,5 +272,31 @@
     <div class="mb-5">
         @include('yalla-gt.layout.upper-footer')
     </div>
-    {{-- @include('yalla-gt.layout.footer') --}}
+@endsection
+@section('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const shippingToggles = document.querySelectorAll('input[name="shippingService"]');
+        const totalAmountElement = document.getElementById('totalAmount').querySelector('span');
+        const cartSubTotal = parseFloat('{{ $cart->sub_total }}');
+
+        function updateTotal() {
+            let selectedFee = 0;
+            shippingToggles.forEach(toggle => {
+                if (toggle.checked) {
+                    selectedFee = parseFloat(toggle.value);
+                }
+            });
+            const total = cartSubTotal + selectedFee;
+            totalAmountElement.textContent = total.toLocaleString();
+        }
+
+        shippingToggles.forEach(toggle => {
+            toggle.addEventListener('change', updateTotal);
+        });
+
+        // Initialize total on page load
+        updateTotal();
+    });
+    </script>
 @endsection

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
+        Schema::create('shipping_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('logo')->nullable();
-            
+
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('shipping_companies');
     }
 };

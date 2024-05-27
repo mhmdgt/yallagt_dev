@@ -6,11 +6,11 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item">Products</li>
+                    <li class="breadcrumb-item">Admins</li>
                 </ol>
-                <a href="{{ route('products.create') }}" class="btn btn-success">
+                <a href="#" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
-                    Create Product
+                    Add Admin
                 </a>
             </div>
         </nav>

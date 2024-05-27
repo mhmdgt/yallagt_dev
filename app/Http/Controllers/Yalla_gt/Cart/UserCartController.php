@@ -92,7 +92,6 @@ class UserCartController extends Controller
 
         return redirect()->back()->with('success', 'Added to Cart successfully.');
     }
-
     // -------------------- Method -------------------- //
     public function increment($userCartItemId, $qty)
     {

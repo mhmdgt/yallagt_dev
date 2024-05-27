@@ -7,10 +7,10 @@
             <div class="container py-5">
                 <div class="row h-100 align-items-center py-5">
                     <div class="col-lg-6">
-                        <h1 class="display-4">{{ __('aboutus.About_us') }}</h1>
-                        <p class="lead text-muted mb-0">{{ __('aboutus.About_us_content') }}</p>
+                        <h1 class="display-4 mb-4">{{ __('aboutus.About_us') }}</h1>
+                        <p class="lead text-muted mb-5">{{ __('aboutus.About_us_content') }}</p>
                     </div>
-                    <div class="col-lg-6 d-none d-lg-block"><img src="{{ asset('yalla_gt/media/about_us/3516805.png') }}"
+                    <div class="col-lg-6"><img src="{{ asset('yalla_gt/media/about_us/3516805.png') }}"
                             alt="" class="img-fluid"></div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                         <h2 class="font-weight-light">{{ __('aboutus.Win_With_Us') }}</h2>
                         <p class="font-italic text-muted mb-4">{{ __('aboutus.Win_With_Us_Content') }}</p>
                         <a href="#"
-                            class="btn btn-light px-5 rounded-pill shadow-sm">{{ __('aboutus.Sell_Your_Car') }}</a>
+                            class="btn btn-light px-5 rounded-pill gradient-green-bg text-white shadow-sm">{{ __('aboutus.Sell_Your_Car') }}</a>
                     </div>
                     <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
                             src="{{ asset('yalla_gt/media/about_us/4136944.png') }}" alt=""
@@ -36,7 +36,7 @@
                         <h2 class="font-weight-light">{{ __('aboutus.Looking_For_Spare_Parts') }}</h2>
                         <p class="font-italic text-muted mb-4">{{ __('aboutus.Looking_For_Spare_Parts_Content') }}</p>
                         <a href="#"
-                            class="btn btn-light px-5 rounded-pill shadow-sm">{{ __('aboutus.Shop_Now') }}</a>
+                            class="btn btn-light px-5 rounded-pill gradient-green-bg text-white shadow-sm">{{ __('aboutus.Shop_Now') }}</a>
                     </div>
                 </div>
             </div>

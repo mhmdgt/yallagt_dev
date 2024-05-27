@@ -12,6 +12,7 @@ use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
 use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
 use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
 use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Shipping\ShippingServiceController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
 use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
@@ -183,6 +184,12 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/add-product', 'add')->name('add');
         Route::post('/store', 'store')->name('store');
+    });
+    // Shipping Service //
+    Route::controller(ShippingServiceController::class)->prefix('manage/shipping-service')->name('shipping-service.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store-service', 'store')->name('store');
+        Route::put('/update-service/{id}', 'update')->name('update');
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('manage/blog-categories')->name('blog-categories.')->group(function () {
