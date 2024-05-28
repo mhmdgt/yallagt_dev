@@ -31,8 +31,10 @@ return new class extends Migration
             $table->integer('sub_total');
 
             $table->foreignId('shipping_service_id')->references('id')->on('shipping_services');
+            $table->string('shipping_service_fee');
 
             $table->foreignId('payment_method_id')->references('id')->on('payment_methods');
+            $table->string('payment_method_name');
 
             $table->integer('total_price');
 

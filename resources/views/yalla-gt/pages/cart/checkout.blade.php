@@ -15,9 +15,11 @@
                             <div class="row mt-3">
                                 <dt class="col-4">Name:</dt>
                                 <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
+                                <input type="hidden" name="addressName" value="{{ $address->name }}">
 
                                 <dt class="col-4">Phone:</dt>
                                 <dd class="col-8"><span>{{ $address->phone }}</span></dd>
+                                <input type="hidden" name="addressPhone" value="{{ $address->phone }}">
 
                                 <dt class="col-4">City:</dt>
                                 <dd class="col-8"><span>{{ $address->governorate->name ?? 'N/A' }}</span></dd>
@@ -29,8 +31,7 @@
                                 <dd class="col-8" dir="auto"><span>{{ $address->type }}</span></dd>
                                 @if ($address->gps_link)
                                     <dt class="col-4">GPS Link:</dt>
-                                    <dd class="col-8"><span><a href="{{ $address->gps_link }}"
-                                                target="_blank">{{ $address->gps_link }}</a></span></dd>
+                                    <dd class="col-8"><span><a href="{{ $address->gps_link }}" target="_blank">{{ $address->gps_link }}</a></span></dd>
                                 @endif
                             </div>
                         </div>
@@ -46,7 +47,6 @@
                             </div>
                             <form action="{{ route('checkout.store') }}" method="POST">
                                 @csrf
-                                @method('POST')
                                 <div class="form-group row pt-0">
                                     <div class="col">
                                         <label for="exampleInputName1">Name</label>
@@ -193,13 +193,11 @@
                 <div class="card p-1">
                     <div class="card-body">
                         <div class="summary summary-cart">
-
                             <h4 class="summary-title h5 text-dark">
                                 <i class='bx bx-check-circle'></i>
                                 Order Summary
                                 <span class="gt-gray h6">Incl. VAT</span>
                             </h4>
-
                             <table class="table table-summary">
                                 <tbody>
 
@@ -207,44 +205,58 @@
                                         <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
                                         <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
                                     </tr>
+                                    <form action="{{ route('checkout.store') }}" method="POST">
 
                                     <tr class="summary-shipping">
                                         <td class="h6 text-dark">Shipping Fee:</td>
                                         <td> </td>
                                     </tr>
 
-                                    @foreach ($shippingServices as $service)
+                                    <input type="hidden" name="shippingServiceId" id="shippingServiceId"
+                                        value="{{ $shippingServices[0]->id }}">
+
+                                    @foreach ($shippingServices as $key => $service)
                                         @php
                                             $serviceName = $service->getTranslations('name')['en'];
-                                            $checked = $serviceName == 'Basic' ? 'checked' : '';
+                                            $checked = $key === 0 ? 'checked' : '';
                                         @endphp
                                         <tr class="summary-shipping-row">
                                             <td>
                                                 <div class="custom-control custom-switch">
                                                     <input type="radio" name="shippingService"
-                                                        class="custom-control-input"
+                                                        class="custom-control-input shipping-service"
                                                         id="toggleShipping{{ $service->id }}"
-                                                        value="{{ $service->fee }}" {{ $checked }}>
+                                                        value="{{ $service->fee }}" {{ $checked }}
+                                                        data-id="{{ $service->id }}">
                                                     <label class="custom-control-label"
                                                         for="toggleShipping{{ $service->id }}">{{ $serviceName }}</label>
                                                 </div>
                                             </td>
-                                            <td>EGP: {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }} </td>
+                                            <td>EGP:
+                                                {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }}
+                                            </td>
                                         </tr>
                                     @endforeach
-
-                                    <tr class="summary-shipping">
-                                        <td class="h6 text-dark">Payment:</td>
-                                        <td class="tex-tdark"><i class='bx bx-wallet'></i>
-                                            {{ ucwords($paymentMethods->name) }}</td>
-                                    </tr>
 
                                     <tr class="summary-total">
                                         <td class="h4 text-dark">Total:</td>
                                         <td class="h5 text-dark" id="totalAmount">EGP:
-                                            <span>{{ number_format($cart->sub_total, 0, '', ',') }}</span>
+                                            <span>{{ number_format($cart->sub_total + $shippingServices[0]->fee, 0, '', ',') }}</span>
                                         </td>
                                     </tr>
+
+
+                                    <tr class="summary-shipping">
+                                        <td class="h6 text-dark">Payment:</td>
+                                        <td class="text-dark"><i class='bx bx-wallet'></i>
+                                            {{ ucwords($paymentMethods->name) }}
+                                        </td>
+                                    </tr>
+
+                                    <input type="hidden" name="payment_method_id" id="paymentMethod"
+                                        value="{{ $paymentMethods->id }}">
+                                    <input type="hidden" name="paymentMethod" id="paymentMethod"
+                                        value="{{ ucwords($paymentMethods->getTranslations('name')['en']) }}">
 
                                 </tbody>
                             </table>
@@ -253,14 +265,18 @@
                                 <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">
                                     PLACE ORDER
                                 </button>
-                            @endif
-                            </form>
-                            @if ($address)
-                                <a href="{{ route('checkout.store') }}"
+                            @else
+                                {{-- <a href="{{ route('checkout.store') }}"
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     PLACE ORDER
-                                </a>
+                                </a> --}}
+                                    @csrf
+                                    <!-- Your form fields here -->
+                                    <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">Place Order</button>
+                                </form>
+
                             @endif
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -274,29 +290,35 @@
     </div>
 @endsection
 @section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const shippingToggles = document.querySelectorAll('input[name="shippingService"]');
-        const totalAmountElement = document.getElementById('totalAmount').querySelector('span');
-        const cartSubTotal = parseFloat('{{ $cart->sub_total }}');
+    <script>
+        let previousFee = {{ $shippingServices[0]->fee }};
+        let currentShippingServiceId = {{ $shippingServices[0]->id }};
 
-        function updateTotal() {
-            let selectedFee = 0;
-            shippingToggles.forEach(toggle => {
-                if (toggle.checked) {
-                    selectedFee = parseFloat(toggle.value);
-                }
+        // Get all radio buttons with class 'shipping-service'
+        const shippingRadios = document.querySelectorAll('.shipping-service');
+        const totalAmountSpan = document.getElementById('totalAmount').querySelector('span');
+        const shippingServiceIdInput = document.getElementById('shippingServiceId');
+
+
+        // Add event listener to each radio button
+        shippingRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Get the selected shipping service ID and fee
+                const selectedId = parseInt(this.dataset.id);
+                const selectedFee = parseFloat(this.value);
+
+                // Update the hidden input values
+                shippingServiceIdInput.value = selectedId;
+
+                // Update the total amount display
+                const currentTotal = parseFloat(totalAmountSpan.innerText.replace(/,/g, ''));
+                const newTotal = currentTotal - previousFee + selectedFee;
+                totalAmountSpan.innerText = newTotal.toLocaleString();
+
+                // Update previous fee and current shipping service ID
+                previousFee = selectedFee;
+                currentShippingServiceId = selectedId;
             });
-            const total = cartSubTotal + selectedFee;
-            totalAmountElement.textContent = total.toLocaleString();
-        }
-
-        shippingToggles.forEach(toggle => {
-            toggle.addEventListener('change', updateTotal);
         });
-
-        // Initialize total on page load
-        updateTotal();
-    });
     </script>
 @endsection

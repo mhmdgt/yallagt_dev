@@ -158,7 +158,7 @@
                                 <a href="{{ route('checkout.index') }}"
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                    PROCEED TO CHECKOUT
+                                    اشتري الآن
                                 </a>
                                 {{-- Buy now Mobile --}}
                                 {{-- <div id="call_nav" class="d-flex align-items-center"

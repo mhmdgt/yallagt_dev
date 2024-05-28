@@ -15,7 +15,7 @@ class PaymentMethodsSeeder extends Seeder
     {
         $methods = [
             ['en' => "cash", "ar" => "نقدي"],
-            ['en' => "cash on delivery", "ar" => "cash on delivery"],
+            ['en' => "cash on delivery", "ar" => "الدفع عند الاستلام"],
             ['en' => "Bank Card", "ar" => "بطاقة مصرفية"],
             ['en' => "downpayment", "ar" => "دفعة مبدئية ( تقسيط )"],
 

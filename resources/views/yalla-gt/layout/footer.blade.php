@@ -145,8 +145,8 @@
                     <div class="footer_widgets--content">
                         <div class="row align-items-center justify-content-between footer_widgets--content-row">
                             <div class="col-lg-7">
+                                <h4 class="mb-3">{{ __('footer.allServiceInOnePlance') }}</h4>
                                 <h4>{{ __('footer.coming_soon_on') }}</h4>
-                                <h4>{{ __('footer.allServiceInOnePlance') }}</h4>
 
                             </div>
 

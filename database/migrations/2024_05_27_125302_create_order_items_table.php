@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-
+            $table->foreignId('order_id')->references('id')->on('orders')->cascadeOnDelete();
             $table->foreignId('seller_id')->references('id')->on('sellers')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('product_listing_id')->references('id')->on('product_listings')->cascadeOnDelete();
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('sku');
             $table->integer('qty')->default(1);
             $table->integer('total_price_per_item')->default(1);
-
             $table->timestamps();
         });
     }

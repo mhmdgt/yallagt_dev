@@ -62,7 +62,7 @@ Route::group(
 
         Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/order-store', 'store')->name('store');
+            Route::post('/order-store', 'store')->name('store');
         });
 
     }); // ------------------------------------ END OF Authorized

@@ -571,10 +571,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <img src="yalla_gt/media/ad_imgaes/1688832343.webp" class="w-100 mb-3" alt="">
+                    <img src="yalla_gt/media/ad_imgaes/1688832343.webp" class="w-100 mb-3 rounded" alt="">
                 </div>
                 <div class="col-md-6">
-                    <img src="yalla_gt/media/ad_imgaes/1688832364.webp" class="w-100 mb-3" alt="">
+                    <img src="yalla_gt/media/ad_imgaes/1688832364.webp" class="w-100 mb-3 rounded" alt="">
                 </div>
             </div>
 

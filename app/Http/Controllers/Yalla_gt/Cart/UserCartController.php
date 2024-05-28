@@ -90,7 +90,8 @@ class UserCartController extends Controller
             'sub_total' => $userCart->UserCartItems->sum('total_price_per_item'),
         ]);
 
-        return redirect()->back()->with('success', 'Added to Cart successfully.');
+        return redirect()->route('user-carts.index')->with('success', 'Added to Cart successfully.');
+
     }
     // -------------------- Method -------------------- //
     public function increment($userCartItemId, $qty)
