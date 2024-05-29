@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\TransmissionType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class TransmissionTypeSeeder extends Seeder
 {
@@ -13,16 +12,14 @@ class TransmissionTypeSeeder extends Seeder
      */
     public function run(): void
     {
-       $transmissions=[
-        ['en' => "Automatic", "ar" => "أوتوماتيك"],
-        ['en' => "Manual", "ar" => "مانيوال"],
+        $transmissions = [
+            ['en' => "Automatic", "ar" => "أوتوماتيك"],
+            ['en' => "Manual", "ar" => "مانيوال"],
 
-       ];
-       foreach($transmissions as $transmission){
-        TransmissionType::create([
-            "name"=>$transmission
-        ]);
-}
+        ];
+        foreach ($transmissions as $transmission) {
+            TransmissionType::create(["name" => $transmission]);
+        }
 
     }
 }

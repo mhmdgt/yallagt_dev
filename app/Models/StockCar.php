@@ -2,32 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\App;
+use App\Traits\UserStampWithTypeTrait;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class StockCar extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'name',
-        'price',
-        'rims_size',
-        'number_of_seat',
-        'trunk_size',
-        'fuel_tank_capacity',
-        'engine_capacity',
-        'cylinder',
-        'acceleration',
-        'maximum_speed',
-        'newton_meter',
-        'horsepower',
-        'transmission_speed',
-        'fuel_consumption',
-        'active',
-        'body_shape_id',
-        'fuel_type_id',
-        'transmission_type_id',
-        'engine_aspiration_id',
-    ];
-    
+    use HasFactory, HasTranslations, UserStampWithTypeTrait;
+
+    protected $fillable = ['slug', 'brand', 'car_brand_model_id', 'year', 'brochure', 'status'];
+
+    public $translatable = ['slug'];
+
+    // -------------------- Method -------------------- //
+    public static function getByTranslatedSlug($slug)
+    {
+        $locale = App::getLocale();
+        return self::where("slug->en", $slug)->orWhere("slug->ar", $slug);
+    }
+    // -------------------- Method -------------------- //
+    function images(){
+        return $this->hasMany(StockCarImage::class);
+    }
+    // -------------------- Method -------------------- //
+    function stockCarCategories(){
+        return $this->hasMany(StockCarCategory::class);
+    }
+    // -------------------- Method -------------------- //
+
+
 }

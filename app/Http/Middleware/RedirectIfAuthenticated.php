@@ -24,13 +24,14 @@ class RedirectIfAuthenticated
             //     return redirect(RouteServiceProvider::HOME);
             // }
 
+            // if (Auth::guard('web')->check()) {
+            //     return redirect()->route('yalla-index');
+            // }
+
             if (Auth::guard('admin')->check()) {
-                return redirect()->route('index-page');
+                return redirect()->route('manager-index');
             }
 
-            if (Auth::guard('web')->check()) {
-                return redirect()->route('dashboard');
-            }
         }
 
         return $next($request);

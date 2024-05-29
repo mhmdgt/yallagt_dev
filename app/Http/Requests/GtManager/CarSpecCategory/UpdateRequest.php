@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
+    public $newLogo;
+
     public function __construct( protected $id , protected $table )
     {
 
@@ -16,9 +18,8 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,15 +32,15 @@ class UpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:200',
-                Rule::unique($this->table, 'name->ar')->ignore($this->id),
+                Rule::unique('manufacturers', 'name->ar')->ignore($this->id),
             ],
             'name_en' => [
                 'required',
                 'string',
                 'max:200',
-                Rule::unique($this->table, 'name->en')->ignore($this->id),
+                Rule::unique('manufacturers', 'name->en')->ignore($this->id),
             ],
-            'logo' => 'nullable|image|mimes:png',
+            'logo' => $this->newLogo ? 'nullable|mimetypes:image/png' : 'nullable',
         ];
     }
 }

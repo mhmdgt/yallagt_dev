@@ -39,6 +39,101 @@
     /* height: 75px; */
 }
 
+.img-container {
+    position: relative;
+    display: inline-block; /* Ensures the container size is based on its content */
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px; /* Adjust this value to position the button vertically */
+    right: 5px; /* Adjust this value to position the button horizontally */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark circle background */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1; /* Ensures the button is above the image */
+}
+
+.delete-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.select-btn {
+    position: absolute;
+    bottom: 5px; /* Adjust this value to position the button vertically */
+    right: 5px; /* Adjust this value to position the button horizontally */
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+    color: transparent; /* Hide any text content */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Border for checkbox appearance */
+    border-radius: 50%;
+    width: 18px; /* Decreased width */
+    height: 18px; /* Decreased height */
+    cursor: pointer;
+    z-index: 1; /* Ensures the button is above the image */
+}
+
+.select-btn:hover {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.select-btn:focus {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.active_main_img {
+    background: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+
+.select-text {
+    position: absolute;
+    bottom: 8px; /* Adjust this value to position the text vertically */
+    right: 40px; /* Adjust this value to position the text horizontally */
+    font-size: 12px; /* Adjust the font size as needed */
+    color: rgba(0, 0, 0, 0.8); /* Text color */
+}
+
+
+
+.card-img-container {
+    overflow: hidden; /* Ensure that the image is contained within the card */
+    height: 220px; /* Set a fixed height for the image container */
+    position: relative; /* Position the image container relative to the card */
+}
+
+.card-img-container img {
+    object-fit: cover; /* Ensure that the image covers the entire container */
+    width: 100%; /* Ensure that the image fills the entire container width */
+    height: 100%; /* Ensure that the image fills the entire container height */
+    position: absolute; /* Position the image absolutely within the container */
+    top: 0; /* Position the image at the top of the container */
+    left: 0; /* Position the image at the left of the container */
+}
+
+.img-container {
+    width: 160px;
+    height: 160px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0; /* Remove any potential margin */
+    padding: 0; /* Remove any potential padding */
+}
+
+.img-container img {
+    display: block; /* Ensures no inline-block space */
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    margin: 0; /* Remove any potential margin */
+    padding: 0; /* Remove any potential padding */
+}
+
+
+
 .card-logo {
     height: 120px;
     margin: 0;
@@ -105,7 +200,7 @@
 .stockCarImageDel{
   position: absolute;
   top: 10px;
-  right: 80px;
+  right: 50px;
   /* transform: translate(-50%, -50%); */
 }
 
@@ -117,4 +212,21 @@
   align-items: center;
   display: flex;
   margin: 1%;
+}
+
+.custom-width-call {
+    width: 80%;
+}
+
+.custom-width-decline {
+    width: 20%;
+}
+
+.car-title-line-space {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 1.6; /* Adjust line height as needed */
+    height: 3em; /* 2 * line-height */
 }

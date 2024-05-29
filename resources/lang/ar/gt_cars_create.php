@@ -1,0 +1,40 @@
+<?php
+
+return [
+
+    'ApplyTheForm_SellYourCar' => 'قم بتطبيق النموذج، قم ببيع سيارتك',
+    'select' => 'اختر من القائمة',
+    'brand' => 'الماركة',
+    'select_brand_first' => 'حدد الماركة التجارية أولاً',
+    'model' => 'موديل',
+    'year' => 'سنة الإصدار',
+    'color' => 'لون السيارة',
+    'condition' => 'حالة السيارة',
+    'new' => 'جديدة',
+    'used' => 'مستعملة',
+    'media' => 'تحميل الصور',
+    'payment_method' => 'طريقة الدفع او السداد',
+    'cash' => 'نقدي',
+    'downpayment' => 'مقدم قسط',
+    'price' => 'السعر',
+    'bodyShape' => 'نوع الهيكل',
+    'transmission' => 'ناقل الحركة',
+    'fuelType' => 'نوع الوقود',
+    'EngineCapacity' => 'المحرك (سي سي)',
+    'Aspiration' => 'تنفس المحرك',
+    'kilometers' => 'كيلومترات',
+    'Description' => 'الوصف',
+    'EnterDescription' => 'قم بعمل وصف لسيارتك يصف حالتها ومميزاتها',
+    'SellNow' => 'بيع الآن',
+
+    'ContactDetails' => 'بيانات التواصل',
+    'name' => 'الاسم',
+    'PhoneNumber' => 'رقم الهاتف المحمول',
+    'Governorate' => 'محافظة',
+
+    'ExtraFeatures' => 'ميزات اضافية',
+    'Choose_additional_features_for_your_car' => '(قم بإختيار مميزات إضافية لسيارتك)',
+    '' => '',
+    '' => '',
+    '' => '',
+];

@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+body {
+    direction: rtl;
+}
+
+* {
+
+    font-family: 'Cairo', sans-serif !important;
+    margin: 0;
+    padding-top: 41px;
+    box-sizing: border-box;
+}
+
+/* ========================================= Custom CSS For RTL =================================================== */
+
+.owl-carousel {
+    direction: ltr !important;
+}
+
+.container-fluid {
+    text-align: right;
+}
+
+.rtl-direction {
+    direction: rtl;
+    text-align: right;
+}
+
+.ar-style {
+    text-align: right;
+}
+
+.login-btn {
+    border-radius: 14px;
+    /* padding: 8px; */
+    font-size: 16px;
+}
+
+
+.text-custom-direction {
+    text-align: left;
+}
+
+.sale_car_img img {
+    background-position: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 280px;
+    object-fit: cover;
+    width: 100%;
+}
+
+
+.language_switcher {
+    float: left; /* Float to the right by default */
+}
+
+/* Center alignment for smaller screens */
+@media (max-width: 991.98px) {
+    .language_switcher {
+        float: none; /* Remove float on smaller screens */
+        text-align: center; /* Center text alignment */
+    }
+}
+
+/* CSS for footer widget */
+.widget_list.widget_categories > ul > li.widget_sub_categories > a {
+    position: relative;
+    direction: ltr; /* Set direction to left-to-right */
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    content: '+';
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    left: 21px; /* Adjust the left offset as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a.active::before {
+    content: '-';
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a,
+.footer .widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    padding: 0;
+}
+
+.footer .widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    left: 0;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d5d5d5;
+    color: #686D81;
+    font-size: 20px;
+}
+
+.head_title {
+    text-align: right;
+}
+.list-group-item .bi-caret-right {
+    margin-left: 10px !important; /* Adjust as needed */
+}
+.list-group-item .bi-caret-left {
+    margin-left: 10px !important; /* Adjust as needed */
+}
+

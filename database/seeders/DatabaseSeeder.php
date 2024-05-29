@@ -28,6 +28,16 @@ class DatabaseSeeder extends Seeder
             TransmissionTypeSeeder::class,
             EngineAspirationSeeder::class,
             EngineCcSeeder::class,
+            EngineKmSeeder::class,
+            ColorSeeder::class,
+            FeatureSeeder::class,
+            GovernorateSeeder::class,
+            ManufacturerSeeder::class,
+            ProductCategorySeeder::class,
+            ProductSubCategorySeeder::class,
+            BlogCategorySeeder::class,
+            SaleConditionSeeder::class,
+            PaymentMethodsSeeder::class,
         ]);
     }
 

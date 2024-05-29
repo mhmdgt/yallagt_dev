@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/* @import url('https://fonts.cdnfonts.com/css/inter'); */
+
+
+body {
+    direction: ltr;
+}
+
+* {
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    /* font-family: 'Inter', sans-serif; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================================= Custom CSS For LTR =================================================== */
+
+.en-style {
+    text-align: left;
+}
+
+.login-btn {
+    border-radius: 14px;
+    /* padding: 8px; */
+    font-size: 16px;
+}
+
+/* .login-btn:hover {
+  background: #18a449;
+} */
+
+
+.text-custom-direction {
+    text-align: right;
+}
+
+.product-image {
+    display: block;
+    overflow: hidden;
+    border-radius: 5px;
+
+}
+
+.vertical_card {
+    border-top-left-radius: 16px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.sale_car_img img {
+    background-position: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 280px;
+    object-fit: cover;
+    width: 100%;
+    /* Add this line */
+}
+
+
+.language_switcher {
+    float: right; /* Float to the right by default */
+}
+
+/* Center alignment for smaller screens */
+@media (max-width: 991.98px) {
+    .language_switcher {
+        float: none; /* Remove float on smaller screens */
+        text-align: center; /* Center text alignment */
+    }
+}
+
+/* CSS for footer widget  */
+.widget_list.widget_categories > ul > li.widget_sub_categories > a {
+    position: relative;
+    direction: rtl; /* Set direction to right-to-left */
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    content: '+';
+    cursor: pointer;
+    font-size: 12px;
+    position: absolute;
+    right: 21px; /* Adjust the right offset as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a.active::before {
+    content: '-';
+}
+
+.widget_list.widget_categories > ul > li.widget_sub_categories > a,
+.footer .widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    padding: 0;
+}
+
+.footer .widget_list.widget_categories > ul > li.widget_sub_categories > a::before {
+    right: 0;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d5d5d5;
+    color: #686D81;
+    font-size: 20px;
+}
+
+

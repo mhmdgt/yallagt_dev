@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\CarBrand;
+use App\Traits\SlugTrait;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class CarBrandSeeder extends Seeder
 {
+    use SlugTrait;
     /**
      * Run the database seeds.
      */
@@ -120,18 +121,8 @@ class CarBrandSeeder extends Seeder
         foreach ($carBrands as $carBrand) {
             CarBrand::create([
                 "name" => $carBrand,
-                "slug" => Str::slug($carBrand['en']),
-                "logo" => "logo.png",
+                "slug" => $this->slug(['en' => $carBrand['en'], 'ar' => $carBrand['ar']]),
             ]);
-
-          
-
-
-
-
-
-
-
         }
 
     }
