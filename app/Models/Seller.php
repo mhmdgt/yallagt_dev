@@ -13,6 +13,11 @@ class Seller extends Model
     protected $guarded = [];
 
     // -------------------- Method -------------------- //
+    public function productListings()
+    {
+        return $this->hasMany(ProductListing::class);
+    }
+    // -------------------- Method -------------------- //
     public function storehouses()
     {
         return $this->hasMany(Storehouse::class);

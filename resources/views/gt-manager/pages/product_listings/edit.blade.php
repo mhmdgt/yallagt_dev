@@ -12,7 +12,7 @@
             </div>
         </nav>
         {{-- ========================== Add Product ========================== --}}
-        <Form action="{{ route('product-listings.store') }}" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('product-listings.update' , $listing->id ) }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- Contact Details --}}
             <div class="row">
@@ -53,7 +53,8 @@
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Selling Price</label>
-                                    <input type="number" class="form-control" autocomplete="off" name="selling_price">
+                                    <input type="text" class="form-control" name="selling_price"
+                                    value="{{ old('selling_price') }}" oninput="formatNumber(this)" placeholder="00,000">
                                     <x-errors.display-validation-error property="selling_price" />
                                 </div>
                             </div>

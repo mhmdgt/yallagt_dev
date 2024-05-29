@@ -110,9 +110,6 @@
                 <div class="collapse" id="ProductSystem">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{route('storehouses.index')}}" class="nav-link">Storehouses</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('product-listings.index')}}" class="nav-link">Product Listings</a>
                         </li>
                     </ul>
@@ -159,7 +156,7 @@
                 </a>
                 <div class="collapse" id="ProductOrders">
                     <ul class="nav sub-menu">
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">All New Orders</a></li>
+                        <li class="nav-item"><a href="{{route('orders.pending')}}" class="nav-link">All New Orders</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Approved</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">in-Processing</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Delivered</a></li>
@@ -183,6 +180,24 @@
                         <li class="nav-item">
                             <a href="{{route('admins.show')}}" class="nav-link">Admins List</a>
                         </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#Sellers" role="button" aria-expanded="false"
+                    aria-controls="Sellers">
+                    <i class="link-icon" data-feather="pie-chart"></i>
+                    <span class="link-title">Sellers</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="Sellers">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{route('sellers.index')}}" class="nav-link">Sellers List</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{route('storehouses.index')}}" class="nav-link">Storehouses</a>
+                        </li> --}}
                     </ul>
                 </div>
             </li>
@@ -225,10 +240,28 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="{{ route('cst_web.contact_us') }}" class="nav-link">
+                <a class="nav-link" data-toggle="collapse" href="#webSettings" role="button" aria-expanded="false"
+                    aria-controls="webSettings">
                     <i class="link-icon" data-feather="info"></i>
-                    <span class="link-title">Contact Us</span>
+                    <span class="link-title">Web Settings</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
+                <div class="collapse" id="webSettings">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('cst_web.contact_us') }}" class="nav-link">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('web-settigns.termsIndex')}}" class="nav-link load-animation-link">Terms of Use</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('web-settigns.privacyIndex')}}" class="nav-link load-animation-link">Privacy Policy</a>
+                        </li>
+                        <li class="nav-item">
+                            {{-- <a href="#" class="nav-link load-animation-link">FAQ</a> --}}
+                        </li>
+                    </ul>
+                </div>
             </li>
             {{-- End of list --}}
         </ul>

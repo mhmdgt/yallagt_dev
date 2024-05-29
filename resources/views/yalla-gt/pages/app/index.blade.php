@@ -30,7 +30,8 @@
                                     <h4 class="h-service">{{ __('home_page.Products') }}</h4>
                                     <p class="p-service">{{ __('home_page.FastandEasy') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('product.all-products')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +49,8 @@
                                     <h4 class="h-service">{{ __('home_page.StockCars') }}</h4>
                                     <p class="p-service">{{ __('home_page.AllYouNeed') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('stock-car.gtIndex')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +68,8 @@
                                     <h4 class="h-service">{{ __('home_page.SaleCars') }}</h4>
                                     <p class="p-service">{{ __('home_page.BestDeals') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('sale-car.gtIndex')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>

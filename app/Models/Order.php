@@ -17,6 +17,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
     // -------------------- Method -------------------- //
+    public function city()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
+    // -------------------- Method -------------------- //
     public function OrderItems()
     {
         return $this->hasMany(OrderItem::class);

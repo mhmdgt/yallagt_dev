@@ -6,12 +6,8 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('sellers.index')}}">Sellers</a></li>
+                    <li class="breadcrumb-item">All New Orders</li>
                 </ol>
-                <a href="{{ route('storehouses.create' , $sellerData->username) }}" class="btn btn-success">
-                    <i class="bi bi-plus-lg mr-2"></i>
-                    New Storehouse
-                </a>
             </div>
         </nav>
         {{-- ========================== Brand Table ==========================  --}}
@@ -25,24 +21,22 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Seller</th>
+                                        <th>Tracking</th>
                                         <th>Name</th>
-                                        <th>Manager Name</th>
                                         <th>Phone</th>
-                                        <th>Government</th>
-                                        <th>Area</th>
+                                        <th>Governorate</th>
+                                        <th>Created at</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($storehouses as $storehouse)
+                                    @foreach($orders as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $storehouse->seller->name }}</td>
-                                        <td><a href="{{ route('storehouses.edit' , $storehouse->id )}}">{{ $storehouse->name }}</a>
-                                        <td>{{$storehouse->manager_name}}</td>
-                                        <td>{{$storehouse->phone}}</td>
-                                        <td>{{ $governorates[$storehouse->governorate_id] }}</td>
-                                        <td>{{$storehouse->area}}</td>
+                                        <td>{{ $order->tracking_num }}</td>
+                                        <td>{{ $order->name }}</td>
+                                        <td>{{ $order->phone }}</td>
+                                        <td>{{ $governorates[$order->governorate_id] }}</td>
+                                        <td>{{ $order->created_at->diffForHumans() }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

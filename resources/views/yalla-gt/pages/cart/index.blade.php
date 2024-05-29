@@ -16,7 +16,7 @@
                         class="img-fluid mb-4 mb-lg-0">
                 </div>
             </div>
-        @elseif ($cart && $cart->UserCartItems->isEmpty())
+        {{-- @elseif ($cart && $cart->UserCartItems->isEmpty()) --}}
             <!-- Case: Cart Exists but No Items in the Cart -->
             <div class="row align-items-center mb-4" style="margin-top: 10px">
                 <div class="col-lg-6 order-2 order-lg-1">
@@ -74,16 +74,22 @@
                                                         <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                                     </div>
                                                     <div class="cart-prod-title">
-                                                        <a class="text-dark"
-                                                            href="{{ route('product-item', ['slug' => $cartItem->productSku->product->slug, 'sku' => $cartItem->productSku->sku]) }}">
+                                                        <div class="text-dark">
                                                             {{ $cartItem->productSku->sku_name }}
-                                                        </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ar-style">
+                                                        <i class="bi bi-bookmark-check"></i>
+                                                        <span
+                                                            class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                        <span>{{ $sellers[$cartItem->seller_id] }}</span>
                                                     </div>
                                                     <div class="cart-prod-attributes">
                                                         <div class="mt-2">
                                                             <span>EGP:</span>
                                                             <span class="product_card_price" style="color: #F25E3D;">
-                                                                <td>{{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
+                                                                <td>
+                                                                    {{ number_format($cartItem->total_price_per_item, 0, ',', ',') }}
                                                                 </td>
                                                             </span>
                                                         </div>
@@ -158,7 +164,7 @@
                                 <a href="{{ route('checkout.index') }}"
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                    اشتري الآن
+                                    Buy Now
                                 </a>
                                 {{-- Buy now Mobile --}}
                                 {{-- <div id="call_nav" class="d-flex align-items-center"

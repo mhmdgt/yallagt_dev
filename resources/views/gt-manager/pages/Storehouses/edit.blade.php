@@ -22,6 +22,7 @@
                         <div class="card-body">
                             <h6 class="card-title">Contact Details</h6>
                             {{-- Title --}}
+                            <input type="hidden" name="seller_id" value="{{ $seller->id }}">
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Seller</label>

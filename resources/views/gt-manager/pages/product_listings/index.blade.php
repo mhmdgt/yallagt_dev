@@ -9,7 +9,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
                     <li class="breadcrumb-item">Product Listings</li>
                 </ol>
-                <a href="{{ route('product-listings.add') }}" class="btn btn-success">
+                <a href="{{ route('product-listings.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
                     Add Product
                 </a>
@@ -27,43 +27,25 @@
                                     <tr>
                                         <th>SN</th>
                                         <th>Seller</th>
-                                        <th>Storehouse</th>
                                         <th>Brand</th>
-                                        <th>Product</th>
+                                        <th>Sku Name</th>
                                         <th>SKU</th>
-                                        <th>QTY</th>
-                                        <th>Price</th>
-                                        {{-- <th>IMG</th> --}}
+                                        <th>Selling Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sellersStock as $seller)
-                                        @foreach ($seller->storehouses as $storehouse)
-                                            @foreach ($storehouse->productListings as $productListing)
-                                                @foreach ($productListing->skus as $sku)
-                                                    <tr>
-                                                        <td>{{ $productListing->id }}</td>
-                                                        <td>{{ $storehouse->seller->name }}</td>
-                                                        <td>{{ $storehouse->name }}</td>
-                                                        <td>{{ $sku->product->manufacturer->name}}</td>
-                                                        <td>{{ $sku->sku_name  }}</td>
-                                                        <td>{{ $sku->sku }}</td>
-                                                        <td>{{ $productListing->qty}}</td>
-                                                        <td>{{ $productListing->selling_price }}</td>
-                                                        {{-- <td>
-                                                            @foreach ($sku->images as $image)
-                                                                @if ($image->main_img)
-                                                                    <img src="{{ display_img($image->name) }}"
-                                                                        class="image-in-box" alt="Main Image">
-                                                                @endif
-                                                            @endforeach
-                                                        </td> --}}
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
+                                    @foreach ($product_listings as $productListing)
+                                        @foreach ($productListing->skus as $sku)
+                                            <tr>
+                                                <td>{{ $productListing->id }}</td>
+                                                <td>{{ $productListing->seller->name ?? 'N/A' }}</td>
+                                                <td>{{ $sku->product->manufacturer->name ?? 'N/A' }}</td>
+                                                <td>{{ $sku->sku_name ?? 'N/A' }}</td>
+                                                <td>{{ $sku->sku }}</td>
+                                                <td>{{ number_format($productListing->selling_price, 0, ',', ',') }}</td>
+                                            </tr>
                                         @endforeach
                                     @endforeach
-
                                 </tbody>
 
 

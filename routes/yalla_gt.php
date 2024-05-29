@@ -90,7 +90,7 @@ Route::group(
         Route::get('/manufacturers', [ShowProductController::class, 'manufacturersIndex'])->name('product.manufacturers-index');
         Route::get('/manufacturer/{slug}', [ShowProductController::class, 'productsByManufacturer'])->name('product.manufacturer-products');
         Route::get('/all-products', [ShowProductController::class, 'allProducts'])->name('product.all-products');
-        Route::get('product-item/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
+        Route::get('product-item/{seller}/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
 
         // Blogs
         Route::get('/car-blogs', [BlogController::class, 'gtIndex'])->name('blog-gtIndex');

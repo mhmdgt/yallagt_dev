@@ -4,182 +4,168 @@
         <div class="row">
             <div class="container-fluid">
                 <div class="row">
-                    @foreach ($single_listing->skus as $sku)
-                        {{-- @foreach ($product_listing->skus as $sku) --}}
-                        <div class="col-md-4 mb-3">
-                            <div class="border rounded product_show_box product-main-img owl-carousel" id="image-carousel">
-                                @php
-                                    $images = $sku->images->sortByDesc('main_img')->values();
-                                @endphp
-                                @foreach ($images as $index => $image)
-                                        <img src="{{ display_img($image->name) }}" alt="Product_Image">
-                                @endforeach
-                            </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="border rounded product_show_box product-main-img owl-carousel" id="image-carousel">
+                            @php
+                                $images = $skuData->images->sortByDesc('main_img')->values();
+                            @endphp
+                            @foreach ($images as $index => $image)
+                                <img src="{{ display_img($image->name) }}" alt="Product_Image">
+                            @endforeach
                         </div>
-                        <!-- Specs And Price -->
-                        <div class="col-lg-6">
-                            <div class="ps-lg-3">
-                                <h4 class="product-title text-dark">
-                                    {{ $sku->sku_name }}
-                                </h4>
-                                <div class="d-flex flex-row my-3">
-                                    <div class="text-warning mb-1 me-2">
-                                        <span class="ms-1">
-                                            4.5
-                                        </span>
-                                    </div>
-                                    <span class="text-muted">
-                                        <i class="fas fa-shopping-basket fa-sm mx-1"></i>
-                                        HOT DEALS
+                    </div>
+                    {{-- return view('yalla-gt.pages.products.item', compact('sellerData', 'product', 'skuData', 'product_listing')); --}}
+
+                    <!-- Specs And Price -->
+                    <div class="col-lg-6">
+                        <div class="ps-lg-3">
+                            <h4 class="product-title text-dark">
+                                {{ $skuData->sku_name }}
+                            </h4>
+                            <div class="d-flex flex-row my-3">
+                                <div class="text-warning mb-1 me-2">
+                                    <span class="ms-1">
+                                        4.5
                                     </span>
-                                    <span class="text-success ml-2">In stock</span>
                                 </div>
-                                <div class="mb-3">
-                                    <span class="h6">EGP:</span>
-                                    <span class="h3 font-weight-bold"
-                                        style="color: #F25E3D;">{{ number_format($single_listing->selling_price, 0, ',', ',') }}</span>
-                                </div>
-                                <div class="row mt-3">
-                                    <dt class="col-4">Manufacturer:</dt>
-                                    <dd class="col-8"><span>{{ $sku->product->manufacturer->name }}</span></dd>
+                                <span class="text-muted">
+                                    <i class="fas fa-shopping-basket fa-sm mx-1"></i>
+                                    {{ $sellerData->name }}
+                                </span>
+                                <span class="text-success ml-2">In stock</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="h6">EGP:</span>
+                                <span class="h3 font-weight-bold"
+                                    style="color: #F25E3D;">{{ number_format($product_listing->selling_price, 0, ',', ',') }}</span>
+                            </div>
+                            <div class="row mt-3">
+                                <dt class="col-4">Manufacturer:</dt>
+                                <dd class="col-8"><span>{{ $product->manufacturer->name }}</span></dd>
 
-                                    <dt class="col-4">Category:</dt>
-                                    <dd class="col-8"><span>{{ $sku->product->category->name }}</span></dd>
+                                <dt class="col-4">Category:</dt>
+                                <dd class="col-8"><span>{{ $product->category->name }}</span></dd>
 
-                                    <dt class="col-4">SubCategory:</dt>
-                                    <dd class="col-8"><span>{{ $sku->product->subCategory->name }}</span></dd>
-                                </div>
-                                <hr />
-                                <div class="row mb-4">
-                                        <form id="add-to-cart-form" class="col-md-12 d-flex justify-content-between"
-                                            action="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}"
-                                            method="POST">
-                                            @csrf
-                                            <input type="hidden" name="quantity" id="selected-quantity" value="1">
-                                            <!-- Default quantity is 1 -->
-                                            <input type="hidden" name="product_sku" value="{{ $sku->sku }}">
-                                            <!-- Assuming you have the SKU available -->
+                                <dt class="col-4">SubCategory:</dt>
+                                <dd class="col-8"><span>{{ $product->subCategory->name }}</span></dd>
+                            </div>
+                            <hr />
+                            <div class="row mb-4">
+                                <form id="add-to-cart-form" class="col-md-12 d-flex justify-content-between"
+                                    action="{{ route('user-carts.store', $product_listing->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="quantity" id="selected-quantity" value="1">
+                                    <!-- Default quantity is 1 -->
+                                    <input type="hidden" name="product_sku" value="{{ $sellerData->sku }}">
+                                    <!-- Assuming you have the SKU available -->
 
-                                            <div class="cart-qty btn gradient-f25e3d text-white rounded mr-1 ml-1 d-flex justify-content-between">
-                                                <span class="quantity">1</span> <!-- Display default quantity -->
-                                                <span class="ml-1 ">QTY</span>
-                                                <div class="ml-3 mr-4 cart-qty-counts">
-                                                    <div class="cart-btn"><span class="p-1">1</span></div>
-                                                    <div class="cart-btn"><span class="p-1">2</span></div>
-                                                    <div class="cart-btn"><span class="p-1">3</span></div>
-                                                    <div class="cart-btn"><span class="p-1">4</span></div>
-                                                    <div class="cart-btn"><span class="p-1">5</span></div>
-                                                </div>
-                                            </div>
-
-                                            {{-- Add to Cart Button --}}
-                                            <button type="submit"
-                                                class="btn gradient-8790f6 rounded text-white mr-1 ml-1 w-100 dissable-cart-button-sm">
-                                                Add To Cart
-                                            </button>
-
-                                            {{-- Buy now Mobile --}}
-                                            {{-- <div id="call_nav" class="d-flex align-items-center"
-                                                onclick="document.getElementById('carForSaleID').submit();">
-                                                <button type="submit" style="border: none; background: none;" class="w-100">
-                                                    <span
-                                                        class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
-                                                        <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
-                                                        <span
-                                                            class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy
-                                                            Now</span>
-                                                    </span>
-                                                </button>
-                                            </div> --}}
-                                        </form>
-
-                                    <div class="ml-3 mr-4 cart-qty-counts">
-                                        <div class="cart-btn"><span class="p-1">1</span></div>
-                                        <div class="cart-btn"><span class="p-1">2</span></div>
-                                        <div class="cart-btn"><span class="p-1">3</span></div>
-                                        <div class="cart-btn"><span class="p-1">4</span></div>
-                                        <div class="cart-btn"><span class="p-1">5</span></div>
+                                    <div
+                                        class="cart-qty btn gradient-f25e3d text-white rounded mr-1 ml-1 d-flex justify-content-between">
+                                        <span class="quantity">1</span> <!-- Display default quantity -->
+                                        <span class="ml-1 ">QTY</span>
                                     </div>
+                                    <button type="submit"
+                                        class="btn gradient-8790f6 rounded text-white mr-1 ml-1 w-100 dissable-cart-button-sm">
+                                        Add To Cart
+                                    </button>
+                                    <div id="call_nav" class="d-flex align-items-center"
+                                        onclick="document.getElementById('carForSaleID').submit();">
+                                        <button type="submit" style="border: none; background: none;" class="w-100">
+                                            <span
+                                                class="col-12 d-flex rounded align-items-center justify-content-center p-2 gradient-8790f6">
+                                                <i class='bi bi-bag-check-fill' style='color:#ffffff'></i>
+                                                <span class="ml-2 mr-2 font-weight-bold text-white sell-now-text">Buy
+                                                    Now</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="ml-3 mr-4 cart-qty-counts">
+                                    <div class="cart-btn"><span class="p-1">1</span></div>
+                                    <div class="cart-btn"><span class="p-1">2</span></div>
+                                    <div class="cart-btn"><span class="p-1">3</span></div>
+                                    <div class="cart-btn"><span class="p-1">4</span></div>
+                                    <div class="cart-btn"><span class="p-1">5</span></div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Description -->
-                        <div class="col-lg-8 mb-4">
-                            <div class="mb-4 border rounded px-3 py-2 bg-white">
-                                <label class="mt-4 p-2 h4 rounded bg-light">
-                                    <i class='bx bx-bookmarks'></i>
-                                    {{ __('gt_cars_create.Description') }}</label>
-                                <div class="tab-content" id="ex1-content">
-                                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
-                                        aria-labelledby="ex1-tab-1">
-                                        <h5 class="mt-4">
-                                            <span>{!! $sku->product->description !!}</span>
-                                        </h5>
+                    </div>
+                    <!-- Description -->
+                    <div class="col-lg-8 mb-4">
+                        <div class="mb-4 border rounded px-3 py-2 bg-white">
+                            <label class="mt-4 p-2 h4 rounded bg-light">
+                                <i class='bx bx-bookmarks'></i>
+                                {{ __('gt_cars_create.Description') }}</label>
+                            <div class="tab-content" id="ex1-content">
+                                <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
+                                    aria-labelledby="ex1-tab-1">
+                                    <h5 class="mt-4">
+                                        <span>{!! $product->description !!}</span>
+                                    </h5>
 
-                                        <table class="table border mt-4 mb-2">
-                                            <tr>
-                                                <th class="py-2">Manufacturer:</th>
-                                                <td class="py-2">{{ $sku->product->manufacturer->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="py-2">Name:</th>
-                                                <td class="py-2">{{ $sku->sku_name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="py-2">Category:</th>
-                                                <td class="py-2">{{ $sku->product->category->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="py-2">SubCategory:</th>
-                                                <td class="py-2">{{ $sku->product->subCategory->name }}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-
+                                    <table class="table border mt-4 mb-2">
+                                        <tr>
+                                            <th class="py-2">Manufacturer:</th>
+                                            <td class="py-2">{{ $product->manufacturer->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-2">Name:</th>
+                                            <td class="py-2">{{ $skuData->sku_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-2">Category:</th>
+                                            <td class="py-2">{{ $product->category->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="py-2">SubCategory:</th>
+                                            <td class="py-2">{{ $product->subCategory->name }}</td>
+                                        </tr>
+                                    </table>
                                 </div>
 
                             </div>
+
                         </div>
-                        <!-- Other Items -->
-                        <div class="col-lg-4 mb-4">
-                            <div class="px-0 rounded">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Similar items</h4>
-                                        @foreach ($related_products as $related_product)
-                                            @foreach ($related_product->skus as $related_sku)
-                                                <!-- Check to ensure the related SKU is not the current SKU -->
-                                                @if ($related_sku->sku !== $sku->sku)
-                                                    <div class="d-flex mb-2">
+                    </div>
+                    <!-- Other Items -->
+                    {{-- <div class="col-lg-4 mb-4">
+                        <div class="px-0 rounded">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Similar items</h4>
+                                    @foreach ($related_products as $related_product)
+                                        @foreach ($related_product->skus as $related_sku)
+                                            <!-- Check to ensure the related SKU is not the current SKU -->
+                                            @if ($related_sku->sku !== $sku->sku)
+                                                <div class="d-flex mb-2">
+                                                    <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
+                                                        class="me-3">
+                                                        @foreach ($related_sku->images as $image)
+                                                            @if ($image->main_img)
+                                                                <img src="{{ display_img($image->name) }}"
+                                                                    style="min-width: 96px; height: 96px;"
+                                                                    class="img-md img-thumbnail" alt="Similar Item Image">
+                                                            @endif
+                                                        @endforeach
+                                                    </a>
+                                                    <div class="similar-items-info">
                                                         <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
-                                                            class="me-3">
-                                                            @foreach ($related_sku->images as $image)
-                                                                @if ($image->main_img)
-                                                                    <img src="{{ display_img($image->name) }}"
-                                                                        style="min-width: 96px; height: 96px;"
-                                                                        class="img-md img-thumbnail"
-                                                                        alt="Similar Item Image">
-                                                                @endif
-                                                            @endforeach
+                                                            class="mb-1">
+                                                            {{ $related_sku->sku_name }}
                                                         </a>
-                                                        <div class="similar-items-info">
-                                                            <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
-                                                                class="mb-1">
-                                                                {{ $related_sku->sku_name }}
-                                                            </a>
-                                                            <p class="text-dark font-weight-bold">
-                                                                EGP:
-                                                                {{ number_format($related_product->selling_price, 2) }}</p>
-                                                        </div>
+                                                        <p class="text-dark font-weight-bold">
+                                                            EGP:
+                                                            {{ number_format($related_product->selling_price, 2) }}</p>
                                                     </div>
-                                                @endif
-                                            @endforeach
+                                                </div>
+                                            @endif
                                         @endforeach
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div> --}}
+                    <!-- END Other Items -->
                 </div>
             </div>
         </div>

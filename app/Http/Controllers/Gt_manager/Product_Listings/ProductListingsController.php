@@ -18,63 +18,62 @@ class ProductListingsController extends Controller
     public function index()
     {
         // // Fetch the latest product listings with associated skus
-        // $product_listings = ProductListing::with('skus')->latest()->get();
+        $product_listings = ProductListing::with('seller', 'skus')->latest()->get();
 
-        // // Prepare arrays to store associated data
-        // $products = [];
-        // $manufacturers = [];
-        // $storehouses = [];
+        // Prepare arrays to store associated data
+        $products = [];
+        $manufacturers = [];
+        $storehouses = [];
 
-        // // Iterate over each product listing to gather associated data
-        // foreach ($product_listings as $product_listing) {
-        //     foreach ($product_listing->skus as $sku) {
-        //         // Retrieve product and manufacturer
-        //         $product = $sku->product;
-        //         $manufacturer = optional($product->manufacturer);
-        //         // Retrieve storehouse
-        //         $storehouse = $product_listing->storehouse;
+        // Iterate over each product listing to gather associated data
+        foreach ($product_listings as $product_listing) {
+            foreach ($product_listing->skus as $sku) {
+                // Retrieve product and manufacturer
+                $product = $sku->product;
+                $manufacturer = optional($product->manufacturer);
+                // Retrieve storehouse
+                $storehouse = $product_listing->storehouse;
 
-        //         // Add product, manufacturer, and storehouse to arrays
-        //         $products[$product_listing->id] = $product;
-        //         $manufacturers[$product_listing->id] = $manufacturer;
-        //         $storehouses[$product_listing->id] = $storehouse;
-        //     }
-        // }
+                // Add product, manufacturer, and storehouse to arrays
+                $products[$product_listing->id] = $product;
+                $manufacturers[$product_listing->id] = $manufacturer;
+                $storehouses[$product_listing->id] = $storehouse;
+            }
+        }
 
-        $sellersStock = Seller::with('storehouses.productListings.skus.images')->get();
+        // $sellersStock = Seller::with('storehouses.productListings.skus.images')->get();
+        // dd($product_listings);
 
         // Pass the data to the view
         return view('gt-manager.pages.product_listings.index',
-        compact('sellersStock'));
+        compact('product_listings'));
     }
     // -------------------------- Method -------------------------- //
-    public function add()
+    public function create()
     {
+        $sellers = Seller::with('storehouses')->latest()->get();
         $storehouses = Storehouse::latest()->get();
 
-        return view('gt-manager.pages.product_listings.add', compact('storehouses'));
+        return view('gt-manager.pages.product_listings.create', compact('sellers','storehouses'));
     }
     // -------------------------- Method -------------------------- //
-
     public function store(Request $request)
     {
         // Validate incoming request data
         $validatedData = $request->validate([
             'seller_id' => 'exists:sellers,id',
-            'storehouse' => 'required|exists:storehouses,id',
             'sku' => 'required|exists:product_skus,sku',
-            'qty' => 'required|integer|min:1',
             'selling_price' => 'required|min:0',
         ]);
 
         // Check for the duplicate entry
-        $existingListing = ProductListing::where('storehouse_id', $request->storehouse)
+        $existingListing = ProductListing::where('seller_id', $request->seller_id)
             ->where('sku', $request->sku)
             ->first();
 
         if ($existingListing) {
             // Flash an error message to the session
-            return redirect()->back()->with('fail', 'The SKU already exists in the selected storehouse.')->withInput();
+            return redirect()->back()->with('fail', 'The SKU already exists in the selected Seller.')->withInput();
         }
 
         // Properties
@@ -82,18 +81,16 @@ class ProductListingsController extends Controller
         $productID = $skuData->product_id;
         $product = Product::where('id', '=', $productID)->first();
         $manufacturer = Manufacturer::where('id', '=', $product->manufacturer_id)->first();
-        $seller_id = Manufacturer::where('id', '=', $product->manufacturer_id)->first();
 
         // Store the listing
         $product_listing = ProductListing::create([
-            'seller_id' => 1,
-            'storehouse_id' => $request->storehouse,
+            'seller_id' => $request->seller_id,
             'manufacturer_id' => $manufacturer->id,
             'product_id' => $product->id,
             'product_sku_id' => $skuData->id,
             'sku' => $request->sku,
-            'qty' => $request->qty,
-            'selling_price' => $request->selling_price,
+            'selling_price' => str_replace(',', '', $request->input('selling_price')),
+
         ]);
 
         // Now you can continue with your logic

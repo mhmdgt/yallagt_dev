@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Yalla_gt\Cart;
 
-use App\Http\Controllers\Controller;
-use App\Models\ProductListing;
-use App\Models\ProductSku;
+use App\Models\Seller;
 use App\Models\UserCart;
+use App\Models\ProductSku;
 use App\Models\UserCartItem;
 use Illuminate\Http\Request;
+use App\Models\ProductListing;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class UserCartController extends Controller
@@ -17,16 +18,20 @@ class UserCartController extends Controller
     {
 
         $cart = UserCart::with(['UserCartItems.productSku.images' => function ($query) {
-            // Limit images to only main images
             $query->where('main_img', true);
         }, 'UserCartItems.productSku', 'UserCartItems.productListing'])->whereUserId(auth()->id())->first();
 
-        // dd($cart);
-        return view('yalla-gt.pages.cart.index', compact('cart'));
+        $items = $cart->UserCartItems;
+        $sellers = Seller::whereIn('id', $items->pluck('seller_id'))->pluck('name', 'id');
+
+        // dd($sellers);
+
+        return view('yalla-gt.pages.cart.index', compact('cart' , 'sellers'));
     }
     // -------------------- Method -------------------- //
-    public function store(Request $request, $ProductSku)
+    public function store(Request $request, $ProductListing)
     {
+
         // Ensure the user is authenticated
         $userId = auth()->id();
         if (!$userId) {
@@ -34,8 +39,10 @@ class UserCartController extends Controller
         }
 
         // Retrieve the product SKU and listing
-        $sku = ProductSku::where('sku', $ProductSku)->firstOrFail();
-        $listing = ProductListing::where('sku', $sku->sku)->firstOrFail();
+        $listing = ProductListing::findOrFail($ProductListing);
+        $sku = ProductSku::where('sku', $listing->sku)->firstOrFail();
+
+        // dd($listing);
 
         // Retrieve or create the user's cart
         $userCart = UserCart::firstOrCreate(
@@ -47,7 +54,7 @@ class UserCartController extends Controller
         $quantity = $request->input('quantity', 1);
 
         // Check if the cart item already exists
-        $userCartItem = UserCartItem::where('user_cart_id', $userCart->id)
+        $userCartItem = UserCartItem::where(['user_cart_id' => $userCart->id , 'product_listing_id' => $listing->id ] )
             ->where('product_sku_id', $sku->id)
             ->first();
 
@@ -64,13 +71,17 @@ class UserCartController extends Controller
             return redirect()->back()->with('fail', "You can only add $allowableQty more of this item to your cart.");
         }
 
+
         if ($userCartItem) {
             // Update the existing cart item
+        // $listing = ProductListing::findOrFail($ProductListing);
+
             $newQty = $userCartItem->qty + $quantity;
             $userCartItem->update([
                 'qty' => $newQty,
-                'total_price_per_item' => ($userCartItem->total_price_per_item / $userCartItem->qty) * $newQty,
+                'total_price_per_item' => $listing->selling_price  * $newQty,
             ]);
+
         } else {
             // Create a new cart item
             $userCart->UserCartItems()->create([
@@ -78,7 +89,7 @@ class UserCartController extends Controller
                 'seller_id' => $listing->seller_id,
                 'product_listing_id' => $listing->id,
                 'product_sku_id' => $sku->id,
-                'sku' => $ProductSku,
+                'sku' => $sku->sku,
                 'qty' => $quantity,
                 'total_price_per_item' => $listing->selling_price * $quantity,
             ]);
@@ -141,6 +152,7 @@ class UserCartController extends Controller
             'success' => true,
             'total_qty' => $userCart->total_qty,
             'sub_total' => $userCart->sub_total,
+            'redirect' => route('user-carts.index'),
         ]);
     }
     // -------------------- Method -------------------- //

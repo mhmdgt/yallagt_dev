@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Gt_manager\Web_settings;
+namespace App\Http\Controllers\Gt_manager\Customer_theme;
 
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\GtManager\WebSettings\ContactUs\UpdateRequest;
-
-
 
 class ContactUsController extends Controller
 {

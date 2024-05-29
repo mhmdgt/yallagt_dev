@@ -31,7 +31,8 @@
                                 <dd class="col-8" dir="auto"><span>{{ $address->type }}</span></dd>
                                 @if ($address->gps_link)
                                     <dt class="col-4">GPS Link:</dt>
-                                    <dd class="col-8"><span><a href="{{ $address->gps_link }}" target="_blank">{{ $address->gps_link }}</a></span></dd>
+                                    <dd class="col-8"><span><a href="{{ $address->gps_link }}"
+                                                target="_blank">{{ $address->gps_link }}</a></span></dd>
                                 @endif
                             </div>
                         </div>
@@ -159,10 +160,9 @@
                                             <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                         </div>
                                         <div class="cart-prod-title">
-                                            <a class="text-dark"
-                                                href="{{ route('product-item', ['slug' => $cartItem->productSku->product->slug, 'sku' => $cartItem->productSku->sku]) }}">
+                                            <div class="text-dark">
                                                 {{ $cartItem->productSku->sku_name }}
-                                            </a>
+                                            </div>
                                         </div>
                                         <div class="cart-prod-attributes">
                                             <div class="mt-2">
@@ -207,56 +207,56 @@
                                     </tr>
                                     <form action="{{ route('checkout.store') }}" method="POST">
 
-                                    <tr class="summary-shipping">
-                                        <td class="h6 text-dark">Shipping Fee:</td>
-                                        <td> </td>
-                                    </tr>
+                                        <tr class="summary-shipping">
+                                            <td class="h6 text-dark">Shipping Fee:</td>
+                                            <td> </td>
+                                        </tr>
 
-                                    <input type="hidden" name="shippingServiceId" id="shippingServiceId"
-                                        value="{{ $shippingServices[0]->id }}">
+                                        <input type="hidden" name="shippingServiceId" id="shippingServiceId"
+                                            value="{{ $shippingServices[0]->id }}">
 
-                                    @foreach ($shippingServices as $key => $service)
-                                        @php
-                                            $serviceName = $service->getTranslations('name')['en'];
-                                            $checked = $key === 0 ? 'checked' : '';
-                                        @endphp
-                                        <tr class="summary-shipping-row">
-                                            <td>
-                                                <div class="custom-control custom-switch">
-                                                    <input type="radio" name="shippingService"
-                                                        class="custom-control-input shipping-service"
-                                                        id="toggleShipping{{ $service->id }}"
-                                                        value="{{ $service->fee }}" {{ $checked }}
-                                                        data-id="{{ $service->id }}">
-                                                    <label class="custom-control-label"
-                                                        for="toggleShipping{{ $service->id }}">{{ $serviceName }}</label>
-                                                </div>
-                                            </td>
-                                            <td>EGP:
-                                                {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }}
+                                        @foreach ($shippingServices as $key => $service)
+                                            @php
+                                                $serviceName = $service->getTranslations('name')['en'];
+                                                $checked = $key === 0 ? 'checked' : '';
+                                            @endphp
+                                            <tr class="summary-shipping-row">
+                                                <td>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="radio" name="shippingService"
+                                                            class="custom-control-input shipping-service"
+                                                            id="toggleShipping{{ $service->id }}"
+                                                            value="{{ $service->fee }}" {{ $checked }}
+                                                            data-id="{{ $service->id }}">
+                                                        <label class="custom-control-label"
+                                                            for="toggleShipping{{ $service->id }}">{{ $serviceName }}</label>
+                                                    </div>
+                                                </td>
+                                                <td>EGP:
+                                                    {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                        <tr class="summary-total">
+                                            <td class="h4 text-dark">Total:</td>
+                                            <td class="h5 text-dark" id="totalAmount">EGP:
+                                                <span>{{ number_format($cart->sub_total + $shippingServices[0]->fee, 0, '', ',') }}</span>
                                             </td>
                                         </tr>
-                                    @endforeach
-
-                                    <tr class="summary-total">
-                                        <td class="h4 text-dark">Total:</td>
-                                        <td class="h5 text-dark" id="totalAmount">EGP:
-                                            <span>{{ number_format($cart->sub_total + $shippingServices[0]->fee, 0, '', ',') }}</span>
-                                        </td>
-                                    </tr>
 
 
-                                    <tr class="summary-shipping">
-                                        <td class="h6 text-dark">Payment:</td>
-                                        <td class="text-dark"><i class='bx bx-wallet'></i>
-                                            {{ ucwords($paymentMethods->name) }}
-                                        </td>
-                                    </tr>
+                                        <tr class="summary-shipping">
+                                            <td class="h6 text-dark">Payment:</td>
+                                            <td class="text-dark"><i class='bx bx-wallet'></i>
+                                                {{ ucwords($paymentMethods->name) }}
+                                            </td>
+                                        </tr>
 
-                                    <input type="hidden" name="payment_method_id" id="paymentMethod"
-                                        value="{{ $paymentMethods->id }}">
-                                    <input type="hidden" name="paymentMethod" id="paymentMethod"
-                                        value="{{ ucwords($paymentMethods->getTranslations('name')['en']) }}">
+                                        <input type="hidden" name="payment_method_id" id="paymentMethod"
+                                            value="{{ $paymentMethods->id }}">
+                                        <input type="hidden" name="paymentMethod" id="paymentMethod"
+                                            value="{{ ucwords($paymentMethods->getTranslations('name')['en']) }}">
 
                                 </tbody>
                             </table>
@@ -270,11 +270,11 @@
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     PLACE ORDER
                                 </a> --}}
-                                    @csrf
-                                    <!-- Your form fields here -->
-                                    <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">Place Order</button>
+                                @csrf
+                                <!-- Your form fields here -->
+                                <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">Place
+                                    Order</button>
                                 </form>
-
                             @endif
                             </form>
                         </div>

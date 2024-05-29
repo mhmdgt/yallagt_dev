@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('seller_id')->references('id')->on('sellers')->cascadeOnDelete();
-            $table->unsignedBigInteger('storehouse_id')->references('id')->on('storehouses')->cascadeOnDelete();
             $table->unsignedBigInteger('manufacturer_id')->references('id')->on('manufacturers')->cascadeOnDelete();
             $table->unsignedBigInteger('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->unsignedBigInteger('product_sku_id')->references('id')->on('product_skus')->cascadeOnDelete();
             $table->string('sku');
-            $table->integer('qty');
             $table->integer('selling_price');
 
             $table->enum('status', ['active', 'hidden'])->default('active');
@@ -32,7 +30,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Add composite unique index to ensure a SKU can only be added once per storehouse
-            $table->unique(['storehouse_id', 'sku']);
+            $table->unique(['seller_id', 'sku']);
         });
     }
 
