@@ -22,6 +22,7 @@
                                     <tr>
                                         <th>SN</th>
                                         <th>Tracking</th>
+                                        <th>Total</th>
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Governorate</th>
@@ -29,15 +30,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($orders as $order)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->tracking_num }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->phone }}</td>
-                                        <td>{{ $governorates[$order->governorate_id] }}</td>
-                                        <td>{{ $order->created_at->diffForHumans() }}</td>
-                                    </tr>
+                                    @foreach ($orders as $order)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <a href="{{ route('orders.edit', $order->tracking_num) }}">
+                                                    {{ $order->tracking_num }}
+                                                </a>
+                                            </td>
+                                            <td>EGP: {{ number_format($order->total_price, 0, ',', ',') }}</td>
+                                            <td>{{ $order->name }}</td>
+                                            <td>{{ $order->phone }}</td>
+                                            <td>{{ $governorates[$order->governorate_id] }}</td>
+                                            <td>{{ $order->created_at->diffForHumans() }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

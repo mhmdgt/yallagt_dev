@@ -16,7 +16,7 @@
                         class="img-fluid mb-4 mb-lg-0">
                 </div>
             </div>
-        {{-- @elseif ($cart && $cart->UserCartItems->isEmpty()) --}}
+        @elseif ($cart && $cart->UserCartItems->isEmpty())
             <!-- Case: Cart Exists but No Items in the Cart -->
             <div class="row align-items-center mb-4" style="margin-top: 10px">
                 <div class="col-lg-6 order-2 order-lg-1">
@@ -46,7 +46,7 @@
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
-                                        <p class="mb-0">You have {{ $cart->total_qty }} items in your cart</p>
+                                        <p class="mb-0">You have {{ $totalQty }} items in your cart</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,14 +82,14 @@
                                                         <i class="bi bi-bookmark-check"></i>
                                                         <span
                                                             class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
-                                                        <span>{{ $sellers[$cartItem->seller_id] }}</span>
+                                                            <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
                                                     </div>
                                                     <div class="cart-prod-attributes">
                                                         <div class="mt-2">
                                                             <span>EGP:</span>
                                                             <span class="product_card_price" style="color: #F25E3D;">
                                                                 <td>
-                                                                    {{ number_format($cartItem->total_price_per_item, 0, ',', ',') }}
+                                                                    {{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
                                                                 </td>
                                                             </span>
                                                         </div>
@@ -138,8 +138,8 @@
                                 <table class="table table-summary">
                                     <tbody>
                                         <tr class="summary-subtotal">
-                                            <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
-                                            <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
+                                            <td class="h6 text-dark">Subtotal: ({{ $totalQty }} items)</td>
+                                            <td>EGP: {{ number_format($subtotal, 0, '', ',') }}</td>
                                         </tr>
                                         <tr class="summary-shipping">
                                             <td class="h6 text-dark">Shipping Fee:</td>
@@ -154,7 +154,7 @@
                                         <tr class="summary-total">
                                             <td class="h4 text-dark">Total:</td>
                                             <td class="h5 text-dark" id="totalAmount">EGP:
-                                                <span>{{ number_format($cart->sub_total, 0, '', ',') }}</span>
+                                                <span>{{ number_format($subtotal, 0, '', ',') }}</span>
                                             </td>
                                         </tr>
 

@@ -18,7 +18,7 @@
                         <span class="placeholder">
                             {{ __('loginPopup.PhoneNumberorEmail') }}
                         </span>
-                        <small class="text-danger d-none" id="login-username-error"></small>
+                        <small class="text-danger d-none rtl-direction" id="login-username-error"></small>
                     </div>
                     <div class="input-block">
                         <input type="password" name="password" id="input-text" required spellcheck="false">
@@ -145,9 +145,7 @@
             });
         });
 
-        // #############################login###########################################333
-
-
+        // ############################# login ###########################################
 
         $('.login_form').submit(function(event) {
             event.preventDefault(); // Prevent default form submission
@@ -188,9 +186,6 @@
                 }
             });
         });
-
-
-
 
     });
 </script>

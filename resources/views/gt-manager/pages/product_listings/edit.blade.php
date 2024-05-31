@@ -12,8 +12,9 @@
             </div>
         </nav>
         {{-- ========================== Add Product ========================== --}}
-        <Form action="{{ route('product-listings.update' , $listing->id ) }}" method="POST" enctype="multipart/form-data">
+        <Form action="{{ route('product-listings.update', $listing->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
             {{-- Contact Details --}}
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -21,41 +22,60 @@
                         <div class="card-body">
                             <h6 class="card-title">Contact Details</h6>
                             {{-- Title --}}
+                            <input type="hidden" name="seller_id" value="{{ $listing->seller->id }}">
                             <div class="form-group row pt-0">
                                 <div class="col">
-                                    <label>Storehouse</label>
-                                    <div>
-                                        <select class="js-example-basic-single w-100" name="storehouse">
-                                            <option value="Select Model">Select Storehouse</option>
-                                            @foreach ($storehouses as $storehouse)
-                                                <option value="{{ $storehouse->id }}">{{ $storehouse->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <x-errors.display-validation-error property="storehouse" />
-                                    </div>
+                                    <label>Seller</label>
+                                    <input type="text" class="form-control" readonly
+                                        value="{{ ucwords($listing->seller->name) }}">
+
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>SKU</label>
-                                    <input type="text" class="form-control" name="sku" value="">
+                                    <input type="text" class="form-control" name="sku" readonly
+                                        value="{{ $listing->sku }}">
                                     <x-errors.display-validation-error property="sku" />
-                                </div>
-                            </div>
-                            <div class="form-group row pt-0">
-                                <div class="col">
-                                    <label>QTY</label>
-                                    <input type="number" class="form-control" name="qty" value="">
-                                    <x-errors.display-validation-error property="qty" />
                                 </div>
                             </div>
                             <div class="form-group row pt-0">
                                 <div class="col">
                                     <label>Selling Price</label>
                                     <input type="text" class="form-control" name="selling_price"
-                                    value="{{ old('selling_price') }}" oninput="formatNumber(this)" placeholder="00,000">
+                                        value="{{ number_format($listing->selling_price, 0, '.', ',') }}"
+                                        oninput="formatNumber(this)">
                                     <x-errors.display-validation-error property="selling_price" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Status --}}
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row pt-0">
+                                <div class="col">
+                                    <h6 class="card-title">Status</h6>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios5" value="active"
+                                                {{ $listing->status == 'active' ? 'checked' : '' }}>
+                                            Active
+                                            <i class="input-frame"></i></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="status"
+                                                id="optionsRadios6" value="hidden"
+                                                {{ $listing->status == 'hidden' ? 'checked' : '' }}>
+                                            Hidden
+                                            <i class="input-frame"></i></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -67,4 +87,3 @@
         </Form>
     </div>
 @endsection
-

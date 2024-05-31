@@ -24,8 +24,6 @@
                                 <div class="card mb-3 ar-style">
                                     <div class="card-body">
                                         <a href="{{ route('user.addressEdit' , $address->id )}}" class="edit-link">Edit</a>
-
-
                                         <div class="row mt-3">
                                             <dt class="col-4">Name:</dt>
                                             <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>

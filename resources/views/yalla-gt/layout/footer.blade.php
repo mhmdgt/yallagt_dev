@@ -10,8 +10,12 @@
                         <li class="widget_sub_categories sub_categories1">
                             <a href="javascript:void(0)">{{ __('footer.services') }}</a>
                             <ul class="widget_dropdown_categories dropdown_categories1" style="display: none;">
+                                @auth
+                                    <li><a href="{{ route('gt_car.create') }}">{{ __('footer.sellYourCar') }}</a></li>
+                                @else
+                                    <a class="SellCarFooterMobile">{{ __('footer.sellYourCar') }}</a>
+                                @endauth
                                 <li><a href="#">{{ __('footer.CarPrices') }}</a></li>
-                                <li><a href="#">{{ __('footer.sellYourCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.saleCar') }}</a></li>
                                 <li><a href="#">{{ __('footer.productsShop') }}</a></li>
                                 <li><a href="#">{{ __('footer.CarNewsAndAdvice') }}</a></li>
@@ -35,7 +39,13 @@
                             <a href="javascript:void(0)">{{ __('footer.my_account') }}</a>
                             <ul class="widget_dropdown_categories dropdown_categories3">
                                 <li><a href="#">{{ __('footer.home') }}</a></li>
-                                <li><a href="#">{{ __('footer.login') }}</a></li>
+                                @auth
+                                    <a href="{{ route('user.profile') }}">
+                                        <li>{{ getFirstName(user_data()->name) }}</li>
+                                    </a>
+                                @else
+                                    <a class="loginPopUpFormFooterMobile">{{ __('footer.login') }}</a>
+                                @endauth
                                 <li><a href="#">{{ __('footer.ExploreNewDeals') }}</a></li>
                             </ul>
                         </li>
@@ -71,11 +81,17 @@
                         </div>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="{{ route('gt_car.create') }}">{{ __('footer.sellYourCar') }}</a></li>
-                                <li><a href="{{route('sale-car.gtIndex')}}">{{ __('footer.saleCar') }}</a></li>
-                                <li><a href="{{route('stock-car.gtIndex')}}">{{ __('footer.CarPrices') }}</a></li>
-                                <li><a href="{{route('product.manufacturers-index')}}">{{ __('footer.productsShop') }}</a></li>
-                                <li><a href="{{route('blog-gtIndex')}}">{{ __('footer.CarNewsAndAdvice') }}</a></li>
+                                @auth
+                                    <li><a href="{{ route('gt_car.create') }}">{{ __('footer.sellYourCar') }}</a></li>
+                                @else
+                                    <a class="SellCarFooterWeb">{{ __('footer.sellYourCar') }}</a>
+                                @endauth
+                                <li><a href="{{ route('sale-car.gtIndex') }}">{{ __('footer.saleCar') }}</a></li>
+                                <li><a href="{{ route('stock-car.gtIndex') }}">{{ __('footer.CarPrices') }}</a></li>
+                                <li><a
+                                        href="{{ route('product.manufacturers-index') }}">{{ __('footer.productsShop') }}</a>
+                                </li>
+                                <li><a href="{{ route('blog-gtIndex') }}">{{ __('footer.CarNewsAndAdvice') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -90,10 +106,11 @@
                         <div class="footer_menu">
                             <ul>
                                 <li><a href="{{ route('about_us') }}">{{ __('footer.AboutUS') }}</a></li>
-                                <li><a href="{{route('contact_us')}}">{{ __('footer.ContactUs') }}</a></li>
-                                <li><a href="#">{{ __('footer.TermsofUse') }}</a></li>
-                                <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
-                                <li><a href="#">{{ __('footer.FAQ') }}</a></li>
+                                <li><a href="{{ route('contact_us') }}">{{ __('footer.ContactUs') }}</a></li>
+                                <li><a href="{{ route('yalla.termsIndex') }}">{{ __('footer.TermsofUse') }}</a></li>
+                                <li><a href="{{ route('yalla.privacyIndex') }}">{{ __('footer.PrivacyPolicy') }}</a>
+                                </li>
+                                <li><a href="{{ route('yalla.faqIndex') }}">{{ __('footer.FAQ') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -112,8 +129,12 @@
                                     <a href="{{ route('user.profile') }}">
                                         <li>{{ getFirstName(user_data()->name) }}</li>
                                     </a>
+                                @else
+                                    <a class="loginPopUpFormFooterWeb">{{ __('footer.login') }}</a>
                                 @endauth
-                                <li><a href="{{route('product.all-products')}}">{{ __('footer.ExploreNewDeals') }}</a></li>
+                                <li><a
+                                        href="{{ route('product.all-products') }}">{{ __('footer.ExploreNewDeals') }}</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -129,8 +150,7 @@
                             {{ get_contact_us()->headqurter_address }}
                         </p>
                         <p><span>{{ __('footer.email') }}:</span>
-                            <a href="{{ get_contact_us()->support_email }}"> {{ get_contact_us()->support_email }}
-                            </a>
+                            <a href="{{ get_contact_us()->support_email }}"> {{ get_contact_us()->support_email }}</a>
                         </p>
                         <p><span>{{ __('footer.phone') }}:</span>
                             <a href="tel:{{ get_contact_us()->phone }}">{{ get_contact_us()->phone }}</a>

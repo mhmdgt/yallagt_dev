@@ -1,28 +1,29 @@
 <?php
 
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
-use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Gt_manager\Blog\BlogController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
-use App\Http\Controllers\Gt_manager\Customers\CustomersController;
-use App\Http\Controllers\Gt_manager\Customer_theme\ContactUsController;
-use App\Http\Controllers\Gt_manager\Customer_theme\WebSettingsController;
 use App\Http\Controllers\Gt_manager\Orders\OrderController;
+use App\Http\Controllers\Gt_manager\Sellers\SellerController;
+use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
+use App\Http\Controllers\Gt_manager\Customers\CustomersController;
+use App\Http\Controllers\Gt_manager\Sellers\StorehousesController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Customer_theme\ContactUsController;
+use App\Http\Controllers\Gt_manager\Shipping\ShippingCompanyController;
+use App\Http\Controllers\Gt_manager\Shipping\ShippingServiceController;
+use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
+use App\Http\Controllers\Gt_manager\Customer_theme\WebSettingsController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
 use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductCategoryController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
 use App\Http\Controllers\Gt_manager\Product_Listings\ProductListingsController;
-use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
-use App\Http\Controllers\Gt_manager\Sellers\SellerController;
-use App\Http\Controllers\Gt_manager\Sellers\StorehousesController;
-use App\Http\Controllers\Gt_manager\Shipping\ShippingServiceController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
 
 // Store Sale Cars
 Route::post('sale-car-store', [SaleCarsController::class, 'store'])->name('sale-car.store');
@@ -134,14 +135,14 @@ Route::middleware('admin')->group(function () {
     Route::controller(SaleCarsController::class)->prefix('manage/sale-car')->name('sale-car.')->group(function () {
         Route::get('/create', 'create')->name('create');
         Route::get('{slug}/edit', 'edit')->name('edit');
-        Route::get('/live', 'live')->name('live');
-        Route::get('/pending', 'pending')->name('pending');
-        Route::get('/declined', 'declined')->name('declined');
+        Route::get('/live-sale-cars', 'live')->name('live');
+        Route::get('/pending-sale-cars', 'pending')->name('pending');
+        Route::get('/declined-sale-cars', 'declined')->name('declined');
 
         // Approve and Decline routes
-        Route::delete('{slug}/destroy', 'destroy')->name('destroy');
-        Route::post('{slug}/approve', 'approve')->name('approve-car');
-        Route::post('{slug}/decline', 'decline')->name('decline-car');
+        Route::delete('{slug}/destroy-sale-car', 'destroy')->name('destroy');
+        Route::post('{slug}/approve-sale-car', 'approve')->name('approve-car');
+        Route::post('{slug}/decline-sale-car', 'decline')->name('decline-car');
     });
     // Product Manufacturers //
     Route::controller(ManufacturersController::class)->prefix('manage/manufacturers')->name('manufacturers.')->group(function () {
@@ -197,16 +198,30 @@ Route::middleware('admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/add-product', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
+        Route::get('/{id}/edit-listing', 'edit')->name('edit');
+        Route::put('/{id}/update-listing', 'update')->name('update');
+
     });
     // Shipping Service //
     Route::controller(ShippingServiceController::class)->prefix('manage/shipping-service')->name('shipping-service.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store-service', 'store')->name('store');
-        Route::put('/update-service/{id}', 'update')->name('update');
+        Route::put('/{id}/update-service', 'update')->name('update');
+    });
+    // Shipping companies //
+    Route::controller(ShippingCompanyController::class)->prefix('manage/shipping-company')->name('shipping-company.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create-shipping-company', 'create')->name('create');
+        Route::post('/store-company', 'store')->name('store');
+        Route::get('/{id}/edit-company', 'edit')->name('edit');
+        Route::put('/{id}/update-company', 'update')->name('update');
     });
     // Orders
     Route::controller(OrderController::class)->prefix('manage/orders')->name('orders.')->group(function () {
-        Route::get('/pending', 'pending')->name('pending');
+        Route::get('/pending-orders', 'pending')->name('pending');
+        Route::get('/{tracking_num}/order-edit', 'edit')->name('edit');
+        // Actions
+        Route::put('/{tracking_num}/approve-order', 'approve')->name('approve-order');
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('manage/blog-categories')->name('blog-categories.')->group(function () {

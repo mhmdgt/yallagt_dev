@@ -914,6 +914,21 @@ textarea:-ms-input-placeholder {
         max-width: 100px;
     }
 }
+.main_header2 .logo {
+    text-align: center;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .main_header2 .logo {
+        text-align: left;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .main_header2 .logo {
+        text-align: left;
+    }
+}
 
 .dropdown_links {
     position: absolute;
@@ -2378,21 +2393,7 @@ textarea:-ms-input-placeholder {
     background: inherit;
 }
 
-.main_header2 .logo {
-    text-align: center;
-}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .main_header2 .logo {
-        text-align: left;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .main_header2 .logo {
-        text-align: left;
-    }
-}
 
 .main_header2 .header_account_area {
     justify-content: flex-end;
@@ -13898,11 +13899,11 @@ header .main_header .container-fluid {
     }
 }
 
-header .main_header .logo a {
+/* header .main_header .logo a {
     font-size: 32px;
     color: #1DB954;
     font-weight: 900;
-}
+} */
 
 header .main_header .search_container {
     margin: 0;

@@ -8,21 +8,66 @@ let box = document.querySelector(".box");
 let close_button = document.querySelector(".close_button");
 let main_body = document.body;
 
+// ---------------------------- Buttons
+
+// Header
 let loginPopUpForm = document.querySelector(".loginPopUpForm");
 
-loginPopUpForm.addEventListener('click' , function(){
-    main_body.style.overflow="hidden";
+loginPopUpForm.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
     signup_box.classList.add("signup_box_active");
-            box.classList.add("active");
+    box.classList.add("active");
 })
-
+// Mobile
 let loginPopUpFormMobile = document.querySelector(".loginPopUpFormMobile");
 
-loginPopUpFormMobile.addEventListener('click' , function(){
-    main_body.style.overflow="hidden";
+loginPopUpFormMobile.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
     signup_box.classList.add("signup_box_active");
-            box.classList.add("active");
+    box.classList.add("active");
 })
+// Footer Mobile
+let loginPopUpFormFooterMobile = document.querySelector(".loginPopUpFormFooterMobile");
+
+loginPopUpFormFooterMobile.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
+    signup_box.classList.add("signup_box_active");
+    box.classList.add("active");
+})
+// Footer Web
+let loginPopUpFormFooterWeb = document.querySelector(".loginPopUpFormFooterWeb");
+
+loginPopUpFormFooterWeb.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
+    signup_box.classList.add("signup_box_active");
+    box.classList.add("active");
+})
+// Sell Car Mobile Nav Bar
+let SellCar = document.querySelector(".SellCar");
+
+SellCar.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
+    signup_box.classList.add("signup_box_active");
+    box.classList.add("active");
+})
+// Sell Car Footer Mobile
+let SellCarFooterMobile = document.querySelector(".SellCarFooterMobile");
+
+SellCarFooterMobile.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
+    signup_box.classList.add("signup_box_active");
+    box.classList.add("active");
+})
+// Sell Car Footer Web
+let SellCarFooterWeb = document.querySelector(".SellCarFooterWeb");
+
+SellCarFooterWeb.addEventListener('click', function () {
+    main_body.style.overflow = "hidden";
+    signup_box.classList.add("signup_box_active");
+    box.classList.add("active");
+})
+
+// ---------------------------- END Buttons
 
 close_button.onclick = function(){
     main_body.style.overflow="auto";

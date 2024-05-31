@@ -36,7 +36,7 @@
                                     src="{{ asset('yalla_gt') }}/media/icon/shopping-cart-header-solid.png"
                                     alt="">
                             </a>
-                            
+
                             {{-- <a class="btn btn-primary" href="{{route('gt_car.create')}}">
                                     <i class="bi bi-plus-circle"></i>
                                     <p class="ml-2 mr-2"> Sell </p>

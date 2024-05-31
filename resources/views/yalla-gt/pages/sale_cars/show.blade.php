@@ -51,11 +51,11 @@
                                 </div>
                                 {{-- Call Details --}}
                                 <div class="mt-4 d-flex justify-content-between">
-                                    <a href="https://wa.me/20{" target="__blank" class="btn btn-outline-secondary rounded">
+                                    <div target="__blank" class="btn btn-outline-secondary rounded">
                                         <i class="bi bi-person-check"></i>
                                         {{ getFirstName($car->user_name) }}
-                                    </a>
-                                    <a href="https://wa.me/20{" target="__blank"
+                                    </div>
+                                    <a href="https://wa.me/{{ $car->phone }}" target="__blank"
                                         class="btn btn-outline-success rounded flex-grow-1 mr-1 ml-1">
                                         <i class="bi bi-whatsapp"></i>
                                         Whatsapp
