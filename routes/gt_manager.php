@@ -1,28 +1,32 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Gt_manager\Blog\BlogController;
-use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
-use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
-use App\Http\Controllers\Gt_manager\Customers\CustomersController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
-use App\Http\Controllers\Gt_manager\Web_settings\ContactUsController;
-use App\Http\Controllers\Gt_manager\Storehouses\StorehousesController;
-use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
 use App\Http\Controllers\Gt_manager\Admin_profile\AdminProfileController;
-use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
-use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
+use App\Http\Controllers\Gt_manager\Blog\BlogCategoryController;
+use App\Http\Controllers\Gt_manager\Blog\BlogController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandController;
+use App\Http\Controllers\Gt_manager\Car_assets\CarBrandModelController;
+use App\Http\Controllers\Gt_manager\Customers\CustomersController;
+use App\Http\Controllers\Gt_manager\Customer_theme\ContactUsController;
+use App\Http\Controllers\Gt_manager\Customer_theme\WebSettingsController;
+use App\Http\Controllers\Gt_manager\Orders\OrderController;
 use App\Http\Controllers\Gt_manager\Product_assets\ManufacturersController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductCategoryController;
-use App\Http\Controllers\Gt_manager\Product_Listings\ProductListingsController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductController;
+use App\Http\Controllers\Gt_manager\Product_assets\ProductSkusController;
 use App\Http\Controllers\Gt_manager\Product_assets\ProductSubCategoryController;
+use App\Http\Controllers\Gt_manager\Product_Listings\ProductListingsController;
+use App\Http\Controllers\Gt_manager\Sale_cars\SaleCarsController;
+use App\Http\Controllers\Gt_manager\Sellers\SellerController;
+use App\Http\Controllers\Gt_manager\Sellers\StorehousesController;
+use App\Http\Controllers\Gt_manager\Shipping\ShippingServiceController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarCategoryController;
+use App\Http\Controllers\Gt_manager\Stock_cars\StockCarsController;
+use Illuminate\Support\Facades\Route;
 
 // Store Sale Cars
-Route::post('sale-car-store' , [SaleCarsController::class, 'store'])->name('sale-car.store');
-Route::post('/{slug}' , [SaleCarsController::class, 'update'])->name('sale-car.update');
+Route::post('sale-car-store', [SaleCarsController::class, 'store'])->name('sale-car.store');
+Route::post('/{slug}', [SaleCarsController::class, 'update'])->name('sale-car.update');
 
 // FilePond
 Route::post('/manage/tmpFilepondUpload', [ProductController::class, 'tmpFilepondUpload']);
@@ -40,21 +44,40 @@ Route::middleware('admin')->group(function () {
     Route::controller(AdminController::class)->prefix('manage/admins')->name('admins.')->group(function () {
         Route::get('/admins', 'show')->name('show');
     });
+    // All Sellers
+    Route::controller(SellerController::class)->prefix('manage/sellers')->name('sellers.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+    // Storehouses //
+    Route::controller(StorehousesController::class)->prefix('manage/storehouses')->name('storehouses.')->group(function () {
+        Route::get('/{seller}', 'index')->name('index');
+        Route::get('/{seller}/create-storehouse', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('{storehouse}/edit-storehouse', 'edit')->name('edit');
+        Route::put('{storehouse}/update-storehouse', 'update')->name('update');
+    });
+    // All Customers
+    Route::controller(CustomersController::class)->prefix('manage/customers')->name('customers.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+    // Customer Web
+    Route::controller(ContactUsController::class)->prefix('manage/cst_web')->name('cst_web.')->group(function () {
+        Route::view('/contact_us', 'gt-manager.pages.customer_theme.web_settings.contact_us')->name('contact_us');
+        Route::post('/update/contact_us', 'update')->name('update');
+    });
+    Route::controller(WebSettingsController::class)->prefix('manage/web-settigns')->name('web-settigns.')->group(function () {
+        Route::get('/terms-of-use', 'termsIndex')->name('termsIndex');
+        Route::post('/update/terms-of-use', 'termsUpdate')->name('termsUpdate');
+
+        Route::get('/privacy-policy', 'privacyIndex')->name('privacyIndex');
+        Route::post('/update/privacy-policy', 'privacyUpdate')->name('privacyUpdate');
+    });
     // Admin Profile //
     Route::controller(AdminProfileController::class)->prefix('manage/admin')->name('admin.')->group(function () {
         Route::get('/profile', 'AdminProfile')->name('profile');
         Route::post('/update-profile', 'AdminUpdateData')->name('update-profile');
         Route::get('/change-password', 'AdminChangePassword')->name('change-password');
         Route::post('/update-password', 'AdminPasswordUpdate')->name('update-password');
-    });
-    // Customers
-    Route::controller(CustomersController::class)->prefix('manage/customers')->name('customers.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-    // Customer Web
-    Route::controller(ContactUsController::class)->prefix('manage/cst_web')->name('cst_web.')->group(function () {
-        Route::view('/contact_us', 'gt-manager.pages.web_settings.contact_us.index')->name('contact_us');
-        Route::post('/update/contact_us', 'update')->name('update');
     });
     // Car Brands //
     Route::controller(CarBrandController::class)->prefix('manage/car-brands')->name('car-brand.')->group(function () {
@@ -120,15 +143,6 @@ Route::middleware('admin')->group(function () {
         Route::post('{slug}/approve', 'approve')->name('approve-car');
         Route::post('{slug}/decline', 'decline')->name('decline-car');
     });
-    // Storehouses //
-    Route::controller(StorehousesController::class)->prefix('manage/storehouses')->name('storehouses.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create-storehouse', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('{storehouse}/edit-storehouse', 'edit')->name('edit');
-        Route::put('{storehouse}/update-storehouse', 'update')->name('update');
-
-    });
     // Product Manufacturers //
     Route::controller(ManufacturersController::class)->prefix('manage/manufacturers')->name('manufacturers.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -181,8 +195,18 @@ Route::middleware('admin')->group(function () {
     // Products Listings //
     Route::controller(ProductListingsController::class)->prefix('manage/product-listings')->name('product-listings.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/add-product', 'add')->name('add');
+        Route::get('/add-product', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
+    });
+    // Shipping Service //
+    Route::controller(ShippingServiceController::class)->prefix('manage/shipping-service')->name('shipping-service.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store-service', 'store')->name('store');
+        Route::put('/update-service/{id}', 'update')->name('update');
+    });
+    // Orders
+    Route::controller(OrderController::class)->prefix('manage/orders')->name('orders.')->group(function () {
+        Route::get('/pending', 'pending')->name('pending');
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('manage/blog-categories')->name('blog-categories.')->group(function () {

@@ -20,6 +20,7 @@ class UserAddress extends Model
         'street',
         'full_address',
         'gps_link',
+        'type',
     ];
     // -------------------- Method -------------------- //
     public function user()

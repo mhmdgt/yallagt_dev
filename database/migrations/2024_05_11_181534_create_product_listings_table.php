@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_listings', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('storehouse_id')->references('id')->on('storehouses')->cascadeOnDelete();
+            $table->unsignedBigInteger('seller_id')->references('id')->on('sellers')->cascadeOnDelete();
             $table->unsignedBigInteger('manufacturer_id')->references('id')->on('manufacturers')->cascadeOnDelete();
             $table->unsignedBigInteger('product_id')->references('id')->on('products')->cascadeOnDelete();
-            $table->string('sku');
             $table->unsignedBigInteger('product_sku_id')->references('id')->on('product_skus')->cascadeOnDelete();
-            $table->integer('qty');
+            $table->string('sku');
             $table->integer('selling_price');
             $table->enum('status', ['active', 'hidden'])->default('active');
+            
+$table->unsignedBigInteger('storehouse_id')->references('id')->on('storehouses')->cascadeOnDelete();
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             // Add composite unique index to ensure a SKU can only be added once per storehouse
-            $table->unique(['storehouse_id', 'sku']);
+            $table->unique(['seller_id', 'sku']);
         });
     }
 

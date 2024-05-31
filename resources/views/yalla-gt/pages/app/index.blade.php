@@ -13,6 +13,7 @@
             <img src="yalla_gt/media/home_slider/1688828869.webp" alt="">
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 <!-- Services -->
 <div class="banner_area">
@@ -31,6 +32,27 @@
                                 <p class="p-service">{{ __('home_page.FastandEasy') }}</p>
                                 <div class="border-divider"></div>
                                 <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
+=======
+    <!-- Services -->
+    <div class="banner_area">
+        <div class="container-fluid ">
+            <div class="row">
+                <!--Shop Service-->
+                <div class="col-xl-3 col-6">
+                    <div class="card card_banner">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-7 col-12 text-center">
+                                    <a href="#"><img src="yalla_gt/media/main_services/shop.png"></a>
+                                </div>
+                                <div class="col-md-5 col-12 text-center">
+                                    <h4 class="h-service">{{ __('home_page.Products') }}</h4>
+                                    <p class="p-service">{{ __('home_page.FastandEasy') }}</p>
+                                    <div class="border-divider"></div>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('product.all-products')}}">{{ __('home_page.SeeMore') }}</a>
+                                </div>
+>>>>>>> c13f8da74bcff732715fe5c546e05e684e7ba0a0
                             </div>
                         </div>
                     </div>
@@ -47,7 +69,8 @@
                                     <h4 class="h-service">{{ __('home_page.StockCars') }}</h4>
                                     <p class="p-service">{{ __('home_page.AllYouNeed') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="#">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('stock-car.gtIndex')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +88,8 @@
                                     <h4 class="h-service">{{ __('home_page.SaleCars') }}</h4>
                                     <p class="p-service">{{ __('home_page.BestDeals') }}</p>
                                     <div class="border-divider"></div>
-                                    <a class="btn btn-dark a-service" href="">{{ __('home_page.SeeMore') }}</a>
+                                    <a class="btn btn-dark a-service"
+                                    href="{{route('sale-car.gtIndex')}}">{{ __('home_page.SeeMore') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -324,7 +348,7 @@
                                             <i class="bi bi-stopwatch"></i> <span
                                                 class="h6">{{ $car->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <div class="detailedSearch__content--badge row no-gutters card-text-4"
+                                        <div class="mt-2 detailedSearch__content--badge row no-gutters card-text-4"
                                             style="display:flex; flex-direction:column">
                                             <span class="badge badge_icon_5">{{ $kms[$car->km] }}</span>
                                             <span class="badge mt-2">{{ $transmissions[$car->transmission] }}</span>
@@ -489,56 +513,66 @@
                     <div class="product_container">
                         <div class="row product_carousel no-gutters" id="shop_filter">
 
-                            @foreach ($product_listings as $product_listing)
-                                @foreach ($product_listing->skus as $sku)
-                                    <div class="col-md-20 col-6 product_item">
-                                        <article class="single_product">
-                                            <figure>
-                                                <a class="text-dark"
-                                                    href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
-                                                    <div class="container-fluid product_thumb">
-                                                        @foreach ($sku->images as $image)
-                                                            @if ($image->main_img)
-                                                                <img src="{{ display_img($image->name) }}">
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="product_card_content">
-                                                        <div class="mt-4 mb-4">
-                                                            <h6 class="brand fw-700">Brand:
-                                                                <span>{{ $sku->product->manufacturer->name }}</span>
-                                                            </h6>
-                                                            <h4 class="product_name home-blog-title">
-                                                                {{ $sku->sku_name }}</h4>
-                                                        </div>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="p-0">
-                                                                <div>
-                                                                    <span>EGP:</span>
-                                                                    <span class="product_card_price"
-                                                                        style="color: #F25E3D;">
-                                                                        {{ number_format($product_listing->selling_price, 0, ',', ',') }}
-                                                                    </span>
+                            @foreach ($sellersStock as $seller)
+                                @foreach ($seller->storehouses as $storehouse)
+                                    @foreach ($storehouse->productListings as $productListing)
+                                        @foreach ($productListing->skus as $sku)
+                                            <div class="col-md-20 col-6 product_item">
+                                                <article class="single_product">
+                                                    <figure>
+                                                        <a class="text-dark"
+                                                            href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                            <div class="container-fluid product_thumb">
+                                                                @foreach ($sku->images as $image)
+                                                                    @if ($image->main_img)
+                                                                        <img src="{{ display_img($image->name) }}">
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="product_card_content">
+                                                                <div class="mt-4 mb-4">
+                                                                    <h6 class="brand fw-700">{{ __('home_page.Brand') }}:
+                                                                        <span>{{ $sku->product->manufacturer->name }}</span>
+                                                                    </h6>
+                                                                    <h4 class="product_name home-blog-title">
+                                                                        {{ $sku->sku_name }}</h4>
                                                                 </div>
-                                                                <div>
-                                                                    <i class="bi bi-bookmark-check"></i>
-                                                                    <span class="product_card_precentage">HOT</span>
-                                                                    <span> DEALS </span>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="p-0">
+                                                                        <div>
+                                                                            <span>{{ __('home_page.EGP') }}:</span>
+                                                                            <span class="product_card_price"
+                                                                                style="color: #F25E3D;">
+                                                                                {{ number_format($productListing->selling_price, 0, ',', ',') }}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="ar-style">
+                                                                            <i class="bi bi-bookmark-check"></i>
+                                                                            <span
+                                                                                class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                                            <span>{{ $seller->name }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-0 product_card_cart">
+                                                                        <form action="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" method="POST">
+                                                                            @csrf
+                                                                            <button type="submit" class="addToCartButton">
+                                                                                <img src="yalla_gt/media/cart/cart_icon.png" alt="Cart Icon">
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="p-0 product_card_cart">
-                                                                <a href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}" class="addToCartButton">
-                                                                    <img src="yalla_gt/media/cart/cart_icon.png">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </figure>
-                                        </article>
-                                    </div>
+                                                        </a>
+                                                    </figure>
+                                                </article>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
                                 @endforeach
                             @endforeach
+
 
                         </div>
                     </div>
@@ -561,7 +595,8 @@
                     <div class="brand_container BrandOWL owl-carousel">
                         @foreach ($manufacturerWithSkus as $manufacturer)
                             <div class="single_manufacturer">
-                                <a href="#"><img src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
+                                <a href="{{ route('product.manufacturer-products', $manufacturer->slug) }}"><img
+                                        src="{{ display_img($manufacturer->logo) }}" alt="..."></a>
                             </div>
                         @endforeach
                     </div>
@@ -740,6 +775,7 @@
 
                 </div>
             </div>
+<<<<<<< HEAD
             <!-- Single Column -->
             <div class="col-xl-3 col-md-6">
                 <div class="section_title section_title_border en-style">
@@ -831,6 +867,19 @@
                     </div>
                     <!-- loop end here -->
 
+=======
+        </div>
+    </section>
+    <!-- Ad Start area -->
+    <section class="new-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="yalla_gt/media/ad_imgaes/1688832343.webp" class="w-100 mb-3 rounded" alt="">
+                </div>
+                <div class="col-md-6">
+                    <img src="yalla_gt/media/ad_imgaes/1688832364.webp" class="w-100 mb-3 rounded" alt="">
+>>>>>>> c13f8da74bcff732715fe5c546e05e684e7ba0a0
                 </div>
             </div>
 
@@ -915,27 +964,28 @@
     @include('yalla-gt.layout.footer')
 @endsection
 
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all buttons with the class 'addToCartButton'
+            const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Select all buttons with the class 'addToCartButton'
-        const addToCartButtons = document.querySelectorAll('.addToCartButton');
-
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function(event) {
-                @if(Auth::check())
-                    // Allow default behavior, which is navigating to the add-to-cart action
-                    return true;
-                @else
-                    event.preventDefault(); // Prevent default navigation
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'You must be logged in to add items to the cart',
-                        showConfirmButton: true,
-                        confirmButtonText: 'Login',
-                    });
-                @endif
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    @if (Auth::check())
+                        // Allow default behavior, which is navigating to the add-to-cart action
+                        return true;
+                    @else
+                        event.preventDefault(); // Prevent default navigation
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'You must be logged in to add items to the cart',
+                            showConfirmButton: true,
+                            confirmButtonText: 'Login',
+                        });
+                    @endif
+                });
             });
         });
-    });
-</script>
+    </script>
+@endsection

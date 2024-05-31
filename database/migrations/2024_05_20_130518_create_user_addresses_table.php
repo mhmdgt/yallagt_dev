@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('full_address');
             $table->string('gps_link')->nullable();
-            $table->enum('type', ['home', 'work'])->default('home');
+            $table->enum('type', ['home', 'work']);
 
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();

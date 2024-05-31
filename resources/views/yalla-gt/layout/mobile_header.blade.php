@@ -2,7 +2,7 @@
     <div class="main_mobile_nav nav_section_mobile d-block d-lg-none">
         <ul class="nav-content d-flex align-items-center justify-content-between">
             <li class="nav-list">
-                <a href="{{ route('yalla-index') }}" class="link-item active">
+                <a href="{{ route('yalla-index') }}" class="link-item">
                     <i class='bx bxs-home link-icon'></i>
                     <span class="link-text">{{ __('header.home') }}</span>
                 </a>
@@ -37,12 +37,20 @@
                         <span class="link-text">{{ __('header.account') }}</span>
                     </a>
                 @endauth
-                {{-- <a class="loginPopUpFormMobile link-item">
-                    <i class='bx bxs-user link-icon'></i>
-                    <span class="link-text">Profile</span>
-                </a> --}}
-
             </li>
         </ul>
     </div>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('.link-item');
+        var currentUrl = window.location.href;
+
+        links.forEach(function(link) {
+            if (link.href === currentUrl) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>

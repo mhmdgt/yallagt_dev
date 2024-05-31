@@ -3,18 +3,24 @@
 namespace App\Models;
 
 use App\Traits\UserStampWithTypeTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
-    use HasFactory  , UserStampWithTypeTrait;
+    use HasFactory, UserStampWithTypeTrait;
 
     protected $guarded = [];
 
     // -------------------- Method -------------------- //
-    function storehouses(){
+    public function productListings()
+    {
+        return $this->hasMany(ProductListing::class);
+    }
+    // -------------------- Method -------------------- //
+    public function storehouses()
+    {
         return $this->hasMany(Storehouse::class);
     }
-    
+
 }

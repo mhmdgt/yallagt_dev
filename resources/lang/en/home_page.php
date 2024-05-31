@@ -18,7 +18,10 @@ return [
     'WithOneClick' => 'By One Click',
     'SeeMore' => 'See More',
     'EGP' => 'EGP',
-    '' => '',
-    '' => '',
+    'Brand' => 'Brand',
+
+
+    'Search' => 'Search',
+    'Sold' => 'Sold',
     '' => '',
 ];

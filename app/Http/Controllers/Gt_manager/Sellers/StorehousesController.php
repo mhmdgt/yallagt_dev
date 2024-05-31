@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Gt_manager\Storehouses;
+namespace App\Http\Controllers\Gt_manager\Sellers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Governorate;
@@ -12,20 +12,23 @@ use Illuminate\Support\Facades\Session;
 class StorehousesController extends Controller
 {
     // -------------------- Method -------------------- //
-    public function index()
+    public function index($seller)
     {
-        $storehouses = Storehouse::with('seller')->latest()->get();
+        $sellerData = Seller::Where('username' , $seller)->with('storehouses')->first();
+        $storehouses = $sellerData->storehouses;
         $governorates = Governorate::whereIn('id', $storehouses->pluck('governorate_id'))->pluck('name', 'id');
 
         return view('gt-manager.pages.storehouses.index',
-            compact('storehouses', 'governorates'));
+            compact('storehouses', 'governorates', 'sellerData'));
     }
     // -------------------- Method -------------------- //
-    public function create()
+    public function create($seller)
     {
+        $sellerData = Seller::Where('username' , $seller)->with('storehouses')->first();
         $governorates = Governorate::orderBy('name')->get();
+
         return view('gt-manager.pages.storehouses.create',
-            compact('governorates'));
+            compact('governorates', 'sellerData'));
     }
     // -------------------- Method -------------------- //
     public function store(Request $request)
@@ -44,9 +47,11 @@ class StorehousesController extends Controller
             'gps_link' => 'nullable|string|max:255',
         ]);
 
+        $sellerData = Seller::Where('id' , $request->seller_id)->with('storehouses')->first();
+
         // Create a new Storehouse instance with the validated data
         $storehouse = Storehouse::create([
-            'seller_id' => 1,
+            'seller_id' => $request->seller_id,
             'name' => $validatedData['name'],
             'manager_name' => $validatedData['manager_name'],
             'phone' => $validatedData['phone'],
@@ -61,7 +66,7 @@ class StorehousesController extends Controller
         ]);
 
         Session::flash('success', 'Stored Successfully');
-        return redirect()->route('storehouses.index');
+        return redirect()->route('storehouses.index', $sellerData->username );
 
     }
     // -------------------- Method -------------------- //
@@ -94,11 +99,14 @@ class StorehousesController extends Controller
             'gps_link' => 'nullable|string|max:255',
         ]);
 
+        $sellerData = Seller::Where('id' , $request->seller_id)->with('storehouses')->first();
+
         // Update the storehouse with validated data
         $data->update($validatedData);
 
         Session::flash('success', 'Updated Successfully');
-        return redirect()->route('storehouses.index');
+        return redirect()->route('storehouses.index', $sellerData->username );
+
 
     }
 }

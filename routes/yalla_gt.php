@@ -33,9 +33,12 @@ Route::group(
         Route::controller(UserController::class)->prefix('user')->name('user.')->group(function () {
             Route::get('/profile', 'index')->name('profile');
             Route::get('/ads', 'ads')->name('ads');
-
+            // Adresses
             Route::get('/addresses', 'addressesIndex')->name('addressesIndex');
-            Route::post('/addresses-store', 'addressesStore')->name('addressesStore');
+            Route::get('/addresses-create', 'addressCreate')->name('addressCreate');
+            Route::post('/addresses-store', 'addressStore')->name('addressStore');
+            Route::get('{id}/addresses-edit', 'addressEdit')->name('addressEdit');
+            Route::put('{id}/addresses-update', 'addressUpdate')->name('addressUpdate');
 
             Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
             Route::put('/update-profile', 'updateProfile')->name('update-profile');
@@ -49,15 +52,22 @@ Route::group(
             Route::get('/sell', 'gtCreate')->name('create');
         });
 
+        // CART
+        Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
+            Route::post('/{ProductSku}/store', 'store')->name('store');
+            Route::post('/cart/item/{id}/update', 'updateQuantity')->name('update');
+            Route::delete('/{itemID}/remove', 'remove')->name('remove');
+        });
+
         Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
-            Route::view('/', 'yalla-gt.pages.cart.checkout')->name('index');
+            Route::get('/', 'index')->name('index');
+            Route::post('/order-store', 'store')->name('store');
         });
 
     }); // ------------------------------------ END OF Authorized
 
         Route::controller(UserCartController::class)->prefix('user-carts')->name('user-carts.')->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/{ProductSku}/store', 'store')->name('store');
         });
 
         // Home
@@ -79,7 +89,7 @@ Route::group(
         Route::get('/manufacturers', [ShowProductController::class, 'manufacturersIndex'])->name('product.manufacturers-index');
         Route::get('/manufacturer/{slug}', [ShowProductController::class, 'productsByManufacturer'])->name('product.manufacturer-products');
         Route::get('/all-products', [ShowProductController::class, 'allProducts'])->name('product.all-products');
-        Route::get('product-item/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
+        Route::get('product-item/{seller}/{slug}/{sku}', [ShowProductController::class, 'item'])->name('product-item');
 
         // Blogs
         Route::get('/car-blogs', [BlogController::class, 'gtIndex'])->name('blog-gtIndex');

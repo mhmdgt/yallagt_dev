@@ -51,6 +51,11 @@ class Product extends Model
         return $this->hasMany(ProductSku::class);
     }
     // -------------------- Method -------------------- //
+    public function productListings()
+    {
+        return $this->hasMany(ProductListing::class);
+    }
+    // -------------------- Method -------------------- //
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');

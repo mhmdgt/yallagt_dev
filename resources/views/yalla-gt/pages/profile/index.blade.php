@@ -95,13 +95,9 @@
                                         <span class="ml-1 mr-1">{{ __('profile.Country') }}</span>
                                         <span> : {{ __('profile.EGYPT') }}</span>
                                     </div>
-                                    @if (App::getLocale() == 'en')
-                                        <i class="bi bi-caret-right ml-auto"></i>
-                                    @else
-                                        <i class="bi bi-caret-left ml-auto"></i>
-                                    @endif
+
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-2">
+                                <li class="list-group-item d-flex px-2">
                                     <div>
                                         <i class="bi bi-translate"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.Language') }} : </span>
@@ -112,10 +108,10 @@
                                             @php
                                                 $currentLocale = LaravelLocalization::getCurrentLocale();
                                                 $locales = LaravelLocalization::getSupportedLocales();
-                                            @endphp
+                                                @endphp
                                             @foreach ($locales as $localeCode => $properties)
-                                                @if ($currentLocale != $localeCode)
-                                                    <li>
+                                            @if ($currentLocale != $localeCode)
+                                            <li>
                                                         <a rel="alternate" hreflang="{{ $localeCode }}"
                                                             href="{{ url('/' . $localeCode . $current_url['path']) }}">
                                                             {{ $properties['native'] }}
@@ -125,11 +121,6 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    @if (App::getLocale() == 'en')
-                                        <i class="bi bi-caret-right ml-auto"></i>
-                                    @else
-                                        <i class="bi bi-caret-left ml-auto"></i>
-                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -138,7 +129,7 @@
             </div>
         </div>
         {{-- Log out --}}
-        <div class="col-md-12 grid-margin stretch-card">
+        <div class="col-md-12 grid-margin stretch-card" style="margin-bottom: 50px">
             <a href="{{ route('yalla-gt.logout') }}">
                 <div class="card">
                     <div class="profile-card">
@@ -154,6 +145,6 @@
     </div>
 @endsection
 @section('footer')
-    {{-- @include('yalla-gt.layout.upper-footer') --}}
+    @include('yalla-gt.layout.upper-footer')
     @include('yalla-gt.layout.footer')
 @endsection

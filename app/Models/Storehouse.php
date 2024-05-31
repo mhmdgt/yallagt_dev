@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProductListing;
 use App\Traits\UserStampWithTypeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,5 +30,9 @@ class Storehouse extends Model
     {
         return $this->belongsTo(Seller::class);
     }
-
+    // -------------------- Method -------------------- //
+    public function productListings()
+    {
+        return $this->hasMany(ProductListing::class);
+    }
 }

@@ -20,6 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Contact Details</h6>
+                            <input type="hidden" name="seller_id" value="{{ $sellerData->id }}">
                             {{-- Title --}}
                             <div class="form-group row pt-0">
                                 <div class="col">

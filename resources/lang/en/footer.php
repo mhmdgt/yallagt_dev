@@ -31,7 +31,7 @@ return [
     'home' => 'Home',
     'login' => 'Login',
     'ExploreNewDeals' => 'Explore New Deals',
-    'FQA' => 'FQA',
+    'FAQ' => 'FAQ',
 
     'headquarters' => 'headquarters',
     'email' => 'Email',

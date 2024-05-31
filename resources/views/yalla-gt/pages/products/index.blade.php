@@ -24,7 +24,7 @@
                                         <article class="single_product">
                                             <figure>
                                                 <a class="text-dark"
-                                                    href="{{ route('product-item', ['slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
+                                                    href="{{ route('product-item', ['seller' => $product_listing->seller->username, 'slug' => $sku->product->slug, 'sku' => $sku->sku]) }}">
                                                     <div class="container-fluid product_thumb">
                                                         @foreach ($sku->images as $image)
                                                             @if ($image->main_img)
@@ -49,18 +49,20 @@
                                                                         {{ number_format($product_listing->selling_price, 0, ',', ',') }}
                                                                     </span>
                                                                 </div>
-                                                                <div>
+                                                                <div class="ar-style">
                                                                     <i class="bi bi-bookmark-check"></i>
-                                                                    <span class="product_card_precentage">HOT</span>
-                                                                    <span> DEALS </span>
+                                                                    <span
+                                                                        class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                                    <span>{{ $product_listing->seller->name }}</span>
                                                                 </div>
                                                             </div>
                                                             <div class="p-0 product_card_cart">
-                                                                <a
-                                                                    href="{{ route('user-carts.store', ['ProductSku' => $sku->sku]) }}">
-                                                                    <img
-                                                                        src="{{ asset('yalla_gt/media/cart/cart_icon.png') }}">
-                                                                </a>
+                                                                <form action="{{ route('user-carts.store', $product_listing->id ) }}" method="POST">
+                                                                    @csrf
+                                                                    <button type="submit" class="addToCartButton">
+                                                                        <img src="{{asset('yalla_gt/media/cart/cart_icon.png')}}" alt="Cart Icon">
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>

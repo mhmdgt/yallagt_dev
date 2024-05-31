@@ -24,9 +24,10 @@
                             <ul class="widget_dropdown_categories dropdown_categories2">
                                 <li><a href="#">{{ __('footer.AboutUS') }}</a></li>
                                 <li><a href="#">{{ __('footer.ContactUs') }}</a></li>
-                                <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
-                                <li><a href="#">{{ __('footer.OrdersandRefunds') }}</a></li>
                                 <li><a href="#">{{ __('footer.TermsofUse') }}</a></li>
+                                <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
+                                <li><a href="#">{{ __('footer.FAQ') }}</a></li>
+
                             </ul>
                         </li>
                         <!-- My Account -->
@@ -35,7 +36,6 @@
                             <ul class="widget_dropdown_categories dropdown_categories3">
                                 <li><a href="#">{{ __('footer.home') }}</a></li>
                                 <li><a href="#">{{ __('footer.login') }}</a></li>
-                                <li><a href="#">{{ __('footer.FQA') }}</a></li>
                                 <li><a href="#">{{ __('footer.ExploreNewDeals') }}</a></li>
                             </ul>
                         </li>
@@ -93,7 +93,7 @@
                                 <li><a href="{{route('contact_us')}}">{{ __('footer.ContactUs') }}</a></li>
                                 <li><a href="#">{{ __('footer.TermsofUse') }}</a></li>
                                 <li><a href="#">{{ __('footer.PrivacyPolicy') }}</a></li>
-                                <li><a href="#">{{ __('footer.OrdersandRefunds') }}</a></li>
+                                <li><a href="#">{{ __('footer.FAQ') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,7 +113,6 @@
                                         <li>{{ getFirstName(user_data()->name) }}</li>
                                     </a>
                                 @endauth
-                                <li><a href="#">{{ __('footer.FQA') }}</a></li>
                                 <li><a href="{{route('product.all-products')}}">{{ __('footer.ExploreNewDeals') }}</a></li>
                             </ul>
                         </div>
@@ -145,8 +144,8 @@
                     <div class="footer_widgets--content">
                         <div class="row align-items-center justify-content-between footer_widgets--content-row">
                             <div class="col-lg-7">
+                                <h4 class="mb-3">{{ __('footer.allServiceInOnePlance') }}</h4>
                                 <h4>{{ __('footer.coming_soon_on') }}</h4>
-                                <h4>{{ __('footer.allServiceInOnePlance') }}</h4>
 
                             </div>
 

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8">
                 {{-- Search Brands --}}
-                <div class="card choose__card">
+                <div class="rounded card choose__card ar-style">
                     <div class="card-body">
                         <form action="#" method="POST">
                             @csrf
@@ -12,7 +12,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <select required class="js-example-basic-single form-control">
-                                            <option> Search </option>
+                                            <option>{{__('gt_cars_create.brand')}}</option>
                                             @foreach ($brandsWithSaleCars as $brand)
                                                 <option value="{{ $brand->id }}">
                                                     {{ $brand->name }}
@@ -24,13 +24,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <select required class="js-example-basic-single form-control">
-                                            <option> Search </option>
+                                            <option>{{__('gt_cars_create.model')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit"
-                                        class="btn btn-third rounded w-100 gradient-f25e3d mt-2">Search</button>
+                                        class="btn btn-third rounded w-100 gradient-f25e3d mt-2">{{__('home_page.Search')}}</button>
                                 </div>
                             </div>
                         </form>

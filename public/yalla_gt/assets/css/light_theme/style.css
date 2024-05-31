@@ -12193,7 +12193,7 @@ textarea:-ms-input-placeholder {
     border-radius: 0;
 }
 
-.modal-content button.close {
+/* .modal-content button.close {
     position: absolute;
     left: 94%;
     width: 35px;
@@ -12206,9 +12206,9 @@ textarea:-ms-input-placeholder {
     cursor: pointer;
     font-size: 18px;
     z-index: 9;
-}
+} */
 
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
     .modal-content button.close {
         left: 83%;
         width: 32px;
@@ -12225,7 +12225,7 @@ textarea:-ms-input-placeholder {
 
 .modal-content button.close span {
     display: block;
-}
+} */
 
 .modal_add_to_cart.mb-15 {
     margin-bottom: 23px;
@@ -17761,7 +17761,7 @@ li.selected {
 
 @media (max-width: 620px) {
     .product_card_cart {
-        width: 50px;
+        width: 40px;
         margin-right: auto;
         margin-left: auto;
     }
@@ -17988,22 +17988,25 @@ li.selected {
 .cart-btn {
     margin-top: 16px;
     border: 1px solid;
-    /* Add border */
     border-radius: 6px;
-    /* Add border radius to round the corners */
     padding: 8px 8px;
-    /* Add padding for better spacing */
     display: inline-block;
-    /* Make it an inline-block element */
     cursor: pointer;
-    /* Change cursor to pointer to indicate it's clickable */
     transition: all 0.3s ease;
-    /* Add transition for smooth hover effect */
+}
+
+.cart-remove-btn {
+    margin-top: 16px;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 8px 8px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .cart-btn:hover {
     background-color: #f0f0f0;
-    /* Change background color on hover */
 }
 
 
@@ -18249,24 +18252,30 @@ li.selected {
 }
 
 .product-main-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Ensures the image is fully visible */
-    padding: 20px; /* Adjust padding if needed */
-    display: block;
-    margin: auto;
-    border-radius: 10px; /* Optional: rounded corners for the image */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .product_show_box {
-    max-height: 360px; /* Adjust this value as needed */
-    overflow: hidden; /* Ensures no overflow beyond max-height */
+    max-height: 380px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product_show_box img {
-    max-height: 100%;
     max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
+    display: block;
+    margin: auto; /* Center the image horizontally */
 }
 
 
@@ -18478,6 +18487,23 @@ li.selected {
     /* Change cursor to pointer */
 }
 
+.del-link {
+    color: #FF0000;
+    /* Use the same color as your button */
+    text-decoration: underline;
+    /* Add underline to the text */
+    background: none;
+    /* Remove background */
+    border: none;
+    /* Remove border */
+    padding: 0;
+    /* Remove padding */
+    font: inherit;
+    /* Inherit font styles from the parent */
+    cursor: pointer;
+    /* Change cursor to pointer */
+}
+
 .categories-list {
     display: flex;
     flex-direction: column;
@@ -18499,4 +18525,22 @@ li.selected {
 .category-price {
     font-size: 1rem;
     color: #555;
+}
+
+/* @media screen and (max-width: 991px) {
+
+    .dissable-cart-button-sm {
+        display: none;
+    }
+} */
+
+.addToCartButton {
+    background: none; /* Remove default background */
+    border: none;     /* Remove default border */
+    padding: 0;       /* Remove default padding */
+    cursor: pointer;  /* Ensure the cursor is a pointer */
+}
+
+.addToCartButton img {
+    display: block;   /* Ensure the image is displayed as a block element */
 }
