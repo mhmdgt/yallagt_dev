@@ -21,9 +21,9 @@ class ProductSubCategory extends Model
         return self::where("slug->en", $slug)->orWhere("slug->ar", $slug);
     }
     // -------------------- Method -------------------- //
-    public function productCategory()
+    public function productCategories()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsToMany(ProductCategory::class);
     }
     // -------------------- Method -------------------- //
     public function products()
