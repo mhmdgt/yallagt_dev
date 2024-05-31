@@ -24,13 +24,16 @@ class ProductSubCategoryController extends Controller
     public function store(StoreProductSubCategoryRequest $request)
     {
 
-        ProductSubCategory::create([
-            'product_category_id' => $request->product_category_id,
+      $productSubCategory =  ProductSubCategory::create([
+            // 'product_category_id' => $request->product_category_id,
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
             'slug' => $this->slug(['en' => $request->name_en, 'ar' => $request->name_ar]),
             'logo' => $request->hasFile('logo') ? $this->uploadImage($request->logo, 'media/product_subcategories' ,$request->name_en):  null,
 
         ]);
+
+        // make sure product_category_id must me an array
+        $productSubCategory->productCategories()->attach($request->product_category_id);
 
         return back()->with('success', 'Created Successfully');
     }
@@ -45,6 +48,8 @@ class ProductSubCategoryController extends Controller
 
         ]);
 
+        $productSubCategory->productCategories()->sync($request->product_category_id);
+
         return back()->with('success', 'Updated Successfully');
     }
     // -------------------- Method -------------------- //
@@ -53,6 +58,8 @@ class ProductSubCategoryController extends Controller
         $productSubCategory = ProductSubCategory::getByTranslatedSlug($slug)->first();
         $this->deleteImage($productSubCategory->logo);
         $productSubCategory->delete();
+        $productSubCategory->productCategories()->detach();
+
         return redirect()->back();
     }
 }

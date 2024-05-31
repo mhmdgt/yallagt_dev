@@ -12,7 +12,7 @@ class ProductSubCategory extends Model
 {
     use HasFactory, HasTranslations ;
 
-    protected $fillable = ['name', 'logo', 'slug', 'product_category_id'];
+    protected $fillable = ['name', 'logo', 'slug'];
     public $translatable = ['name', 'slug'];
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
