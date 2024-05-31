@@ -62,6 +62,13 @@ class UserController extends Controller
 
     }
     // -------------------- Method -------------------- //
+    public function changePassword($username)
+    {
+        $userData = User::where('username', $username)->get()->first();
+        return view('yalla-gt.pages.profile.security.change-password', compact('userData'));
+
+    }
+    // -------------------- Method -------------------- //
     public function ads()
     {
         // Retrieve the authenticated user's ID
@@ -96,14 +103,14 @@ class UserController extends Controller
 
         // dd($addresses);
 
-        return view('yalla-gt.pages.profile.addresses.index',  compact('governorates', 'addresses'));
+        return view('yalla-gt.pages.profile.addresses.index', compact('governorates', 'addresses'));
 
     }
     // -------------------- Method -------------------- //
     public function addressCreate()
     {
         $governorates = Governorate::orderBy('name')->get();
-        return view('yalla-gt.pages.profile.addresses.create',  compact('governorates'));
+        return view('yalla-gt.pages.profile.addresses.create', compact('governorates'));
     }
     // -------------------- Method -------------------- //
     public function addressStore(Request $request)
@@ -135,10 +142,10 @@ class UserController extends Controller
     // -------------------- Method -------------------- //
     public function addressEdit($id)
     {
-        $user_address = UserAddress::Where('id' , $id)->get()->first();
+        $user_address = UserAddress::Where('id', $id)->get()->first();
         $governorates = Governorate::get();
 
-        return view('yalla-gt.pages.profile.addresses.edit',  compact('user_address', 'governorates'));
+        return view('yalla-gt.pages.profile.addresses.edit', compact('user_address', 'governorates'));
     }
     // -------------------- Method -------------------- //
     public function addressUpdate(Request $request, $id)

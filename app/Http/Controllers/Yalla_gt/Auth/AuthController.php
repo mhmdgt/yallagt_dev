@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Yalla_gt\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\YallaGT\Auth\LoginRequest;
-use App\Http\Requests\YallaGT\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\YallaGT\Auth\LoginRequest;
+use App\Http\Requests\YallaGT\Auth\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -51,7 +52,7 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json([
                 'success' => false,
-                'username_error' => 'Username not found',
+                'username_error' => 'Data not found',
             ], 422);
         }
         // Check if the password is correct
@@ -80,4 +81,51 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('yalla-index');
     }
+    // -------------------- New Method -------------------- //
+    public function userPasswordUpdate(Request $request)
+    {
+        // Validation rules
+        $rules = [
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed|min:8',
+        ];
+
+        // Custom error messages
+        $messages = [
+            'old_password.required' => 'The old password field is required.',
+            'new_password.required' => 'The new password field is required.',
+            'new_password.confirmed' => 'Password does not match.',
+            'new_password.min' => 'Password must be at least 8 characters.',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        // Fetch the authenticated user's current password
+        $old_password = auth()->user()->password;
+        $id = auth()->user()->id;
+        $userData = User::find($id);
+
+        // Check if the old password matches
+        if (!Hash::check($request->old_password, $old_password)) {
+            return back()->with('fail', 'Old Password does not match!');
+        }
+
+        // Update the user's password and check if update was successful
+        $updateSuccess = $userData->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        if (!$updateSuccess) {
+            return back()->with('fail', 'Password did not update.');
+        }
+
+        return back()->with('success', 'Password updated successfully.');
+    }
+
+
 }

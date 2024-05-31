@@ -19,6 +19,7 @@ Route::controller(AuthController::class)->prefix('users')->name('yalla-gt.')->gr
     Route::post('register', 'register')->name('register');
     Route::post('login', 'login')->name('login');
     Route::get('logout', 'logout')->name('logout');
+    Route::post('update-user-password', 'userPasswordUpdate')->name('update-password');
 });
 
 Route::group(
@@ -31,17 +32,19 @@ Route::group(
 
         // USER PROFILE
         Route::controller(UserController::class)->prefix('user')->name('user.')->group(function () {
+            // Profile
             Route::get('/profile', 'index')->name('profile');
+            Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
+            Route::put('/update-profile', 'updateProfile')->name('update-profile');
             Route::get('/ads', 'ads')->name('ads');
+            // Password
+            Route::get('{username}/chnage-password', 'changePassword')->name('change-password');
             // Adresses
             Route::get('/addresses', 'addressesIndex')->name('addressesIndex');
             Route::get('/addresses-create', 'addressCreate')->name('addressCreate');
             Route::post('/addresses-store', 'addressStore')->name('addressStore');
             Route::get('{id}/addresses-edit', 'addressEdit')->name('addressEdit');
             Route::put('{id}/addresses-update', 'addressUpdate')->name('addressUpdate');
-
-            Route::get('{username}/edit-profile', 'editProfile')->name('edit-profile');
-            Route::put('/update-profile', 'updateProfile')->name('update-profile');
 
         });
 
@@ -72,6 +75,9 @@ Route::group(
 
         // Home
         Route::get('/', [HomeContorller::class, 'index'])->name('yalla-index');
+        Route::get('/terms-of-use', [HomeContorller::class, 'termsIndex'])->name('yalla.termsIndex');
+        Route::get('/privacy-policy', [HomeContorller::class, 'privacyIndex'])->name('yalla.privacyIndex');
+        Route::get('/FAQ', [HomeContorller::class, 'faqIndex'])->name('yalla.faqIndex');
         Route::view('/about-us', 'yalla-gt.pages.need_help.about_us')->name('about_us');
         Route::view('/contact_us', 'yalla-gt.pages.need_help.contact_us')->name('contact_us');
 

@@ -46,7 +46,6 @@
                                     <h6 class="card-title ">Change Password</h6>
                                     <form method="POST" action="{{ route('admin.update-password') }}" class="forms-sample">
                                         @csrf
-
                                         <div class="form-group">
                                             <label for="exampleInputName1">Old Password</label>
                                             <input type="password"
@@ -77,12 +76,7 @@
                                                 <span class="text-danger">{{ $message }} </span>
                                             @enderror
                                         </div>
-
-
-
-
                                         <button type="submit" class="btn btn-success mt-2 mr-2">Submit</button>
-
                                     </form>
                                 </div>
                             </div>

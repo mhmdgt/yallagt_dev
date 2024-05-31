@@ -7,11 +7,11 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('manager-index') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
-                    <li class="breadcrumb-item">Product Listings</li>
+                    <li class="breadcrumb-item">Listings</li>
                 </ol>
                 <a href="{{ route('product-listings.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-lg mr-2"></i>
-                    Add Product
+                    Add
                 </a>
             </div>
         </nav>
@@ -27,22 +27,24 @@
                                     <tr>
                                         <th>SN</th>
                                         <th>Seller</th>
-                                        <th>Brand</th>
                                         <th>Sku Name</th>
                                         <th>SKU</th>
+                                        <th>Manufacturer</th>
                                         <th>Selling Price</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($product_listings as $productListing)
                                         @foreach ($productListing->skus as $sku)
                                             <tr>
-                                                <td>{{ $productListing->id }}</td>
+                                                <td><a href="{{ route('product-listings.edit' , $productListing->id) }}">{{ $productListing->id }}</a></td>
                                                 <td>{{ $productListing->seller->name ?? 'N/A' }}</td>
-                                                <td>{{ $sku->product->manufacturer->name ?? 'N/A' }}</td>
                                                 <td>{{ $sku->sku_name ?? 'N/A' }}</td>
                                                 <td>{{ $sku->sku }}</td>
+                                                <td>{{ $sku->product->manufacturer->name ?? 'N/A' }}</td>
                                                 <td>{{ number_format($productListing->selling_price, 0, ',', ',') }}</td>
+                                                <td>{{ $productListing->status }}</td>
                                             </tr>
                                         @endforeach
                                     @endforeach

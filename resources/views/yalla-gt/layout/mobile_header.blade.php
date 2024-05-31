@@ -8,19 +8,26 @@
                 </a>
             </li>
             <li class="nav-list">
-                <a href="{{route('product.manufacturers-index')}}" class="link-item">
+                <a href="{{ route('product.manufacturers-index') }}" class="link-item">
                     <i class='bx bxs-shopping-bags link-icon'></i>
                     <span class="link-text">{{ __('header.shop') }}</span>
                 </a>
             </li>
             <li class="nav-list">
-                <a href="{{route('gt_car.create')}}" class="link-item">
-                    <i class='bx bxs-message-square-add link-icon'></i>
-                    <span class="link-text">{{ __('header.sell') }}</span>
-                </a>
+                @auth
+                    <a href="{{ route('gt_car.create') }}" class="link-item">
+                        <i class='bx bxs-message-square-add link-icon'></i>
+                        <span class="link-text">{{ __('header.sell') }}</span>
+                    </a>
+                @else
+                    <a class="SellCar" class="link-item">
+                        <i class='bx bxs-message-square-add link-icon'></i>
+                        <span class="link-text">{{ __('header.sell') }}</span>
+                    </a>
+                @endauth
             </li>
             <li class="nav-list">
-                <a href="{{route('user-carts.index')}}" class="link-item">
+                <a href="{{ route('user-carts.index') }}" class="link-item">
                     <i class="bi bi-basket-fill link-icon"></i>
                     <span class="link-text">{{ __('header.cart') }}</span>
                 </a>

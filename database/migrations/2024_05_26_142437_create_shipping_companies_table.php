@@ -14,6 +14,20 @@ return new class extends Migration
         Schema::create('shipping_companies', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name');
+            $table->string('manager_name');
+            $table->string('phone');
+            $table->string('landline')->nullable();
+            $table->string('email')->nullable();
+            $table->string('governorate_id');
+            $table->string('area');
+            $table->string('building_number');
+            $table->string('street');
+            $table->string('headquarter_address');
+            $table->string('gps_link');
+
+            $table->enum('status', ['active', 'hidden'])->default('active');
+
             // Autoloaded Stamps
             $table->string('created_user_type')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();

@@ -30,7 +30,7 @@
                                 </div>
                                 <span class="text-muted">
                                     <i class="fas fa-shopping-basket fa-sm mx-1"></i>
-                                    {{ $sellerData->name }}
+                                    {{ ucwords($sellerData->name) }}
                                 </span>
                                 <span class="text-success ml-2">In stock</span>
                             </div>
@@ -64,11 +64,12 @@
                                         <span class="quantity">1</span> <!-- Display default quantity -->
                                         <span class="ml-1 ">QTY</span>
                                     </div>
-                                    <button type="submit"
-                                        class="btn gradient-8790f6 rounded text-white mr-1 ml-1 w-100 dissable-cart-button-sm">
-                                        Add To Cart
+                                    <button type="submit" class="addToCartButton">
+                                        <a class="btn gradient-8790f6 rounded text-white mr-1 ml-1 dissable-cart-button-sm">
+                                            Add To Cart
+                                        </a>
                                     </button>
-                                    <div id="call_nav" class="d-flex align-items-center"
+                                    {{-- <div id="call_nav" class="d-flex align-items-center"
                                         onclick="document.getElementById('carForSaleID').submit();">
                                         <button type="submit" style="border: none; background: none;" class="w-100">
                                             <span
@@ -78,7 +79,7 @@
                                                     Now</span>
                                             </span>
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </form>
                                 <div class="ml-3 mr-4 cart-qty-counts">
                                     <div class="cart-btn"><span class="p-1">1</span></div>
@@ -128,7 +129,7 @@
                         </div>
                     </div>
                     <!-- Other Items -->
-                    {{-- <div class="col-lg-4 mb-4">
+                    <div class="col-lg-4 mb-4">
                         <div class="px-0 rounded">
                             <div class="card">
                                 <div class="card-body">
@@ -136,35 +137,31 @@
                                     @foreach ($related_products as $related_product)
                                         @foreach ($related_product->skus as $related_sku)
                                             <!-- Check to ensure the related SKU is not the current SKU -->
-                                            @if ($related_sku->sku !== $sku->sku)
-                                                <div class="d-flex mb-2">
-                                                    <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
-                                                        class="me-3">
-                                                        @foreach ($related_sku->images as $image)
-                                                            @if ($image->main_img)
-                                                                <img src="{{ display_img($image->name) }}"
-                                                                    style="min-width: 96px; height: 96px;"
-                                                                    class="img-md img-thumbnail" alt="Similar Item Image">
-                                                            @endif
-                                                        @endforeach
-                                                    </a>
-                                                    <div class="similar-items-info">
-                                                        <a href="{{ route('product-item', ['slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}"
-                                                            class="mb-1">
-                                                            {{ $related_sku->sku_name }}
-                                                        </a>
-                                                        <p class="text-dark font-weight-bold">
-                                                            EGP:
-                                                            {{ number_format($related_product->selling_price, 2) }}</p>
-                                                    </div>
+                                            <div class="d-flex mb-2">
+                                                <a
+                                                    href="{{ route('product-item', ['seller' => $product_listing->seller->username, 'slug' => $related_sku->product->slug, 'sku' => $related_sku->sku]) }}">
+                                                    @foreach ($related_sku->images as $image)
+                                                        @if ($image->main_img)
+                                                            <img src="{{ display_img($image->name) }}"
+                                                                style="width: 100px; height: 100px;"
+                                                                class="img-md img-thumbnail product_show_box"
+                                                                alt="Similar Item Image">
+                                                        @endif
+                                                    @endforeach
+                                                </a>
+                                                <div class="similar-items-info ">
+                                                    {{ $related_sku->sku_name }}
+                                                    <p class="text-dark font-weight-bold">
+                                                        EGP: {{ number_format($related_product->selling_price, 2) }}
+                                                    </p>
                                                 </div>
-                                            @endif
+                                            </div>
                                         @endforeach
                                     @endforeach
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <!-- END Other Items -->
                 </div>
             </div>
@@ -177,6 +174,28 @@
 @endsection
 @section('script')
     <script>
+        // ----------------- If Not Auth
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all buttons with the class 'addToCartButton'
+            const addToCartButtons = document.querySelectorAll('.addToCartButton');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    @if (Auth::check())
+                        // Allow default behavior, which is navigating to the add-to-cart action
+                        return true;
+                    @else
+                        event.preventDefault(); // Prevent default navigation
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '{{ __('messages.login_first') }}',
+                            showConfirmButton: true,
+                            confirmButtonText: '{{ __('messages.Next') }}',
+                        });
+                    @endif
+                });
+            });
+        });
         // ----------------- QTY
         document.addEventListener('DOMContentLoaded', function() {
             const qtyButton = document.querySelector('.cart-qty');

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Yalla_gt\Cart;
 
+use App\Http\Controllers\Controller;
+use App\Models\ProductListing;
+use App\Models\ProductSku;
 use App\Models\Seller;
 use App\Models\UserCart;
-use App\Models\ProductSku;
 use App\Models\UserCartItem;
 use Illuminate\Http\Request;
-use App\Models\ProductListing;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class UserCartController extends Controller
@@ -16,17 +16,27 @@ class UserCartController extends Controller
     // -------------------- Method -------------------- //
     public function index()
     {
-
+        // Fetch the cart with related items, product SKUs, images, and listings
         $cart = UserCart::with(['UserCartItems.productSku.images' => function ($query) {
             $query->where('main_img', true);
-        }, 'UserCartItems.productSku', 'UserCartItems.productListing'])->whereUserId(auth()->id())->first();
+        }, 'UserCartItems.productSku', 'UserCartItems.productListing.seller'])
+            ->whereUserId(auth()->id())
+            ->first();
 
-        $items = $cart->UserCartItems;
-        $sellers = Seller::whereIn('id', $items->pluck('seller_id'))->pluck('name', 'id');
+        // Initialize the subtotal and total quantity
+        $subtotal = 0;
+        $totalQty = 0;
 
-        // dd($sellers);
+        // Calculate the subtotal and total quantity
+        if ($cart && $cart->UserCartItems) {
+            foreach ($cart->UserCartItems as $item) {
+                $subtotal += $item->productListing->selling_price * $item->qty;
+                $totalQty += $item->qty;
+            }
+        }
 
-        return view('yalla-gt.pages.cart.index', compact('cart' , 'sellers'));
+        // Pass the cart, subtotal, and total quantity to the view
+        return view('yalla-gt.pages.cart.index', compact('cart', 'subtotal', 'totalQty'));
     }
     // -------------------- Method -------------------- //
     public function store(Request $request, $ProductListing)
@@ -46,15 +56,14 @@ class UserCartController extends Controller
 
         // Retrieve or create the user's cart
         $userCart = UserCart::firstOrCreate(
-            ['user_id' => $userId],
-            ['total_qty' => 0, 'sub_total' => 0]
+            ['user_id' => $userId]
         );
 
         // Get the quantity from the request
         $quantity = $request->input('quantity', 1);
 
         // Check if the cart item already exists
-        $userCartItem = UserCartItem::where(['user_cart_id' => $userCart->id , 'product_listing_id' => $listing->id ] )
+        $userCartItem = UserCartItem::where(['user_cart_id' => $userCart->id, 'product_listing_id' => $listing->id])
             ->where('product_sku_id', $sku->id)
             ->first();
 
@@ -71,17 +80,15 @@ class UserCartController extends Controller
             return redirect()->back()->with('fail', "You can only add $allowableQty more of this item to your cart.");
         }
 
-
         if ($userCartItem) {
             // Update the existing cart item
-        // $listing = ProductListing::findOrFail($ProductListing);
+            // $listing = ProductListing::findOrFail($ProductListing);
 
             $newQty = $userCartItem->qty + $quantity;
             $userCartItem->update([
                 'qty' => $newQty,
-                'total_price_per_item' => $listing->selling_price  * $newQty,
+                'total_price_per_item' => $listing->selling_price * $newQty,
             ]);
-
         } else {
             // Create a new cart item
             $userCart->UserCartItems()->create([
@@ -95,14 +102,7 @@ class UserCartController extends Controller
             ]);
         }
 
-        // Update the cart's total quantity and subtotal
-        $userCart->update([
-            'total_qty' => $userCart->UserCartItems->sum('qty'),
-            'sub_total' => $userCart->UserCartItems->sum('total_price_per_item'),
-        ]);
-
         return redirect()->route('user-carts.index')->with('success', 'Added to Cart successfully.');
-
     }
     // -------------------- Method -------------------- //
     public function increment($userCartItemId, $qty)
@@ -112,9 +112,7 @@ class UserCartController extends Controller
         $userCartItem->increment('qty', $userCartItem->qty + $qty);
         $productPrice = ProductListing::where('sku', $userCartItem->sku)->first();
 
-        $userCartItem->userCart()->update([
-
-        ]);
+        $userCartItem->userCart()->update([]);
     }
     // -------------------- Method -------------------- //
     public function decrement($userCartItemId, $qty)
@@ -142,18 +140,37 @@ class UserCartController extends Controller
             'total_price_per_item' => $userCartItem->productListing->selling_price * $newQty,
         ]);
 
-        $userCart = $userCartItem->userCart;
-        $userCart->update([
-            'total_qty' => $userCart->UserCartItems->sum('qty'),
-            'sub_total' => $userCart->UserCartItems->sum('total_price_per_item'),
-        ]);
+        // $userCart = $userCartItem->userCart;
+        // $userCart->update([
+        //     'total_qty' => $userCart->UserCartItems->sum('qty'),
+        //     'sub_total' => $userCart->UserCartItems->sum('total_price_per_item'),
+        // ]);
+        // Fetch the cart with related items, product SKUs, images, and listings
+        $cart = UserCart::with(['UserCartItems.productSku.images' => function ($query) {
+            $query->where('main_img', true);
+        }, 'UserCartItems.productSku', 'UserCartItems.productListing.seller'])
+            ->whereUserId(auth()->id())
+            ->first();
 
-        return response()->json([
-            'success' => true,
-            'total_qty' => $userCart->total_qty,
-            'sub_total' => $userCart->sub_total,
-            'redirect' => route('user-carts.index'),
-        ]);
+        // Initialize the subtotal and total quantity
+        $subtotal = 0;
+        $totalQty = 0;
+
+        // Calculate the subtotal and total quantity
+        if ($cart && $cart->UserCartItems) {
+            foreach ($cart->UserCartItems as $item) {
+                $subtotal += $item->productListing->selling_price * $item->qty;
+                $totalQty += $item->qty;
+            }
+        }
+
+        return view('yalla-gt.pages.cart.update', compact('cart', 'subtotal', 'totalQty'));
+        // return response()->json([
+        //     'success' => true,
+        //     'total_qty' => $userCart->total_qty,
+        //     'sub_total' => $userCart->sub_total,
+        //     'redirect' => route('user-carts.index'),
+        // ]);
     }
     // -------------------- Method -------------------- //
     public function remove($itemID)
@@ -181,6 +198,5 @@ class UserCartController extends Controller
 
         // Optionally, you can return a response or redirect
         return redirect()->back()->with('success', 'Deleted successfully.');
-
     }
 }

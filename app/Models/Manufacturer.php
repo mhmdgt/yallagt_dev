@@ -20,7 +20,7 @@ class Manufacturer extends Model
     public static function getByTranslatedSlug($slug)
     {
         $locale = App::getLocale();
-        return self::where("slug->{$locale}", $slug);
+        return self::where("slug->en", $slug)->orWhere("slug->ar", $slug);
     }
     // -------------------- Method -------------------- //
     public function products()

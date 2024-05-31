@@ -11,7 +11,7 @@
                 @if ($address)
                     <div class="card mb-4 ar-style">
                         <div class="card-body">
-                            <a href="#" class="edit-link">Change Address</a>
+                            <a href="{{ route('user.addressEdit' , $address->id )}}" class="edit-link">Change Address</a>
                             <div class="row mt-3">
                                 <dt class="col-4">Name:</dt>
                                 <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
@@ -164,6 +164,12 @@
                                                 {{ $cartItem->productSku->sku_name }}
                                             </div>
                                         </div>
+                                        <div class="ar-style">
+                                            <i class="bi bi-bookmark-check"></i>
+                                            <span
+                                                class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
+                                        </div>
                                         <div class="cart-prod-attributes">
                                             <div class="mt-2">
                                                 <span>EGP:</span>
@@ -202,10 +208,13 @@
                                 <tbody>
 
                                     <tr class="summary-subtotal">
-                                        <td class="h6 text-dark">Subtotal: ({{ $cart->total_qty }} items)</td>
-                                        <td>EGP: {{ number_format($cart->sub_total, 0, ',', ',') }}</td>
+                                        <td class="h6 text-dark">Subtotal: ({{ $totalQty }} items)</td>
+                                        <td>EGP: {{ number_format($subtotal, 0, ',', ',') }}</td>
                                     </tr>
                                     <form action="{{ route('checkout.store') }}" method="POST">
+
+                                        <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+                                        <input type="hidden" name="totalQty" value="{{ $totalQty }}">
 
                                         <tr class="summary-shipping">
                                             <td class="h6 text-dark">Shipping Fee:</td>
@@ -241,7 +250,7 @@
                                         <tr class="summary-total">
                                             <td class="h4 text-dark">Total:</td>
                                             <td class="h5 text-dark" id="totalAmount">EGP:
-                                                <span>{{ number_format($cart->sub_total + $shippingServices[0]->fee, 0, '', ',') }}</span>
+                                                <span>{{ number_format($subtotal + $shippingServices[0]->fee, 0, '', ',') }}</span>
                                             </td>
                                         </tr>
 

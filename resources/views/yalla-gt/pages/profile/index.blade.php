@@ -38,7 +38,7 @@
 
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center px-2">
-                                    <a href="#">
+                                    <a href="{{route('user.change-password' , user_data()->username)}}" class="text-dark">
                                         <i class="bi bi-phone"></i>
                                         <span class="ml-1 mr-1">{{ __('profile.Security') }}</span>
                                     </a>
@@ -129,7 +129,7 @@
             </div>
         </div>
         {{-- Log out --}}
-        <div class="col-md-12 grid-margin stretch-card" style="margin-bottom: 50px">
+        <div class="col-md-12 grid-margin stretch-card" style="margin-bottom: 40px">
             <a href="{{ route('yalla-gt.logout') }}">
                 <div class="card">
                     <div class="profile-card">
@@ -145,6 +145,6 @@
     </div>
 @endsection
 @section('footer')
-    @include('yalla-gt.layout.upper-footer')
+    {{-- @include('yalla-gt.layout.upper-footer') --}}
     @include('yalla-gt.layout.footer')
 @endsection

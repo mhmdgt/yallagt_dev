@@ -78,7 +78,7 @@
                             <a href="{{route('shipping-service.index')}}" class="nav-link">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Companies</a>
+                            <a href="{{route('shipping-company.index')}}" class="nav-link">Companies</a>
                         </li>
                     </ul>
                 </div>

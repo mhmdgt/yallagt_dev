@@ -1,40 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Gt_manager\Sellers;
+namespace App\Http\Controllers\Gt_manager\Shipping;
 
-use App\Http\Controllers\Controller;
 use App\Models\Governorate;
-use App\Models\Seller;
-use App\Models\Storehouse;
 use Illuminate\Http\Request;
+use App\Models\ShippingCompany;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-class StorehousesController extends Controller
+class ShippingCompanyController extends Controller
 {
     // -------------------- Method -------------------- //
-    public function index($seller)
+    public function index()
     {
-        $sellerData = Seller::Where('username' , $seller)->with('storehouses')->first();
-        $storehouses = $sellerData->storehouses;
-        $governorates = Governorate::whereIn('id', $storehouses->pluck('governorate_id'))->pluck('name', 'id');
-
-        return view('gt-manager.pages.sellers.storehouses.index',
-            compact('storehouses', 'governorates', 'sellerData'));
+        $companies = ShippingCompany::latest()->get();
+        return view('gt-manager.pages.shipping.companies.index', compact('companies'));
     }
     // -------------------- Method -------------------- //
-    public function create($seller)
+    public function create()
     {
-        $sellerData = Seller::Where('username' , $seller)->with('storehouses')->first();
         $governorates = Governorate::orderBy('name')->get();
 
-        return view('gt-manager.pages.sellers.storehouses.create',
-            compact('governorates', 'sellerData'));
+        return view('gt-manager.pages.shipping.companies.create',
+            compact('governorates'));
     }
     // -------------------- Method -------------------- //
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:storehouses',
+            'name' => 'required|string|max:255|unique:shipping_companies',
             'manager_name' => 'required|string|max:255',
             'phone' => 'required|numeric',
             'landline' => 'nullable|numeric',
@@ -43,15 +37,12 @@ class StorehousesController extends Controller
             'area' => 'required|string|max:255',
             'building_number' => 'required|numeric',
             'street' => 'required|string|max:255',
-            'full_address' => 'required|string|max:255',
+            'headquarter_address' => 'required|string|max:255',
             'gps_link' => 'nullable|string|max:255',
         ]);
 
-        $sellerData = Seller::Where('id' , $request->seller_id)->with('storehouses')->first();
-
         // Create a new Storehouse instance with the validated data
-        $storehouse = Storehouse::create([
-            'seller_id' => $request->seller_id,
+        $company = ShippingCompany::create([
             'name' => $validatedData['name'],
             'manager_name' => $validatedData['manager_name'],
             'phone' => $validatedData['phone'],
@@ -61,28 +52,26 @@ class StorehousesController extends Controller
             'area' => $validatedData['area'],
             'building_number' => $validatedData['building_number'],
             'street' => $validatedData['street'],
-            'full_address' => $validatedData['full_address'],
+            'headquarter_address' => $validatedData['headquarter_address'],
             'gps_link' => $validatedData['gps_link'],
         ]);
 
-        Session::flash('success', 'Stored Successfully');
-        return redirect()->route('storehouses.index', $sellerData->username );
+        return redirect()->route('shipping-company.index')->with('success', 'Stored Successfully');
 
     }
     // -------------------- Method -------------------- //
-    public function edit($storehouse)
+    public function edit($id)
     {
-        $storehouseData = Storehouse::Where('id', $storehouse)->get()->first();
-        $seller = Seller::Where('id', $storehouseData->seller_id)->get()->first();
+        $company = ShippingCompany::findOrFail($id);
         $governorates = Governorate::latest()->get();
 
-        return view('gt-manager.pages.sellers.storehouses.edit',
-            compact('storehouseData', 'seller', 'governorates'));
+        return view('gt-manager.pages.shipping.companies.edit',
+            compact('company', 'governorates'));
     }
     // -------------------- Method -------------------- //
-    public function update(Request $request, $storehouse)
+    public function update(Request $request, $id)
     {
-        $data = Storehouse::findOrFail($storehouse);
+        $data = ShippingCompany::findOrFail($id);
 
         // Validate the incoming request data
         $validatedData = $request->validate([
@@ -95,18 +84,16 @@ class StorehousesController extends Controller
             'area' => 'nullable|string|max:255',
             'building_number' => 'nullable|string|max:255',
             'street' => 'nullable|string|max:255',
-            'full_address' => 'nullable|string|max:255',
+            'headquarter_address' => 'nullable|string|max:255',
             'gps_link' => 'nullable|string|max:255',
         ]);
 
-        $sellerData = Seller::Where('id' , $request->seller_id)->with('storehouses')->first();
 
         // Update the storehouse with validated data
         $data->update($validatedData);
 
-        Session::flash('success', 'Updated Successfully');
-        return redirect()->route('storehouses.index', $sellerData->username );
-
-
+        // Session::flash('success', 'Updated Successfully');
+        return redirect()->route('shipping-company.index')->with('success', 'Updated Successfully');
     }
 }
+

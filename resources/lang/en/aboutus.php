@@ -12,7 +12,7 @@ return [
     'Shop_Now' => 'Shop Now',
 
 
-    '' => '',
+    'Your_ad_is_now_free' => 'You Ad is Now Free',
     '' => '',
     '' => '',
     '' => '',

@@ -7,9 +7,9 @@
                 <div class="d-flex align-items-center mb-4">
                     <h3 class="detailedSearch__header--h3">Detailed Search</h3>
                     <div class=" mr-2 btn text-white rounded gradient-green-bg">
-                        <a href="{{route('product.manufacturers-index')}}" class="text-white">
-                        Products
-                    </a>
+                        <a href="{{ route('product.manufacturers-index') }}" class="text-white">
+                            Products
+                        </a>
                     </div>
                 </div>
                 {{-- All Products --}}
@@ -32,50 +32,50 @@
                                                             @endif
                                                         @endforeach
                                                     </div>
-                                                    <div class="product_card_content">
-                                                        <div class="mt-4 mb-4">
-                                                            <h6 class="brand fw-700">Brand:
-                                                                <span>{{ $sku->product->manufacturer->name }}</span>
-                                                            </h6>
-                                                            <h4 class="product_name home-blog-title">
-                                                                {{ $sku->sku_name }}</h4>
+                                                </a>
+
+                                                <div class="product_card_content">
+                                                    <div class="mt-4 mb-4">
+                                                        <h6 class="brand fw-700">Brand:
+                                                            <span>{{ $sku->product->manufacturer->name }}</span>
+                                                        </h6>
+                                                        <h4 class="product_name home-blog-title">
+                                                            {{ $sku->sku_name }}</h4>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="p-0">
+                                                            <div>
+                                                                <span>EGP:</span>
+                                                                <span class="product_card_price" style="color: #F25E3D;">
+                                                                    {{ number_format($product_listing->selling_price, 0, ',', ',') }}
+                                                                </span>
+                                                            </div>
+                                                            <div class="ar-style">
+                                                                <i class="bi bi-bookmark-check"></i>
+                                                                <span
+                                                                    class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                                                <span>{{ ucwords($product_listing->seller->name) }}</span>
+                                                            </div>
                                                         </div>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="p-0">
-                                                                <div>
-                                                                    <span>EGP:</span>
-                                                                    <span class="product_card_price"
-                                                                        style="color: #F25E3D;">
-                                                                        {{ number_format($product_listing->selling_price, 0, ',', ',') }}
-                                                                    </span>
-                                                                </div>
-                                                                <div class="ar-style">
-                                                                    <i class="bi bi-bookmark-check"></i>
-                                                                    <span
-                                                                        class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
-                                                                    <span>{{ $product_listing->seller->name }}</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="p-0 product_card_cart">
-                                                                <form action="{{ route('user-carts.store', $product_listing->id ) }}" method="POST">
-                                                                    @csrf
-                                                                    <button type="submit" class="addToCartButton">
-                                                                        <img src="{{asset('yalla_gt/media/cart/cart_icon.png')}}" alt="Cart Icon">
-                                                                    </button>
-                                                                </form>
-                                                            </div>
+                                                        <div class="p-0 product_card_cart">
+                                                            <form
+                                                                action="{{ route('user-carts.store', $product_listing->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button type="submit" class="addToCartButton">
+                                                                    <img src="{{ asset('yalla_gt/media/cart/cart_icon.png') }}"
+                                                                        alt="Cart Icon">
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                </a>
+                                                </div>
                                             </figure>
                                         </article>
                                     </div>
                                 @endforeach
                             @endforeach
-
-
                             <!-- loop end here -->
-
                         </div>
                     </div>
                 </section>
@@ -88,4 +88,30 @@
 @section('footer')
     @include('yalla-gt.layout.upper-footer')
     @include('yalla-gt.layout.footer')
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all buttons with the class 'addToCartButton'
+            const addToCartButtons = document.querySelectorAll('.addToCartButton');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    @if (Auth::check())
+                        // Allow default behavior, which is navigating to the add-to-cart action
+                        return true;
+                    @else
+                        event.preventDefault(); // Prevent default navigation
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '{{ __('messages.login_first') }}',
+                            showConfirmButton: true,
+                            confirmButtonText: '{{ __('messages.Next') }}',
+                        });
+                    @endif
+                });
+            });
+        });
+    </script>
 @endsection
