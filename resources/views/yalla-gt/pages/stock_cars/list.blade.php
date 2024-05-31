@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 {{-- Title --}}
                 <div class="d-flex align-items-center mb-4">
-                    <h3 class="detailedSearch__header--h3">Detailed Search</h3>
+                    <h3 class="detailedSearch__header--h3">{{__('home_page.Search_Results')}}</h3>
                     <div class=" mr-2 btn text-white rounded gradient-green-bg">
                         {{ $brandData->name }}
                     </div>

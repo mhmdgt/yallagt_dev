@@ -156,9 +156,9 @@
                 </a>
                 <div class="collapse" id="ProductOrders">
                     <ul class="nav sub-menu">
-                        <li class="nav-item"><a href="{{route('orders.pending')}}" class="nav-link">All New Orders</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Approved</a></li>
-                        <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">in-Processing</a></li>
+                        <li class="nav-item"><a href="{{route('orders.all-pending')}}" class="nav-link">All New Orders</a></li>
+                        <li class="nav-item"><a href="{{route('orders.all-approved')}}" class="nav-link">Approved</a></li>
+                        <li class="nav-item"><a href="{{route('orders.all-processing')}}" class="nav-link">in-Processing</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Delivered</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Refunded</a></li>
                         <li class="nav-item"><a href="pages/advanced-ui/cropper.html" class="nav-link">Cancelled</a></li>

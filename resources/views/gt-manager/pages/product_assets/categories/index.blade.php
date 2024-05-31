@@ -39,8 +39,7 @@
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">(AR)</span></label>
                                         <input type="text" class="form-control" name="name_ar" dir="auto"
-                                        placeholder="English Name"
-                                            value="{{ old('name_ar') }}">
+                                            placeholder="English Name" value="{{ old('name_ar') }}">
                                         <x-errors.display-validation-error property="name_ar" />
                                     </div>
                                     <div class="form-group">
@@ -78,11 +77,14 @@
         {{-- ========================== All Categories ========================== --}}
         <div class="row">
             <div class="col-md-12">
-
                 <div class="card">
                     <div class="col-md-12 grid-margin stretch-card">
-
                         <div class="card-body">
+                            {{-- ====== Modal button ====== --}}
+                            <a href="{{route('product-subcategories.add-sub')}}" class="btn btn-success float-right">
+                                <i class="bi bi-plus-lg mr-2"></i>
+                                Add Sub
+                            </a>
                             <h6 class="card-title">All Categories</h6>
                             <div class="row">
                                 {{-- LOOP --}}
@@ -91,7 +93,8 @@
                                         <a href="{{ route('product-categories.show', $category->slug) }}">
                                             <div class="border border-light rounded shadow-sm">
                                                 <div class="card-logo ">
-                                                    <img width="100px" src="{{ display_img($category->logo) }}" alt="No_IMG">
+                                                    <img width="100px" src="{{ display_img($category->logo) }}"
+                                                        alt="No_IMG">
                                                 </div>
                                             </div>
                                             <p class="text-center mt-3 text-dark ">{{ $category->name }}</p>

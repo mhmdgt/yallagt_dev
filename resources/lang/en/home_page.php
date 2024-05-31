@@ -23,5 +23,5 @@ return [
 
     'Search' => 'Search',
     'Sold' => 'Sold',
-    '' => '',
+    'Search_Results' => 'Search Results',
 ];

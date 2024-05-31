@@ -39,14 +39,16 @@
                         <div class="col-lg-7">
                             {{-- NAV --}}
                             <div class="cart-nav">
-                                <h5 class=""><a href="" class="text-body">
+                                <h5 class="">
+                                    <a href="{{route('product.all-products')}}" class="text-body">
                                         <i class="bi bi-arrow-left-short"></i>
-                                        Continue Shopping</a>
+                                        {{__('cart.Continue_Shopping')}}
+                                    </a>
                                 </h5>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
-                                        <p class="mb-0">You have {{ $totalQty }} items in your cart</p>
+                                        <p class="mb-0">{{__('cart.Cart_items')}} ({{ $totalQty }})</p>
                                     </div>
                                 </div>
                             </div>
@@ -56,6 +58,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
+                                                {{-- IMAGE --}}
                                                 <div class="product-media">
                                                     <a class="primary_img d-flex justify-content-center" href="#">
                                                         @foreach ($cartItem->productSku->images as $image)
@@ -68,21 +71,22 @@
                                                         @endforeach
                                                     </a>
                                                 </div>
-                                                <div class="prod-details">
-                                                    <div>
-                                                        <span>Brand:</span>
+                                                {{-- Data  --}}
+                                                <div class="prod-details mr-3">
+                                                    <div class="mb-1">
+                                                        <span>{{ __('cart.Brand') }}:</span>
                                                         <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                                     </div>
-                                                    <div class="cart-prod-title">
+                                                    <div class="cart-prod-title mb-2">
                                                         <div class="text-dark">
                                                             {{ $cartItem->productSku->sku_name }}
                                                         </div>
                                                     </div>
-                                                    <div class="ar-style">
+                                                    <div class="ar-style mb-2">
                                                         <i class="bi bi-bookmark-check"></i>
                                                         <span
                                                             class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
-                                                            <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
+                                                        <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
                                                     </div>
                                                     <div class="cart-prod-attributes">
                                                         <div class="mt-2">
@@ -131,29 +135,24 @@
                             <div class="summary summary-cart">
                                 <h4 class="summary-title mt-4 h5 text-dark">
                                     <i class='bx bx-check-circle'></i>
-                                    Order Summary
-                                    <span class="gt-gray" style="font-size: 12px">(Inclusive of VAT)</span>
+                                    {{__('cart.Order_Summary')}}
+                                    <span class="gt-gray" style="font-size: 12px">{{__('cart.VAT')}}</span>
                                 </h4>
 
                                 <table class="table table-summary">
                                     <tbody>
                                         <tr class="summary-subtotal">
-                                            <td class="h6 text-dark">Subtotal: ({{ $totalQty }} items)</td>
-                                            <td>EGP: {{ number_format($subtotal, 0, '', ',') }}</td>
+                                            <td class="h6 text-dark">{{__('cart.Subtotal')}}: ({{ $totalQty }})</td>
+                                            <td>{{__('cart.EGP')}}: {{ number_format($subtotal, 0, '', ',') }}</td>
                                         </tr>
                                         <tr class="summary-shipping">
-                                            <td class="h6 text-dark">Shipping Fee:</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-
-                                        <tr class="summary-shipping-row">
-                                            <td>Standard:</td>
+                                            <td class="h6 text-dark">{{__('cart.Shipping_Fee')}}:</td>
                                             <td class="gt-green font-weight-bold">FREE</td>
                                         </tr>
 
                                         <tr class="summary-total">
-                                            <td class="h4 text-dark">Total:</td>
-                                            <td class="h5 text-dark" id="totalAmount">EGP:
+                                            <td class="h4 text-dark">{{__('cart.Total')}}:</td>
+                                            <td class="h5 text-dark" id="totalAmount">{{__('cart.EGP')}}:
                                                 <span>{{ number_format($subtotal, 0, '', ',') }}</span>
                                             </td>
                                         </tr>
@@ -164,7 +163,8 @@
                                 <a href="{{ route('checkout.index') }}"
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                    Buy Now
+                                    <i class="bi bi-bag-check"></i>
+                                    {{__('cart.buy_now')}}
                                 </a>
                                 {{-- Buy now Mobile --}}
                                 {{-- <div id="call_nav" class="d-flex align-items-center"

@@ -165,6 +165,7 @@ Route::middleware('admin')->group(function () {
     // Sub Product Categories //
     Route::controller(ProductSubCategoryController::class)->prefix('manage/product-subcategories')->name('product-subcategories.')->group(function () {
         Route::post('/', 'store')->name('store');
+        Route::get('/add-sub', 'addSub')->name('add-sub');
         Route::get('/{slug}/edit', 'edit')->name('edit');
         Route::put('/{slug}', 'update')->name('update');
         Route::delete('/{slug}', 'destroy')->name('destroy');
@@ -218,10 +219,14 @@ Route::middleware('admin')->group(function () {
     });
     // Orders
     Route::controller(OrderController::class)->prefix('manage/orders')->name('orders.')->group(function () {
-        Route::get('/pending-orders', 'pending')->name('pending');
-        Route::get('/{tracking_num}/order-edit', 'edit')->name('edit');
+        Route::get('/pending-orders', 'allPending')->name('all-pending');
+        Route::get('/{tracking_num}/pending-edit', 'pendingEdit')->name('pendingEdit');
+        Route::get('/approved-orders', 'allApproved')->name('all-approved');
+        Route::get('/{tracking_num}/approved-edit', 'approvedEdit')->name('approvedEdit');
+        Route::get('/processing-orders', 'allProcessing')->name('all-processing');
         // Actions
-        Route::put('/{tracking_num}/approve-order', 'approve')->name('approve-order');
+        Route::put('/{tracking_num}/approve-order', 'approveAction')->name('approve-order');
+        Route::put('/{tracking_num}/processing-order', 'processingAction')->name('processing-order');
     });
     // blog categories
     Route::controller(BlogCategoryController::class)->prefix('manage/blog-categories')->name('blog-categories.')->group(function () {

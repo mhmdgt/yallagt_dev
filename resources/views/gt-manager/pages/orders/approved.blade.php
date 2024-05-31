@@ -35,7 +35,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <a href="{{ route('orders.pendingEdit', $order->tracking_num) }}">
+                                                <a href="{{ route('orders.approvedEdit', $order->tracking_num) }}">
                                                     {{ $order->tracking_num }}
                                                 </a>
                                             </td>
@@ -43,7 +43,7 @@
                                             <td>{{ $order->name }}</td>
                                             <td>{{ $order->phone }}</td>
                                             <td>{{ $governorates[$order->governorate_id] }}</td>
-                                            <td class="text-danger">{{ $order->status }}</td>
+                                            <td>{{ $order->status }}</td>
                                             <td>{{ $order->created_at->diffForHumans() }}</td>
                                         </tr>
                                     @endforeach

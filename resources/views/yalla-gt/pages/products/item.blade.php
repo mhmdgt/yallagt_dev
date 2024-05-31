@@ -64,11 +64,16 @@
                                         <span class="quantity">1</span> <!-- Display default quantity -->
                                         <span class="ml-1 ">QTY</span>
                                     </div>
-                                    <button type="submit" class="addToCartButton">
-                                        <a class="btn gradient-8790f6 rounded text-white mr-1 ml-1 dissable-cart-button-sm">
+                                    @auth
+                                        <button type="submit"
+                                            class="btn gradient-8790f6 rounded text-white flex-grow-1 w-100">
+                                            Add To Cart
+                                        </button>
+                                    @else
+                                        <a class="SellCarFooterWeb btn gradient-8790f6 rounded text-white flex-grow-1 w-100">
                                             Add To Cart
                                         </a>
-                                    </button>
+                                    @endauth
                                     {{-- <div id="call_nav" class="d-flex align-items-center"
                                         onclick="document.getElementById('carForSaleID').submit();">
                                         <button type="submit" style="border: none; background: none;" class="w-100">
@@ -175,27 +180,27 @@
 @section('script')
     <script>
         // ----------------- If Not Auth
-        document.addEventListener('DOMContentLoaded', function() {
-            // Select all buttons with the class 'addToCartButton'
-            const addToCartButtons = document.querySelectorAll('.addToCartButton');
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     // Select all buttons with the class 'addToCartButton'
+        //     const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    @if (Auth::check())
-                        // Allow default behavior, which is navigating to the add-to-cart action
-                        return true;
-                    @else
-                        event.preventDefault(); // Prevent default navigation
-                        Swal.fire({
-                            icon: 'warning',
-                            title: '{{ __('messages.login_first') }}',
-                            showConfirmButton: true,
-                            confirmButtonText: '{{ __('messages.Next') }}',
-                        });
-                    @endif
-                });
-            });
-        });
+        //     addToCartButtons.forEach(button => {
+        //         button.addEventListener('click', function(event) {
+        //             @if (Auth::check())
+        //                 // Allow default behavior, which is navigating to the add-to-cart action
+        //                 return true;
+        //             @else
+        //                 event.preventDefault(); // Prevent default navigation
+        //                 Swal.fire({
+        //                     icon: 'warning',
+        //                     title: '{{ __('messages.login_first') }}',
+        //                     showConfirmButton: true,
+        //                     confirmButtonText: '{{ __('messages.Next') }}',
+        //                 });
+        //             @endif
+        //         });
+        //     });
+        // });
         // ----------------- QTY
         document.addEventListener('DOMContentLoaded', function() {
             const qtyButton = document.querySelector('.cart-qty');

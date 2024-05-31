@@ -12,7 +12,7 @@ class ProductSubCategory extends Model
 {
     use HasFactory, HasTranslations ;
 
-    protected $fillable = ['name', 'logo', 'slug', 'product_category_id'];
+    protected $fillable = ['name', 'logo', 'slug'];
     public $translatable = ['name', 'slug'];
     // -------------------- Method -------------------- //
     public static function getByTranslatedSlug($slug)
@@ -21,9 +21,9 @@ class ProductSubCategory extends Model
         return self::where("slug->en", $slug)->orWhere("slug->ar", $slug);
     }
     // -------------------- Method -------------------- //
-    public function productCategory()
+    public function productCategories()
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsToMany(ProductCategory::class,'pro_category_pro_sub_category');
     }
     // -------------------- Method -------------------- //
     public function products()

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Yalla_gt\Cart;
 use App\Http\Controllers\Controller;
 use App\Models\ProductListing;
 use App\Models\ProductSku;
-use App\Models\Seller;
 use App\Models\UserCart;
 use App\Models\UserCartItem;
 use Illuminate\Http\Request;
@@ -20,8 +19,8 @@ class UserCartController extends Controller
         $cart = UserCart::with(['UserCartItems.productSku.images' => function ($query) {
             $query->where('main_img', true);
         }, 'UserCartItems.productSku', 'UserCartItems.productListing.seller'])
-        ->whereUserId(auth()->id())
-        ->first();
+            ->whereUserId(auth()->id())
+            ->first();
 
         // Initialize the subtotal and total quantity
         $subtotal = 0;
@@ -164,19 +163,6 @@ class UserCartController extends Controller
         $item = UserCartItem::where('id', $itemID)->with('userCart')->first();
 
         if ($item) {
-            // Update the total_qty and sub_total in UserCart
-            $userCart = $item->userCart;
-            if ($userCart) {
-                // Decrement the total_qty by the quantity of the item being removed
-                $userCart->total_qty -= $item->qty;
-
-                // Decrement the sub_total by the total_price_per_item of the item being removed
-                $userCart->sub_total -= $item->total_price_per_item;
-
-                // Save the changes to the UserCart
-                $userCart->save();
-            }
-
             // Remove the item from the cart
             $item->delete();
         }

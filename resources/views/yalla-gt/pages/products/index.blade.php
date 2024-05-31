@@ -5,10 +5,10 @@
             <div class="container-fluid">
                 {{-- Title --}}
                 <div class="d-flex align-items-center mb-4">
-                    <h3 class="detailedSearch__header--h3">Detailed Search</h3>
+                    <h3 class="detailedSearch__header--h3">{{ __('home_page.Search_Results') }}</h3>
                     <div class=" mr-2 btn text-white rounded gradient-green-bg">
                         <a href="{{ route('product.manufacturers-index') }}" class="text-white">
-                            Products
+                            {{__('home_page.Products')}}
                         </a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                                                     </div>
                                                 </a>
 
-                                                <div class="product_card_content">
+                                                <div class="p-2 product_card_content">
                                                     <div class="mt-4 mb-4">
                                                         <h6 class="brand fw-700">Brand:
                                                             <span>{{ $sku->product->manufacturer->name }}</span>
@@ -58,15 +58,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="p-0 product_card_cart">
-                                                            <form
-                                                                action="{{ route('user-carts.store', $product_listing->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button type="submit" class="addToCartButton">
-                                                                    <img src="{{ asset('yalla_gt/media/cart/cart_icon.png') }}"
-                                                                        alt="Cart Icon">
-                                                                </button>
-                                                            </form>
+                                                            @auth
+                                                                <form
+                                                                    action="{{ route('user-carts.store', $product_listing->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    <button type="submit" class="addToCartButton"
+                                                                    style="width: 50px;">
+                                                                        <img src="{{ asset('yalla_gt/media/cart/cart_icon.png') }}"
+                                                                            alt="Cart Icon">
+                                                                    </button>
+                                                                </form>
+                                                            @endauth
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,7 +95,7 @@
 @endsection
 
 @section('script')
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Select all buttons with the class 'addToCartButton'
             const addToCartButtons = document.querySelectorAll('.addToCartButton');
@@ -113,5 +117,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

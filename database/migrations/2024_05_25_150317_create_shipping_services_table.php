@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ShippingService;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +25,19 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
+
+        try {
+            ShippingService::create([
+                'name' => ['en' => "Basic", "ar" => "أساسي"],
+                'name' => 50,
+            ]);
+        } catch (\Exception $e) {
+            // Handle the error, such as logging or displaying a message
+            // For example:
+            logger()->error('Failed to create initial ContactUs record: ' . $e->getMessage());
+            // Or
+            // throw $e; // Rethrow the exception
+        }
     }
 
     /**

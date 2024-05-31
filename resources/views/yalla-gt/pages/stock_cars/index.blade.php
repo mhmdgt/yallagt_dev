@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8">
                 {{-- Search Brands --}}
-                <div class="card choose__card ar-style">
+                {{-- <div class="card choose__card ar-style">
                     <div class="card-body">
                         <form action="#" method="POST">
                             @csrf
@@ -35,7 +35,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> --}}
                 {{-- Active Brands --}}
                 <div class="choose_container mt-4">
                     <div class="row">

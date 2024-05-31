@@ -13,11 +13,15 @@
         </nav>
         <div class="profile-page tx-13">
             <div class="row profile-body">
-                {{-- ====== Brand Details ====== --}}
+                {{-- ====== Order Details ====== --}}
                 <div class="col-md-4 col-xl-4 left-wrapper mb-4">
                     <div class="card rounded">
                         <div class="card-body">
                             <h6 class="card-title">Order Details</h6>
+                            <div class="mt-3">
+                                <label class="tx-14 font-weight-bold mb-1 text-uppercase">Created at:</label>
+                                <td>{{ $order->created_at->diffForHumans() }}</td>
+                            </div>
                             <div class="mt-3">
                                 <label class="tx-14 font-weight-bold mb-1 text-uppercase">Tracking Num:</label>
                                 <td>{{ $order->tracking_num }}</td>
@@ -31,10 +35,6 @@
                                 <td>{{ $order->phone }}</td>
                             </div>
                             <div class="mt-3">
-                                <label class="tx-14 font-weight-bold mb-1 text-uppercase">Governorate:</label>
-                                <td>{{ $governorates[$order->governorate_id] ?? 'N/A' }}</td>
-                            </div>
-                            <div class="mt-3">
                                 <label class="tx-14 font-weight-bold mb-1 text-uppercase">Shipping EGP:</label>
                                 <td>{{ number_format($order->shipping_service_fee, 0, ',', ',') }}</td>
                             </div>
@@ -43,15 +43,44 @@
                                 <td>{{ number_format($order->total_price, 0, ',', ',') }}</td>
                             </div>
                             <div class="mt-3">
-                                <label class="tx-14 font-weight-bold mb-1 text-uppercase">Created at:</label>
-                                <td>{{ $order->created_at->diffForHumans() }}</td>
+                                <label class="tx-14 font-weight-bold mb-1 text-uppercase">Governorate:</label>
+                                <td>{{ $governorates[$order->governorate_id] ?? 'N/A' }}</td>
                             </div>
-                            {{-- Status --}}
-                            <Form action="{{ route('orders.approve-order' , $order->tracking_num) }}" method="POST">
+                            <div class="mt-3">
+                                <label class="tx-14 font-weight-bold mb-1 text-uppercase">Full Address:</label>
+                                <td>{{ $order->full_address }}</td>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card rounded mt-4">
+                        <div class="card-body">
+                            <h6 class="card-title">Shippment Details</h6>
+                            <Form action="{{ route('orders.processing-order' , $order->tracking_num) }}" method="POST">
                                 @csrf
                                 @method('put')
-                                <button class="btn btn-success mt-4 float-right" type="submit">Approve</button>
-                            </Form>
+                                <div class="form-group row pt-0">
+                                    <div class="col">
+                                        <div>
+                                            <label>Shipping Company</label>
+                                            <select id="brandSelect" class="js-example-basic-single w-100" name="company_id">
+                                                <option>Select Company</option>
+                                                @foreach ($shippingCompanies as $company)
+                                                    <option value="{{ $company->id }}" @selected(old('brand') == $company->id)>
+                                                        {{-- {{ old('brand') == $brand->id ? 'selected' : '' }}> --}}
+                                                        {{ $company->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <x-errors.display-validation-error property="company_id" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Shipment code</label>
+                                    <input type="text" class="form-control" name="Shipment_code">
+                                </div>
+                                <button class="btn btn-success mt-4 float-right" type="submit">Activate</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -84,7 +113,9 @@
                                                         <td>{{ $item->productSku->sku_name }}</td>
                                                         <td>{{ $item->sku }}</td>
                                                         <td>{{ $item->qty }}</td>
-                                                        <td>EGP {{ number_format($item->total_price_per_item, 0, ',', ',') }}</td>
+                                                        <td>EGP
+                                                            {{ number_format($item->total_price_per_item, 0, ',', ',') }}
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
