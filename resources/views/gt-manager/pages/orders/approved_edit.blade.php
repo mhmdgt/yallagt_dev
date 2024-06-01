@@ -55,31 +55,32 @@
                     <div class="card rounded mt-4">
                         <div class="card-body">
                             <h6 class="card-title">Shippment Details</h6>
-                            <Form action="{{ route('orders.processing-order' , $order->tracking_num) }}" method="POST">
+                            <form action="{{ route('orders.processing-order', $order->tracking_num) }}" method="POST">
                                 @csrf
                                 @method('put')
                                 <div class="form-group row pt-0">
                                     <div class="col">
                                         <div>
                                             <label>Shipping Company</label>
-                                            <select id="brandSelect" class="js-example-basic-single w-100" name="company_id">
+                                            <select id="brandSelect" class="js-example-basic-single w-100" name="shipping_company_id">
                                                 <option>Select Company</option>
                                                 @foreach ($shippingCompanies as $company)
-                                                    <option value="{{ $company->id }}" @selected(old('brand') == $company->id)>
-                                                        {{-- {{ old('brand') == $brand->id ? 'selected' : '' }}> --}}
+                                                    <option value="{{ $company->id }}" @selected(old('shipping_company_id') == $company->id)>
                                                         {{ $company->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <x-errors.display-validation-error property="company_id" />
+                                            <x-errors.display-validation-error property="shipping_company_id" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Shipment code</label>
-                                    <input type="text" class="form-control" name="Shipment_code">
+                                    <label for="exampleInputUsername1">Shipment Code</label>
+                                    <input type="text" class="form-control" name="shipment_code">
+                                    <x-errors.display-validation-error property="shipment_code" />
+
                                 </div>
-                                <button class="btn btn-success mt-4 float-right" type="submit">Activate</button>
+                                <button class="btn btn-success mt-4 float-right" type="submit">Processing</button>
                             </form>
                         </div>
                     </div>

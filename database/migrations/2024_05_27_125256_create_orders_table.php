@@ -40,6 +40,9 @@ return new class extends Migration
 
             $table->enum('status', ['pending', 'approved', 'processing', 'delivered', 'refunded', 'cancelled', 'completed'])->default('pending');
 
+            $table->foreignId('shipping_company_id')->nullable()->constrained('shipping_companies');
+            $table->string('shipment_code')->nullable();
+
             $table->timestamps();
         });
     }

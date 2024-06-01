@@ -10,6 +10,10 @@
                             href="{{ route('product-categories.index') }}">All Categories</a></li>
                     <li class="breadcrumb-item"><a>Category</a></li>
                 </ol>
+                <a href="{{route('product-subcategories.add-sub')}}" class="btn btn-success float-right">
+                    <i class="bi bi-plus-lg mr-2"></i>
+                    Add Sub
+                </a>
             </div>
         </nav>
         {{-- ====== CATEGORY Details ====== --}}
@@ -128,11 +132,9 @@
                                             <td>{{ $productSubCategory->getTranslations('name')['en'] }}</td>
                                             <td>{{ $productSubCategory->getTranslations('name')['ar'] }}</td>
                                             <td>
-                                                <button class="btn btn-inverse-warning ml-4 mr-1" data-toggle="modal"
-                                                    data-target="#editModelproductSubCategory{{ $productSubCategory->slug }}"
-                                                    title="Edit">
+                                                <a href="{{route('product-subcategories.edit' , $productSubCategory->slug )}}" class="btn btn-inverse-warning ml-4 mr-1">
                                                     <i class="bi bi-pencil-square"></i>
-                                                </button>
+                                                </a>
 
                                                 <button class="btn btn-inverse-danger" data-toggle="modal"
                                                     data-target="#confirmDeleteModal{{ $productSubCategory->slug }}"

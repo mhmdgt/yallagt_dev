@@ -29,7 +29,7 @@ return new class extends Migration
         try {
             ShippingService::create([
                 'name' => ['en' => "Basic", "ar" => "أساسي"],
-                'name' => 50,
+                'fee' => 50,
             ]);
         } catch (\Exception $e) {
             // Handle the error, such as logging or displaying a message

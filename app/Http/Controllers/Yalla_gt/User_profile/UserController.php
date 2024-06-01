@@ -72,7 +72,6 @@ class UserController extends Controller
     public function ads()
     {
         // Retrieve the authenticated user's ID
-        // $userId = Auth::guard('web')->user()->id;
         $userId = Auth::id();
 
         // Retrieve the sale car ads related to the authenticated user

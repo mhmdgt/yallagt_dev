@@ -417,7 +417,7 @@
             $('#brandSelect').change(function() {
                 var brandId = $(this).val();
                 if (!brandId) {
-                    $('#modelSelect').html('<option value="">Select Brand First</option>');
+                    $('#modelSelect').html('<option value="">{{ __('gt_cars_create.select_brand_first') }}</option>');
                     return;
                 }
 
@@ -426,7 +426,7 @@
                     url: '/car-brand-models/models/' + brandId,
                     type: 'GET',
                     success: function(data) {
-                        var options = '<option value="">Select Model</option>';
+                        var options = '<option value="">{{ __('gt_cars_create.select_model') }}</option>';
                         $.each(data, function(index, model) {
                             // Get the translation based on the current locale
                             var modelName = model.name["{{ App::getLocale() }}"];

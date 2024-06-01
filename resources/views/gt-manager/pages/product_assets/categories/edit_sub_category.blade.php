@@ -17,19 +17,21 @@
                 <div class="card">
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card-body">
-                            <form action="{{ route('product-subcategories.store') }}" method="POST"
+                            <form action="{{ route('product-subcategories.update', $productSubCategory->slug) }}"
+                                method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
+                                <input type="hidden" name="id"
+                                value="{{ $productSubCategory->id }}">
                                 <div class="form-group">
                                     <label>Name <span class="text-danger">(EN)</span></label>
-                                    <input type="text" class="form-control" name="name_en" placeholder="English Name"
-                                        value="{{ old('name_en') }}">
+                                    <input type="text" class="form-control" name="name_en" value="{{ $productSubCategory->getTranslations('name')['en'] }}">
                                     <x-errors.display-validation-error property="name_en" />
                                 </div>
                                 <div class="form-group">
                                     <label>Name <span class="text-danger">(AR)</span></label>
-                                    <input type="text" class="form-control" name="name_ar" dir="auto"
-                                        placeholder="English Name" value="{{ old('name_ar') }}">
+                                    <input type="text" class="form-control" name="name_ar" dir="auto" value="{{ $productSubCategory->getTranslations('name')['ar'] }}">
                                     <x-errors.display-validation-error property="name_ar" />
                                 </div>
                                 <div class="form-group row pt-0">
@@ -43,22 +45,25 @@
                                                 <option value="">Select</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
-                                                        {{ in_array($category->id, (array) old('categories', [])) ? 'selected' : '' }}>
+                                                        {{ in_array($category->id, (array) old('categories', $selectedCategories)) ? 'selected' : '' }}>
                                                         {{ $category->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+
                                         <x-errors.display-validation-error property="features" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Sub Category Logo</label>
-                                    <input type="file" name="logo" class="file-upload-default" accept=".png">
-
+                                    <input type="file" name="logo"
+                                        class="file-upload-default" id="image"
+                                        accept=".png">
                                     <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info" disabled=""
-                                            placeholder="Upload Image" name="logo">
+                                        <input type="text"
+                                            class="form-control file-upload-info" disabled=""
+                                            placeholder="Upload Image">
                                         <span class="input-group-append">
                                             <button class="file-upload-browse btn btn-success"
                                                 type="button">Upload</button>

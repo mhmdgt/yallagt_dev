@@ -6,6 +6,7 @@ return [
     'select' => 'Select',
     'brand' => 'Brand',
     'select_brand_first' => 'Choose the brand first',
+    'select_model' => 'Select Model',
     'model' => 'Model',
     'year' => 'Year',
     'color' => 'Color',

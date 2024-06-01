@@ -18,9 +18,11 @@ return [
     'Subtotal' => 'Subtotal',
     'Shipping_Fee' => 'Shipping Fee',
     'Total' => 'Total',
-    '' => '',
-    '' => '',
-    '' => '',
+    'addedToCartSuccess' => 'Added To Cart Successfully',
+
+    'QTY' => 'Quantity',
+    'Remove' => 'Remove',
+
     '' => '',
     '' => '',
     '' => '',

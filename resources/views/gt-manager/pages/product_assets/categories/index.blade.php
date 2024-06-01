@@ -81,12 +81,8 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card-body">
                             {{-- ====== Modal button ====== --}}
-                            <a href="{{route('product-subcategories.add-sub')}}" class="btn btn-success float-right">
-                                <i class="bi bi-plus-lg mr-2"></i>
-                                Add Sub
-                            </a>
                             <h6 class="card-title">All Categories</h6>
-                            <div class="row">
+                            <div class="row mt-2">
                                 {{-- LOOP --}}
                                 @foreach ($categories as $category)
                                     <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">

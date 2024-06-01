@@ -90,7 +90,7 @@
                                                     </div>
                                                     <div class="cart-prod-attributes">
                                                         <div class="mt-2">
-                                                            <span>EGP:</span>
+                                                            <span>{{__('cart.EGP')}}:</span>
                                                             <span class="product_card_price" style="color: #F25E3D;">
                                                                 <td>
                                                                     {{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
@@ -107,7 +107,7 @@
                                             <div type="button" class="cart-remove-btn" data-toggle="modal"
                                                 data-target="#confirmDeleteModal{{ $cartItem->id }}" title="Edit">
                                                 <i class="bi bi-trash"></i>
-                                                Remove
+                                                {{__('cart.Remove')}}
                                             </div>
                                             <x-modal.confirm-delete-modal
                                                 route="{{ route('user-carts.remove', $cartItem->id) }}"
@@ -115,7 +115,7 @@
                                             {{-- QTY --}}
                                             <div class="ml-2 mr-2 cart-item">
                                                 <div class="cart-btn cart-qty">
-                                                    <span>{{ $cartItem->qty }} Quantity</span>
+                                                    <span>{{ $cartItem->qty }} {{__('cart.QTY')}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                 <a href="{{ route('checkout.index') }}"
                                     class="btn gradient-8790f6 rounded text-white w-100">
                                     {{-- class="btn gradient-8790f6 rounded text-white flex-grow-1 d-none d-lg-block"> --}}
-                                    <i class="bi bi-bag-check"></i>
+                                    <i class="bi bi-bag-check ml-1 mr-1"></i>
                                     {{__('cart.buy_now')}}
                                 </a>
                                 {{-- Buy now Mobile --}}

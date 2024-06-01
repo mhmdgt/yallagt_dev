@@ -223,7 +223,7 @@ class SaleCarsController extends Controller
             $temporaryImage->delete();
         }
 
-        Session::flash('success', 'Stored Successfully');
+        Session::flash('success', __('messages.car_added_suc'));
         return redirect()->route('yalla-index');
     }
     // -------------------- Method -------------------- //

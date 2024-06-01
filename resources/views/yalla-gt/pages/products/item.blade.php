@@ -14,8 +14,6 @@
                             @endforeach
                         </div>
                     </div>
-                    {{-- return view('yalla-gt.pages.products.item', compact('sellerData', 'product', 'skuData', 'product_listing')); --}}
-
                     <!-- Specs And Price -->
                     <div class="col-lg-6">
                         <div class="ps-lg-3">
@@ -23,30 +21,29 @@
                                 {{ $skuData->sku_name }}
                             </h4>
                             <div class="d-flex flex-row my-3">
-                                <div class="text-warning mb-1 me-2">
-                                    <span class="ms-1">
-                                        4.5
-                                    </span>
+                                <div class="ar-style">
+                                    <i class="bi bi-bookmark-check"></i>
+                                    <span class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
                                 </div>
                                 <span class="text-muted">
                                     <i class="fas fa-shopping-basket fa-sm mx-1"></i>
                                     {{ ucwords($sellerData->name) }}
                                 </span>
-                                <span class="text-success ml-2">In stock</span>
+                                <span class="text-success ml-2 mr-2">{{__('productItem.in_stock')}}</span>
                             </div>
                             <div class="mb-3">
-                                <span class="h6">EGP:</span>
+                                <span class="h6">{{__('productItem.EGP')}}:</span>
                                 <span class="h3 font-weight-bold"
                                     style="color: #F25E3D;">{{ number_format($product_listing->selling_price, 0, ',', ',') }}</span>
                             </div>
                             <div class="row mt-3">
-                                <dt class="col-4">Manufacturer:</dt>
+                                <dt class="col-4">{{ __('productItem.Manufacturer') }}:</dt>
                                 <dd class="col-8"><span>{{ $product->manufacturer->name }}</span></dd>
 
-                                <dt class="col-4">Category:</dt>
+                                <dt class="col-4">{{ __('productItem.Category') }}:</dt>
                                 <dd class="col-8"><span>{{ $product->category->name }}</span></dd>
 
-                                <dt class="col-4">SubCategory:</dt>
+                                <dt class="col-4">{{ __('productItem.SubCategory') }}:</dt>
                                 <dd class="col-8"><span>{{ $product->subCategory->name }}</span></dd>
                             </div>
                             <hr />
@@ -62,16 +59,17 @@
                                     <div
                                         class="cart-qty btn gradient-f25e3d text-white rounded mr-1 ml-1 d-flex justify-content-between">
                                         <span class="quantity">1</span> <!-- Display default quantity -->
-                                        <span class="ml-1 ">QTY</span>
+                                        <span class="ml-1 mr-1">{{ __('productItem.QTY') }}</span>
                                     </div>
                                     @auth
-                                        <button type="submit"
-                                            class="btn gradient-8790f6 rounded text-white flex-grow-1 w-100">
-                                            Add To Cart
+                                        <button type="submit" class="btn gradient-8790f6 rounded text-white flex-grow-1 w-100">
+                                            <i class="bi bi-bag-check"></i>
+                                            {{ __('productItem.Buy_Now') }}
                                         </button>
                                     @else
                                         <a class="SellCarFooterWeb btn gradient-8790f6 rounded text-white flex-grow-1 w-100">
-                                            Add To Cart
+                                            <i class="bi bi-bag-check"></i>
+                                            {{ __('productItem.Buy_Now') }}
                                         </a>
                                     @endauth
                                     {{-- <div id="call_nav" class="d-flex align-items-center"
@@ -111,19 +109,19 @@
 
                                     <table class="table border mt-4 mb-2">
                                         <tr>
-                                            <th class="py-2">Manufacturer:</th>
+                                            <th class="py-2">{{ __('productItem.Manufacturer') }}:</th>
                                             <td class="py-2">{{ $product->manufacturer->name }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="py-2">Name:</th>
+                                            <th class="py-2">{{ __('productItem.Name') }}:</th>
                                             <td class="py-2">{{ $skuData->sku_name }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="py-2">Category:</th>
+                                            <th class="py-2">{{ __('productItem.Category') }}:</th>
                                             <td class="py-2">{{ $product->category->name }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="py-2">SubCategory:</th>
+                                            <th class="py-2">{{ __('productItem.SubCategory') }}:</th>
                                             <td class="py-2">{{ $product->subCategory->name }}</td>
                                         </tr>
                                     </table>
@@ -157,7 +155,7 @@
                                                 <div class="similar-items-info ">
                                                     {{ $related_sku->sku_name }}
                                                     <p class="text-dark font-weight-bold">
-                                                        EGP: {{ number_format($related_product->selling_price, 2) }}
+                                                        {{__('productItem.EGP')}}: {{ number_format($related_product->selling_price, 2) }}
                                                     </p>
                                                 </div>
                                             </div>

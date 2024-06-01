@@ -102,7 +102,7 @@ class UserCartController extends Controller
             ]);
         }
 
-        return redirect()->route('user-carts.index')->with('success', 'Added to Cart successfully.');
+        return redirect()->route('user-carts.index')->with('success', __('cart.addedToCartSuccess'));
 
     }
     // -------------------- Method -------------------- //

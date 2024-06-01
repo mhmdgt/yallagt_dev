@@ -111,7 +111,7 @@ class AuthController extends Controller
 
         // Check if the old password matches
         if (!Hash::check($request->old_password, $old_password)) {
-            return back()->with('fail', 'Old Password does not match!');
+            return back()->with('fail', __('messages.Old_Password_does_not_match!'));
         }
 
         // Update the user's password and check if update was successful

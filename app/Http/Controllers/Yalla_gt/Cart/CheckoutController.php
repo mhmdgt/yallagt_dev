@@ -136,7 +136,7 @@ class CheckoutController extends Controller
         $cart->UserCartItems()->delete();
         $cart->delete();
 
-        return redirect()->route('yalla-index')->with('success', 'Order placed successfully');
+        return redirect()->route('yalla-index')->with('success', __('checkout.Order_placed_successfully'));
     }
 
 }

@@ -23,7 +23,7 @@ class ProductSubCategory extends Model
     // -------------------- Method -------------------- //
     public function productCategories()
     {
-        return $this->belongsToMany(ProductCategory::class,'pro_category_pro_sub_category');
+        return $this->belongsToMany(ProductCategory::class, 'pro_category_pro_sub_category');
     }
     // -------------------- Method -------------------- //
     public function products()

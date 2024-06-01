@@ -14,12 +14,6 @@ class ProductSubCategoryController extends Controller
 {
     use SlugTrait, ImageTrait;
 
-
-    function addSub()
-    {
-        $categories = ProductCategory::latest()->get();
-        return view('gt-manager.pages.product_assets.categories.add_sub_category', compact('categories'));
-    }
     // -------------------- Method -------------------- //
     public function getCategoriesByCategory($categoryId)
     {
@@ -28,9 +22,23 @@ class ProductSubCategoryController extends Controller
         return response()->json($subCategories);
     }
     // -------------------- Method -------------------- //
+    function addSub()
+    {
+        $categories = ProductCategory::latest()->get();
+        return view('gt-manager.pages.product_assets.categories.add_sub_category', compact('categories'));
+    }
+    // -------------------- Method -------------------- //
+    function edit($slug)
+    {
+        $productSubCategory = ProductSubCategory::getByTranslatedSlug($slug)->with('productCategories')->first();
+        $categories = ProductCategory::all();
+        $selectedCategories = $productSubCategory->productCategories->pluck('id')->toArray();
+
+        return view('gt-manager.pages.product_assets.categories.edit_sub_category', compact('productSubCategory' , 'categories', 'selectedCategories'));
+    }
+    // -------------------- Method -------------------- //
     public function store(StoreProductSubCategoryRequest $request)
     {
-
       $productSubCategory =  ProductSubCategory::create([
             // 'product_category_id' => $request->product_category_id,
             'name' => ['en' => $request->name_en, 'ar' => $request->name_ar],
@@ -40,9 +48,9 @@ class ProductSubCategoryController extends Controller
         ]);
 
         // make sure product_category_id must me an array
-        $productSubCategory->productCategories()->attach($request->product_category_id);
+        $productSubCategory->productCategories()->sync($request->categories);
 
-        return back()->with('success', 'Created Successfully');
+        return redirect()->route('product-categories.index')->with('success', 'Created Successfully');
     }
     // -------------------- Method -------------------- //
     public function update(updateProductSubCategoryRequest $request, $slug)
@@ -55,14 +63,18 @@ class ProductSubCategoryController extends Controller
 
         ]);
 
-        return back()->with('success', 'Updated Successfully');
+        // make sure product_category_id must me an array
+        $productSubCategory->productCategories()->sync($request->categories);
+
+        return redirect()->route('product-categories.index')->with('success', 'updated Successfully');
     }
     // -------------------- Method -------------------- //
     public function destroy($slug)
     {
         $productSubCategory = ProductSubCategory::getByTranslatedSlug($slug)->first();
         $this->deleteImage($productSubCategory->logo);
-        $productSubCategory->delete();
-        return redirect()->back();
+        $productSubCategory->productCategories()->detach();
+        return redirect()->route('product-categories.index')->with('success', 'Deleted Successfully');
+
     }
 }

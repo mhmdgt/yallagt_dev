@@ -6,31 +6,31 @@
                 {{-- Address --}}
                 <div class="p-2 mb-2 text-dark d-flex align-items-center ar-style">
                     <i class="bi bi-geo-alt ml-1 mr-1"></i>
-                    <span style="font-size: 24px; font-weight: 500;">Shipping Address</span>
+                    <span style="font-size: 24px; font-weight: 500;">{{__('checkout.Shipping_Address')}}</span>
                 </div>
                 @if ($address)
                     <div class="card mb-4 ar-style">
                         <div class="card-body">
-                            <a href="{{ route('user.addressEdit' , $address->id )}}" class="edit-link">Change Address</a>
+                            <a href="{{ route('user.addressEdit', $address->id) }}" class="edit-link">{{__('checkout.Change_Address')}}</a>
                             <div class="row mt-3">
-                                <dt class="col-4">Name:</dt>
+                                <dt class="col-4">{{__('checkout.Name')}}:</dt>
                                 <dd class="col-8" dir="auto"><span>{{ $address->name }}</span></dd>
                                 <input type="hidden" name="addressName" value="{{ $address->name }}">
 
-                                <dt class="col-4">Phone:</dt>
+                                <dt class="col-4">{{__('checkout.Phone')}}:</dt>
                                 <dd class="col-8"><span>{{ $address->phone }}</span></dd>
                                 <input type="hidden" name="addressPhone" value="{{ $address->phone }}">
 
-                                <dt class="col-4">City:</dt>
+                                <dt class="col-4">{{__('checkout.Area')}}:</dt>
                                 <dd class="col-8"><span>{{ $address->governorate->name ?? 'N/A' }}</span></dd>
 
-                                <dt class="col-4">Address:</dt>
+                                <dt class="col-4">{{__('checkout.Address')}}:</dt>
                                 <dd class="col-8" dir="auto"><span>{{ $address->full_address }}</span></dd>
 
-                                <dt class="col-4">Type:</dt>
+                                <dt class="col-4">{{__('checkout.Type')}}:</dt>
                                 <dd class="col-8" dir="auto"><span>{{ $address->type }}</span></dd>
                                 @if ($address->gps_link)
-                                    <dt class="col-4">GPS Link:</dt>
+                                    <dt class="col-4">{{__('checkout.Location')}}:</dt>
                                     <dd class="col-8"><span><a href="{{ $address->gps_link }}"
                                                 target="_blank">{{ $address->gps_link }}</a></span></dd>
                                 @endif
@@ -42,21 +42,20 @@
                         <div class="card-body ar-style">
                             {{-- Title --}}
                             <div class="p-2 mb-4 text-dark ar-style">
-                                <span style="font-size: 22px; font-weight: 500;">New Address</span>
-                                <p class="mt-2 gt-gray">Add your shipping address for fast and easy checkout across
-                                    our marketplaces</p>
+                                <span style="font-size: 22px; font-weight: 500;">{{__('checkout.new_address')}}</span>
+                                <p class="mt-2 gt-gray">{{__('checkout.new_address_message')}}</p>
                             </div>
                             <form action="{{ route('checkout.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <label for="exampleInputName1">Name</label>
+                                        <label for="exampleInputName1">{{__('checkout.Name')}}</label>
                                         <input type="text" class="form-control" name="name"
                                             value="{{ user_data()->name }}">
                                         <x-errors.display-validation-error property="name" />
                                     </div>
                                     <div class="col">
-                                        <label for="exampleInputPhone1">Phone number</label>
+                                        <label for="exampleInputPhone1">{{__('checkout.Phone')}}</label>
                                         <input type="text" class="form-control" name="phone"
                                             value="{{ user_data()->phone }}">
                                         <x-errors.display-validation-error property="phone" />
@@ -79,54 +78,54 @@
                                 </div>
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <label>Area</label>
+                                        <label>{{__('checkout.Area')}}</label>
                                         <input type="text" class="form-control" name="area" value="">
                                         <x-errors.display-validation-error property="area" />
                                     </div>
                                 </div>
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <label>Building number</label>
+                                        <label>{{__('checkout.Building')}}</label>
                                         <input type="text" class="form-control" name="building_number">
                                         <x-errors.display-validation-error property="building_number" />
                                     </div>
 
                                     <div class="col">
-                                        <label>Street</label>
+                                        <label>{{__('checkout.Street')}}</label>
                                         <input type="text" class="form-control" name="street" value="">
                                         <x-errors.display-validation-error property="street" />
                                     </div>
                                 </div>
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <label>Full Address</label>
+                                        <label>{{__('checkout.FullAddress')}}</label>
                                         <input type="text" class="form-control" name="full_address" value="">
                                         <x-errors.display-validation-error property="full_address" />
                                     </div>
                                 </div>
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <label>GPS Link <span>( Location )</span></label>
+                                        <label>{{__('checkout.GPS')}} <span>( {{__('checkout.Location')}} )</span></label>
                                         <input type="url" class="form-control" name="gps_link" value="">
                                         <x-errors.display-validation-error property="gps_link" />
                                     </div>
                                 </div>
                                 <div class="form-group row pt-0">
                                     <div class="col">
-                                        <h6 class="card-title">Type</h6>
+                                        <h6 class="card-title">{{__('checkout.Type')}}</h6>
                                         <div class="form-check form-check-inline border rounded p-2">
                                             <label class="form-check-label">
                                                 <input type="radio" class="form-check-input" name="type"
                                                     id="optionsRadios5" value="home">
-                                                Home
-                                                <i class="input-frame"></i></label>
+                                                    {{__('checkout.Home')}}
+                                                <i class="input-frame ml-1 mr-1"></i></label>
                                         </div>
                                         <div class="form-check form-check-inline border rounded p-2">
                                             <label class="form-check-label">
                                                 <input type="radio" class="form-check-input" name="type"
                                                     id="optionsRadios6" value="work">
-                                                Work
-                                                <i class="input-frame"></i></label>
+                                                    {{__('checkout.Work')}}
+                                                <i class="input-frame ml-1 mr-1"></i></label>
                                         </div>
                                     </div>
                                 </div>
@@ -135,8 +134,8 @@
                 @endif
                 {{-- Your Order --}}
                 <div class="p-2 mb-2 text-dark d-flex align-items-center ar-style">
-                    <i class="bi bi-bag-check ml-1 mr-1"></i>
-                    <span style="font-size: 24px; font-weight: 500;">Your order</span>
+                    <i class="bi bi-cart-check mr-1 ml-1"></i>
+                    <span style="font-size: 24px; font-weight: 500;">{{__('checkout.YourOrder')}}</span>
                 </div>
                 @foreach ($cart->UserCartItems as $cartItem)
                     <div class="card mb-4">
@@ -156,7 +155,7 @@
                                     </div>
                                     <div class="prod-details">
                                         <div>
-                                            <span>Brand:</span>
+                                            <span>{{__('checkout.manufacturer')}}:</span>
                                             <span>{{ $cartItem->productSku->product->manufacturer->name }}</span>
                                         </div>
                                         <div class="cart-prod-title">
@@ -166,13 +165,12 @@
                                         </div>
                                         <div class="ar-style">
                                             <i class="bi bi-bookmark-check"></i>
-                                            <span
-                                                class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
-                                                <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
+                                            <span class="product_card_precentage">{{ __('home_page.Sold') }}:</span>
+                                            <span>{{ ucwords($cartItem->productListing->seller->name) }}</span>
                                         </div>
                                         <div class="cart-prod-attributes">
                                             <div class="mt-2">
-                                                <span>EGP:</span>
+                                                <span>{{__('checkout.EGP')}}:</span>
                                                 <span class="product_card_price" style="color: #F25E3D;">
                                                     <td>{{ number_format($cartItem->productListing->selling_price, 0, ',', ',') }}
                                                     </td>
@@ -184,7 +182,7 @@
                                 <div class="prod-ctrl d-flex">
                                     <div class="cart-item">
                                         <div class="cart-btn cart-qty">
-                                            <span>{{ $cartItem->qty }} Quantity</span>
+                                            <span>{{ $cartItem->qty }} {{__('checkout.QTY')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -201,15 +199,15 @@
                         <div class="summary summary-cart">
                             <h4 class="summary-title h5 text-dark">
                                 <i class='bx bx-check-circle'></i>
-                                Order Summary
-                                <span class="gt-gray h6">Incl. VAT</span>
+                                {{__('checkout.Order_Summary')}}
+                                <span class="gt-gray" style="font-size: 12px">{{__('checkout.VAT')}}</span>
                             </h4>
                             <table class="table table-summary">
                                 <tbody>
 
                                     <tr class="summary-subtotal">
-                                        <td class="h6 text-dark">Subtotal: ({{ $totalQty }} items)</td>
-                                        <td>EGP: {{ number_format($subtotal, 0, ',', ',') }}</td>
+                                        <td class="h6 text-dark">{{__('checkout.Subtotal')}}: ({{ $totalQty }})</td>
+                                        <td>{{__('checkout.EGP')}}: {{ number_format($subtotal, 0, ',', ',') }}</td>
                                     </tr>
                                     <form action="{{ route('checkout.store') }}" method="POST">
 
@@ -217,7 +215,7 @@
                                         <input type="hidden" name="totalQty" value="{{ $totalQty }}">
 
                                         <tr class="summary-shipping">
-                                            <td class="h6 text-dark">Shipping Fee:</td>
+                                            <td class="h6 text-dark">{{__('checkout.Shipping_Fee')}}:</td>
                                             <td> </td>
                                         </tr>
 
@@ -226,7 +224,7 @@
 
                                         @foreach ($shippingServices as $key => $service)
                                             @php
-                                                $serviceName = $service->getTranslations('name')['en'];
+                                                $serviceName = $service->name;
                                                 $checked = $key === 0 ? 'checked' : '';
                                             @endphp
                                             <tr class="summary-shipping-row">
@@ -241,24 +239,23 @@
                                                             for="toggleShipping{{ $service->id }}">{{ $serviceName }}</label>
                                                     </div>
                                                 </td>
-                                                <td>EGP:
+                                                <td>{{__('checkout.EGP')}}:
                                                     {{ $service->fee == 0 ? 'Free' : number_format($service->fee, 0, '', ',') }}
                                                 </td>
                                             </tr>
                                         @endforeach
 
-                                        <tr class="summary-total">
-                                            <td class="h4 text-dark">Total:</td>
-                                            <td class="h5 text-dark" id="totalAmount">EGP:
-                                                <span>{{ number_format($subtotal + $shippingServices[0]->fee, 0, '', ',') }}</span>
+                                        <tr class="summary-shipping">
+                                            <td class="h6 text-dark">{{__('checkout.Payment')}}:</td>
+                                            <td class="text-dark"><i class='bx bx-wallet'></i>
+                                                {{ ucwords($paymentMethods->name) }}
                                             </td>
                                         </tr>
 
-
-                                        <tr class="summary-shipping">
-                                            <td class="h6 text-dark">Payment:</td>
-                                            <td class="text-dark"><i class='bx bx-wallet'></i>
-                                                {{ ucwords($paymentMethods->name) }}
+                                        <tr class="summary-total">
+                                            <td class="h4 text-dark">{{__('checkout.Total')}}:</td>
+                                            <td class="h5 text-dark" id="totalAmount">{{__('checkout.EGP')}}:
+                                                <span>{{ number_format($subtotal + $shippingServices[0]->fee, 0, '', ',') }}</span>
                                             </td>
                                         </tr>
 
@@ -272,7 +269,8 @@
                             {{-- Buy now Web --}}
                             @if (!$address)
                                 <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">
-                                    PLACE ORDER
+                                    <i class="bi bi-bag-check-fill ml-1 mr-1"></i>
+                                    {{ __('checkout.Complete_the_order') }}
                                 </button>
                             @else
                                 {{-- <a href="{{ route('checkout.store') }}"
@@ -281,8 +279,10 @@
                                 </a> --}}
                                 @csrf
                                 <!-- Your form fields here -->
-                                <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">Place
-                                    Order</button>
+                                <button type="submit" class="btn gradient-8790f6 rounded text-white w-100">
+                                    <i class="bi bi-bag-check-fill ml-2 mr-2"></i>
+                                    {{ __('checkout.Complete_the_order') }}
+                                </button>
                                 </form>
                             @endif
                             </form>

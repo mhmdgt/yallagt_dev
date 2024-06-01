@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Governorate;
 use App\Models\Order;
 use App\Models\ShippingCompany;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -46,12 +47,23 @@ class OrderController extends Controller
         return view('gt-manager.pages.orders.approved_edit', compact('order', 'governorates', 'shippingCompanies'));
     }
     // -------------------- Method -------------------- //
-    public function processingAction($tracking_num)
+    public function processingAction(Request $request, $tracking_num)
     {
-        $order = Order::Where('tracking_num', $tracking_num)->first();
-        $order->update(['status' => 'processing']);
-        return redirect()->route('orders.all-approved')->with('success', 'Approved successfully.');
+        $request->validate([
+            'shipping_company_id' => 'required|exists:shipping_companies,id',
+            'shipment_code' => 'required|string|max:255',
+        ]);
+
+        $order = Order::where('tracking_num', $tracking_num)->firstOrFail();
+        $order->update([
+            'status' => 'processing',
+            'shipping_company_id' => $request->input('shipping_company_id'),
+            'shipment_num' => $request->input('shipment_code'),
+        ]);
+
+        return redirect()->route('orders.all-approved')->with('success', 'Order processed successfully.');
     }
+
     // -------------------- Method -------------------- //
     public function allProcessing()
     {

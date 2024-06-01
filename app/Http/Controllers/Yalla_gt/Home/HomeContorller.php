@@ -65,5 +65,11 @@ class HomeContorller extends Controller
     {
         return view('yalla-gt.pages.need_help.faq');
     }
+    // -------------------- Method -------------------- //
+    public function storeContactMessage()
+    {
+
+        return redirect()->route('yalla-index')->with('success' , __('messages.Your_message_has_been_sent'));
+    }
 
 }

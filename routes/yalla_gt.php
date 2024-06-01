@@ -79,6 +79,7 @@ Route::group(
         Route::get('/terms-of-use', [HomeContorller::class, 'termsIndex'])->name('yalla.termsIndex');
         Route::get('/privacy-policy', [HomeContorller::class, 'privacyIndex'])->name('yalla.privacyIndex');
         Route::get('/FAQ', [HomeContorller::class, 'faqIndex'])->name('yalla.faqIndex');
+        Route::post('/store-contact-message', [HomeContorller::class, 'storeContactMessage'])->name('yalla.storeContactMessage');
         Route::view('/about-us', 'yalla-gt.pages.need_help.about_us')->name('about_us');
         Route::view('/contact_us', 'yalla-gt.pages.need_help.contact_us')->name('contact_us');
 
